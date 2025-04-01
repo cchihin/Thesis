@@ -10,7 +10,10 @@ The thesis is organised into chapters as folders,
     * Numerical Techniques - NumericalTechniques/numericaltechniques.tex
     * Transitional RBP - TransitionalRBP/transitionalrbp.tex
     * State space structure of SDC - StateSpaceStructureOfSDC/statespacestructureofsdc.tex
+    * Conclusions - Conclusions/conclusions.tex
+    * Appendices - Appendices/appendices.tex
+    * References - References/.bib(s)
 
 These folders contain,
-*   .tex files
+*   Native .tex and .bib files
 *   Figures (.pdf, .eps, .png, .jpg)
