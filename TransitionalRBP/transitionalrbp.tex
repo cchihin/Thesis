@@ -1,7 +1,7 @@
 \chapter{Transitional Rayleigh-B\'{e}nard Poiseuille flows}\label{chap:4}
 
 \section{Introduction}
-Rayleigh-B\'{e}nard-Poiseuille (RBP) flows describe the motion of fluids confined between two extended parallel plates, heated from below and cooled from the top, with an imposed pressure gradient.
+RRayleigh-B\'{e}nard-Poiseuille (RBP) flows describe the motion of fluids confined between two extended parallel plates, heated from below and cooled from the top, with an imposed pressure gradient.
 This system combines classical Rayleigh-B\'{e}nard convection (RBC) and plane Poiseuille flow (PPF), driven by buoyancy and shear forces, respectively.
 In the limiting cases, the laminar solution can transition to convection rolls (RBC) or shear-driven turbulence (PPF), depending on whether buoyancy or shear forces dominate.
 Transition to turbulence in the regime where both forces interact remains largely unexplored.
@@ -227,7 +227,7 @@ Substituting equation \eqref{eq:simAnsatz} into (\ref{eq:linearised}) result to 
 \subsection{Classification}
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth]{Figures/PhaseSpace/RaRePhaseSpace.pdf}
+    \includegraphics[width=0.9\textwidth]{TransitionalRBP/Figures/PhaseSpace/RaRePhaseSpace.pdf}
     \caption{The $Ra-Re$ phase space illustrates the terminal midplane temperature snapshots, $\theta(x,z)|_{y=0}$ for $Re \in [0,2000]$ and $Ra \in [0, 10000]$, classified into five distinct regimes: (1) SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls and (5) shear-driven turbulence. The blue solid curves refer to primary neutral curves of the longitudinal and transverse rolls $Ra_\parallel, Ra_\perp$. The red curve refers to secondary oscillatory instability of ISRs at $Re = 0$ \citep{bodenschatz_2000}. Shades of red, green and blue indicate their dominant mechanism, whether driven by buoyancy or shear (or mixed). The plot is not to scale.}
     \label{fig:rarephase}
 \end{figure}
@@ -264,7 +264,7 @@ The ratio between the wavelength of streamwise waviness and spanwise roll is abo
 
 % \begin{figure}
 %     \centering
-%     \includegraphics[width=\linewidth]{Figures/PhaseSpace/theta_hat-compiled.pdf}
+%     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/PhaseSpace/theta_hat-compiled.pdf}
 %     \caption{The time-averaged spatial planar $x$-$z$ wavenumber spectra of midplane perturbation temperature, $\frac{1}{T} \sum_T |\widehat{\theta'|_{y=0}}(n_x,n_z,t)|$ at $Re = 100,10$, (a,e) $Ra = 3000$, (b,f) $Ra = 5000$, (c,g) $Ra = 8000$, (d,h) $Ra = 10000$. The coefficient is defined by taking the Fourier transform of the instanteneous midplane perturbation temperature $\widehat{\theta'|_{y=0}}(n_x,n_z,t) = \int_{x,z} \theta'|_{y=0}(x,z,t) e^{-i(\alpha n_x x + \beta n_z z)} \; \mathrm{d}x \mathrm{d}z$ where $\alpha = 2\pi/L_x$ and $\beta = 2\pi/L_z$. The coefficients obey the conjugate symmetry, i.e $\widehat{\theta'|_{y=0}}(n_x,n_z,t)=\widehat{\theta'|_{y=0}}^*(-n_x,-n_z,t)$}
 %     \label{fig:rollspectra}
 % \end{figure}
@@ -272,7 +272,7 @@ The ratio between the wavelength of streamwise waviness and spanwise roll is abo
 \subsection{Spatiotemporal intermittent rolls}\label{sec:intermittentrolls}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/PhaseSpace/Ra8000-Re500-BotSpaceTime-TimeHist.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/PhaseSpace/Ra8000-Re500-BotSpaceTime-TimeHist.pdf}
     \caption{The intermittent rolls regime at $Ra = 8000, Re = 500$, $t \in [0, 10000]$. The time history of (a) Nusselt number, and shear, (b) near-wall wall-normal and spanwise perturbation kinetic energy, (c) midplane temperature spacetime plot, and their corresponding near-wall and midplane temporal planar snapshots at (d,e) $t = 3736$, (f,g) $t = 6189$, and (h,i) $t = 8680$.}
     \label{fig:Ra8k-Re500-IntRolls}
 \end{figure}
@@ -292,7 +292,7 @@ To overcome this challenge, we consider a confined domain, $\Gamma = \pi / 2$, w
 \subsection{Coexistence with turbulent bands}\label{sec:3.3}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra0-Re1050-3-BotSpaceTime-Lows.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra0-Re1050-3-BotSpaceTime-Lows.pdf}
     \caption{Shear-driven turbulence regime at $Ra = 0, Re = 1050$, $t \in [0, 8000]$. Spacetime plots of (a) near-wall wall-normal and spanwise perturbation kinetic energy, (b) midplane temperature spacetime plot, and near-wall and midplane temporal planar snapshots at (c,d) $t = 1100$, (e,f) $t = 4491$, and (g,h) $t = 6171$, highlighting a prolonged laminar patch.}
     \label{fig:spacetime-Ra0k-Re1.05k}
 \end{figure}
@@ -311,7 +311,7 @@ Next, we consider the influence of buoyancy on the turbulent-laminar bands and c
 % We present the spacetime graph of the near-wall wall-normal and spanwise perturbation kinetic energy,$\frac{1}{2W_c}|u'+ v'|_{(y^+, z) = (15,8\pi)}$, and midplane temperature plots, $\theta(x,t)|_{y=0}$, and 3 pairs of $x-z$ planar snapshots at different times for $Ra = 10000, 0$, $Ra = 1050$ in figures \ref{fig:spacetime-Ra10k-Re1.05k} and \ref{fig:spacetime-Ra0k-Re1.05k} respectively.
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra10000-Re1050-BotSpaceTime-Highs.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra10000-Re1050-BotSpaceTime-Highs.pdf}
     \caption{Shear-driven turbulence regime at $Ra = 100000, Re = 1050$, $t \in [0, 8000]$. Spacetime plots of (a) near-wall wall-normal and spanwise perturbation kinetic energy, (b) midplane temperature spacetime plot, and their corresponding near-wall and midplane temporal $x-z$ planar snapshots at (c,d) $t = 1282$, (e,f) $t = 5077$, and (g,h) $t = 6358$, highlighting the coexistence of longitudinal rolls and turbulent bands.}
     \label{fig:spacetime-Ra10k-Re1.05k}
 \end{figure}
@@ -345,7 +345,7 @@ To address this, we focus our analysis to a confined domain, $\Gamma = \pi / 2$,
 \subsection{The thermally-assisted sustaining process (TASP) in a confined domain}\label{sec:TASP}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra10000-Re1050-MidBotTimeHist.png}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra10000-Re1050-MidBotTimeHist.png}
     \caption{Intermittent dynamics in a confined domain at $Ra = 10000$, $Re = 1050$, $t\in[0,3000]$, $\Gamma = \pi/2$. The time history of the (a) Nusselt number and shear. Temporal snapshots of volumetric temperature, planar near-wall streamwise and spanwise perturbations at (b) $t = 1291.5$, (c) $t = 1480.5$, (d) $t = 1564.5$, (e) $t = 1711.5$. Longitudinal rolls and transient turbulence are observed at (b,d) and (c,e), respectively.}
     \label{fig:Ra10k-Re1050-small}
 \end{figure}
@@ -370,7 +370,7 @@ This suggests that the turbulence has a finite lifetime, occurring transiently b
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra0-Re1050-MidBotTimeHist.png}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra0-Re1050-MidBotTimeHist.png}
     \caption{Relaminarisation in a confined domain at $Ra = 0$, $Re = 1050$, $t\in[0,3000]$, $\Gamma = \pi/2$. The time history of the (a) Nusselt number and shear. Temporal snapshots of volumetric temperature at (b) $t = 31.5$, (c) $t = 63$, (d) $t = 157.5$, (e) $t = 672$.}
     \label{fig:Ra0k-Re1050-small}
 \end{figure}
@@ -384,7 +384,7 @@ As we compare the results between $Ra = 0$ and $Ra = 10000$, we propose that the
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/T1620-MidBotTimeHist-Quenched-Annotated.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/T1620-MidBotTimeHist-Quenched-Annotated.pdf}
     \caption{$Ra$-quenching experiments for $Ra = 8000, 5000, 3000, 2000$, $Re = 1050$, $\Gamma = \pi/2$, $t \in [850.5, 5000]$. The time history of (a) shear and (b) volumetric temperature snapshots of the initial condition at $t = 850.5$. Volumetric temperature snapshots for $Ra = 8000$ at (c,d) $t = 1312.5, 1743$, and $Ra = 5000$ at (e,f) $t = 1312.5, 3570$, revealing a longitudinal roll and a turbulent state, respectively. Stable longitudinal rolls emerge for $Ra = 3000$ at (g,h) $t = 1312.5, 4200$, and $Ra = 2000$ at (j,k) $t = 1312.5, 4200$.}
     \label{fig:RaQuench}
 \end{figure}
@@ -409,7 +409,7 @@ We note that the longitudinal rolls in figure \ref{fig:RaQuench} have a spanwise
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/ev-compiled.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/ev-compiled.pdf}
     \caption{The growth rates of infinitesimal perturbations linearised about longitudinal rolls, $\mathbf{q}_{LR}$, of spanwise wavenumber of $\alpha d = 4$, against (a) streamwise wavenumber $\lambda$, and (b) $Ra$ for $\beta d =1$. The hatches in (a) refer to wavenumbers smaller than those admissible in $\Gamma = \pi/2$. The dash-dotted line in (b) is a standard quadratic regression yielding $Ra_{s}\approx 4720$.}
     \label{fig:SecStabLongRolls}
 \end{figure}
@@ -426,7 +426,7 @@ Using a standard quadratic regression, the critical Rayleigh number for disturba
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra5000-Re1050-MidBotTimeHist-PEig-labelled.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra5000-Re1050-MidBotTimeHist-PEig-labelled.pdf}
     \caption{Integrating along the dominant unstable manifold, $\beta d =2$, of the longitudinal rolls at $Ra = 5000, Re = 1050, \Gamma = \pi/2$, $t\in[0,8000]$. Time history of the (a) Nusselt number and shear, and (b) midplane temperature spacetime plot. This system oscillates between the longitudinal rolls ($LR1-4$) and turbulence ($T1-4$) over four intervals. Snapshots of volumetric temperature and near-wall streamwise and spanwise velocity perturbations at (b) $t = 105$, (c) $t = 1512$, (d) $t = 2446.5$, (e) $t = 2992.5$, (f) $t = 3727.5$, (g) $t = 5103$, (h) $t = 6300$, (i) $t = 6993$.}
     \label{fig:intermittent-dynamics}
 \end{figure}
@@ -461,7 +461,7 @@ This suggests that other unstable manifolds may be linked to the transition to t
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra5000-Re1050-StateSpace-dudy.png}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra5000-Re1050-StateSpace-dudy.png}
     \caption{State space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy at $Ra = 5000$, $Re = 1050$, $\Gamma = \pi/2$, (a) $t \in[0,800]$, (b) $t \in [0, 68750]$.  The open black circles represent the unstable equilibria of longitudinal rolls and the laminar state. Note that the black-crosses, labelled by (T1-4) and (LR1-4), refer to temporal snapshots in figure \ref{fig:intermittent-dynamics}, not equilibria solutions.}
     \label{fig:intermittent-state-space}
 \end{figure}
@@ -494,7 +494,7 @@ We refer to this sustaining process as the \emph{thermally-assisted sustaining p
 \subsection{Variation of $Ra$ and $Re$ on the thermally sustained turbulent process within $\Gamma = \pi/ 2$}\label{sec:IntConfined}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/ConsolidatedPlot-temporal.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/ConsolidatedPlot-temporal.pdf}
     \caption{The behaviour of the unstable and stable longitudinal rolls at $Ra = 8000, 4000$ for (a,e) $Re = 600$, (b,f) $Re = 700$, (c,g) $Re = 1000$ and (d,h) $Re = 1400$ within $\Gamma = \pi/2$. Each parameter regime consist of three panels from the top to bottom, depicting the midplane temperature spacetime plot, $\theta|_{(y,z) = (0, \pi)}$, time history of the Nusselt number and shear, and state space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy.}
     \label{fig:dynamical-process}
 \end{figure}
@@ -539,7 +539,7 @@ When $Ra$ is lowered to $Ra = 4000$, the periodic orbit disappears and the traje
 % Although the conditions in terms of $Ra$ and $Re$ considered here differ from figure \ref{fig:SecStabLongRolls}, the critical $Ra_{s} \approx 4720$ identified earlier supports our findings here, highlighting the role of $Ra$ in sustaining turbulence via unstable longitudinal rolls.
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/statespace-cartoon-full.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/statespace-cartoon-full.pdf}
     \caption{A state space sketch of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{Paranjape_2023}.}
     \label{fig:statespacesketch}
 \end{figure}
@@ -580,7 +580,7 @@ Figure \ref{fig:compiled-full} underscores the role of unstable longitudinal rol
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.47\linewidth, angle=90]{Figures/RaEffectOnTurbulence/ConsolidatedPlot-full-annotated.pdf}
+    \includegraphics[width=1.47\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/ConsolidatedPlot-full-annotated.pdf}
     \caption{The temperature spacetime plots and time history of shear and the Nusselt number for $Ra \in [5000, 10000]$, $Re \in [600, 1400]$ within $\Gamma = \pi/2$. Unstable longitudinal rolls lead to the onset of (1) periodic orbits (yellow), (2) the \emph{thermally-assisted sustaining process} (green), and (3) sustained turbulence (blue), occurring beyond an $Ra-Re$ boundary, below which longitudinal rolls remain stable (red).}
     \label{fig:compiled-full}
 \end{figure}
@@ -588,7 +588,7 @@ Figure \ref{fig:compiled-full} underscores the role of unstable longitudinal rol
 \subsection{Extending to large domains, $\Gamma = 4\pi$.}
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/Ra10000-MidSpaceTimeAndPDFs.pdf}
+    \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra10000-MidSpaceTimeAndPDFs.pdf}
     \caption{The midplane temperature spacetime plot, and near-wall wall-normal and spanwise perturbation kinetic energy by normalised by thermal velocity scale, $u_\kappa$, and the probability density functions based on planar-averaged centerline velocity and the midplane temperature at $Ra = 10000$, (a,b,c) $Re = 500$, (d,e,f) $Re = 750$, (g,h,i) $Re = 1000$, (j,k,l) $Re = 1050$.}
     \label{fig:Ra10k-PDFs}
 \end{figure}
@@ -733,13 +733,13 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % 
 % \begin{figure}
 %     \centering
-%     \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/TB-Ra2kRe1050.png}
+%     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/TB-Ra2kRe1050.png}
 %     \caption{12 simulations at $Re = 1050$, $Ra = 2000$, with initial conditions at $Re 1100$.}
 %     \label{fig:Re1050Ra2000}
 % \end{figure}
 % \begin{figure}
 %     \centering
-%     \includegraphics[width=\linewidth]{Figures/RaEffectOnTurbulence/TB-Ra2kRe1050.png}
+%     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/TB-Ra2kRe1050.png}
 %     \caption{12 simulations at $Re = 1050$, $Ra = 10000$, with initial conditions at $Re 1100$.}
 %     \label{fig:Re1050Ra10000}
 % \end{figure}
@@ -771,7 +771,7 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % \begin{figure}
 % \centering
 %     \begin{subfigure}[b]{0.32\textwidth}            
-%             \includegraphics[width=\textwidth]{Figures/Re10/Re10-Long.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10/Re10-Long.png}
 %             \caption{Longitudinal}
 %             \label{fig:SRl}
 %     \end{subfigure}%
@@ -779,13 +779,13 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 %       %(or a blank line to force the subfigure onto a new line)
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10/Re10-Trans.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10/Re10-Trans.png}
 %             \caption{Transverse}
 %             \label{fig:D-Imager}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10/Re10-Oblique.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10/Re10-Oblique.png}
 %             \caption{Oblique}
 %             \label{fig:D-Imager}
 %     \end{subfigure}
@@ -807,19 +807,19 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % \begin{figure}
 % \centering
 %     \begin{subfigure}[b]{0.33\textwidth}            
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-0.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-0.png}
 %             \caption{$\theta|_{y=0}$, at $t = 0, Re(t) = 10$.}
 %             \label{fig:ReContLongA}
 %     \end{subfigure}%
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-25.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-25.png}
 %             \caption{$\theta|_{y=0}$, at $t = 500, Re = 55$.}
 %             \label{fig:ReContLongB}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-50.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Long/Nx160-Ny10-Lx16_midslice-50.png}
 %             \caption{$\theta|_{y=0}$, at $t = 1000, Re = 100$.}
 %             \label{fig:ReContLongC}
 %     \end{subfigure}
@@ -829,19 +829,19 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % \begin{figure}
 % \centering
 %     \begin{subfigure}[b]{0.32\textwidth}            
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-0.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-0.png}
 %             \caption{$\theta|_{y=0}$, at $t = 0, Re(t) = 10$.}
 %             \label{fig:ReContTransA}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.32\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-3.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-3.png}
 %             \caption{$\theta|_{y=0}$, at $t = 60, Re = 15.40$.}
 %             \label{fig:ReContTransB}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.32\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-12.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Trans/Nx160-Ny10-Lx16_midslice-12.png}
 %             \caption{$\theta|_{y=0}$, at $t = 249, Re = 31.60$.}
 %             \label{fig:ReContTransC}
 %     \end{subfigure}
@@ -852,19 +852,19 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % \begin{figure}
 % \centering
 %     \begin{subfigure}[b]{0.33\textwidth}            
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-0.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-0.png}
 %             \caption{$\theta|_{y=0}$, at $t = 0, Re(t) = 10$.}
 %             \label{fig:ReContOblA}
 %     \end{subfigure}%
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-7.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-7.png}
 %             \caption{$\theta|_{y=0}$, at $t = 140, Re = 22.60$.}
 %             \label{fig:ReContOblB}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.33\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-30.png}
+%             \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/Oblique/Nx160-Ny10-Lx16_midslice-30.png}
 %             \caption{$\theta|_{y=0}$, at $t = 800, Re = 64$.}
 %             \label{fig:ReContOblC}
 %     \end{subfigure}
@@ -874,7 +874,7 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % 
 % \begin{figure}
 %     \centering
-%     \includegraphics[width=\textwidth]{Figures/Re10Re100/nuPlot-comparison.pdf}
+%     \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/nuPlot-comparison.pdf}
 %     \caption{Nusselt number as a function of increasing $Re$}
 %     \label{fig:NuCont}
 % \end{figure}
@@ -882,17 +882,17 @@ It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to
 % \begin{figure}
 %     \centering
 %     \begin{subfigure}[b]{0.8\textwidth}
-%         \includegraphics[width=\textwidth]{Figures/Re10Re100/BusseBalloon/neutralcurves-1012rolls.pdf}
+%         \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/BusseBalloon/neutralcurves-1012rolls.pdf}
 %         \caption{Primary and secondary instability neutral curves with 10, 12, 13 and 16 rolls superimposed}
 %         \label{fig:busseballoon}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.33\textwidth}
-%         \includegraphics[width=\textwidth]{Figures/Re10Re100/BusseBalloon/10Rolls.png}
+%         \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/BusseBalloon/10Rolls.png}
 %         \caption{10 Rolls}
 %         \label{fig:10rolls}
 %     \end{subfigure}
 %     \begin{subfigure}[b]{0.33\textwidth}
-%         \includegraphics[width=\textwidth]{Figures/Re10Re100/BusseBalloon/16Rolls.png}
+%         \includegraphics[width=\textwidth]{TransitionalRBP/Figures/Re10Re100/BusseBalloon/16Rolls.png}
 %         \caption{16 Rolls}
 %         \label{fig:16rolls}
 %     \end{subfigure}
