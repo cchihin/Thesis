@@ -1,5 +1,29 @@
 \appendix
 \chapter{Appendices}\label{chap:appendices}
+\section{Non-dimensionalisation}
+The non-dimensionalised incompressible Navier-Stokes equations with Boussinesq approximations for buoyancy describe the motion of a fluid of RBP. 
+\begin{subequations}\label{eq:rbpdimensional}
+\begin{equation}
+    \frac{\partial \mathbf{u^*}}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)\mathbf{u^*} = -\frac{1}{\rho}\nabla^* p^* + \nu \nabla^*^2 \mathbf{u^*} + g\gamma(T-T_0)+ \mathbf{f}_b,
+\end{equation}
+\begin{equation}
+    \frac{\partial T}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)T= \kappa \nabla^*^2 T,
+\end{equation}
+\begin{equation}
+    \nabla^* \cdot \mathbf{u^*} = 0,
+\end{equation}
+with Dirichlet and Neumann boundary conditions.
+\begin{equation}
+    \mathbf{u^*}_d, p^*_d, T_d \in \Omega_d, \quad \nabla^*\mathbf{u^*}_N, \nabla^*p^*_N, \nabla^*T_N \in \partial\Omega_N.
+\end{equation}
+where $\nabla^*=(\partial/\partial x^*, \partial/\partial y^*, \partial/\partial z^*)$ and $t^*$ refer to the differential operators and time with dimensions in per unit space, $m^{-1}$, and time, $s$. $\mathbf{u^*}(\mathbf{x^*}), T(\mathbf{x^*}), p^*(\mathbf{x}^*)$ refers to the three-dimensional fluid velocity, temperature, pressure fields, in dimensional form, while $T_0, \mathbf{f_b}$ refers to a reference temperature and body-forcing terms.
+% For a given set of fluid properties $\rho, \nu, \kappa$ and geometric properties $L^*, t^*, u^*$ referring to an arbitrary length-, time- and velocity-scale, we are primarily interested in the behaviour of the fluid i.e if its laminar or turbulent.
+To reduce the number of control parameters, we can suitably nondimensionalise the primitive variables by a velocity scale $u_c$, length scale, $L_x$, and time scale $u_c/L_x$, where $u_c$ refers to the centreline velocity of a laminar flow and $L_x$ refers to the streamwise length of the domain.
+
+$\rho, \nu, \kappa, g, \gamma$ refers the fluid's density, kinematic viscosity and thermal diffusivity, gravity, thermal expansion coefficient, properties specific to a given a fluid.
+We note that that for a given pressure gradient, $\Delta P^*$, a laminar centerline velocity forms as $w^*(y^*) = W_{lam}^*(1 - y^*^2/h^2)$.
+Here, we have a total of nine dimensional quantities $W^*_{lam}, \Delta T, h, \kappa, \nu, \rho, \gamma, g$ that describes the behaviour of the fluid motion.
+However, ultilise the buckingham pi theorem where we can reduce the equations to less dependenc
 \section{Governing equations for Rayleigh-B\'{e}nard convection}\label{app:eqrbc}
 The governing equations for Rayleigh-B\'{e}nard convection are the non-dimensionalised equations with the Boussinesq approximation for buoyancy-driven flow, given by
 \begin{subequations}\label{eq:rbc}
