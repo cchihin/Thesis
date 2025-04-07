@@ -39,104 +39,8 @@ The key control parameters for RBP flows are the Rayleigh number, $Ra$, Reynolds
 \end{equation}
 where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
 
-We first discuss the key developments of Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:RBC}, followed by plane Poiseuille flows (PPF) in \S \ref{sec:PPF}, the limiting case of Rayleigh-B\'{e}nard Poiseuille (RBP) flows.
+We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:RBC}.
 The historical developments involving Rayleigh-B\'{e}nard Poiseuille (RBP) flows are then expanded in \S \ref{sec:RBP} concluded by a section describing the hydrodynamic stability of fluid flows in \S \ref{sec:hydrodynamic_stab}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Rayleigh Benard Convection
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Rayleigh-B\'{e}nard convection (RBC)}\label{sec:RBC}
-Rayleigh-B\'{e}nard convection serves as one of the paradigmatic fluid configuration for studying the dynamics of natural convection.
-% It describes the motion of the fluid confined between two infinite-parallel plates simultaneously heated from below and cooled from the top.
-The two basic physical mechanisms that underpins RBC is the competition between buoyancy due to heating, and resistance due to viscous forces.
-As the bottom plate is heated, the bottom layer fluid becomes more buoyant and tends to rise, while the colder top fluid layer is becomes relatively less buoyant and tends to sink, leading to an overturning of layers.
-Viscous forces between adjacent fluid parcels act to resist the motion. 
-As buoyancy overcomes these viscous forces, the fluid layers overturn, resulting in the initiation of convection.
-One of the earliest experimental work is performed by Henri B\'{e}nard \citep{benard_tourbillons_1901}, who observed the onset of hexagonal convection cells above a certain threshold of $\Delta T$.
-To quantify the ratio between buoyancy and viscous forces, Lord Rayleigh \citep{rayleigh_lix_1916} introduced the Rayleigh number, $Ra$, and predicted the onset of convection at a critical Rayleigh number of $Ra_c = \frac{27}{4}\pi^4  = 657.5$, with a critical wavenumber of $q_c = \frac{\pi}{\sqrt{2}d}$.
-His work formed the earliest record of linear stability analysis of convection.
-% and predicted the critical Rayleigh number of $Ra_c = \frac{27}{4}\pi^4 = 657.5$, and a critical wavelength of $q_c = \frac{\pi}{\sqrt{2}d}$.
-% where $Ra, \alpha, g, d \Delta T, \kappa, \nu$ refers to the Rayleigh number, volumetric thermal expansion of the fluid, gravitational constant, width and temperature difference between plates, thermal diffusivity and kinematic viscosity. 
-% When $Ra$ exceeds a certain critical Rayleigh number $Ra_c$, the fluid configuration becomes unstable and convection motion ensures.
-
-The pioneering work from Rayleigh, and B\'{e}nard's experiment formed the early foundations of buoyancy-driven convection, now known as Rayleigh-B\'{e}nard convection.
-However, it is worth highlighting the key differences between B\'{e}nard's experiment and Rayleigh's analysis.
-In B\'{e}nard's experiments, he considered a thin layer of fluid heated which is freely exposed to ambient air, leading to the formation of hexagonal convection patterns.
-Unbeknownst to him at that time was that surface tension (Maragoni) effects are important in thin layers of fluid.
-As fluids in thin layers are being heated, surface tension decreases, generated a tangential forces towards regions of higher surface tension at the surface, where cold fluid resides, ampliying convection, now known as B\'{e}nard-Maragoni convection \citep{manneville_thirty_2006}. 
-In B\'{e}nard's case, the effect of surface tension becomes important as the layer of fluid becomes thinner, forming hexagonal cells instead of concentric rolls in thicker layers shown by \cite{hoard_experiments_1970}.
-
-In the absence of surface tension effects, the critical Rayleigh number, $Ra_c$ depends on the boundary condition, commonly analysed using stress-free or rigid-rigid (no-slip) boundary conditions.
-In Rayleigh's work, he considered a stress-free condition at the wall, ${\partial u}/{\partial n} = 0$, where analytical solutions are admittable.
-The critical Rayleigh number for the rigid-rigid (no-slip) case is at $Ra_c = 1707.8$ and $q_c = 3.12/d$ (or $\lambda_c \approx 2d$), computed later by \cite{pellew_maintained_1940}, and is independent or $Pr$ \citep{bodenschatz_recent_2000}.
-Notably, the size of a single convection roll in the rigid-rigid case, $l_{roll} = 1/2\lambda_c \approx d$, suggesting that the distance separating the two plates dictates the length scale of the covection roll.
-In this work, I will investigate RBC with no-slip velocity boundary conditions, herein referred to RBC for the rest of the thesis.
-
-Slightly above the onset of convection, described using the reduced Rayleigh number $\varepsilon = (\frac{Ra}{Ra_c} - 1)$, a set of stable convection rolls near $q_c$ are found to exist (CITATIONS?).
-The theoretical foundations of performing stability analysis using expansion in powers of amplitude  (\emph{weakly nonlinear analysis}) was considered by \cite{eckhaus_studies_1965}, in which he applied it to the problem of parallel shear flows.
-The important contribution was that slightly above the onset, stable stationary rolls are found within the range of $Ra > Ra_c + 3\eta(\alpha - \alpha_c)^2$, where $\eta = \frac{1}{2}\frac{\partial Ra}{\partial \alpha}|_{Ra_c}$.
-\cite{busse_instabilities_1971} then extended the same technique to Rayleigh-B\'{e}nard convection, in which $\eta$ was found to depend on $Pr$.
-Whilst this technique is useful in detailing the stability regions of stationary rolls, it appears to be limited as it contradict some experiments in which time-dependent oscillatory rolls were discovered \citep{rossby_study_1969,willis_oscillatory_1970}, which has been found to be a secondary instability of stationary convection rolls with complex eigenvalues.
-As noted by \cite{busse_oscillatory_1972}, the applicability of weakly nonlinear analysis is limited to small $\varepsilon$.
-This limitation is addressed by using directly computing the linear stability of saturated convection rolls computed based on a Galerkin truncation and a root-finding algorithm.
-The results from linear stability analysis led to the well known Busse balloon which described the stability boundary of the convection rolls in the two dimensional space of $\varepsilon - q$, known as the Busse balloon \citep{busse_non-linear_1978} (figure \ref{fig:busseballon}).
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Background/Figures/BusseBalloonPlapp.pdf}
-\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon diigitised from \citep{plapp1997spiral} for $Pr \approx 1$}
-    \label{fig:busseballon}
-\end{figure}
-
-While the Busse balloon describes the stability boundaries of ISRs over a range of wavenumbers, predicting the wavenumber of an ISR state remains an central challenge \citep{bodenschatz_recent_2000}.
-Indeed, experimental investigations of RBC in moderate domain sizes ($\Gamma \geq 7,$ where $\Gamma$ refers to the domain's aspect ratio) in rectangular (straight rolls) and cylinderical (concentric rolls) domains showed that the wavenumbers are confined within the Busse balloon.
-As $\varepsilon$ is was continously modified, the ISRs with wavenumbers that are now outside of the Busse balloon, rolls dislocations and defects spontaneously nucleate, either increasing or decreasing the roll wavenumber, adhering to the the stability boundaries of the Busse balloon.
-The hysteretic nature of the system implies that the roll wavenumber of the ISRs strongly depends on the system's history \citep{bodenschatz_recent_2000}.
-
-To complicate the subject further, ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1} as multiple `non-ISR' states, in the form os squares, travelling/stationary targets, giant rotating spirals and oscillatory convection patterns have been found over the years \citep{croquette_convective_1989,croquette_convective_1989-1,plapp_dynamics_1998,hof_flow_1999,rudiger_pattern_2000,boronska_extreme_2010,boronska_extreme_2010-1}.
-For example, investigations of cylinderical RBC in small aspect-ratio revealed eight stationary statesand two oscillatory states.
-These findings were later supported by numerical experiments and bifurcation analyses.
-% It is worth noting that the solutions in the form of ISRs appear to be an exception rather
-% than the rule (Croquette 1989b). The coexistence of multiple ‘non-ISR’ states, in the form
-% of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection
-% patterns have been found over several years (Le Gal et al. 1985; Croquette 1989a; Plapp
-% et al. 1998; Hof et al. 1999; Rüdiger & Feudel 2000; Borońska & Tuckerman 2010a).
-% Investigation of cylindrical RBC with small aspect-ratio (Γ = 2) found eight stationary states
-% (at the same 𝑅𝑎 = 142000), and two oscillatory states (𝑅𝑎 > 14200) (Hof et al. 1999). These
-% findings were later supported by numerical experiments and bifurcation analyses (Ma et al.
-% 2006; Borońska & Tuckerman 2010a,b). In particular, bifurcation analyses performed by
-% Ma et al. (2006), revealed twelve stable branches in the form of symmetric and asymmetric
-% convection rolls near onset (𝑅𝑎 ⩽ 2500), with the potential emergence of hundreds of
-% branches at higher Rayleigh numbers, 𝑅𝑎 ⩽ 30000 (Borońska & Tuckerman 2010b). In
-% larger domains (Γ ⩾ 28), giant rotating spirals were identified and thoroughly investigated
-% (Plapp & Bodenschatz 1996; Plapp et al. 1998). Experimental and numerical studies of
-% RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting and
-% no-slip) (Tuckerman & Barkley 1988; Siggers 2003; Paul et al. 2003; Boullé et al. 2022),
-% non-Boussinesq convection (Bodenschatz et al. 1991, 1992), and rotational effects (Hu et al.
-% 1997) were investigated, where multiple states were also reported. More recently, (Reetz &
-% Schneider 2020; Reetz et al. 2020) computed up to sixteen stable and unstable invariant
-% states and identified heteroclinic orbits between the multiple states in an inclined RBC
-
-
-\begin{enumerate}
-    \item Saturated States
-    \item Busse balloon for Pr = 1
-    \item Skew-varicose, Eckhaus, Cross-roll instabilities
-    \item Low $Pr$ and high $Pr$.
-    \item What happens above the Busse balloon?
-\end{enumerate}
-
-\begin{enumerate}
-    \item Statisitical description of spatial-temporal chaos (i.e correlation length, time etc..)
-    \item Challenge with quantifying the onset
-\end{enumerate}
-
-% \subsection{Turbulent Rayleigh Benard: ultimate regime vs classical regime
-% \begin{enumerate}
-%     \item Onset of turbulence RBC
-%     \item Introduce classical vs ultimate regime and scaling arguments of $Nu$.
-% \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Plane Poiseuille Flows
@@ -275,15 +179,116 @@ To demonstrate an example of transient growth, we consider a two-dimensional toy
     \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix} v \\ \eta \end{pmatrix}  = \begin{pmatrix} -\frac{1}{Re} & -1 \\ 0 & -\frac{2}{Re} \end{pmatrix} \begin{pmatrix} v \\ \eta \end{pmatrix},
 \end{equation}
 where $Re$ refers to the Reynolds number.
-The toy model is linearly stable with a pair of eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, and unit eigenvectors $\mathbf{x_1} = (1, 0)$, $\mathbf{x_2} = \frac{1}{\sqrt{Re^2 + 1}}(Re, 1)$.
+The toy model is has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, and unit eigenvectors $\mathbf{x_1} = (1, 0)$, $\mathbf{x_2} = \frac{1}{\sqrt{Re^2 + 1}}(Re, 1)$.
+Judging from the negative eigenvalues, we conclude that $\mathbf{q}(t)$ will decay exponentially.
+However, as $Re \rightarrow \infty$, they becoming increasingly non-orthogonal approaching each other such that the angle between $\mathbf{x}_1$ and $\mathbf{x}_2$ tend towards 0.
 At $Re = 15$, the eigenvector pairs, $\mathbf{x_1}$ and $\mathbf{x_2}$, are highly non-orthogonal, becoming almost linear dependent shown in figure \ref{fig:toy_model}(a).
-Surprisingly, for a specific chosen initial condition and integrating in $t \in [0, 100]$ shown in the blue trajectory the energy amplification reaches roughly four times before decaying asymptotically.
-Whereas in a randomly selected green trajectory, the green trajectory initially decays, followed by a short bump around $t = 15$ before decaying asymptotically.
-In other words, the key premise of non-modal stability analysis is to search for initial conditions leading to maximum amplification defined as,
-\begin{equation}
-    G(t) = \max \frac{||\mathbf{q}(t)||^2}{||\mathbf{q}_0||^2}    
-\end{equation}
+For a randomly selected initial condition with an energy-norm of $||\mathbf{q}_0||_2 = 15$, where $|| \cdot ||_2$ refers to the L2-norm, the trajectory in green decays exponentially for $t \in [0, 100]$ in figure \ref{fig:toy_model}(b).
+In constrast, for a specifically chosen initial condition in shown as the blue trajectory, $||\mathbf{q}||_2$ is amplified nearly four times before decaying exponentially.
+The toy model demonstrates the significance of transient growth for a specifically chosen initial condition.
 
+The goal of non-modal stability analysis is to searching over all initial conditions, $\mathbf{\tilde{q}}_0$, leading to the maximum amplification factor at time $t$, resulting in an optimisation problem,
+\begin{equation}\label{eq:transient_growth}
+    % G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2}, \quad \text{s.t} \quad ||\mathbf{\tilde{q}}_0||^2 = 1,
+    G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathbf{\tilde{q}}(t), \mathbf{\tilde{q}}(t) \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle }, \quad \text{s.t} \quad \langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle = 1,
+\end{equation}
+where, $\langle \cdot, \cdot \rangle$ refers to the inner-product defined as,
+\begin{equation}
+    \langle \mathbf{x}, \mathbf{y} \rangle = \int_\Omega \mathbf{x}^H \mathbf{y} \; \mathrm{d}\Omega,
+\end{equation}
+and $\mathbf{x}^ H$ refers to the complex conjugate transpose of $\mathbf{x}$.
+By considering the linearised operator of \eqref{eq:OSQ}, we can define a linear time-evolution given as,
+\begin{equation}\label{eq:linear_evolution}
+    \mathbf{\tilde{q}}(t) = \mathcal{A}(t) \mathbf{\tilde{q}}_0,
+\end{equation}
+which takes the solution from initial conditions, $\mathbf{\tilde{q}}_0$, to $\mathbf{\tilde{q}}(t)$ at time $t$.
+Subtituting the expression above into equation \eqref{eq:transient_growth},
+\begin{equation}\label{eq:transient_growth_adj}
+    G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathcal{A}(t)\mathbf{\tilde{q}}_0, \mathcal{A}(t)\mathbf{\tilde{q}}_0 \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle} = \langle \mathbf{\tilde{q}}_0, \mathcal{A}^\dagger(t) \mathcal{A}(t)\mathbf{\tilde{q}}_0  \rangle = \lambda_{max} (\mathcal{A}^\dagger \mathcal{A})
+\end{equation}
+where $\mathcal{A}^\dagger(t)$ refers to the adjoint of $\mathcal{A}(t)$. The maximum amplification factor $\max G(t)$ is the largest eigenvalue, $\lambda_{max}$, of $\mathcal{A}^\dagger \mathcal{A}$, and the eigenvalue problem is given as,
+\begin{equation}
+    \mathcal{A}^\dagger(t)\mathcal{A}(t) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0,
+\end{equation}
+where $\mathbf{\tilde{q}}_0$ refers to the eigenvector denoting the optimal initial condition.
+For a detailed derivation of the optimal initial conditions or forcing, the reader is referred to \citep{butler_three-dimensional_1992,schmid_nonmodal_2007}.
+An alternative method of computing transient growth is computing the pseudospectral of linear operators discussed in \citep{trefethen_pseudospectra_1997}, outside the scope of this thesis.
+
+Both two-dimensional, $\beta = 0$, and three-dimensional, $\beta \neq 0$, non-modal stability analysis have been studied.
+
+In the two-dimensional form, the optimal initial conditions are in the form of near wall vorticies tilted upstream, transiently energised referred to as the Orr-mechanism \citep{orr_stability_1907, farrell_optimal_1988,reddy_pseudospectra_1993}.
+In the three-dimension form, streamwise vortices, acting as optimal initial conditions lead to the optimal response in the form of streamwise streaks \citep{reddy_energy_1993}.
+Contrary to linear stability analysis which confers two-dimensional perturbations as linearly unstable, the key result in this analysis is that three-dimensional initial conditions, $\alpha = 0$, confer the optimal initial conditions leading to large transient growth at subcritical Reynolds numbers.
+Figure.. shows this.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NONLINEAR DYNAMICAL SYSTEMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Nonlinear dynamic systems}
+While the previous treats the transition process based on linear processes, turbulence is an inherent turbulent process where chaotic and quasi-periodic processes arise such as the self-sustaining process \citep{hamilton_regeneration_1995}, arising as dynamical relationship between streaks and quasi-streamwise vortices. 
+An alternative view of turbulence arise from the interpretation of the solution traversing through a network of unstable nonlinear solutions known as exact coherent structures (ECS) or invariant solutions \citep{graham_exact_2021}.
+Unstable nonlinear solutions were first identified by \citep{nagata_three-dimensional_1990} in plane Couette flow.
+Nonlinear solutions to of plane Poiseuille flow was later identified by \citep{waleffe_exact_2001} and many others \citep{waleffe_homotopy_2003, toh_periodic-like_2003, nagata_mirror-symmetric_2013, wall_exact_2016, zammert_streamwise_201}.
+% Utilising tools from nonlinear dynamics systems, turbulence could be viewed as chaotic trajectories around unstable nonlinear solutions known as invariant solutions or exact coherent structures \citep{Waleffe_2001,Waleffe_2003,toh2003periodic,Kreilos_2012,nagata2013mirror,Wall_Nagata_2016,Zammert_Eckhardt_2014,graham21}.
+
+
+
+
+% \begin{equation}
+%     \langle \mathcal{A}(\tau)\mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{x}, \mathcal{A}^\dagger(\tau) \mathbf{y} \rangle.
+% \end{equation}
+% Next, we convert the constraint optimisation \eqref{eq:linear_growth_adj} into an unconstraint Lagrangian using Lagrange multipliers,
+% \begin{equation}
+%     \mathcal{L} = \langle \mathbf{\tilde{q}}_0, \mathcal{A}^\dagger\mathcal{A}\mathbf{\tilde{q}}_0 \rangle  + \lambda (\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle - 1)
+% \end{equation}
+% \begin{equation}
+%     \delta L / \delta \mathbf{\tilde{q}}_0 = 2 \mathcal{A}^\dagger\mathcal{A}\mathbf{\tilde{q}}_0 - 2\lambda \mathbf{\tilde{q}}_0 = 0,
+% \end{equation}
+% where $\lambda$ refers to the Lagrange multiply.
+% By invoking the optimal conditions, $\delta L/ \delta \mathbf{\tilde{q}}_0 = 0$, we get,
+% \begin{equation}
+%     \mathcal{A}^\dagger\mathcal{A}\mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}},
+% \end{equation}
+
+% The maximum amplification factor $G(\tau)$ is simply the maximum eigenvalue of $\mathcal{A}^\dagger(\tau) \mathcal{A}(\tau)$, expressed as,
+% Next, we describe the transient approach for Orr-Sommerfeld problem, by first casting it in its time-evolution form,
+% \begin{equation}
+%     \frac{\partial}{\partial t} \mathbf{\tilde{q}} = 
+%     \begin{pmatrix}
+%         (D^2 - k^2)^{-1}\mathcal{L}_{OS} & 0 \\
+%         -i\beta U' & -\mathcal{L}_{SQ}
+%     \end{pmatrix}
+%     \mathbf{\tilde{q}},
+% \end{equation}
+% Next, we consider the evolution equations of the Orr-Sommerfeld operator as,
+% where the solution at time $\tau$ is given as,
+% \begin{equation}
+%     \mathbf{\tilde{q}}(\tau) = \exp(\mathcal{A}\tau) \mathbf{\tilde{q}}_0
+% \end{equation}
+% where $\mathbf{A} \mathbf{V}= \mathbf{V}\mathbf{D}$ is diagonalisable where $\mathbf{V}, \mathbf{D}$ refer to the eigenvectors and values respectively.
+% 
+% \begin{equation}
+%     G(t) = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2}, \quad \text{s.t} \quad ||\mathbf{\tilde{q}_0}||^2 = 1.
+% \end{equation}
+% The energy-norm is defined with a continuous inner-product,
+% \begin{equation}
+%     ||\mathbf{x}
+% \end{equation}
+% \begin{equation}
+%     ||\mathbf{\tilde{q}}(t)||^2 = \langle \mathbf{A}(t) \mathbf{\tilde{q}_0}, \mathbf{A}(t) \mathbf{\tilde{q}_0} \rangle = \int_\Omega (\mathbf{A}\mathbf{\tilde{q}})^* \mathbf{A}\mathbf{\tilde{q}} \; \mathrm{d} \Omega,
+% \end{equation}
+% where $\cdot^{*}$ refer to the complex conjugate.
+% Next, we introduce the adjoint operator where,
+% \begin{equation}
+%     \langle \mathbf{x}^\dagger, A x \rangle = \langle A^\dagger \mathbf{x}, \mathbf{x} \rangle
+% \end{equation}
+% \begin{equation}
+%     G(t) = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2} = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{\mathbf{a_0}^T\exp(\mathbf{D}t)\mathbf{V}^T\mathbf{V}\exp(\mathbf{D}t)\mathbf{a}_0}{\mathbf{a}_0^T \mathbf{V}^T \mathbf{V} \mathbf{a}_0}
+% \end{equation}
+% \begin{equation}
+%     G(t) = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2} = \max_{\mathbf{\tilde{q}_0}} \frac{\mathbf{\tilde{q}_0}^T \mathbf{A}^T \mathbf{A} \mathbf{\tilde{q_0}}}{\mathbf{q}_0^T\mathbf{q}_0}
+% \end{equation}
 The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{Brandt_liftup_2014}.
 These modal and nonmodal mechanisms above highlight developments based on linear methods.
 It is now known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
@@ -294,6 +299,7 @@ These turbulent-laminar bands have been also observed in shear flow systems such
     \item{Nonlinear dynamical systems}
     \item{Spatiotemporal intermittency}
 \end{enumerate}
+
 Over the past decade, research efforts have been dedicated to the study of turbulent-laminar bands.
 The wavelengths of $24^\circ$ oblique bands been observed to occupy $20h$ at $1900 < Re < 1400$, and $40h$ at $1300 < Re < 800$, suggesting that band widths increases as $Re$ decrease.
 Between $1300 < Re < 1400$ there appears to be bistable region between bands of both band-widths \citep{tuckerman_turbulent-laminar_2014}. \citep{tsukahara_dns_2014,tsukahara_dns_2014-1} observed turbulent-laminar oblique bands tilted by $23.7^\circ$ at $Re = 1430$. \citep{gome_statistical_2020} computed probabilities of turbulent-laminar band splitting and decay depending on $Re$. As $Re$ increases the probability of band decay decreases, while as $Re$ decreases the probability a band splitting event decreases. By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 925$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
@@ -351,6 +357,103 @@ The thesis is structured into the follow, Chapter 1 is the introduction with lit
    \item Academic motivation - flow structures, statistics, transition.
    \item Application motivation - shear, heat transfer. Chip cooling, thin-film fabrication and atmospheric boundary layer.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rayleigh Benard Convection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rayleigh-B\'{e}nard convection (RBC)}\label{sec:RBC}
+Rayleigh-B\'{e}nard convection serves as one of the paradigmatic fluid configuration for studying the dynamics of natural convection.
+% It describes the motion of the fluid confined between two infinite-parallel plates simultaneously heated from below and cooled from the top.
+The two basic physical mechanisms that underpins RBC is the competition between buoyancy due to heating, and resistance due to viscous forces.
+As the bottom plate is heated, the bottom layer fluid becomes more buoyant and tends to rise, while the colder top fluid layer is becomes relatively less buoyant and tends to sink, leading to an overturning of layers.
+Viscous forces between adjacent fluid parcels act to resist the motion. 
+As buoyancy overcomes these viscous forces, the fluid layers overturn, resulting in the initiation of convection.
+One of the earliest experimental work is performed by Henri B\'{e}nard \citep{benard_tourbillons_1901}, who observed the onset of hexagonal convection cells above a certain threshold of $\Delta T$.
+To quantify the ratio between buoyancy and viscous forces, Lord Rayleigh \citep{rayleigh_lix_1916} introduced the Rayleigh number, $Ra$, and predicted the onset of convection at a critical Rayleigh number of $Ra_c = \frac{27}{4}\pi^4  = 657.5$, with a critical wavenumber of $q_c = \frac{\pi}{\sqrt{2}d}$.
+His work formed the earliest record of linear stability analysis of convection.
+% and predicted the critical Rayleigh number of $Ra_c = \frac{27}{4}\pi^4 = 657.5$, and a critical wavelength of $q_c = \frac{\pi}{\sqrt{2}d}$.
+% where $Ra, \alpha, g, d \Delta T, \kappa, \nu$ refers to the Rayleigh number, volumetric thermal expansion of the fluid, gravitational constant, width and temperature difference between plates, thermal diffusivity and kinematic viscosity. 
+% When $Ra$ exceeds a certain critical Rayleigh number $Ra_c$, the fluid configuration becomes unstable and convection motion ensures.
+
+The pioneering work from Rayleigh, and B\'{e}nard's experiment formed the early foundations of buoyancy-driven convection, now known as Rayleigh-B\'{e}nard convection.
+However, it is worth highlighting the key differences between B\'{e}nard's experiment and Rayleigh's analysis.
+In B\'{e}nard's experiments, he considered a thin layer of fluid heated which is freely exposed to ambient air, leading to the formation of hexagonal convection patterns.
+Unbeknownst to him at that time was that surface tension (Maragoni) effects are important in thin layers of fluid.
+As fluids in thin layers are being heated, surface tension decreases, generated a tangential forces towards regions of higher surface tension at the surface, where cold fluid resides, ampliying convection, now known as B\'{e}nard-Maragoni convection \citep{manneville_thirty_2006}. 
+In B\'{e}nard's case, the effect of surface tension becomes important as the layer of fluid becomes thinner, forming hexagonal cells instead of concentric rolls in thicker layers shown by \cite{hoard_experiments_1970}.
+
+In the absence of surface tension effects, the critical Rayleigh number, $Ra_c$ depends on the boundary condition, commonly analysed using stress-free or rigid-rigid (no-slip) boundary conditions.
+In Rayleigh's work, he considered a stress-free condition at the wall, ${\partial u}/{\partial n} = 0$, where analytical solutions are admittable.
+The critical Rayleigh number for the rigid-rigid (no-slip) case is at $Ra_c = 1707.8$ and $q_c = 3.12/d$ (or $\lambda_c \approx 2d$), computed later by \cite{pellew_maintained_1940}, and is independent or $Pr$ \citep{bodenschatz_recent_2000}.
+Notably, the size of a single convection roll in the rigid-rigid case, $l_{roll} = 1/2\lambda_c \approx d$, suggesting that the distance separating the two plates dictates the length scale of the covection roll.
+In this work, I will investigate RBC with no-slip velocity boundary conditions, herein referred to RBC for the rest of the thesis.
+
+Slightly above the onset of convection, described using the reduced Rayleigh number $\varepsilon = (\frac{Ra}{Ra_c} - 1)$, a set of stable convection rolls near $q_c$ are found to exist (CITATIONS?).
+The theoretical foundations of performing stability analysis using expansion in powers of amplitude  (\emph{weakly nonlinear analysis}) was considered by \cite{eckhaus_studies_1965}, in which he applied it to the problem of parallel shear flows.
+The important contribution was that slightly above the onset, stable stationary rolls are found within the range of $Ra > Ra_c + 3\eta(\alpha - \alpha_c)^2$, where $\eta = \frac{1}{2}\frac{\partial Ra}{\partial \alpha}|_{Ra_c}$.
+\cite{busse_instabilities_1971} then extended the same technique to Rayleigh-B\'{e}nard convection, in which $\eta$ was found to depend on $Pr$.
+Whilst this technique is useful in detailing the stability regions of stationary rolls, it appears to be limited as it contradict some experiments in which time-dependent oscillatory rolls were discovered \citep{rossby_study_1969,willis_oscillatory_1970}, which has been found to be a secondary instability of stationary convection rolls with complex eigenvalues.
+As noted by \cite{busse_oscillatory_1972}, the applicability of weakly nonlinear analysis is limited to small $\varepsilon$.
+This limitation is addressed by using directly computing the linear stability of saturated convection rolls computed based on a Galerkin truncation and a root-finding algorithm.
+The results from linear stability analysis led to the well known Busse balloon which described the stability boundary of the convection rolls in the two dimensional space of $\varepsilon - q$, known as the Busse balloon \citep{busse_non-linear_1978} (figure \ref{fig:busseballon}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/BusseBalloonPlapp.pdf}
+\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon diigitised from \citep{plapp1997spiral} for $Pr \approx 1$}
+    \label{fig:busseballon}
+\end{figure}
+
+While the Busse balloon describes the stability boundaries of ISRs over a range of wavenumbers, predicting the wavenumber of an ISR state remains an central challenge \citep{bodenschatz_recent_2000}.
+Indeed, experimental investigations of RBC in moderate domain sizes ($\Gamma \geq 7,$ where $\Gamma$ refers to the domain's aspect ratio) in rectangular (straight rolls) and cylinderical (concentric rolls) domains showed that the wavenumbers are confined within the Busse balloon.
+As $\varepsilon$ is was continously modified, the ISRs with wavenumbers that are now outside of the Busse balloon, rolls dislocations and defects spontaneously nucleate, either increasing or decreasing the roll wavenumber, adhering to the the stability boundaries of the Busse balloon.
+The hysteretic nature of the system implies that the roll wavenumber of the ISRs strongly depends on the system's history \citep{bodenschatz_recent_2000}.
+
+To complicate the subject further, ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1} as multiple `non-ISR' states, in the form os squares, travelling/stationary targets, giant rotating spirals and oscillatory convection patterns have been found over the years \citep{croquette_convective_1989,croquette_convective_1989-1,plapp_dynamics_1998,hof_flow_1999,rudiger_pattern_2000,boronska_extreme_2010,boronska_extreme_2010-1}.
+For example, investigations of cylinderical RBC in small aspect-ratio revealed eight stationary statesand two oscillatory states.
+These findings were later supported by numerical experiments and bifurcation analyses.
+% It is worth noting that the solutions in the form of ISRs appear to be an exception rather
+% than the rule (Croquette 1989b). The coexistence of multiple ‘non-ISR’ states, in the form
+% of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection
+% patterns have been found over several years (Le Gal et al. 1985; Croquette 1989a; Plapp
+% et al. 1998; Hof et al. 1999; Rüdiger & Feudel 2000; Borońska & Tuckerman 2010a).
+% Investigation of cylindrical RBC with small aspect-ratio (Γ = 2) found eight stationary states
+% (at the same 𝑅𝑎 = 142000), and two oscillatory states (𝑅𝑎 > 14200) (Hof et al. 1999). These
+% findings were later supported by numerical experiments and bifurcation analyses (Ma et al.
+% 2006; Borońska & Tuckerman 2010a,b). In particular, bifurcation analyses performed by
+% Ma et al. (2006), revealed twelve stable branches in the form of symmetric and asymmetric
+% convection rolls near onset (𝑅𝑎 ⩽ 2500), with the potential emergence of hundreds of
+% branches at higher Rayleigh numbers, 𝑅𝑎 ⩽ 30000 (Borońska & Tuckerman 2010b). In
+% larger domains (Γ ⩾ 28), giant rotating spirals were identified and thoroughly investigated
+% (Plapp & Bodenschatz 1996; Plapp et al. 1998). Experimental and numerical studies of
+% RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting and
+% no-slip) (Tuckerman & Barkley 1988; Siggers 2003; Paul et al. 2003; Boullé et al. 2022),
+% non-Boussinesq convection (Bodenschatz et al. 1991, 1992), and rotational effects (Hu et al.
+% 1997) were investigated, where multiple states were also reported. More recently, (Reetz &
+% Schneider 2020; Reetz et al. 2020) computed up to sixteen stable and unstable invariant
+% states and identified heteroclinic orbits between the multiple states in an inclined RBC
+
+
+\begin{enumerate}
+    \item Saturated States
+    \item Busse balloon for Pr = 1
+    \item Skew-varicose, Eckhaus, Cross-roll instabilities
+    \item Low $Pr$ and high $Pr$.
+    \item What happens above the Busse balloon?
+\end{enumerate}
+
+\begin{enumerate}
+    \item Statisitical description of spatial-temporal chaos (i.e correlation length, time etc..)
+    \item Challenge with quantifying the onset
+\end{enumerate}
+
+% \subsection{Turbulent Rayleigh Benard: ultimate regime vs classical regime
+% \begin{enumerate}
+%     \item Onset of turbulence RBC
+%     \item Introduce classical vs ultimate regime and scaling arguments of $Nu$.
+% \end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Rayleigh Benard Poiseuille flows
