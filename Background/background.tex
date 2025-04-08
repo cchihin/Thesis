@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
 % Theoretical Background
 %%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -39,14 +39,14 @@ The key control parameters for RBP flows are the Rayleigh number, $Ra$, Reynolds
 \end{equation}
 where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
 
-We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:RBC}.
-The historical developments involving Rayleigh-B\'{e}nard Poiseuille (RBP) flows are then expanded in \S \ref{sec:RBP} concluded by a section describing the hydrodynamic stability of fluid flows in \S \ref{sec:hydrodynamic_stab}
+We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
+The historical developments involving Rayleigh-B\'{e}nard Poiseuille (RBP) flows are then expanded in \S \ref{sec:bkgrd_RBP} concluded by a section describing the hydrodynamic stability of fluid flows in \S \ref{sec:bkgrd_transitional}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Plane Poiseuille Flows
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Transitional wall-bounded shear flows}\label{sec:PPF}
+\section{Transitional wall-bounded shear flows}\label{sec:bkgrd_transitional}
 Wall-bounded shear flows remain as a fundamental topic in fluid mechanics, concerning the motion of a fluid travelling in parallel to solid surfaces (such as walls), where pressence of the wall influences the flow.
 To satistfy the non-slip boundary conditions at the walls, the fluid layer becomes sheared, leading to velocity gradients and shear stresses within the fluid.
 The prototypical examples flows include the pressure-driven plane Poiseuille flow (PPF), pipe (Hagen-Poiseuille) flow, plane Couette flow and flat plate boundary layers.
@@ -83,7 +83,7 @@ The typical approach begins with decomposing the velocity field, $\mathbf{u}(\ma
 \begin{equation}
     \mathbf{u}(\mathbf{x}) = U(y) + \mathbf{u}'(\mathbf{x},t), \quad \text{and} \quad p(\mathbf{x},t) = P(x) + p'(\mathbf{x},t).
 \end{equation}
-Substituing into the Navier-Stokes equations of equation \eqref{eq:rbp_equations} and dropping nonlinear pertubrations terms $(\mathbf{u'}\cdot \nabla)\mathbf{u'}$, we the linearised perturbation equations,
+Next, we the substitute the formulations for the decomposed velocity and pressure into the Navier-Stokes equations of equation \eqref{eq:rbp_equations} and drop the nonlinear pertubrations terms $(\mathbf{u'}\cdot \nabla)\mathbf{u'}$,
 \begin{subequations}\label{eq:shear_linearised}
 \begin{equation}
     \frac{\partial \mathbf{u'}}{\partial t} + (U \cdot\nabla)\mathbf{u'} + (\mathbf{u'}\cdot\nabla)U= -\nabla p' + \frac{1}{Re}\nabla^2 \mathbf{u'},
@@ -92,10 +92,19 @@ Substituing into the Navier-Stokes equations of equation \eqref{eq:rbp_equations
     \nabla \cdot \mathbf{u}' = 0,
 \end{equation}
 \end{subequations}
-which describes the time evolution of the perturbations, $\mathbf{u}'$, subjected to continuity.
-To eliminate the pressure terms, it is covenient to transform equation \eqref{eq:shear_linearised} using the wall-normal perturbation velocity, $v'$, and wall-normal vorticity, $\eta' = \partial u'/ \partial z - \partial w' / \partial x$, variables and introduce a wavelike ansatz for them,
+resulting to the linearised Navier-Stokes equations. 
+This commonly followed by introducing a wavelike ansatz (mode) defined by streamwise and spanwise wavenumbers, $\alpha, \beta$ and complex frequency, $\omega$.
+In general two ways to analysis the linearised Navier-Stokes equations by considering the behaviour of each mode independently in \S \ref{subsec:modal} and their coupled dynamics in \S \ref{subsec:nonmodal}
+
+%%%%%%%%%%%%%%%%%
+% MODAL STABILITy
+%%%%%%%%%%%%%%%%%
+
+\subsubsection{Modal analysis}\label{subsec:modal}
+It is covenient to eliminate the pressure terms by to transform equation \eqref{eq:shear_linearised} using the wall-normal perturbation velocity, $v'$, and wall-normal vorticity, $\eta' = \partial u'/ \partial z - \partial w' / \partial x$, variables.
+Using $(v, \eta)$, introduce an ansatz (mode) for them,
 \begin{equation}\label{eq:shear_ansatz}
-    v'(\mathbf{x},t ) = \tilde{v}(y)e^{i(\alpha x + \beta z - \omega t)}, \quad \text{and} \quad \eta'(\mathbf{x}, t) = \tilde{\eta}(y)^e^{i(\alpha x + \beta z - \omega t)}.
+    v'(\mathbf{x},t ) = \tilde{v}(y)e^{i(\alpha x + \beta z - \omega t)}, \quad \text{and} \quad \eta'(\mathbf{x}, t) = \tilde{\eta}(y)e^{i(\alpha x + \beta z - \omega t)}.
 \end{equation}
 where $\alpha, \beta, \omega$ denotes the streamwise and spanwise wavenumbers, and complex frequency (i.e. $\omega = \omega_r + i\omega_i$), respectively.
 Next, we substitute the ansatz into equation \ref{eq:shear_linearised}, leading to the classical Orr-Sommerfeld and Squire equations \citep{orr_stability_1907,sommerfeld_beitrag_1909,squire_stability_1933, schmid_stability_2001},
@@ -152,6 +161,7 @@ Equation \eqref{eq:OSQ} is simply an eigenvalue problem which could be represent
 and $i \omega$ refers to the eigenvalue.
 The aim of linear stability analysis is to determine the critical Reynolds number, $Re_c$, which is defined as the lowest value of $Re$ over $\alpha$ and $\beta$, such that $Im[\omega] = 0$.
 For $Re > Re_c$, perturbations could grow exponentially, departing from the laminar state.
+In other words, we consider the behaviour of each $\alpha-\beta$ mode independently, herein referred to as \emph{modal} analysis.
 Squire's theorem implies that for any unstable three-dimensional perturbations, $\beta \neq 0$, there exist an unstable two-dimensional perturbation, $\beta = 0$ with a lower $Re_c$ \citep{squire_stability_1933}.
 Therefore, the unstable perturbations of wall-bounded shear flows at $Re_c$ must be two-dimensional.
 The theoretical calculations was first perform by \cite{tollmien_uber_1928} and \cite{schlichting_zur_1933} for a flat-plate boundary layer flow, yielding a critical Reynolds number based on streamwise distance $x$ of $Re_{x,c} = Ux_c / \nu = 520$ \citep{schlichting_onset_2017}.
@@ -165,6 +175,12 @@ A similar result holds for the plane Couette flow \citep{meseguer_linearized_200
 % The critical Reynolds number for the onset of unstable infinitesimal perturbutations in plane Poiseuille flow (PPF) occurs at $Re_{c} = 5772.2$ \citep{orszag_accurate_1971}.
 Despite its limitation, linear analysis analysis succeeds in predicting the critical Rayleigh number in Rayleigh-B\'{e}nard convection.
 % Despite it failures, it has succeeded in other configurations, such as Rayleigh-B\'{e}nard convection, and Taylor-Couette flow \citep{bodenschatz_recent_2000}, predicting the onset of convection and Taylor rolls are the correct critical parameters.
+
+%%%%%%%%%%%%%%%%%%%%%
+% Non-modal stability
+%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Non-modal stability}\label{subsec:nonmodal}
 One of a major limitation of linear stability analysis considered above is that it treats each eigenmode independently, referred to as \emph{modal} analysis.
 However, the interaction between decaying eigenmodes may lead to a short-term amplification of perturbations, before eventually decaying.
 This phenonemon is referred to as \emph{transient growth}, and the method of analysis is referred to as \emph{non-modal} analysis, related to the normality of the linear Orr-Sommerfeld operator \citep{schmid_nonmodal_2007}.
@@ -221,18 +237,55 @@ In the three-dimension form, streamwise vortices, acting as optimal initial cond
 Contrary to linear stability analysis which confers two-dimensional perturbations as linearly unstable, the key result in this analysis is that three-dimensional initial conditions, $\alpha = 0$, confer the optimal initial conditions leading to large transient growth at subcritical Reynolds numbers.
 Figure.. shows this.
 
+The width of the streaks happen to be robustly occur around 100 wall units, the characteristics spacing identified in many experiments [Kline, Panton, Bandybopobi]
+
+The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{ellingsen_stability_1975,brandt_lift-up_2014}.
+These modal and nonmodal mechanisms above highlight developments based on linear methods.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NONLINEAR DYNAMICAL SYSTEMS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Nonlinear dynamic systems}
-While the previous treats the transition process based on linear processes, turbulence is an inherent turbulent process where chaotic and quasi-periodic processes arise such as the self-sustaining process \citep{hamilton_regeneration_1995}, arising as dynamical relationship between streaks and quasi-streamwise vortices. 
-An alternative view of turbulence arise from the interpretation of the solution traversing through a network of unstable nonlinear solutions known as exact coherent structures (ECS) or invariant solutions \citep{graham_exact_2021}.
-Unstable nonlinear solutions were first identified by \citep{nagata_three-dimensional_1990} in plane Couette flow.
-Nonlinear solutions to of plane Poiseuille flow was later identified by \citep{waleffe_exact_2001} and many others \citep{waleffe_homotopy_2003, toh_periodic-like_2003, nagata_mirror-symmetric_2013, wall_exact_2016, zammert_streamwise_201}.
+\subsection{Nonlinear dynamical systems}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Background/Figures/StateSpaceGraham.png}
+    \caption{The state space organising of the upper and lower branch. Turbulence is interpreted as solution trajectories wander around the upper branch, orbiting around a network unstable invariant states. The lower branch acts as a boundary between the turbulent attractor and laminar attractor, an attracttor on the edge referred to as the edge state.}
+    \label{fig:StateSpaceGraham}
+\end{figure}
+
+It is well established that coherent motions defined by flow patterns that persist in space and time play an important role in the transport of momentum and heat.
+In parallel shear flows, these coherent structures typically appear as near-walls streaks and quasi-streamwise rollers.
+A persistent, quasi-periodic cycle between the regeneration of streaks and rolls, referred to as the \emph{self-sustaining process}, appears to be a fundamental mechanism in sustaining wall-bounded turbulence \emph{self-sustaining process} \citep{hamilton_regeneration_1995}.
+This mechanism is described by the generation of streaks due to quasi-streamwise rollers by redistributing the mean.
+These streaks become linearly unstable and breakdown, and through a nonlinear process regenerates the quasi-streamwise rollers, closing the cycle.
+
+In the previous section, we have examined the transition process based linear mechanisms. 
+While such mechanisms are important, the transition to turbulence is ultimately governed fully nonlinear nature of the Navier-Stokes equations.
+As a result, an increasing attention has been directed towards the description of turbulence as a nonlinear dynamical systems.
+In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
+These invariant solutions commonly take the form of as equilibria, travelling waves, periodic and relative periodic orbits.
+
+In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
+This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
+The lower branch refers to its proximity towards the stable laminar state in phase space.
+A travelling-wave solution in plane Couette flow also later found by the same author \citep{nagata_three-dimensional_1997}.
+A family of equilibrium and travelling waves solutions was found for plane Couette and plane Poiseuille flows under various boundary conditions (i.e. stress-free, slip and no-slip) where identified by \citep{waleffe_exact_2001,waleffe_homotopy_2003}.
+
+While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
+Periodic orbits defined by time-dependent solutions that have been identified in plane Couette flow \citep{kawahara_periodic_2001}, describing a single regeneration cycle similar to the self-sustaining process.
+The chaotic trajectories of turbulence have been found to be embedded within invariant solutions and their connections between them known as heteroclinic orbits, offering a robust view of the building-blocks of of turbulence \citep{gibson_visualizing_2008, gibson_equilibrium_2009, halcrow_heteroclinic_2009, graham_exact_2021}
+
+In the context of this transitional flows, the lower branch solution can be though of separating the turbulent attractor from the laminar state.
+Its an attractor that resides on the edge of turbulence, defined as an edge state.
+The graphical representation of this edge is shown in figure \ref{fig:StateSpaceGraham}.
+
 % Utilising tools from nonlinear dynamics systems, turbulence could be viewed as chaotic trajectories around unstable nonlinear solutions known as invariant solutions or exact coherent structures \citep{Waleffe_2001,Waleffe_2003,toh2003periodic,Kreilos_2012,nagata2013mirror,Wall_Nagata_2016,Zammert_Eckhardt_2014,graham21}.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spatiotemporal transitional flows
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spatiotemporal transitonal flows}
 
 
 % \begin{equation}
@@ -289,8 +342,6 @@ Nonlinear solutions to of plane Poiseuille flow was later identified by \citep{w
 % \begin{equation}
 %     G(t) = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2} = \max_{\mathbf{\tilde{q}_0}} \frac{\mathbf{\tilde{q}_0}^T \mathbf{A}^T \mathbf{A} \mathbf{\tilde{q_0}}}{\mathbf{q}_0^T\mathbf{q}_0}
 % \end{equation}
-The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{Brandt_liftup_2014}.
-These modal and nonmodal mechanisms above highlight developments based on linear methods.
 It is now known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
 These turbulent-laminar bands have been also observed in shear flow systems such as Couette flow \citep{duguet_formation_2010}, Taylor-Couette flow \citep{prigent_long-wavelength_2003}, and pipe flow \citep{avila_onset_2011} (as puffs and slugs).
 
@@ -362,7 +413,7 @@ The thesis is structured into the follow, Chapter 1 is the introduction with lit
 % Rayleigh Benard Convection
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Rayleigh-B\'{e}nard convection (RBC)}\label{sec:RBC}
+\section{Rayleigh-B\'{e}nard convection (RBC)}\label{sec:bkgrd_RBC}
 Rayleigh-B\'{e}nard convection serves as one of the paradigmatic fluid configuration for studying the dynamics of natural convection.
 % It describes the motion of the fluid confined between two infinite-parallel plates simultaneously heated from below and cooled from the top.
 The two basic physical mechanisms that underpins RBC is the competition between buoyancy due to heating, and resistance due to viscous forces.
@@ -401,7 +452,7 @@ The results from linear stability analysis led to the well known Busse balloon w
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Background/Figures/BusseBalloonPlapp.pdf}
-\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon diigitised from \citep{plapp1997spiral} for $Pr \approx 1$}
+\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon diigitised from \citep{plapp_spiral_1997} for $Pr \approx 1$}
     \label{fig:busseballon}
 \end{figure}
 
@@ -459,13 +510,12 @@ These findings were later supported by numerical experiments and bifurcation ana
 % Rayleigh Benard Poiseuille flows
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Rayleigh-B\'{e}nard Poiseuille (RBP) flows}
-
+\section{Rayleigh-B\'{e}nard Poiseuille (RBP) flows}\label{sec:bkgrd_RBP}
 
 \cite{gage_stability_1968} first investigated the primary instabilities of RBP flows, which can be determined by $Re$, $Ra$, $Pr$, and the planar $x$-$z$ perturbations wavenumbers $\alpha, \beta$ respectively.
 For a given $Ra$ and $Pr$, the neutral stability curves are limited by the development of Tollmien-Schlicting waves for $Re \geq Re_{TS} = 5772.22$ \citep{orszag_accurate_1971}, and convection rolls within $0 \leq Re < Re_{TS}$.
 Convection rolls can be categorised based on their orientation to the mean flow, namely, longitudinal ($\alpha= 0, \beta \neq 0$), transverse ($\alpha \neq 0, \beta = 0$) and oblique rolls ($\alpha \neq 0, \beta \neq 0$).
-The linearised system governing the onset of longitudinal rolls is analogous to the linearised RBC system, with a critical Rayleigh number, $Ra_{\parallel} = Ra_{RB} = 1708.8$ and critical wavenumber, $\alpha_{\parallel} = \alpha_{RB} = 3.13$ \citep{pellew_convection_1940, kelly_onset_1994}, independent of $Re$ and $Pr$.
+The linearised system governing the onset of longitudinal rolls is analogous to the linearised RBC system, with a critical Rayleigh number, $Ra_{\parallel} = Ra_{RB} = 1708.8$ and critical wavenumber, $\alpha_{\parallel} = \alpha_{RB} = 3.13$ \citep{pellew_maintained_1940, kelly_onset_1994}, independent of $Re$ and $Pr$.
 The critical Rayleigh number for oblique and transverse rolls matches that of RBC at $Re=0$ due to horizontal isotropy, but increases as $Re$ increases, depending on $Pr$, i.e., $Ra_{\perp} = f(Re,Pr)$ \citep{gage_stability_1968, muller_transversal_1992, nicolas_two-dimensional_1997}.
 When spatially developing instabilities are considered, longitudinal rolls are always convectively unstable, and transverse rolls can become absolutely unstable \citep{muller_convective_1989, muller_transversal_1992, carriere_convective_1999}.
 Nonmodal stability analyses of subcritical RBP indicate that the optimal transient growth $G_{max}$ increases gradually with $Ra$.

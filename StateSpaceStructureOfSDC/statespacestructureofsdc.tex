@@ -1,20 +1,20 @@
 \chapter{The state space structure of Spiral Defect Chaos}\label{sec:chap5}
-\section{Introduction}\label{sec:intro}
+\section{Introduction}\label{sec:rbc_intro}
 
 Rayleigh-B\'{e}nard convection (RBC) concerns the fluid motion confined between two parallel walls, separated by a distance $d$, heated from below. The motion of the fluid is effectively driven by unstable stratification due to temperature gradients ($\Delta T/d$) across the walls. Given a large enough temperature gradient, a non-trivial fluid motion occurs, often developing into a spatially varying structure known as a convection pattern. This motion is described in terms of the Rayleigh number $Ra = \alpha g d^3 \Delta T / \nu \kappa$, Prandtl number $Pr = \nu / \kappa$ and aspect ratio of the experimental/computational domain $\Gamma = L/d$, where $\alpha, g, \Delta T, \nu, \kappa, L$ refers to the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity thermal diffusivity, domain's length and span respectively. An important question that underpins RBC is often as follows: Given the Rayleigh number ($Ra$), Prandtl number ($Pr$) and aspect ratio ($\Gamma$) of a fluid system, what convection pattern arises and what is its associated heat flux? 
 
-\subsection{Multiple convection states}\label{sec:mulstate}
+\subsection{Multiple convection states}\label{sec:rbc_mulstate}
 
 While the Busse balloon describes the stability of ISRs over a continuum of wavenumbers (at given ${Ra}$ and ${Pr}$), predicting the wavenumber of an ISR state remains an ongoing challenge \cite{bodenschatz2000}. Experimental investigations of RBC in moderate domains ($\Gamma \geq 7$) showed that ISRs in rectangular (straight rolls) and cylindrical (concentric rolls) domains are stable. Consider $\varepsilon (\equiv (Ra-Ra_c)/Ra_c$, where $Ra_c$ is the critical $Ra$ for the onset of linear instability for ISRs) as a control parameter referred to as the reduced Rayleigh number. As $\varepsilon$ is increased continuously from below the onset, the initial ISRs become unstable and transform into another set of ISRs with a different wavelength. With the marginal increase of $\varepsilon$, this process is repeated and the ISRs undergo hysteretic transverse wavelength adjustments, adhering to the stability boundaries of the Busse balloon \cite{steinberg1985,croquette1989a}. When ISRs become unstable, roll dislocations and defects can be nucleated near the boundary or bulk, modifying the effective roll wavenumber as they travel through the domain \cite{croquette1989a}. This observation implies that the wavenumber of an ISR state depends on the state's history or the system's initial condition \cite{bodenschatz2000}.
 
 It is worth noting that the solutions in the form of ISRs appear to be an exception rather than the rule \cite{croquette1989b}. The coexistence of multiple `non-ISR' states, in the form of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection patterns have been found over several years \cite{legal1985, croquette1989a, plapp1998, hof1999, rudiger2000, boronska2010a}. Investigation of cylindrical RBC with small aspect-ratio ($\Gamma = 2$) revealed eight stationary states (at the same ${Ra} = 142000$), and two oscillatory states ($Ra > 14200$) \cite{hof1999}. These findings were later supported by numerical experiments and bifurcation analyses \cite{ma2006, boronska2010a, boronska2010b}. In particular, bifurcation analyses performed by \cite{ma2006}, revealed twelve stable branches in the form of symmetric and asymmetric convection rolls near onset ($Ra \leq 2500$), with the potential emergence of hundreds of branches at higher Rayleigh numbers, ${Ra} \leq 30000$ \cite{boronska2010b}. In larger domains ($\Gamma \geq 28$), giant rotating spirals were identified and thoroughly investigated \cite{plapp1996, plapp1998}. Experimental and numerical studies of RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting and no-slip) \cite{tuckerman1988, siggers2003, paul2003, boulle2022}, non-Boussinesq convection \cite{bodenschatz1991, bodenschatz1992}, and rotational effects \cite{hu1997} were investigated, where multiple states were also reported. More recently, \cite{Reetz2020part1, Reetz2020part2} computed up to sixteen stable and unstable invariant states and identified heteroclinic orbits between the multiple states in an inclined RBC.
 
-\subsection{Spiral defect chaos}\label{sec:sdc}
+\subsection{Spiral defect chaos}\label{sec:rbc_sdc}
 Convection rolls exhibiting spatio-temporal chaotic behaviour known as spiral defect chaos (SDC) are found in the same parameter space of $\varepsilon$, where ISRs were expected \cite{Morris93, hu1993, Decker94, hu1995a,hu1995b, morris1996, Cakmur97, ahlers1998, egolf1998, chiam2003, vitral2020}. It is well established that SDC exists as an intrinsic state of RBC, independent of sidewall conditions \cite{morris1996}. SDC has also been found in numerical simulations of the two-dimensional Swift-Hohenberg equations \cite{swift1977, xi1993, xi1995, schmitz2002, karimi2011}. Some investigations into quantifying the onset of SDC in terms of Rayleigh number remain inconclusive. The critical reduced Rayleigh number for the onset of SDC, $\varepsilon_s$, has been observed to decrease with increasing $\Gamma$, and increase with increasing $Pr$ \cite{hu1995a, hu1995b, bajaj1997, Cakmur97, bodenschatz2000}. It is worth noting that SDC has been reported in larger domains ($\Gamma \geq 20$) only, implying that there exists a minimal $\Gamma$ for SDC to occur \cite{bodenschatz2000}, further supporting the dependence of $\varepsilon_s$ on $\Gamma$ mentioned above. This is also consistent with the leading Lyapunov exponents, which become smaller with decreasing aspect ratios, $\Gamma$, albeit at larger $\varepsilon = 2.5$ \cite{egolf2000, paul2007}. Investigations into the spatial-temporal characteristics of SDC, such as the quantification of the averaged roll-curvature \cite{hu1995a, hu1995b}, probability of spirals \cite{ecke1995,liu1996} and correlation length-/time-scales \cite{Morris93,morris1996,Cakmur97} have been studied. Specifically, the correlation length-scales \cite{Morris93, morris1996, Cakmur97} of SDC appear to scale exponentially as $\varepsilon$ is increased. Furthermore, spatio-temporal chaotic behaviour reminiscent to SDC has been found in other pattern-formation systems such as rotational RBC \cite{hu1997}, dielectric barrier discharge \cite{dong2005} and chemical systems \cite{affan2014}.
 
-Given the co-existence of ISRs and SDC in the parameter space of $\varepsilon$, it is known that they form bistability at $Pr \approx 1$ in a spatially extended domain, supported by experiments over a range of $\varepsilon(>0)$ \cite{Cakmur97}. Only carefully prepared experiment setups led to ISRs while most initial conditions yield SDC. In other words, the asymptotic state of RBC depends on its initial conditions, reminiscent of the hysteretic behaviour of RBC discussed in \S\ref{sec:mulstate}. The chaotic state of SDC is unstable at $Pr=4$, where multiple spiral patterns coarsen into a single spiral, before evolving into straight-curved rolls over a long period \cite{bajaj1997}. This implies that the behaviour of SDC depends on $Pr$.
+Given the co-existence of ISRs and SDC in the parameter space of $\varepsilon$, it is known that they form bistability at $Pr \approx 1$ in a spatially extended domain, supported by experiments over a range of $\varepsilon(>0)$ \cite{Cakmur97}. Only carefully prepared experiment setups led to ISRs while most initial conditions yield SDC. In other words, the asymptotic state of RBC depends on its initial conditions, reminiscent of the hysteretic behaviour of RBC discussed in \S\ref{sec:rbc_mulstate}. The chaotic state of SDC is unstable at $Pr=4$, where multiple spiral patterns coarsen into a single spiral, before evolving into straight-curved rolls over a long period \cite{bajaj1997}. This implies that the behaviour of SDC depends on $Pr$.
 
-\subsection {Scope of this study}\label{sec:objs}
+\subsection {Scope of this study}\label{sec:rbc_objs}
 The bistability between SDC and ISR is well established, but this also opens a question of how it is connected with the previous findings of multiple stable states. 
 It is worth noting that a possible parameter in exploring this connection appears to be the domain size.
 Bistability has been reported in domains much larger ($\Gamma = 50$) than the multiple states found in small-to-moderate domains ($\Gamma \leq 10$) \cite{Cakmur97}. Furthermore, giant rotating spirals have been found in domains comparable to the horizontal length scale of SDC \cite{plapp1996, plapp1998}. 
@@ -24,16 +24,16 @@ Motivated by the observation that SDC consists of several localised structures t
 
 The main contributions of the present study can be briefly summarised as follows:
 \begin{enumerate}
-    \item Discovery of a number of stable invariant solutions which underpin the localised structures of SDC by minimising the computational domain for SDC (sectisn \ref{sec:mindom});
-    \item Computation of some of multiple `edge states' sitting on the separatrix between SDC and ISRs (section \ref{sec:edgestate});
-    \item Several heteroclinic orbits connecting unstable ISRs and stable ISRs near the boundaries of the Busse balloon (section \ref{sec:heteroclinic});
-    \item The role of unstable ISRs far from the Busse balloon acting as a signpost between ISRs and SDC (section \ref{sec:chaoticsaddle}).
+    \item Discovery of a number of stable invariant solutions which underpin the localised structures of SDC by minimising the computational domain for SDC (sectisn \ref{sec:rbc_mindom});
+    \item Computation of some of multiple `edge states' sitting on the separatrix between SDC and ISRs (section \ref{sec:rbc_edgestate});
+    \item Several heteroclinic orbits connecting unstable ISRs and stable ISRs near the boundaries of the Busse balloon (section \ref{sec:rbc_heteroclinic});
+    \item The role of unstable ISRs far from the Busse balloon acting as a signpost between ISRs and SDC (section \ref{sec:rbc_chaoticsaddle}).
 \end{enumerate}
 
-\section{Problem formulation}\label{sec:2}
+\section{Problem formulation}\label{sec:rbc_2}
 \subsection{Rayleigh-Benard convection (RBC)}
 We consider a buoyancy-driven flow of an incompressible fluid separated by a vertical height of $d$, confined between an upper wall of uniform temperature $T_U$, and a lower wall of uniform temperature $T_L$. The temperature of the lower wall is higher than the temperature of the upper wall ($\Delta T = T_L - T_U > 0$) such that the fluid is unstably stratified. The fluid has a density of $\rho$, a thermal diffusivity of $\kappa$, and a kinematic viscosity of $\nu$.  The non-dimensionalised governing equations with the Boussinesq approximation for buoyancy-driven flows are given by
-\begin{subequations}\label{eq:rbc}
+\begin{subequations}\label{eq:rbc_rbc}
 \begin{equation}
     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + Pr\nabla^2 \mathbf{u} + RaPr\theta \mathbf{{j}},
 \end{equation}
@@ -45,21 +45,21 @@ We consider a buoyancy-driven flow of an incompressible fluid separated by a ver
 \end{equation}
 \end{subequations}
 with the following boundary conditions at the wall,
-\begin{subequations}\label{eq:bc}
+\begin{subequations}\label{eq:rbc_bc}
 \begin{equation}
     \mathbf{u}|_{y=0,1} = 0, \quad \theta|_{y=0} = 1, \quad \theta|_{y=1} = 0, 
 \end{equation}
 \end{subequations}
 and the periodic boundary condition in the horizontal direction. Here, $t$ denotes the time scaled by the vertical thermal diffusion time, $d^2/\kappa$, and $\mathbf{x}(=(x,y,z))$ is the spatial coordinates non-dimensionalised by $d$, where $x$ and $z$ are two orthogonal horizontal directions and $y$ is the vertical direction. $\mathbf{u}(=(u,v,w))$ is the velocity vector scaled with $\kappa/d$, $p$ the pressure scaled with $ \rho \kappa^2 / d^2 $, $\theta(\equiv(T-T_U)/\Delta T)$ the non-dimensional temperature with $T$ being the absolute temperature, and $\mathbf{j}$ denotes the unit vector in $y$-direction. 
-The Rayleigh number and the Prandtl numbers are defined as in \S\ref{sec:intro}: $Ra = \alpha g d^3 \Delta T / \nu \kappa$, Prandtl number $Pr = \nu / \kappa$. Throughout this study, $Pr=1$ is set. 
+The Rayleigh number and the Prandtl numbers are defined as in \S\ref{sec:rbc_intro}: $Ra = \alpha g d^3 \Delta T / \nu \kappa$, Prandtl number $Pr = \nu / \kappa$. Throughout this study, $Pr=1$ is set. 
 
 \subsection{Numerical method}
 The governing equations are solved numerically using Nektar++, an open-source spectral/\emph{hp}-element method framework \cite{cantwell2015}. An initial computational mesh, composed of quadrilateral elements, in the $x$-$y$ plane is generated using Gmsh \cite{geuzaine2009} and then refined by Nekmesh, the mesh generator available in Nektar++. Several computational domains of different sizes are prepared: $(L_x, L_y, L_z) = (32\pi, 1, 32\pi), (16\pi, 1, 16\pi), (8\pi, 1, 8\pi), (4\pi, 1, 4\pi)$. The spatial domain is discretised using a quasi-3D approach with spectral/\emph{hp} elements in $x$-$y$ domain and Fourier expansions in $z$-direction.
 The discretised equations are subsequently solved using a velocity-correction method based on a second-order implicit-explicit temporal scheme \cite{Karniadakis1991, Guermond2003, hossain21}. Since different computational domain sizes were considered, the spatial distribution of spectral/\emph{hp} elements in the $x$-$y$ plane and Fourier expansions along $z$ was kept constant. A spatial resolution of $(\Delta x, \Delta y|_{y=0,d}, \Delta y|_{y={d/2}}, \Delta z) = (0.1\pi, 0.0549, 0.367, 0.25\pi)$ with polynomial order $P=4$, and temporal resolution of $\Delta t = 0.0125$ was sufficient to establish numerical independence -- for example, the Nusselt number, $Nu(=-\int_{x,z}\frac{\partial \theta}{\partial y}|_{y=0} \; \mathrm{d}x\mathrm{d}z)$, varies less than $10^{-5}$ when $P$ was increased to $P=5$.
 
-\subsection{Linear stability analysis of ISRs}\label{sec:lsa}
-As discussed in \S\ref{sec:objs}, we will perform a set of numerical experiments, in which a small perturbation about several unstable ISRs is added along their unstable manifolds. To obtain the direction of the unstable manifolds (i.e. linear instability eigenfunctions), we consider a small perturbation about the ISR (base) state: 
-\begin{subequations}\label{eq:basepert}
+\subsection{Linear stability analysis of ISRs}\label{sec:rbc_lsa}
+As discussed in \S\ref{sec:rbc_objs}, we will perform a set of numerical experiments, in which a small perturbation about several unstable ISRs is added along their unstable manifolds. To obtain the direction of the unstable manifolds (i.e. linear instability eigenfunctions), we consider a small perturbation about the ISR (base) state: 
+\begin{subequations}\label{eq:rbc_basepert}
 \begin{equation}
     \mathbf{u}(\mathbf{x}, t) = \mathbf{u}_{ISR,q}(\mathbf{x}) + \mathbf{u'}(\mathbf{x}, t),
 \end{equation}
@@ -70,8 +70,8 @@ As discussed in \S\ref{sec:objs}, we will perform a set of numerical experiments
     p(\mathbf{x}, t)  = p_{ISR,q}(\mathbf{x})  + p'(\mathbf{x}, t),
 \end{equation}
 \end{subequations}
-where $\mathbf{s}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{s}_{ISR,q}=[\mathbf{u}_{ISR,q}, \theta_{ISR,q}, p_{ISR,q}]^T$ and $\mathbf{s}'=[\mathbf{u}', \theta', p']^T$ refers to solution vector, the ISR (base) state of a given wavenumber, $q$, and the perturbation respectively.  Substitution of (\ref{eq:basepert}) into (\ref{eq:rbc}) leads to the following linearised equations:
-\begin{subequations}\label{eq:linearised}
+where $\mathbf{s}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{s}_{ISR,q}=[\mathbf{u}_{ISR,q}, \theta_{ISR,q}, p_{ISR,q}]^T$ and $\mathbf{s}'=[\mathbf{u}', \theta', p']^T$ refers to solution vector, the ISR (base) state of a given wavenumber, $q$, and the perturbation respectively.  Substitution of (\ref{eq:rbc_basepert}) into (\ref{eq:rbc_rbc}) leads to the following linearised equations:
+\begin{subequations}\label{eq:rbc_linearised}
 \begin{equation}
     \frac{\partial \mathbf{s'}}{\partial t} = \mathcal{A}(\mathbf{s}_{ISR,q}; Ra, Pr) \mathbf{s'}, 
 \end{equation}
@@ -88,27 +88,27 @@ where
 \end{equation}
 \end{subequations}
 For the sake of simplicity here, we will only consider the ISRs invariant along $z$-direction. Since the ISRs are also assumed periodic in $x$-direction, the following form of normal-mode solution can be considered:
-\begin{equation}\label{eq:ansatz}
+\begin{equation}\label{eq:rbc_ansatz}
     \mathbf{s}' (\mathbf{x},t) = \mathbf{\breve{s}}(x,y)e^{i(\alpha x+\beta z)+\lambda t} + \text{c.c},
 \end{equation}
-where $\lambda, \alpha$ and $\beta$ are the complex frequency, the streamwise wavenumber (or the Floquet exponent), and the spanwise wavenumber, respectively. Using the periodic nature of $\mathbf{\breve{s}}(x,y)$ in $x$-direction, (\ref{eq:ansatz}) can also be written as 
-\begin{equation}\label{eq:simAnsatz}
+where $\lambda, \alpha$ and $\beta$ are the complex frequency, the streamwise wavenumber (or the Floquet exponent), and the spanwise wavenumber, respectively. Using the periodic nature of $\mathbf{\breve{s}}(x,y)$ in $x$-direction, (\ref{eq:rbc_ansatz}) can also be written as 
+\begin{equation}\label{eq:rbc_simAnsatz}
     \mathbf{s}' (\mathbf{x},t) = \left[\sum_{n=-\infty}^{\infty}\mathbf{\breve{\breve{s}}}_n(y)e^{i \frac{2\pi}{L_x}(n+\epsilon) x} \right] e^{i\beta z+\lambda t} + \text{c.c},
 \end{equation}
 where $\epsilon(=\alpha L_x/(2\pi))$ is the Floquet detuning parameter with $0 \leq \epsilon \leq 1/2$. Since the stability analysis here will be limited to the identification of unstable manifolds of ISRs in a fixed computational domain, $\epsilon=0$ (fundamental mode) is considered only - note that the modes associated with $\epsilon \ne 0$ are only observed in the $x$ domains greater than $L_x$.
 
-Substituting \eqref{eq:simAnsatz} into (\ref{eq:linearised}) leads to a discretised eigenvalue problem in terms of the eigenvalue $\lambda$, where the wavenumber in the $z$-direction must be restricted to be $\beta=2 \pi m/L_z$, and $m$ is a positive integer, for the given computational domain. The resulting eigenvalue problems are solved using a time-stepper-based iterative Arnoldi algorithm \cite{tuckerman2000}, implemented in Nektar++, which has been verified in various applications \cite{cantwell2015}. The eigenvalues of primary instabilities of RBC computed in Nektar++ are also verified against those obtained with a Chebyshev-collocation method in Appendix \ref{app:appA}.
+Substituting \eqref{eq:rbc_simAnsatz} into (\ref{eq:rbc_linearised}) leads to a discretised eigenvalue problem in terms of the eigenvalue $\lambda$, where the wavenumber in the $z$-direction must be restricted to be $\beta=2 \pi m/L_z$, and $m$ is a positive integer, for the given computational domain. The resulting eigenvalue problems are solved using a time-stepper-based iterative Arnoldi algorithm \cite{tuckerman2000}, implemented in Nektar++, which has been verified in various applications \cite{cantwell2015}. The eigenvalues of primary instabilities of RBC computed in Nektar++ are also verified against those obtained with a Chebyshev-collocation method in Appendix \ref{app:appA}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % RESULTS AND DISCUSSION
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Transient SDC and elementary states in minimal domain}\label{sec:mindom}
+\section{Transient SDC and elementary states in minimal domain}\label{sec:rbc_mindom}
 In this section, we seek to capture localised structures of SDC using a minimal domain by systematically reducing the domain by half in the homogeneous ($x$-$z$) directions. A random noise, characterised by Gaussian white noise (0 mean and 1 variance), generated with a total energy of 
-\begin{equation}\label{eq:energy}
+\begin{equation}\label{eq:rbc_energy}
     \delta = \frac{1}{\overline{V}} \int_\Omega \mathbf{\tilde{u}}(\mathbf{x})^T\mathbf{\tilde{u}}(\mathbf{x}) + {RaPr}\tilde{\theta}(\mathbf{x})^2 \; \mathrm{d}\Omega \approx O(10^{-3}),
 \end{equation}
-where $\mathbf{\tilde{u}}(\mathbf{x})$ and $ \tilde{\theta}(\mathbf{x})$ refer to the perturbation velocity and temperature about the base state $\mathbf{U}(\mathbf{x})=\mathbf{0}$ and $\Theta(y) = 1-y$, is introduced as an initial condition to the system. Here, we note that the first term of the integrand in (\ref{eq:energy}) is the kinetic energy of the perturbation velocity and the second one measures the potential energy from the perturbation temperature. 
+where $\mathbf{\tilde{u}}(\mathbf{x})$ and $ \tilde{\theta}(\mathbf{x})$ refer to the perturbation velocity and temperature about the base state $\mathbf{U}(\mathbf{x})=\mathbf{0}$ and $\Theta(y) = 1-y$, is introduced as an initial condition to the system. Here, we note that the first term of the integrand in (\ref{eq:rbc_energy}) is the kinetic energy of the perturbation velocity and the second one measures the potential energy from the perturbation temperature. 
 
 \begin{figure}
     \centering
@@ -122,7 +122,7 @@ The resulting mid-plane temperature snapshots $\theta(x,z)|_{y=d/2}$ at $t=300$ 
 When the domain size is large, for instance, $\Gamma = 8\pi$ shown in figure \ref{fig:fig1}(a), features of SDC consist of many repeating localised spirals, defects and dislocations.
 Reducing the domain in half to $\Gamma = 4\pi$, shown in figure \ref{fig:fig1}(b), led to a spatially less extensive chaotic state, revealing a single spiral, with some defects and dislocations.
 Surprisingly, a further reduction of the domain in half, $\Gamma = 2\pi$, does not lead to sustained SDC, but rather, a transient SDC state before settling into stable `elementary' states.
-These elementary states are identified as \emph{pacman} (PM), \emph{spiral-defect} (SD), \emph{hooked} (HK), and \emph{peanut} (PN) states in figure \ref{fig:fig1} (c-f), which resemble the localised features of SDC (see the coloured bounding boxes in figures \ref{fig:fig1}(a,b)). These states represent stable invariant solutions of (\ref{eq:rbc}). Specifically, PM state represents a steady equilibrium, SD and HK states are characterised by relative periodic orbits, and the PN state is a periodic orbit \cite{gibson2008}. 
+These elementary states are identified as \emph{pacman} (PM), \emph{spiral-defect} (SD), \emph{hooked} (HK), and \emph{peanut} (PN) states in figure \ref{fig:fig1} (c-f), which resemble the localised features of SDC (see the coloured bounding boxes in figures \ref{fig:fig1}(a,b)). These states represent stable invariant solutions of (\ref{eq:rbc_rbc}). Specifically, PM state represents a steady equilibrium, SD and HK states are characterised by relative periodic orbits, and the PN state is a periodic orbit \cite{gibson2008}. 
 
 \begin{figure}
     \centering
@@ -171,21 +171,21 @@ The spatial-temporal complexity of SDC reduces when the domain size is reduced f
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MULTIPLICITY OF EDGE STATES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Multiplicity of edge states}\label{sec:edgestate}
+\section{Multiplicity of edge states}\label{sec:rbc_edgestate}
 The stable nature of many ISRs and elementary states underpinning SDC implies the existence of state-space boundaries between them (i.e. edge).
 In this section, we perform the edge tracking between the stable manifolds of ISRs and elementary states to compute the attractors on the edge (i.e edge states). 
 For the edge tracking, we use the bisection method \cite{skufca2006,Schneider2007, khapko_2016}, with an initial condition given by
-\begin{equation}\label{eq:8}
+\begin{equation}\label{eq:rbc_8}
     \mathbf{s_0}(\mathbf{x},t = 0) = \chi\mathbf{s}_{ISR,q} + (1 - \chi)\mathbf{s}_{elementary},
 \end{equation}
 where $\mathbf{s_0}(=[\mathbf{u}_0, \theta_0, p_0]^T)$ refers to an initial condition consisting of a weighted sum, $\chi \in [0,1] $, between a stable ISR state, $\mathbf{s}_{ISR,q}$ of a wavenumber $q$, and an elementary state, $\mathbf{s}_{elementary}$ where the subscript refers to its names in figures \ref{fig:fig1}(c-f).
 
-Given the large number of stable ISRs and elementary states, we shall focus on the computation of the edge states considering three of the stable ISRs and two of the elementary states. However, in principle, the edge tracking is technically possible with other stable ISRs and elementary states. As such, in general, multiple edge states are expected. The three ISRs are related to three different wavenumbers, denoted by $\mathbf{s}_{ISR, q=2.06/d},  \mathbf{s}_{ISR,q=2.24/d}, \mathbf{s}_{ISR,q=3.16/d}$ (figures \ref{fig:ISRs}(b,d,j)) respectively, and the two elementary states are SD state, $\mathbf{s}_{spiral-defect}$ (figure \ref{fig:fig1}(c)), and PM state, $\mathbf{s}_{pacman}$ (figure \ref{fig:fig1}(d)). Using this set of stable ISRs and elementary states, we aim to track the edge near $\mathbf{s}_{ISR,q}$ in the direction of $\mathbf{s}_{elementary}$ by bisecting the initial condition with $\chi$ in (\ref{eq:8}), whereby one of the two trajectories across the edge decays toward $\mathbf{s}_{ISR,q}$ and the other is attracted toward transient chaotic state (i.e. SDC), referred to as the `lower' and `upper' trajectories respectively. The bisection of the initial condition is carried out by monitoring the difference in two trajectories with  $Nu$ (i.e. $\Delta Nu$). When the two trajectories reach a certain time at which $\Delta Nu > 0.0007$, the bisection of the initial condition is repeated using the flow fields from the two different trajectories by replacing $\mathbf{s}_{ISR,q}$ and $\mathbf{s}_{elementary}$ in (\ref{eq:8}) with them. This process is repeated until the edge trajectory reaches an attractor (i.e. an edge state).
+Given the large number of stable ISRs and elementary states, we shall focus on the computation of the edge states considering three of the stable ISRs and two of the elementary states. However, in principle, the edge tracking is technically possible with other stable ISRs and elementary states. As such, in general, multiple edge states are expected. The three ISRs are related to three different wavenumbers, denoted by $\mathbf{s}_{ISR, q=2.06/d},  \mathbf{s}_{ISR,q=2.24/d}, \mathbf{s}_{ISR,q=3.16/d}$ (figures \ref{fig:ISRs}(b,d,j)) respectively, and the two elementary states are SD state, $\mathbf{s}_{spiral-defect}$ (figure \ref{fig:fig1}(c)), and PM state, $\mathbf{s}_{pacman}$ (figure \ref{fig:fig1}(d)). Using this set of stable ISRs and elementary states, we aim to track the edge near $\mathbf{s}_{ISR,q}$ in the direction of $\mathbf{s}_{elementary}$ by bisecting the initial condition with $\chi$ in (\ref{eq:rbc_8}), whereby one of the two trajectories across the edge decays toward $\mathbf{s}_{ISR,q}$ and the other is attracted toward transient chaotic state (i.e. SDC), referred to as the `lower' and `upper' trajectories respectively. The bisection of the initial condition is carried out by monitoring the difference in two trajectories with  $Nu$ (i.e. $\Delta Nu$). When the two trajectories reach a certain time at which $\Delta Nu > 0.0007$, the bisection of the initial condition is repeated using the flow fields from the two different trajectories by replacing $\mathbf{s}_{ISR,q}$ and $\mathbf{s}_{elementary}$ in (\ref{eq:rbc_8}) with them. This process is repeated until the edge trajectory reaches an attractor (i.e. an edge state).
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{StateSpaceStructureOfSDC/Figures/EdgeStatesSummary.pdf}
-    \caption{Mid-plane termperature fields of ISRs and elementary states used in Eq. (\ref{eq:8}), and the resulting edge states. Here, ISRs (green borders): (a) $\mathbf{s}_{ISR, q=2.06/d}$, (b) $\mathbf{s}_{ISR,q=2.24/d}$, (c) $\mathbf{s}_{ISR,q=3.16/d}$; elementary states: (d) $\mathbf{s}_{pacman}$, (e) $\mathbf{s}_{spiral-defect}$; edge states (black borders): (f) $\emph{jagged}$, (g) \emph{point-defect}, (h) \emph{forked} and (i) \emph{skewed-varicose} edge state.}
+    \caption{Mid-plane termperature fields of ISRs and elementary states used in Eq. (\ref{eq:rbc_8}), and the resulting edge states. Here, ISRs (green borders): (a) $\mathbf{s}_{ISR, q=2.06/d}$, (b) $\mathbf{s}_{ISR,q=2.24/d}$, (c) $\mathbf{s}_{ISR,q=3.16/d}$; elementary states: (d) $\mathbf{s}_{pacman}$, (e) $\mathbf{s}_{spiral-defect}$; edge states (black borders): (f) $\emph{jagged}$, (g) \emph{point-defect}, (h) \emph{forked} and (i) \emph{skewed-varicose} edge state.}
     \label{fig:EdgeSummary}
 \end{figure}
 
@@ -202,7 +202,7 @@ Given the large number of stable ISRs and elementary states, we shall focus on t
         $\mathbf{s}_{ISR,q=3.16/d}$ & $\mathbf{s}_{pacman}$ & \emph{Skewed-varicose} (Stationary) & Transient Chaos \\
 
     \end{tabular}
-    \caption{A summary of the edge states computed. The first two columns denote the pair of initial conditions considered for edge tracking in Eq. (\ref{eq:8}). The names and classification of the edge states are described in the third column. The last column describes the state transitioned from $\mathbf{s}_{ISR,q}$ for sufficiently large $\chi$ in Eq. (\ref{eq:8}).}
+    \caption{A summary of the edge states computed. The first two columns denote the pair of initial conditions considered for edge tracking in Eq. (\ref{eq:rbc_8}). The names and classification of the edge states are described in the third column. The last column describes the state transitioned from $\mathbf{s}_{ISR,q}$ for sufficiently large $\chi$ in Eq. (\ref{eq:rbc_8}).}
     \label{tab:EdgeSummary}
 \end{table}
 
@@ -270,10 +270,10 @@ It is worth noting that, in this particular case, no chaotic transient in the fo
 
 Finally, figure \ref{fig:statespace-sdc-isr-elems-edge} depicts a state space portrait of stable ISRs, SDC and the edge/elementary states found here. As seen previously, SDC and elementary states are seen to be clustered around the region of $||\frac{1}{\overline{V}}\tilde{\mathbf{u}}||_2\approx 6.3$ and $||\frac{1}{\overline{V}}RaPr\tilde{\theta}||_2\approx 8.6$, whereas stable ISRs are distributed along a horseshoe-shaped band (green line). The edge states found in this study are located not far from the (green) horseshoe-shaped band of ISRs, as they presumably lie in a smaller (grey) horseshoe-shape band situated between ISRs and SDC or elementary states. While we have identified four edge states, we expect that there are more edge states, presumably distrubuted along the (grey) horseshoe-shaped band. It is also worth mentioning that the edge states we found here contain the underlying ISR structure ($\mathbf{s}_{q=2.06/d,2.24/d,3.16/d}$) modified by spatially localised defects and `pinches' between rolls, supporting its proximity with ISRs in the state space. This feature is also reminiscent of spatially localised edge states identified in boundary layer flows \cite{khapko_2016}. Lastly, we would like to emphasise that we have only considered initial conditions from the states between $\mathbf{s}_{ISR,q}$ and $\mathbf{s}_{elementary}$ and not strictly between $\mathbf{s}_{ISR,q}$ and a transient SDC state. Nevertheless, three of the edge states are found to lie on the boundary separating the stable ISRs from transient SDC, supporting previous findings that the transient chaotic SDC are related to elementary states.
 
-\section{Unstable ideal straight rolls}\label{sec:asymp}
+\section{Unstable ideal straight rolls}\label{sec:rbc_asymp}
 Thus far, we have studied the edge and the edge states between some of the stable ISRs and elementary states. The dynamics associated with the unstable ISRs outside of the Busse balloon, however, remain unclear \cite{busse1985}. Given that the stable ISRs and SDC form a bistable system, it is expected that some of the unstable ISRs near the Busse balloon would asymptotically reach one of the stable ISRs as the difference between the stable and unstable ISRs would be sufficiently small \cite{steinberg1985,croquette1989a}. On the other hand, the unstable ISRs, which exist far from the boundary of the Busse balloon, may well have a sufficiently large deviation from the stable ISRs, implying that they are possibly associated with a state-space route to the SDC. The purpose of this section is to test this hypothesis by examining the long-term behaviour of the linear instabilities of the unstable ISRs.
 
-We consider the linear instabilities of 3 unstable ISRs on the right side of the Busse balloon, with increasing wavenumber of $q=3.5/d, 4.0/d, 4.5/d$, as shown in figure \ref{fig:bbfig}(a). The identification of the linear instability mode (or unstable manifold) with the different spanwise wavenumbers $\beta$ is considered (see \eqref{eq:simAnsatz}). Figure \ref{fig:bbfig}(b) presents the unstable eigenvalues as a function of $\beta$. There are 2, 4 and 7 unstable manifolds ($\Re (\lambda) > 0$) for unstable ISRs of $q = 3.5/d, 4.0/d, 4.5/d$ respectively, forming total 13 unstable manifolds. In general, the growth rate and the number of linear instability modes (i.e. the repelling strength and the number of unstable manifolds) increase as $q$ increases. It is worth mentioning that the solutions of unstable ISRs of $\mathbf{s}_{ISR,q}(x,y)$ (required for linear stability analysis) are obtained by restricting the computational domain to the 2D $x$-$y$ plane which artificially suppresses 3D linear instabilities. We also note that the stability analysis of the unstable ISR, $q = 5.0/d$ was not considered as it quickly evolved into an unstable ISR of $q = 3.5/d$, which will be discussed in section \S\ref{sec:heteroclinic}.
+We consider the linear instabilities of 3 unstable ISRs on the right side of the Busse balloon, with increasing wavenumber of $q=3.5/d, 4.0/d, 4.5/d$, as shown in figure \ref{fig:bbfig}(a). The identification of the linear instability mode (or unstable manifold) with the different spanwise wavenumbers $\beta$ is considered (see \eqref{eq:rbc_simAnsatz}). Figure \ref{fig:bbfig}(b) presents the unstable eigenvalues as a function of $\beta$. There are 2, 4 and 7 unstable manifolds ($\Re (\lambda) > 0$) for unstable ISRs of $q = 3.5/d, 4.0/d, 4.5/d$ respectively, forming total 13 unstable manifolds. In general, the growth rate and the number of linear instability modes (i.e. the repelling strength and the number of unstable manifolds) increase as $q$ increases. It is worth mentioning that the solutions of unstable ISRs of $\mathbf{s}_{ISR,q}(x,y)$ (required for linear stability analysis) are obtained by restricting the computational domain to the 2D $x$-$y$ plane which artificially suppresses 3D linear instabilities. We also note that the stability analysis of the unstable ISR, $q = 5.0/d$ was not considered as it quickly evolved into an unstable ISR of $q = 3.5/d$, which will be discussed in section \S\ref{sec:rbc_heteroclinic}.
 
 \begin{figure}
     \centering
@@ -293,15 +293,15 @@ We consider the linear instabilities of 3 unstable ISRs on the right side of the
      $q = 4.5/d$ & ISR$_{2.50}$ & ISR$_{2.50}$ & (c) ISR$_{3.00}$ & ISR$_{3.20}$ & (d) Elementary & ISR$_{2.50}$ & (e) Elementary 
 \end{tabular}
 }
-\caption{Asymptotic state of secondary linear instabilities of $q = 3.5/d, 4.0/d, 4.5/d$. Subscripts in ISR refer to asymptotic wavenumber $q$, e.g., ISR$_{2.5}$ refers to ideal straight rolls with wavenumber of $q = 2.5/d$. The asymptotic behaviours of (a-c) and (d,e) are discussed further in \S\ref{sec:heteroclinic} and \S\ref{sec:chaoticsaddle} respectively.}
+\caption{Asymptotic state of secondary linear instabilities of $q = 3.5/d, 4.0/d, 4.5/d$. Subscripts in ISR refer to asymptotic wavenumber $q$, e.g., ISR$_{2.5}$ refers to ideal straight rolls with wavenumber of $q = 2.5/d$. The asymptotic behaviours of (a-c) and (d,e) are discussed further in \S\ref{sec:rbc_heteroclinic} and \S\ref{sec:rbc_chaoticsaddle} respectively.}
 \label{tab:asymptotics}
 \end{table}
 
 To consider the long-term behavior in the direction of the unstable manifolds, an initial condition,
-\begin{equation}\label{eq:SecInstab}
+\begin{equation}\label{eq:rbc_SecInstab}
     \mathbf{s}_0(\mathbf{x},t=0) = \mathbf{s}_{ISR,q}(\mathbf{x}) + \mathbf{\hat{s}}_\beta(x,y)e^{i\beta z},
 \end{equation}
-is prescribed to equation \eqref{eq:rbc}. Here, $\hat{\mathbf{s}}_\beta e^{i\beta z}$ is the unstable eigenmode, the amplitude of which was scaled such that its total energy (defined in \eqref{eq:simAnsatz}) of $\delta = 10^{-5}, 10^{-4}, 10^{-3}$ were considered. The total energy of the eigenmode, $\delta = 10^{-4}$  was found to be sufficiently small enough to ensure linear growth, while large enough to prevent other eigenmodes from being excited. Next, the initial condition is time integrated over an extended period until an asymptotic state is reached. Table \ref{tab:asymptotics} shows the asymptotic states of $13$ linear instabilities, depicted in figure \ref{fig:bbfig}(b), of which 11 linear instabilities led to ISRs states, forming a network of heteroclinic orbits which will be discussed in \S\ref{sec:heteroclinic}. Only the remaining 2 instabilities led to a transient SDC state before settling into an elementary state discussed further in \S\ref{sec:chaoticsaddle}.
+is prescribed to equation \eqref{eq:rbc_rbc}. Here, $\hat{\mathbf{s}}_\beta e^{i\beta z}$ is the unstable eigenmode, the amplitude of which was scaled such that its total energy (defined in \eqref{eq:rbc_simAnsatz}) of $\delta = 10^{-5}, 10^{-4}, 10^{-3}$ were considered. The total energy of the eigenmode, $\delta = 10^{-4}$  was found to be sufficiently small enough to ensure linear growth, while large enough to prevent other eigenmodes from being excited. Next, the initial condition is time integrated over an extended period until an asymptotic state is reached. Table \ref{tab:asymptotics} shows the asymptotic states of $13$ linear instabilities, depicted in figure \ref{fig:bbfig}(b), of which 11 linear instabilities led to ISRs states, forming a network of heteroclinic orbits which will be discussed in \S\ref{sec:rbc_heteroclinic}. Only the remaining 2 instabilities led to a transient SDC state before settling into an elementary state discussed further in \S\ref{sec:rbc_chaoticsaddle}.
 
 \begin{figure}
     \centering
@@ -313,13 +313,13 @@ is prescribed to equation \eqref{eq:rbc}. Here, $\hat{\mathbf{s}}_\beta e^{i\bet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Asymptotic behaviour -> Heteroclinic Orbit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Pathways leading to ISRs - heteroclinic orbits}\label{sec:heteroclinic}
+\subsection{Pathways leading to ISRs - heteroclinic orbits}\label{sec:rbc_heteroclinic}
 In this section, the asymptotic behaviour of the most unstable linear instabilities of ISRs (tab \ref{tab:asymptotics}(a-c)) will be discussed. 
 Figure \ref{fig:heteroclinics} depicts the state space plot of volume normalised L2-norms of velocity and temperature. It reveals a number of heteroclinic orbits, connecting the base state ($\bullet$), stable ($\color{green}{\bullet}$) and unstable ($\color{red}{\bullet}$) ISRs. Figure \ref{fig:heteroclinics}(a) exhibits several solution trajectories linking the base state, stable and unstable ISRs: three orbits connecting the base state to all the stable and unstable ISRs shown, one from the ISR of $q = 3.5/d$ to that of $q = 2.5/d$, and one from the ISR of $q = 5.0/d$ to that of $q = 3.5/d$. Here, caution will need to be taken in interpreting each of the connections as a heteroclinic orbit, because there appears to be an invariant state at which the speed of the solution trajectory nearly vanishes (a sign of the existence of unstable invariant states or ghost states \cite{strogatz_2018}): for example, see the solution trajectory between the ISR of $q = 3.5/d$ to that of $q = 2.5/d$ (in the inset of figure \ref{fig:heteroclinics}(a)), which will be discussed below with figure \ref{fig:7RollsBeta0.50}. Starting from the primary base state, the system saturates into an ISR of wavenumber $q = 5.0/d$. Since this ISR is linearly unstable, it evolves into another unstable ISR of $q = 3.5/d$, before ultimately stabilising into an ISR of $q = 2.5/d$.  Next, figure \ref{fig:heteroclinics}(b) shows three solution trajectories connecting the base state, an unstable and stable ISR. Starting from the base state, the system transitions into an unstable ISR of $q = 4/d$ before stabilising into an ISR of $q = 3.16/d$. 
 Lastly, figure \ref{fig:heteroclinics}(c) presents three solution trajectories connecting the base state, a stable and unstable ISR. Starting from the base state, it can evolve to an unstable ISR of $q = 4.5/d$ before settling into a stable ISR of $q = 3.0/d$. 
 Figure \ref{fig:heteroclinics} suggests that each of the stable ISRs within the Busse balloon has the basin of attraction, characterised by a web of heteroclinic orbits connecting some of the unstable ISRs outside of the Busse balloon. It is worth emphasising that the connections between the solutions presented here were obtained by time-integrating the dominant unstable manifolds of ISRs. In practice, there are many more unstable manifolds (see table \ref{tab:asymptotics}) which have not been presented, potentially leading to more complex networks of heteroclinic orbits that form the basin of attraction for each stable ISR.
 
-Figure \ref{fig:7RollsBeta0.50} describes the asymptotic behaviour with the most unstable eigenmode for $q=3.5/d$ (table \ref{tab:asymptotics}(a)) in detail, corresponding to the connection between the unstable ISR of $q = 3.5/d$ and the stable ISR of $q = 2.5/d$ in figure \ref{fig:heteroclinics}(a). To observe the linear instability defined in Eq. (\ref{eq:SecInstab}), we report contribution of modal energy (figure \ref{fig:7RollsBeta0.50}(a)) as
+Figure \ref{fig:7RollsBeta0.50} describes the asymptotic behaviour with the most unstable eigenmode for $q=3.5/d$ (table \ref{tab:asymptotics}(a)) in detail, corresponding to the connection between the unstable ISR of $q = 3.5/d$ and the stable ISR of $q = 2.5/d$ in figure \ref{fig:heteroclinics}(a). To observe the linear instability defined in Eq. (\ref{eq:rbc_SecInstab}), we report contribution of modal energy (figure \ref{fig:7RollsBeta0.50}(a)) as
 \begin{equation}
     E_k(t) = \frac{1}{2} \int_\Omega |\hat{\mathbf{u}}_k(t)|^2 \; \mathrm{d}\Omega,
 \end{equation}
@@ -357,7 +357,7 @@ All three cases examined here show that the transition from an unstable ISR to a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PATHWAYS TO ELEMENTARY STATES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Pathways leading to elementary states}\label{sec:chaoticsaddle}
+\subsection{Pathways leading to elementary states}\label{sec:rbc_chaoticsaddle}
 Now, we discuss the asymptotic behaviour with linear instabilities of $\mathbf{\hat{s}}_{\beta=1.25}$ and $\mathbf{\hat{s}}_{\beta=1.75}$ about the unstable ISR of $q = 4.5/d$ (tab \ref{tab:asymptotics}(d,e)). Contrary to the transitions presented in the previous section, the asymptotic states did not result in ISRs, but transient SDC before settling into an elementary state for case (e) (table \ref{tab:asymptotics}(e)), and an elementary directly for case (d) (table \ref{tab:asymptotics}(d)).
 \begin{figure}
     \centering
@@ -393,7 +393,7 @@ Figure \ref{fig:phasespacetraj} presents the state space trajectories of two pat
     \label{fig:extendeddomain}
 \end{figure}
 
-In \S\ref{sec:chaoticsaddle}, we have identified two distinct pathways to elementary states along some unstable manifolds from an unstable ISR. In particular, one of the trajectories evolved into transient SDC before stabilising into an elementary state. This is reminiscent of a chaotic saddle, but with a considerably short lifetime. The transient SDC behaviour observed within the minimal domain implies that if the same initial condition is added in an extended computational domain, it would trigger a chaotic state at least with a longer lifetime. This chaotic state is expected to be SDC in an extended domain, given the analysis in \S\ref{sec:chaoticsaddle}. To examine this hypothesis, we conduct a numerical simulation with an initial condition from the case of table \ref{tab:asymptotics}(e) (i.e. the unstable ISR $q = 4.5/d$ with the instability mode of $\mathbf{\hat{s}}_{\beta = 1.75}$) in a domain twice larger than each horizontal direction ($\Gamma = 12.58$). 
+In \S\ref{sec:rbc_chaoticsaddle}, we have identified two distinct pathways to elementary states along some unstable manifolds from an unstable ISR. In particular, one of the trajectories evolved into transient SDC before stabilising into an elementary state. This is reminiscent of a chaotic saddle, but with a considerably short lifetime. The transient SDC behaviour observed within the minimal domain implies that if the same initial condition is added in an extended computational domain, it would trigger a chaotic state at least with a longer lifetime. This chaotic state is expected to be SDC in an extended domain, given the analysis in \S\ref{sec:rbc_chaoticsaddle}. To examine this hypothesis, we conduct a numerical simulation with an initial condition from the case of table \ref{tab:asymptotics}(e) (i.e. the unstable ISR $q = 4.5/d$ with the instability mode of $\mathbf{\hat{s}}_{\beta = 1.75}$) in a domain twice larger than each horizontal direction ($\Gamma = 12.58$). 
 
 The solution trajectory along the unstable manifold, $\mathbf{s}_{\beta = 1.75}$, of ISR $q = 4.5/d$ in an extended domain ($\Gamma = 4\pi$) is presented in figure \ref{fig:extendeddomain}. The state, characterised by 18 convection rolls (figure \ref{fig:extendeddomain}(b)), experiences the linear instability from $t=1.25$ to $t=7$, marked by cross-convection rolls shown in figure \ref{fig:extendeddomain}(c). Subsequently, the state exhibits a prolonged period of chaotic behaviour, starting from $t=7$ and lasting beyond $t=200$. This is in stark contrast to the transient SDC behaviour observed in the minimal domain (figure \ref{fig:9RollsBeta1.75}), confirming the hypothesis above. Finally, it is interesting to note that the convection patterns of figures \ref{fig:extendeddomain}(f,g) contain localised structures that bear resemblance with the stationary \emph{pac-man} (figure \ref{fig:fig1})(c)) and oscillatory \emph{peanut} (figure \ref{fig:fig1}(f))  elementary states.
 
@@ -408,7 +408,7 @@ The solution trajectory along the unstable manifold, $\mathbf{s}_{\beta = 1.75}$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONCLUSIONS AND FUTURE WORK
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Concluding remarks}\label{sec:4}
+\section{Concluding remarks}\label{sec:rbc_4}
 SDC has been considered one of the bistable states within a large spatial domain in Rayleigh-B\'{e}nard convection. However, existing studies have also shown the presence of multiple stable states in small and large domains, puzzling one's understanding of the bistable system in an extended spatial domain. 
 Starting with numerical simulation in an extended domain ($\Gamma=8\pi$), we have systematically reduced the computational domain, such that the fundamental patterns of SDC can be isolated. 
 Through numerical experiments confined within a minimal domain of $\Gamma = 2\pi$, we have identified transient SDC before stabilising into a stable elementary states of SDC, and 14 different elementary states have been found in this way.

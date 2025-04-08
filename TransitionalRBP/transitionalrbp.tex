@@ -63,7 +63,7 @@ Additionally, we also aim to bridge the gap between RBC (see \S \ref{sec:RBC}), 
 This study is largely exploratory, focusing on identifying different flow regimes and providing key insights into their dynamical processes.
 Hence, we do not intend to perform bifurcation analysis due to the lack of prior knowledge of the phase space, which could lead to large computational costs.
 
-The paper is organised as follows: in \S \ref{sec:2}, we describe the problem formulation, governing equations, numerical methods and setup. In \S \ref{sec:3}, we present the $Ra$-$Re$ phase space, identifying five distinct regimes and their transition boundaries. We also introduce a new `intermittent roll' regime and discuss the coexistence of longitudinal rolls with turbulent-laminar bands, highlighting the role of longitudinal rolls in transitional RBP flows. In \S \ref{sec:4}, we investigate the unstable manifolds of longitudinal rolls in a confined domain, $\Gamma = \pi/2$, revealing dynamical connections between shear-driven turbulence, longitudinal rolls and the laminar state, and discuss its relevance to the larger domain. Finally, we conclude in \S \ref{sec:5}, and propose directions for future work.
+The paper is organised as follows: in \S \ref{sec:rbp_2}, we describe the problem formulation, governing equations, numerical methods and setup. In \S \ref{sec:rbp_3}, we present the $Ra$-$Re$ phase space, identifying five distinct regimes and their transition boundaries. We also introduce a new `intermittent roll' regime and discuss the coexistence of longitudinal rolls with turbulent-laminar bands, highlighting the role of longitudinal rolls in transitional RBP flows. In \S \ref{sec:4}, we investigate the unstable manifolds of longitudinal rolls in a confined domain, $\Gamma = \pi/2$, revealing dynamical connections between shear-driven turbulence, longitudinal rolls and the laminar state, and discuss its relevance to the larger domain. Finally, we conclude in \S \ref{sec:5}, and propose directions for future work.
 
 % In this $Ra-Re$ phase space, we identify five distinct regimes: (1) bistable SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence, and describe their transition boundaries.
 % We characterise the impact of $Re$ on the bistable system between SDC and ISRs, and discuss the $Re$-threshold where SDC ceases to exist.
@@ -100,8 +100,8 @@ The paper is organised as follows: in \S \ref{sec:2}, we describe the problem fo
 
 % Extended organisation, could be use for conclusions...
 % \begin{itemize}
-%     \item Section \ref{sec:2}: Describes the problem formulation, governing equations and numerical methods and setup.
-%     \item Section \ref{sec:3}: Maps the full $Ra$-$Re$ phase space, identifying five distinct states and its boundaries within $Ra \in [0, 10000]$, $Re \in [0, 2000]$ at $Pr = 1$ for $\Gamma = 4\pi$, consisting of (1) SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls and (5) shear-driven turbulence. We discuss their common characteristics and whether they are dominated by buoyancy or shear forces (or both), and introduce the new intermittent rolls regime.
+%     \item Section \ref{sec:rbp_2}: Describes the problem formulation, governing equations and numerical methods and setup.
+%     \item Section \ref{sec:rbp_3}: Maps the full $Ra$-$Re$ phase space, identifying five distinct states and its boundaries within $Ra \in [0, 10000]$, $Re \in [0, 2000]$ at $Pr = 1$ for $\Gamma = 4\pi$, consisting of (1) SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls and (5) shear-driven turbulence. We discuss their common characteristics and whether they are dominated by buoyancy or shear forces (or both), and introduce the new intermittent rolls regime.
 %     \item Section \ref{sec:4}: Explores the coexistence of longitudinal rolls and turbulent bands, a challenge addressed through numerical simulations in a minimal flow unit (MFU) and analysis of its state space trajectories. Our findings reveal that the unstable longitudinal rolls lead to transient turbulence, which decays towards the laminar state before re-energising into longitudinal rolls where a basin of attraction is formed - referred to as the `thermally sustained turbulent process'. We then examine the MFU's state space trajectories intermittent regime, where the turbulence ceases to exist, where we observe a periodic orbit emerge between the longitudinal and laminar state. Finally, we extend these dynamics to the large domain.
 %     \item Section \ref{sec:5}: Summarises the key findings, and proposed future work.
 % \end{itemize}
@@ -111,11 +111,11 @@ The paper is organised as follows: in \S \ref{sec:2}, we describe the problem fo
 %     \item A study of the intermittent dynamics between longitudinal rolls, shear-driven turbulence and the laminar state within a small domain $\Gamma = \pi/2$ and its relevance to $\Gamma = 4\pi$.
 % \end{enumerate}
 
-\section{Problem formulation}\label{sec:2}
+\section{Problem formulation}\label{sec:rbp_2}
 \subsection{Governing equations}
 We consider a layer of fluid sandwiched between two extended parallel plates of equal length and span, $L = L_x =  L_z$, separated by depth, $d$ (or two half heights, $h = d/2$), with a uniform upper and lower plate temperature $T_U$ and $T_L$.
 The fluid is unstably stratified such that $\Delta T = T_L - T_U > 0$. The fluid has a density of $\rho$, kinetic viscosity, $\nu$, thermal diffusivity $\kappa$. The governing equations are the non-dimensionalised Navier-Stokes equations with Boussinesq approximation given by,
-\begin{subequations}\label{eq:RBP}
+\begin{subequations}\label{eq:rbp_RBP}
 \begin{equation}
     \frac{\partial \mathbf{u}}{\partial t}  + (\mathbf{u}\cdot \nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{8PrRe^2}\theta \mathbf{{j}},
 \end{equation}
@@ -178,7 +178,7 @@ We have also considered a mesh independence study for the end case of $Ra = 1000
 \subsection{Linear Stability Analysis}\label{sec:linearstab}
 In \S \ref{sec:4}, we will perform numerical experiments where small disturbances are added along the unstable manifolds of longitudinal rolls.
 To determine the unstable manifolds, we consider a small disturbance about the longitudinal roll state,
-\begin{subequations}\label{eq:basepert}
+\begin{subequations}\label{eq:rbp_basepert}
 \begin{equation}
     \mathbf{u}(\mathbf{x}, t) = \mathbf{u}_{LR}(\mathbf{x}) + \mathbf{\hat{u}}(\mathbf{x}, t),
 \end{equation}
@@ -190,8 +190,8 @@ To determine the unstable manifolds, we consider a small disturbance about the l
 \end{equation}
 \end{subequations}
 where $\mathbf{q}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{q}_{LR}=[\mathbf{u}_{LR}, \theta_{LR}, p_{LR}]^T$ and $\mathbf{\hat{q}}=[\mathbf{\hat{u}}, \hat{\theta}, \hat{p}]^T$ refers to solution vector, the longitudinal state and the disturbances respectively.
-We substitute equation \eqref{eq:basepert} into \eqref{eq:RBP} and neglect the nonlinear terms, leading to the linearised equations,
-\begin{subequations}\label{eq:linearised}
+We substitute equation \eqref{eq:rbp_basepert} into \eqref{eq:rbp_RBP} and neglect the nonlinear terms, leading to the linearised equations,
+\begin{subequations}\label{eq:rbp_linearised}
 \begin{equation}
     \frac{\partial \mathbf{\hat{q}}}{\partial t} = \mathcal{A}(\mathbf{q}_{LR}; Re, Ra, Pr) \mathbf{\hat{q}}, 
 \end{equation}
@@ -208,22 +208,22 @@ where
 \end{equation}
 \end{subequations}
 Out of convenience, we will only consider longitudinal rolls invariant along the $z$-direction, which are also assumed to be periodic in $x$-direction, and the following form of normal-mode solution can be considered,
-\begin{equation}\label{eq:ansatz}
+\begin{equation}\label{eq:rbp_ansatz}
     \mathbf{\hat{q}} (\mathbf{x},t) = \mathbf{\breve{q}}(x,y)e^{i(\alpha x+\beta z)+\lambda t} + \text{c.c},
 \end{equation}
-where $\lambda, \alpha$ and $\beta$ are the complex frequency, the spanwise wavenumber (or the Floquet exponent), and the stream wavenumber, respectively. Using the periodic nature of $\mathbf{\breve{q}}(x,y)$ in the $x$-direction, (\ref{eq:ansatz}) can also be written as 
-\begin{equation}\label{eq:simAnsatz}
+where $\lambda, \alpha$ and $\beta$ are the complex frequency, the spanwise wavenumber (or the Floquet exponent), and the stream wavenumber, respectively. Using the periodic nature of $\mathbf{\breve{q}}(x,y)$ in the $x$-direction, (\ref{eq:rbp_ansatz}) can also be written as 
+\begin{equation}\label{eq:rbp_simAnsatz}
     \mathbf{\hat{q}} (\mathbf{x},t) = \left[\sum_{n=-\infty}^{\infty}\mathbf{\breve{\breve{q}}}_n(y)e^{i \frac{2\pi}{L_x}(n+\epsilon) x} \right] e^{i\beta z+\lambda t} + \text{c.c},
 \end{equation}
 where $\epsilon(=\alpha L_x/(2\pi))$ is the Floquet detuning parameter with $0 \leq \epsilon \leq 1/2$.
 In this study, we will only consider the identification of the unstable manifolds of longitudinal rolls in a fixed computational domain, hence, the fundamental mode, $\epsilon = 0$, is of sole interest.
-Substituting equation \eqref{eq:simAnsatz} into (\ref{eq:linearised}) result to a discretised eigenvalue problem with the eigenvalue $\lambda$. The wavenumber, $\beta$, is restricted to discrete values of $\beta=2 \pi m/L_z$, and $m$ is a positive integer, for the given computational domain. The resulting eigenvalue problems are solved using a time-stepper-based iterative Arnoldi algorithm implemented in Nektar++ \citep{cantwell_2015}.
+Substituting equation \eqref{eq:rbp_simAnsatz} into (\ref{eq:rbp_linearised}) result to a discretised eigenvalue problem with the eigenvalue $\lambda$. The wavenumber, $\beta$, is restricted to discrete values of $\beta=2 \pi m/L_z$, and $m$ is a positive integer, for the given computational domain. The resulting eigenvalue problems are solved using a time-stepper-based iterative Arnoldi algorithm implemented in Nektar++ \citep{cantwell_2015}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Ra-Re Phase Space Summary
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{$Ra$-$Re$ Phase Space}\label{sec:3}
+\section{$Ra$-$Re$ Phase Space}\label{sec:rbp_3}
 \subsection{Classification}
 \begin{figure}
     \centering
@@ -289,7 +289,7 @@ In other words, the longitudinal rolls enhance heat and momentum transfer across
 However, exploring the spatiotemporal intermittency of this regime remains challenging in a large extended domain, 
 To overcome this challenge, we consider a confined domain, $\Gamma = \pi / 2$, where spatial intermittency could be artificially suppressed and discuss its temporal intermittent dynamics in \S \ref{sec:IntConfined}.
 
-\subsection{Coexistence with turbulent bands}\label{sec:3.3}
+\subsection{Coexistence with turbulent bands}\label{sec:rbp_3.3}
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra0-Re1050-3-BotSpaceTime-Lows.pdf}
@@ -432,11 +432,11 @@ Using a standard quadratic regression, the critical Rayleigh number for disturba
 \end{figure}
 
 Following this, we examine the dominant unstable manifold ($\beta d = 2$) of the longitudinal rolls, by considering an initial condition,
-\begin{equation}\label{eq:SecInstab}
+\begin{equation}\label{eq:rbp_SecInstab}
     \mathbf{q}_0(\mathbf{x},t=0) = \mathbf{q}_{LR}(x,y) + \mathbf{\hat{q}}_\beta(x,y)e^{i\beta z},
 \end{equation}
-which is prescribed to equation \eqref{eq:RBP}. Here, $\hat{\mathbf{q}}_\beta e^{i\beta d z}$ is an eigenmode at $\beta d$, and the amplitude of which was scaled such that its total energy is defined by,
-\begin{equation}\label{eq:totalenergy}
+which is prescribed to equation \eqref{eq:rbp_RBP}. Here, $\hat{\mathbf{q}}_\beta e^{i\beta d z}$ is an eigenmode at $\beta d$, and the amplitude of which was scaled such that its total energy is defined by,
+\begin{equation}\label{eq:rbp_totalenergy}
     \delta = \frac{1}{{V}} \int_\Omega \mathbf{\hat{u}}(\mathbf{x})^T\mathbf{\hat{u}}(\mathbf{x}) + \frac{Ra}{8Re^2Pr}\hat{\theta}(\mathbf{x})^2 \; \mathrm{d}\Omega \approx O(10^{-3})
 \end{equation}
 is considered.
@@ -501,7 +501,7 @@ We refer to this sustaining process as the \emph{thermally-assisted sustaining p
 In this section, we explore the behaviour of the \emph{TASP} as $Re$ and $Ra$ are varied.
 We consider eight different cases at $Ra = 8000, 4000$ and $Re = 600, 700, 1000, 1400$.
 The results of these eight cases, where longitudinals rolls are either unstable at $Ra = 8000$ or stable at $Ra = 4000$, are shown in figure \ref{fig:dynamical-process}, depicting the spacetime plots of midplane temperature, $\theta|_{y=0}(x,t)$, time history of the Nusselt number, $Nu$, and shear, $\langle \mathrm{d}w/\mathrm{d}y|_{y=-h}\rangle_{x,z}$ and state space projection using the planar averaged centerline velocity, $\langle w|_{y=0} \rangle_{x,z}$, shear, coloured by the volume normalised perturbation kinetic energy, $\frac{1}{2V}||\mathbf{u'}||^2$.
-For all cases except $Ra = 4000$, $Re = 1000$ and $Re = 1400$, their initial conditions are prepared from the laminar state, superimposed by a random noise based on a Gaussian distribution with zero mean and unit variance, scaled to a total energy of $\delta = 10^{-3}$ (see definition in equation \eqref{eq:totalenergy}).
+For all cases except $Ra = 4000$, $Re = 1000$ and $Re = 1400$, their initial conditions are prepared from the laminar state, superimposed by a random noise based on a Gaussian distribution with zero mean and unit variance, scaled to a total energy of $\delta = 10^{-3}$ (see definition in equation \eqref{eq:rbp_totalenergy}).
 For the exceptional cases at $Ra = 4000$, $Re = 1000$ and $Re = 1400$, where subcritical turbulence and stable longitudinal rolls are expected, their initial conditions are obtained by gradually lowering $Re$ from a statistically stationary turbulent solution at $Re = 2000$.
 We note that we have not explicitly performed a linear stability analysis of the longitudinal rolls for the parameter regime in figure \ref{fig:dynamical-process}, however, they appear to be unstable at $Ra = 8000$, while being stable at $Ra = 4000$ from DNS.
 
@@ -562,7 +562,7 @@ This behaviour resembles the nature of subcritical turbulence in shear-driven fl
 We examined the dynamics of unstable longitudinal rolls as the Reynolds number, $Re$, and Rayleigh number, $Ra$, are varied, identifying three key dynamical processes: (1) periodic orbits between longitudinal rolls and the laminar state (figure \ref{fig:statespacesketch}(a,b)), (2) the \emph{TASP}, where transient turbulence can be sustained (figure \ref{fig:statespacesketch}(c)) and (3) an intermediate transitional pathway towards sustained turbulence (figure \ref{fig:statespacesketch}(d)).
 To establish a connection between these processes and understand their transitional boundaries, we conduct a parameter sweep over $Ra \in [4000, 10000]$ and $Re \in [600, 1400]$ within $\Gamma = \pi/2$.
 Figure \ref{fig:compiled-full} presents the midplane temperature spacetime plot alongside the time history of shear, $\langle \mathrm{d}w/\mathrm{d}y|_{y=-h}\rangle_{x,z}$ and the Nusselt number, $Nu$.
-For all simulations, the initial conditions are prepared from the laminar state, superimposed with a random noise based on a Gaussian distribution with zero mean and unit variance, scaled to a total energy of $\delta = 10^{-3}$ (see definition in equation \eqref{eq:totalenergy}).
+For all simulations, the initial conditions are prepared from the laminar state, superimposed with a random noise based on a Gaussian distribution with zero mean and unit variance, scaled to a total energy of $\delta = 10^{-3}$ (see definition in equation \eqref{eq:rbp_totalenergy}).
 Due to the subcritical nature of turbulence and expected stable longitudinal rolls, exceptions are made for $Ra = 4000$, $Re \in [900, 1400]$, where initial conditions are taken from gradually lowering $Re$ from a statistically stationary turbulent state at $Re = 2000$.
 The \emph{thermally-assisted sustaining process} is highlighted in green for $Ra \in [5000, 10000]$ and $Re \in[900, 1200]$, where temporally intermittent shear and Nusselt number fluctuations are observed, accompanied by a mixture of organised and disorganised flow structures in the temperature spacetime plots.
 In this regime, the longitudinal rolls provide an intermediate pathway towards transient turbulence, which appears linearly unstable for $Ra \geq 5000$.
