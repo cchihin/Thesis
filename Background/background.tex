@@ -213,7 +213,7 @@ where, $\langle \cdot, \cdot \rangle$ refers to the inner-product defined as,
     \langle \mathbf{x}, \mathbf{y} \rangle = \int_\Omega \mathbf{x}^H \mathbf{y} \; \mathrm{d}\Omega,
 \end{equation}
 and $\mathbf{x}^ H$ refers to the complex conjugate transpose of $\mathbf{x}$.
-By considering the linearised operator of \eqref{eq:OSQ}, we can define a linear time-evolution given as,
+By considering the linearised operator of \eqref{eq:OSQ}, we can define a linear time invariant operator given as,
 \begin{equation}\label{eq:linear_evolution}
     \mathbf{\tilde{q}}(t) = \mathcal{A}(t) \mathbf{\tilde{q}}_0,
 \end{equation}
@@ -241,52 +241,6 @@ The width of the streaks happen to be robustly occur around 100 wall units, the 
 
 The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{ellingsen_stability_1975,brandt_lift-up_2014}.
 These modal and nonmodal mechanisms above highlight developments based on linear methods.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% NONLINEAR DYNAMICAL SYSTEMS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Nonlinear dynamical systems}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Background/Figures/StateSpaceGraham.png}
-    \caption{The state space organising of the upper and lower branch. Turbulence is interpreted as solution trajectories wander around the upper branch, orbiting around a network unstable invariant states. The lower branch acts as a boundary between the turbulent attractor and laminar attractor, an attracttor on the edge referred to as the edge state.}
-    \label{fig:StateSpaceGraham}
-\end{figure}
-
-It is well established that coherent motions defined by flow patterns that persist in space and time play an important role in the transport of momentum and heat.
-In parallel shear flows, these coherent structures typically appear as near-walls streaks and quasi-streamwise rollers.
-A persistent, quasi-periodic cycle between the regeneration of streaks and rolls, referred to as the \emph{self-sustaining process}, appears to be a fundamental mechanism in sustaining wall-bounded turbulence \emph{self-sustaining process} \citep{hamilton_regeneration_1995}.
-This mechanism is described by the generation of streaks due to quasi-streamwise rollers by redistributing the mean.
-These streaks become linearly unstable and breakdown, and through a nonlinear process regenerates the quasi-streamwise rollers, closing the cycle.
-
-In the previous section, we have examined the transition process based linear mechanisms. 
-While such mechanisms are important, the transition to turbulence is ultimately governed fully nonlinear nature of the Navier-Stokes equations.
-As a result, an increasing attention has been directed towards the description of turbulence as a nonlinear dynamical systems.
-In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
-These invariant solutions commonly take the form of as equilibria, travelling waves, periodic and relative periodic orbits.
-
-In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
-This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
-The lower branch refers to its proximity towards the stable laminar state in phase space.
-A travelling-wave solution in plane Couette flow also later found by the same author \citep{nagata_three-dimensional_1997}.
-A family of equilibrium and travelling waves solutions was found for plane Couette and plane Poiseuille flows under various boundary conditions (i.e. stress-free, slip and no-slip) where identified by \citep{waleffe_exact_2001,waleffe_homotopy_2003}.
-
-While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
-Periodic orbits defined by time-dependent solutions that have been identified in plane Couette flow \citep{kawahara_periodic_2001}, describing a single regeneration cycle similar to the self-sustaining process.
-The chaotic trajectories of turbulence have been found to be embedded within invariant solutions and their connections between them known as heteroclinic orbits, offering a robust view of the building-blocks of of turbulence \citep{gibson_visualizing_2008, gibson_equilibrium_2009, halcrow_heteroclinic_2009, graham_exact_2021}
-
-In the context of this transitional flows, the lower branch solution can be though of separating the turbulent attractor from the laminar state.
-Its an attractor that resides on the edge of turbulence, defined as an edge state.
-The graphical representation of this edge is shown in figure \ref{fig:StateSpaceGraham}.
-
-% Utilising tools from nonlinear dynamics systems, turbulence could be viewed as chaotic trajectories around unstable nonlinear solutions known as invariant solutions or exact coherent structures \citep{Waleffe_2001,Waleffe_2003,toh2003periodic,Kreilos_2012,nagata2013mirror,Wall_Nagata_2016,Zammert_Eckhardt_2014,graham21}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Spatiotemporal transitional flows
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spatiotemporal transitonal flows}
-
 
 % \begin{equation}
 %     \langle \mathcal{A}(\tau)\mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{x}, \mathcal{A}^\dagger(\tau) \mathbf{y} \rangle.
@@ -342,18 +296,80 @@ The graphical representation of this edge is shown in figure \ref{fig:StateSpace
 % \begin{equation}
 %     G(t) = \max_{\mathbf{\tilde{q}_0} \neq 0} \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2} = \max_{\mathbf{\tilde{q}_0}} \frac{\mathbf{\tilde{q}_0}^T \mathbf{A}^T \mathbf{A} \mathbf{\tilde{q_0}}}{\mathbf{q}_0^T\mathbf{q}_0}
 % \end{equation}
-It is now known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
-These turbulent-laminar bands have been also observed in shear flow systems such as Couette flow \citep{duguet_formation_2010}, Taylor-Couette flow \citep{prigent_long-wavelength_2003}, and pipe flow \citep{avila_onset_2011} (as puffs and slugs).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NONLINEAR DYNAMICAL SYSTEMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{enumerate}
-    \item{Non-modal analysis}
-    \item{Nonlinear dynamical systems}
-    \item{Spatiotemporal intermittency}
-\end{enumerate}
+\subsection{Nonlinear dynamical systems}
 
-Over the past decade, research efforts have been dedicated to the study of turbulent-laminar bands.
-The wavelengths of $24^\circ$ oblique bands been observed to occupy $20h$ at $1900 < Re < 1400$, and $40h$ at $1300 < Re < 800$, suggesting that band widths increases as $Re$ decrease.
-Between $1300 < Re < 1400$ there appears to be bistable region between bands of both band-widths \citep{tuckerman_turbulent-laminar_2014}. \citep{tsukahara_dns_2014,tsukahara_dns_2014-1} observed turbulent-laminar oblique bands tilted by $23.7^\circ$ at $Re = 1430$. \citep{gome_statistical_2020} computed probabilities of turbulent-laminar band splitting and decay depending on $Re$. As $Re$ increases the probability of band decay decreases, while as $Re$ decreases the probability a band splitting event decreases. By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 925$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Background/Figures/StateSpaceGraham.png}
+    \caption{The state space organising of the upper and lower branch. Turbulence is interpreted as solution trajectories wander around the upper branch, orbiting around a network unstable invariant states. The lower branch acts as a boundary between the turbulent attractor and laminar attractor, an attracttor on the edge referred to as the edge state. Taken from \citep{graham_exact_2021}.}
+    \label{fig:StateSpaceGraham}
+\end{figure}
+
+It is well established that coherent motions defined by flow patterns that persist in space and time play an important role in the transport of momentum and heat.
+In parallel shear flows, these coherent structures typically appear as near-walls streaks and quasi-streamwise rollers.
+A persistent, quasi-periodic cycle between the regeneration of streaks and rolls, referred to as the \emph{self-sustaining process}, appears to be a fundamental mechanism in sustaining wall-bounded turbulence \emph{self-sustaining process} \citep{hamilton_regeneration_1995}.
+This mechanism is described by the generation of streaks due to quasi-streamwise rollers by redistributing the mean.
+These streaks become linearly unstable and breakdown, and through a nonlinear process regenerates the quasi-streamwise rollers, closing the cycle.
+
+In the previous section, we have examined the transition process based linear mechanisms. 
+While such mechanisms are important, the transition to turbulence is ultimately governed fully nonlinear nature of the Navier-Stokes equations.
+As a result, an increasing attention has been directed towards the description of turbulence as a nonlinear dynamical systems.
+In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
+These invariant solutions commonly take the form of as equilibria, travelling waves, periodic and relative periodic orbits.
+
+In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
+This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
+The lower branch refers to its proximity towards the stable laminar state in phase space.
+A travelling-wave solution in plane Couette flow also later found by the same author \citep{nagata_three-dimensional_1997}.
+A family of equilibrium and travelling waves solutions was found for plane Couette and plane Poiseuille flows under various boundary conditions (i.e. stress-free, slip and no-slip) where identified by \citep{waleffe_exact_2001,waleffe_homotopy_2003}.
+
+While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
+Periodic orbits defined by time-dependent solutions that have been identified in plane Couette flow \citep{kawahara_periodic_2001}, describing a single regeneration cycle similar to the self-sustaining process.
+The chaotic trajectories of turbulence have been found to be embedded within invariant solutions and their connections between them known as heteroclinic orbits, offering a robust view of the building-blocks of of turbulence \citep{gibson_visualizing_2008, gibson_equilibrium_2009, viswanath_recurrent_2007, halcrow_heteroclinic_2009, graham_exact_2021}
+
+In the context of this transitional flows, the lower branch solution can be though of separating the turbulent attractor from the laminar state.
+Its an attractor that resides on the edge of turbulence, defined as an edge state.
+The graphical representation of this edge is shown in figure \ref{fig:StateSpaceGraham}.
+
+% Utilising tools from nonlinear dynamics systems, turbulence could be viewed as chaotic trajectories around unstable nonlinear solutions known as invariant solutions or exact coherent structures \citep{Waleffe_2001,Waleffe_2003,toh2003periodic,Kreilos_2012,nagata2013mirror,Wall_Nagata_2016,Zammert_Eckhardt_2014,graham21}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spatiotemporal transitional flows
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spatiotemporal transitonal flows}
+This section describes the inherent spatiotemporal intermittent description of turbulence in transitional wall-bounded shear flows.
+In this regime, turbulence is characterised by the coexistence of turbulent and laminar structures occurring within a range of Reynolds numbers.
+Above an certain $Re$ threshold, the domain is fully engulfed by turbulent regions, referred to as uniform, featureless turbulence.
+Below a certain $Re$ threshold, the full regions are mostly laminar, interpersed by turbulent regions in which they decay asymptotically where the flow relaminarises \citep{tuckerman_patterns_2020}. 
+The spatioteemporal intermittent structures have been reported in canonical shear flow systems such as plane Couette \citep{prigent_long-wavelength_2003,barkley_mean_2007,tuckerman_patterns_2011,duguet_formation_2010}, Taylor-Couette \citep{prigent_barber_2002,prigent_long-wavelength_2003}, and pipe \citep{avila_transient_2010,avila_onset_2011,song_speed_2017,avila_transition_2023} and plane Poiseuille flows \citep{tsukahara_dns_2014, tsukahara_dns_2014-1, tuckerman_turbulent-laminar_2014, gome_statistical_2020, paranjape_onset_2019, paranjape_oblique_2020, paranjape_direct_2023}.
+We will focus on the plane Poiseuille flow configuration, where the spatiotemporal intermittent pattern are commonly referred to as oblique turbulent-laminar bands.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{Background/Figures/Ra0-BotSpaceTime.pdf}
+\caption{Turbulent-laminar bands for $t \in [0, 3000]$ in large domains $(L_x, L_z) = (16\pi, 16\pi)$ at (a) $Re = 1800$, (b) $Re = 1600$, (c) $Re = 1400$,  (d)  $Re =1200$, (e) $Re = 1100$, (f) $Re = 1050$,  (g) $Re = 1000$.}
+\label{fig:turb_lam_bands}
+\end{figure}
+The turbulent-laminar bands are shown in figure \ref{fig:turb_lam_bands}.
+Notably, the featureless, uniform turbulence occurs near $Re = 1800$, where oblique patterns quickly appear below $Re = 1600$ onwards, before relaminarising at $Re = 1000$.
+A couple of studies have been dedicated to the study of the dynamics and statistics of these bands. 
+Due to the high computational cost associated, many considered a tilted domain where the angle and span of the bands could be fixed.
+In a tilted domain, with a spanwise wavelengths of $24^\circ$, these bands have wavelength of $20h$ at $1900 < Re < 1400$, and $40h$ at $1300 < Re < 800$.
+This suggest thmay split or merge near the $Re$-threshold.
+Indeed, between $1300 < Re < 1400$ the bands appear to alternative between two different band-widths \citep{tuckerman_turbulent-laminar_2014}, merging and splitting continuously. 
+Notably, \citep{tsukahara_dns_2014,tsukahara_dns_2014-1} also observed turbulent-laminar oblique bands tilted by $23.7^\circ$ at $Re = 1430$ suggesting that the bands are preferred at a certain angle.
+To study the preference of angles, zzz performed linear stability analysis of bands and showed that preferred angle at .. degrees.
+Relevant to transitional flow, bands spontaneously decay adn their porbabilities are Poisson, memoryless below a certain Reynolds number, where their lift time depends on a super exponential.
+It is worth noting that isolated bands are not memoryless, depending on their pass history [citation]
+Above a certain Reynolds number, the probability of band splitting again depends on a super-exponentianal.
+Show graph.
+\citep{gome_statistical_2020} computed probabilities of turbulent-laminar band splitting and decay depending on $Re$. As $Re$ increases the probability of band decay decreases, while as $Re$ decreases the probability a band splitting event decreases. By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 925$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
+% In the context of plane Poiseuille flowsd, it is well known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
+% Over the past decade, research efforts have been dedicated to the study of turbulent-laminar bands.
 
 At $Re \sim 1000 - 2000$, turbulent bands can either decay spontaneously, stabilising into a laminar state, or split, forming more bands whereby turbulent-laminar bands are sustained.
 The probability of decay and splitting lifetimes strongly depends on the domain size and $Re$.
