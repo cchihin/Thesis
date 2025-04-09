@@ -340,34 +340,62 @@ The graphical representation of this edge is shown in figure \ref{fig:StateSpace
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Spatiotemporal transitional flows
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spatiotemporal transitonal flows}
-This section describes the inherent spatiotemporal intermittent description of turbulence in transitional wall-bounded shear flows.
-In this regime, turbulence is characterised by the coexistence of turbulent and laminar structures occurring within a range of Reynolds numbers.
-Above an certain $Re$ threshold, the domain is fully engulfed by turbulent regions, referred to as uniform, featureless turbulence.
-Below a certain $Re$ threshold, the full regions are mostly laminar, interpersed by turbulent regions in which they decay asymptotically where the flow relaminarises \citep{tuckerman_patterns_2020}. 
-The spatioteemporal intermittent structures have been reported in canonical shear flow systems such as plane Couette \citep{prigent_long-wavelength_2003,barkley_mean_2007,tuckerman_patterns_2011,duguet_formation_2010}, Taylor-Couette \citep{prigent_barber_2002,prigent_long-wavelength_2003}, and pipe \citep{avila_transient_2010,avila_onset_2011,song_speed_2017,avila_transition_2023} and plane Poiseuille flows \citep{tsukahara_dns_2014, tsukahara_dns_2014-1, tuckerman_turbulent-laminar_2014, gome_statistical_2020, paranjape_onset_2019, paranjape_oblique_2020, paranjape_direct_2023}.
-We will focus on the plane Poiseuille flow configuration, where the spatiotemporal intermittent pattern are commonly referred to as oblique turbulent-laminar bands.
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{Background/Figures/Ra0-BotSpaceTime.pdf}
-\caption{Turbulent-laminar bands for $t \in [0, 3000]$ in large domains $(L_x, L_z) = (16\pi, 16\pi)$ at (a) $Re = 1800$, (b) $Re = 1600$, (c) $Re = 1400$,  (d)  $Re =1200$, (e) $Re = 1100$, (f) $Re = 1050$,  (g) $Re = 1000$.}
-\label{fig:turb_lam_bands}
+\subsection{Spatiotemporal transitonal flows}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/Re1400.pdf}
+    \caption{A snapshot of turbulent-laminar bands at $Re = 1400$ in a large domain $L/d = 8\pi$, depecting its spatiotemporal intermittent nature. Isovolume renderings is based on the spanwise, $u'$, and wall-normal, $v'$, perturbation kinetic energy, $E(u',v') = 1/2(u'^2 + v'^2)$, where the perturbation velocities are defined about the laminar state $\mathbf{u}'(\mathbf{x},t) = \mathbf{u}(\mathbf{x},t) - U_{lam}(y)$.}
+    \label{fig:turbulent-laminar}
 \end{figure}
-The turbulent-laminar bands are shown in figure \ref{fig:turb_lam_bands}.
-Notably, the featureless, uniform turbulence occurs near $Re = 1800$, where oblique patterns quickly appear below $Re = 1600$ onwards, before relaminarising at $Re = 1000$.
-A couple of studies have been dedicated to the study of the dynamics and statistics of these bands. 
-Due to the high computational cost associated, many considered a tilted domain where the angle and span of the bands could be fixed.
-In a tilted domain, with a spanwise wavelengths of $24^\circ$, these bands have wavelength of $20h$ at $1900 < Re < 1400$, and $40h$ at $1300 < Re < 800$.
-This suggest thmay split or merge near the $Re$-threshold.
-Indeed, between $1300 < Re < 1400$ the bands appear to alternative between two different band-widths \citep{tuckerman_turbulent-laminar_2014}, merging and splitting continuously. 
-Notably, \citep{tsukahara_dns_2014,tsukahara_dns_2014-1} also observed turbulent-laminar oblique bands tilted by $23.7^\circ$ at $Re = 1430$ suggesting that the bands are preferred at a certain angle.
+
+This section describes the inherent spatiotemporal intermittent description of turbulence in transitional wall-bounded shear flows commonly reported in large extended domains where the span is about fifty times the half-height of a plane Poiseuille channel, $L/h \gtrsim 50$.
+In thie regime, turbulence is characterised by the coexistence of turbulent and laminar structures.
+Examples of such are found in canonical shear flow systems such as plane Couette flows \citep{prigent_long-wavelength_2003,barkley_computational_2005,barkley_mean_2007,tuckerman_patterns_2011,duguet_formation_2010,reetz_exact_2019}, Taylor-Couette flows \citep{prigent_barber_2002,prigent_long-wavelength_2003}, pipe flows \citep{avila_transient_2010,avila_onset_2011,song_speed_2017,avila_transition_2023} and plane Poiseuille flows \citep{tsukahara_dns_2014, tsukahara_dns_2014-1, tuckerman_turbulent-laminar_2014, tsukahara_experimental_2014, gome_statistical_2020, paranjape_onset_2019, paranjape_oblique_2020, paranjape_direct_2023}.
+
+We will focus on the plane Poiseuille flow configuration, where the spatiotemporal intermittent patterns are referred to as oblique turbulent-laminar bands illustrated in figure \ref{fig:turbulent-laminar} at $Re = 1400$ for $L/h = 16\pi$.
+The the bright and dark regions highlights coexisting spatially localised turbulent and laminar regions.
+These turbulent-laminar bands occur over a range of Reynolds numbers, and its precise range is likely dependent on the domain's aspect ratio \citep{tsukahara_experimental_2014,tuckerman_turbulent-laminar_2014,paranjape_direct_2023}.
+Near the upper $Re$ threshold of this regime, the domain is fully engulfed by developed turbulent regions, referred to uniform, featureless turbulence appearing at $Re = 1800$ in figure \ref{fig:turbulent-laminar}(a).
+As $Re$ decreases towards $Re = 1050$, turbulent-laminar bands persist in figures \ref{fig:turb_lam_bands}(b-f).
+In this region, turbulent-laminar bands angles have been observed to be inclined between $20^\circ \sim 30^\circ$, with streamwise wavelengths of $\sim 60h$, and spanwise wavelengths of $\sim 20h-30h$ \citep{tsukahara_experimental_2014}.
 To study the preference of angles, zzz performed linear stability analysis of bands and showed that preferred angle at .. degrees.
-Relevant to transitional flow, bands spontaneously decay adn their porbabilities are Poisson, memoryless below a certain Reynolds number, where their lift time depends on a super exponential.
-It is worth noting that isolated bands are not memoryless, depending on their pass history [citation]
-Above a certain Reynolds number, the probability of band splitting again depends on a super-exponentianal.
-Show graph.
-\citep{gome_statistical_2020} computed probabilities of turbulent-laminar band splitting and decay depending on $Re$. As $Re$ increases the probability of band decay decreases, while as $Re$ decreases the probability a band splitting event decreases. By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 925$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
+Below certain $Re$ threshold, the spatially turbulent regions spontaneously decay where the flow relaminarises asymptotically \citep{tuckerman_turbulent-laminar_2014}.
+This decay is shown in $Re = 1000$ near $t = 1600$ in figure \ref{fig:turb_lam_bands}(g). 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/Ra0-BotSpaceTime.pdf}
+    \caption{Turbulent-laminar bands for $t \in [0, 3000]$ in large domains $(L_x, L_z) = (16\pi, 16\pi)$ at (a) $Re = 1800$, (b) $Re = 1600$, (c) $Re = 1400$,  (d)  $Re =1200$, (e) $Re = 1100$, (f) $Re = 1050$,  (g) $Re = 1000$.}
+    \label{fig:turb_lam_bands}
+\end{figure}
+
+Inspired from previous studies of turbulent-laminar bands in plane Couette flows \citep{barkley_computational_2005, reetz_exact_2019}, narrow domains, titled orthogonally to the band angles where considered to investigate their dynamics \citep{tuckerman_turbulent-laminar_2014, paranjape_oblique_2020, paranjape_direct_2023}.
+In narrow-tilted domains inclined at $24^\circ$, the turbulent-bands convect at about $\sim1\%$ of the bulk velocity, propagating either upstream or downstream, above or below an critical $Re \sim 1000$, independent of domain sizes for $L_z \geq 100h$ \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
+The characteristic spanwise wavelengths of turbulent-laminar bands are depdendent on $Re$, appearing at $\lambda_z \sim 20h$ for $Re \geq 1400$ and $\lambda_z \sim 40h$ for $Re \leq 1100$.
+Indeed, between $1300 < Re < 1400$ the bands appear to alternative between two different band-widths \citep{tuckerman_turbulent-laminar_2014}, merging and splitting continuously. 
+This points towards a band splitting event in between $Re = 1100$ and $Re = 1400$, reminiscent of a puff splitting in pipe flows \citep{avila_onset_2011}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Background/Figures/gomes_prob.pdf}
+    \caption{The mean decay times (red), $\tau^d$, and mean splitting times (black), $\tau^s$, as a function of Reynolds number, leading to a crossover point at $Re \approx 965$, adapted from \citep{gome_statistical_2020}.}
+    \label{fig:decay_split_probability}
+\end{figure}
+
+On the other hand, turbulent bands appear to decay at $Re = 830$ \citep{gome_statistical_2020}, and at $re = 1100$ but surviving for $re = 1000$ \citep{tuckerman_turbulent-laminar_2014}, suggesting that turbulent bands decay spontaneously.
+\citep{gome_statistical_2020} computed the probabilities distributions of turbulent band decay, $P(\Delta t^d)$, where $\Delta t^d$ refers to the time it takes for decay.
+On of the key insight is that the probability distributions of turbulent band decay mimicks a Poisson distribution,
+\begin{equation}
+    P(\Delta t^d) = \exp(-\Delta t^d/\tau^d(Re)),
+\end{equation}
+where $\tau^d(Re)$ refers to the mean lifetime for decay as a function of $Re$.
+Similarly, the probability distribution for band splitting also follows a Poisson distribution, $P(\Delta t^s) = \exp(-\Delta t^s / \tau^s(Re))$, where $\tau^s(Re)$ refers to the mean lifetime of a splitting event dependent on $Re$.
+The mean lifetime of a band and splitting event depends super exponentially on $Re$, $\tau^{d,s} = \exp(\exp(Re))$, shown in figure \ref{fig:decay_split_probability}, with a crossover point at $Re_{cross} \approx 965$, where the probabilities of splitting or decay are equal, suggesting a critical $Re$ for the onset of turbulent bands.
+% By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 965$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
+While there has substantial progress made towards understanding the behaviour of periodic turbulent-laminar bands in narrow-tilted domains, recently studies of isolated turbulent bands (ITBs) indicate differed behaviour.
+Notably, ITBs persist at $Re \approx 700$ for $t = 10000$ (far beyond figure \ref{fig:decay_split_probability}, characterised by streak generating head, and a diffusive upstream tail. \citep{xiong_turbulent_2015, tao_extended_2018, shimizu_bifurcations_2019, xiao_growth_2020}.
+% It is worth noting that isolated bands are not memoryless, depending on their pass history [citation]
+% Above a certain Reynolds number, the probability of band splitting again depends on a super-exponentianal.
+% Show graph.
 % In the context of plane Poiseuille flowsd, it is well known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
 % Over the past decade, research efforts have been dedicated to the study of turbulent-laminar bands.
 
