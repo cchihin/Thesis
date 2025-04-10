@@ -2,24 +2,47 @@
 % Theoretical Background
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Theoretical Background}\label{chap:2}
+\chapter{Introduction}\label{chap:2}
 
 \section{Overview}
-Rayleigh-B\'{e}nard-Poiseuille (RBP) flows describe the motion of fluids confined between two infinitely extended parallel walls, heated from below and cooled from the top, driven by a pressure gradient.
+A broad class of fluid motions driven by buoyancy and frictional forces are found in the study of thermal convective and wall-bounded shear flows.
+Their combined effects leading to rich behaviour, spanning across wide interests in engineering and meteorology applications.
+In small length scales of $L \sim 1 cm$, this concerns the cooling of silicon chips, where the fluid experiences shear from the walls, and buoyancy from heating.
+One of the main innovations in this field is on the exponential increase in computing power in the $20^{th}$ century, by squeezing more transitors into a single silion chip.
+Moore's law predicts that the amount of transistors on a single chip will double every two years.
+One of the major limitations is on dissipating the excessive heat from the silicon chip.
+In many cases, a fluid (air/water/refrigerant) act as a medium, transporting heat away from the components preventing overheating \citep{kennedy_combined_1983, ray_analysis_1992}.
+In moderate length scales, $L \sim 1m$, the interaction between buoyancy and frictional forces concern the fabrication of uniform thin films in chemical vapour deposition (CVD) \citep{evans_unsteady_1991,jensen_flow_1991}.
+The CVD process usally involves a reactive gases, carried by inert gases convected through a channel which has a heated substrate.
+Upon heating, the reactant gases react chemically at substrate, depositing a material where thin films are fabricated, such as silicon layers.
+In many cases, the important qualities of the CVD process is in the uniformity of thin film, and the sharpness between their interfaces.
+Interactions between shear and buoyancy forces often lead to development of a boundary layer and thermoconvective rolls, impacting the homogenity of deposition, posing a challenge for a uniform layer of film.
+\input{Background/Figures/Applications/applications.tex}
+In the largest of scales, $L \sim 1km$, parallel bands of cumulus clouds over the Norewegian Sea, known as clouds streets, extending for several hundreds of kilometres.
+These cloud streets develop when the relative warmer Norwegian sea heats up the colder air blowing from the North \citep{norwegian_sea}.
+The heated air (or thermals) rises towards the atmosphere while transporting water vapour, condenses into visible clouds.
+The cooler air falls towards the sea, forming the distinct parallel cylinders of rotating air known as thermconvective rolls.
+
+The common denominator of the examples given above is in the interaction between shear and bouyancy forces driven fluid motion, the main focus of this thesis.
+We note that by restricting our analysis to two forces, other physical mechanisms such as phase change, chemically reactions and latent heat of evaporation are neglected, which could be important in the cooling of electronic components, CVD, and atmopsheric boundary layers respectively \citep{vallis_simple_2019}.
+We consider an idealised setup, without any geometric complexitiy, referred to as the Rayleigh-B\'{e}nard-Poiseuille (RBP) flow.
+RBP flows describe the motion of a fluid between two infinitely extended parallel walls, heated from below and cooled from the top, driven by a pressure gradient.
+The RBP system combines the two paradigmatic flow configurations; the classical Rayleigh-B\'{e}nard convection (RBC) and the plane Poiseuille flow (PPF), driven by buoyancy and shear forces, respectively.
+The onset of convection and the transition to subscritical shear-driven turbulence has been well studied independently over the past decades, however, the transitional regime where both forces interact remains largely unexplored.
+Understanding the transition to turbulence in this regime can have implications for applications across a range of scales mentioned previously. 
+
 \input{Background/Figures/RBPFlowConfiguration.tex}
+
 The RBP configuration is illustrated in figure \ref{fig:rbpconfiguration}, where $z^*, y^*, x^*, L_z, L_x, d, h$ refer to the streamwise, spanwise, wall-normal coordinates, length, span, depth and half-height of the domain respectively.
 We note that the asterisks$^*$, refer to variables in dimensional form.
 The flow is driven by a pressure gradient along the streamwise $z^*$ direction, $\Delta P^* = P^*|_{z^*=0} - P^*|_{z^*=L_z} < 0$, leading to the formation of a laminar Poiseuille flow, $w^*(y^*)$, for a sufficiently small $\Delta P$. 
 In this study, we will only consider fully-developed flow, where the boundary layer from the top and the bottom wall meets at the midplane, $y^*=0$, and entrance effects are neglected.
 The RBP configuration is also unstably stratified, such that the temperature difference between the lower, $T_L$, and upper wall, $T_U$, is always positive, $\Delta T = T_L - T_U > 0$, leading to a stable linear conduction profile along the wall-normal direction, $T(y^*)$, if $\Delta T$ is kept sufficiently small.
 
-The RBP system combines the two paradigmatic flow configurations; the classical Rayleigh-B\'{e}nard convection (RBC) and the plane Poiseuille flow (PPF), driven by buoyancy and shear forces, respectively.
 In the absence of a pressure gradient, the RBP configuration reduces to the classical Rayleigh-B\'{e}nard convection problem, bringing about buoyany-driven convection for a sufficiently large unstable stratification.
 In the limiting case without unstable stratification, $\Delta T = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
 
-The onset of convection and the transition to subscritical shear-driven turbulence has been well studied independently over the past decades, however, the transitional regime where both forces interact remains largely unexplored.
 For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
-Understanding the transition to turbulence in this regime can have implications for applications such as the fabrication of thin uniform films in chemical vapour deposition \citep{evans_unsteady_1991,jensen_flow_1991,fauzi_critical_2018} and the cooling of electronic components \citep{kennedy_combined_1983,ray_analysis_1992}.
 To describe the motion of the fluid in RBP configurations, we cosider non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
 \begin{subequations}\label{eq:rbp_equations}
 \begin{equation}
@@ -39,17 +62,27 @@ The key control parameters for RBP flows are the Rayleigh number, $Ra$, Reynolds
 \end{equation}
 where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
 
-We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
-The historical developments involving Rayleigh-B\'{e}nard Poiseuille (RBP) flows are then expanded in \S \ref{sec:bkgrd_RBP} concluded by a section describing the hydrodynamic stability of fluid flows in \S \ref{sec:bkgrd_transitional}
+We describe important historical of hydrodynamic stability of planar shear flows and their theorectical frameworks in \S \ref{sec:bkgrd_transitional}.
+Theorectical frameworks used in the study of stability of flow such as linear stability, nonlinear dynamical systems and spatiotemporal character of transitional shear flows will be outlined.
+This followed the historical developments of Rayleigh-B\'{e}nard convection (RBC), where concepts of the stability of fluid flows will be ultilised in \S \ref{sec:bkgrd_RBC}.
+After which, we describe the historical developments of RBP flows \S \ref{sec:bkgrd_RBP}, and the outline of the thesis will be give in \S \ref{sec:thesis_outline}.
+
+
+% We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Plane Poiseuille Flows
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Transitional wall-bounded shear flows}\label{sec:bkgrd_transitional}
-Wall-bounded shear flows remain as a fundamental topic in fluid mechanics, concerning the motion of a fluid travelling in parallel to solid surfaces (such as walls), where pressence of the wall influences the flow.
-To satistfy the non-slip boundary conditions at the walls, the fluid layer becomes sheared, leading to velocity gradients and shear stresses within the fluid.
-The prototypical examples flows include the pressure-driven plane Poiseuille flow (PPF), pipe (Hagen-Poiseuille) flow, plane Couette flow and flat plate boundary layers.
+\section{Transitional wall-bounde shear flows}\label{sec:bkgrd_transitional}
+Wall-bounded shear flows concerns the motion of a fluid travelling in parallel to solid surfaces, refrred to as walls.
+To satisfy the no-slip boundary condition at the wall, the fluid closest to the wall comes to a rest, generating a regular velocity gradient in the direction perpendicular away from the wall.
+In Newtonian fluids, shear stresses are directly proportionate to the velocity gradient by the fluids kinetic viscosity, $\nu$, given as,
+\begin{equation}\label{eq:shear}
+   \tau = \nu \frac{\partial u}{\partial y},
+\end{equation}
+where $\tau$, $\nu$, and $\frac{\partial u}{\partial y}$ refers to shear, kinematic viscosity and velocity gradients.
+Examples flows include the pressure-driven plane Poiseuille flow (PPF), pipe (Hagen-Poiseuille) flow, plane Couette flow and flat plate boundary layers.
 These geometrically simple examples enables a convenient framework amenable to the mathematical analysis of fluid motion under shear.
 A central question in this field is predicting the transition to turbulence, specifically, at what point does turbulence emerge as shear increases?
 % One of the central questions is on the prediction on the transition to turbulence, specifically, when is turbulence expected as shear is increased?
@@ -376,20 +409,23 @@ Indeed, between $1300 < Re < 1400$ the bands appear to alternative between two d
 This points towards a band splitting event in between $Re = 1100$ and $Re = 1400$, reminiscent of a puff splitting in pipe flows \citep{avila_onset_2011}.
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{Background/Figures/gomes_prob.pdf}
+    \includegraphics[width=0.7\textwidth]{Background/Figures/gome_prob.pdf}
     \caption{The mean decay times (red), $\tau^d$, and mean splitting times (black), $\tau^s$, as a function of Reynolds number, leading to a crossover point at $Re \approx 965$, adapted from \citep{gome_statistical_2020}.}
     \label{fig:decay_split_probability}
 \end{figure}
 
 On the other hand, turbulent bands appear to decay at $Re = 830$ \citep{gome_statistical_2020}, and at $re = 1100$ but surviving for $re = 1000$ \citep{tuckerman_turbulent-laminar_2014}, suggesting that turbulent bands decay spontaneously.
 \citep{gome_statistical_2020} computed the probabilities distributions of turbulent band decay, $P(\Delta t^d)$, where $\Delta t^d$ refers to the time it takes for decay.
-On of the key insight is that the probability distributions of turbulent band decay mimicks a Poisson distribution,
+On of the key insight is that the probability distributions of turbulent band decay mimicks a memoryless Poisson distribution,
 \begin{equation}
     P(\Delta t^d) = \exp(-\Delta t^d/\tau^d(Re)),
 \end{equation}
 where $\tau^d(Re)$ refers to the mean lifetime for decay as a function of $Re$.
 Similarly, the probability distribution for band splitting also follows a Poisson distribution, $P(\Delta t^s) = \exp(-\Delta t^s / \tau^s(Re))$, where $\tau^s(Re)$ refers to the mean lifetime of a splitting event dependent on $Re$.
-The mean lifetime of a band and splitting event depends super exponentially on $Re$, $\tau^{d,s} = \exp(\exp(Re))$, shown in figure \ref{fig:decay_split_probability}, with a crossover point at $Re_{cross} \approx 965$, where the probabilities of splitting or decay are equal, suggesting a critical $Re$ for the onset of turbulent bands.
+The mean survival lifetime of a band decaying, $\tau^d$, and splitting, $\tau^s$, depends superexponentially on $Re$, i.e. $\tau^{d,s} = \exp(\exp(Re))$.
+This superexponential dependence is presented in figure \ref{fig:decay_split_probability}, with a crossover point at $Re_{cross} \approx 965$.
+This crossover point refers to equal mean survival lifetime of a band de
+suggesting a critical $Re$ for the onset of turbulent bands.
 % By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 965$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
 While there has substantial progress made towards understanding the behaviour of periodic turbulent-laminar bands in narrow-tilted domains, recently studies of isolated turbulent bands (ITBs) indicate differed behaviour.
 Notably, ITBs persist at $Re \approx 700$ for $t = 10000$ (far beyond figure \ref{fig:decay_split_probability}, characterised by streak generating head, and a diffusive upstream tail. \citep{xiong_turbulent_2015, tao_extended_2018, shimizu_bifurcations_2019, xiao_growth_2020}.
@@ -399,59 +435,11 @@ Notably, ITBs persist at $Re \approx 700$ for $t = 10000$ (far beyond figure \re
 % In the context of plane Poiseuille flowsd, it is well known that at $Re \sim 1000 - 2000$, turbulence behaves intermittently, existing as oblique bands of turbulent and laminar regions. 
 % Over the past decade, research efforts have been dedicated to the study of turbulent-laminar bands.
 
-At $Re \sim 1000 - 2000$, turbulent bands can either decay spontaneously, stabilising into a laminar state, or split, forming more bands whereby turbulent-laminar bands are sustained.
-The probability of decay and splitting lifetimes strongly depends on the domain size and $Re$.
-At $L_z = 100h$, the critical Reynolds number of $Re_{cr} \approx 965$ have been determined statistically, whereby decay and splitting lifetimes intersect more than $10^6$ advective time units. 
-It is worth to note that for $Re < Re_{cr}$, the probably of decay is higher than splitting events, vice versa. 
+% At $Re \sim 1000 - 2000$, turbulent bands can either decay spontaneously, stabilising into a laminar state, or split, forming more bands whereby turbulent-laminar bands are sustained.
+% The probability of decay and splitting lifetimes strongly depends on the domain size and $Re$.
+% At $L_z = 100h$, the critical Reynolds number of $Re_{cr} \approx 965$ have been determined statistically, whereby decay and splitting lifetimes intersect more than $10^6$ advective time units. 
+% It is worth to note that for $Re < Re_{cr}$, the probably of decay is higher than splitting events, vice versa. 
 
-We seek to investigate the influence of unstable stratification quantified by Rayleigh number $Ra$, on the behaviour tuburlent-laminar bands. 
-The onset of convection occurs at a critical Rayleigh number of $Ra_c > 1708$, in the form of a pair of convection rolls.
-When aligned in the streamwise direction, the convection rolls are seemingly analogous to a pair of counter-rotating vortices, an optimal initial condition for transient growth. 
-Our investigation naturally answers a few questions related to turbulent-laminar bands.
-For example, does the onset of turbulent-laminar bands, $Re_{cr}$ decrease with increasing $Ra$?
-Do $Ra$-effects influence the structure of turbulent-laminar bands i.e band angle/width? 
-
-The answers to our research will have important implications Rayleigh-B\'{e}nard Poiseuille flows, ubiquitous in atmospheric, geophysical and engineering flows.
-[PRESENT RBP SETUP]
-The governing equations of the fluid motion in given by the Navier-Stokes equations with Boussinessq approximations,
-\begin{equation}
-    \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\frac{1}{\rho} \nabla p + \nu \nabla^2 \mathbf{u} + g\beta(T-T_0).
-\end{equation}`
-\begin{equation}
-    \frac{\partial T}{\partial t} + (\mathbf{u} \cdot \nabla)T = \kappa \nabla^2 T,
-\end{equation}
-\begin{equation}
-    \nabla  \cdot \mathbf{u} = 0.
-\end{equation}
-with arbitrary Dirichlet and Neumann boundary conditions.
-\begin{equation}
-    \mathbf{u}_d, p_d, T_d \in \Omega_d, \quad \nabla\mathbf{u}_N, p_N, T_N \in \partial\Omega_N.
-\end{equation}
-where $\mathbf{u}, T, p$ refers to the velocity, temperature and pressure fields, primitive variables that are not known a priori and $\rho, \nu, \kappa$ refers to the properties of the fluid, namely, density, kinematic viscosity and thermal diffusivity.
-For a given set of fluid properties $\rho, \nu, \kappa$ and geometric properties $L^*, t^*, u^*$ referring to an arbitrary length-, time- and velocity-scale, we are primarily interested in the behaviour of the fluid i.e if its laminar or turbulent.
-In other words, we have a six control parameters that describes a fluid flow of interest.
-To reduce the number of control parameters, we can suitably nondimensionalise the primitive variables by a velocity scale $u_c$, length scale, $L_x$, and time scale $u_c/L_x$, where $u_c$ refers to the centreline velocity of a laminar flow and $L_x$ refers to the streamwise length of the domain.
-The nondimensional equations with Boussienessq approximations are now given as,
-\begin{equation}
-    \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{Re^2Pr} \theta
-\end{equation}
-\begin{equation}
-    \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla)\theta = \frac{1}{RePr}\nabla^2 \theta,
-\end{equation}
-\begin{equation}
-    \nabla \cdot \mathbf{u} = 0.
-\end{equation}
-where $\mathbf{u}, \theta, p$ refers to the nondimensionalised velocity, temperature and presure.
-In this thesis, I am particularly focused on the transition behaviour of fluid flow driven by shear and bouyancy, addressing questions related to the onset of instabilities due to shear and buoyancy, and the (possible) competitive between shear and buoyancy driven instabilities.
-I would like to preface that while this thesis is dealing with onset of instabilities, it does not clearly indicate that the onset of such instabilities necessarily lead to turbulence, hence, for terminology sake, we shall be looking into transitional regimes where the fluid neither laminar nor turbulent.
-The main motivations are two-folds, both from an academic and applied point-of-view. 
-Within academia, the onset and transition to turbulence in Rayleigh-B\'{e}nard Poiseuille flows remains poorly understand.
-Whilst there had been significant progress in our understand of transition to turbulence in independent setups, Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
-The thesis is structured into the follow, Chapter 1 is the introduction with literature review, chapter 2 methodology assosicated with the spectral/\emph{hp}-element method, chapter 3 with results related to the the Rayleigh and Reynolds number sweep, chapter 4 with a specific focus on the bistability between spiral defect chaos and ideal straight rolls and finally chapter 5 with concluding remarks.
-\begin{enumerate}
-   \item Academic motivation - flow structures, statistics, transition.
-   \item Application motivation - shear, heat transfer. Chip cooling, thin-film fabrication and atmospheric boundary layer.
-\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Rayleigh Benard Convection
@@ -508,6 +496,7 @@ The hysteretic nature of the system implies that the roll wavenumber of the ISRs
 To complicate the subject further, ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1} as multiple `non-ISR' states, in the form os squares, travelling/stationary targets, giant rotating spirals and oscillatory convection patterns have been found over the years \citep{croquette_convective_1989,croquette_convective_1989-1,plapp_dynamics_1998,hof_flow_1999,rudiger_pattern_2000,boronska_extreme_2010,boronska_extreme_2010-1}.
 For example, investigations of cylinderical RBC in small aspect-ratio revealed eight stationary statesand two oscillatory states.
 These findings were later supported by numerical experiments and bifurcation analyses.
+
 % It is worth noting that the solutions in the form of ISRs appear to be an exception rather
 % than the rule (Croquette 1989b). The coexistence of multiple ‘non-ISR’ states, in the form
 % of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection
@@ -571,3 +560,58 @@ In finite streamwise extensions of RBP flows, the onset of convection rolls and 
 More recently, shear-driven turbulence can enhance heat fluxes in turbulent RBP flows \citep{scagliarini_heat_2014, scagliarini_law_2015, pirozzoli_mixed_2017}.
 RBP flows with sinusoidal heating and wavy walls have also been studied \citep{hossain_spectral_2021}.
 For an in-depth discussion of RBP flows, see the reviews by \cite{kelly_onset_1994} and \cite{nicolas_revue_2002}.
+
+%%%%%%%%%%%%%%%%
+% THESIS OUTLINE
+%%%%%%%%%%%%%%%%
+
+\subsection{Thesis Outline}\label{sec:thesis_outline}
+
+% The governing equations of the fluid motion in given by the Navier-Stokes equations with Boussinessq approximations,
+% \begin{equation}
+%     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\frac{1}{\rho} \nabla p + \nu \nabla^2 \mathbf{u} + g\beta(T-T_0).
+% \end{equation}`
+% \begin{equation}
+%     \frac{\partial T}{\partial t} + (\mathbf{u} \cdot \nabla)T = \kappa \nabla^2 T,
+% \end{equation}
+% \begin{equation}
+%     \nabla  \cdot \mathbf{u} = 0.
+% \end{equation}
+% with arbitrary Dirichlet and Neumann boundary conditions.
+% \begin{equation}
+%     \mathbf{u}_d, p_d, T_d \in \Omega_d, \quad \nabla\mathbf{u}_N, p_N, T_N \in \partial\Omega_N.
+% \end{equation}
+% where $\mathbf{u}, T, p$ refers to the velocity, temperature and pressure fields, primitive variables that are not known a priori and $\rho, \nu, \kappa$ refers to the properties of the fluid, namely, density, kinematic viscosity and thermal diffusivity.
+% For a given set of fluid properties $\rho, \nu, \kappa$ and geometric properties $L^*, t^*, u^*$ referring to an arbitrary length-, time- and velocity-scale, we are primarily interested in the behaviour of the fluid i.e if its laminar or turbulent.
+% In other words, we have a six control parameters that describes a fluid flow of interest.
+% To reduce the number of control parameters, we can suitably nondimensionalise the primitive variables by a velocity scale $u_c$, length scale, $L_x$, and time scale $u_c/L_x$, where $u_c$ refers to the centreline velocity of a laminar flow and $L_x$ refers to the streamwise length of the domain.
+% The nondimensional equations with Boussienessq approximations are now given as,
+% \begin{equation}
+%     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{Re^2Pr} \theta
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla)\theta = \frac{1}{RePr}\nabla^2 \theta,
+% \end{equation}
+% \begin{equation}
+%     \nabla \cdot \mathbf{u} = 0.
+% \end{equation}
+% where $\mathbf{u}, \theta, p$ refers to the nondimensionalised velocity, temperature and presure.
+In this thesis, I am particularly focused on the transition behaviour of fluid flow driven by shear and bouyancy, addressing questions related to the onset of instabilities due to shear and buoyancy, and the (possible) competitive between shear and buoyancy driven instabilities.
+I would like to preface that while this thesis is dealing with onset of instabilities, it does not clearly indicate that the onset of such instabilities necessarily lead to turbulence, hence, for terminology sake, we shall be looking into transitional regimes where the fluid neither laminar nor turbulent.
+The main motivations are two-folds, both from an academic and applied point-of-view. 
+Within academia, the onset and transition to turbulence in Rayleigh-B\'{e}nard Poiseuille flows remains poorly understand.
+Whilst there had been significant progress in our understand of transition to turbulence in independent setups, Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
+The thesis is structured into the follow, Chapter 1 is the introduction with literature review, chapter 2 methodology assosicated with the spectral/\emph{hp}-element method, chapter 3 with results related to the the Rayleigh and Reynolds number sweep, chapter 4 with a specific focus on the bistability between spiral defect chaos and ideal straight rolls and finally chapter 5 with concluding remarks.
+
+\begin{enumerate}
+   \item Academic motivation - flow structures, statistics, transition.
+   \item Application motivation - shear, heat transfer. Chip cooling, thin-film fabrication and atmospheric boundary layer.
+\end{enumerate}
+We seek to investigate the influence of unstable stratification quantified by Rayleigh number $Ra$, on the behaviour tuburlent-laminar bands. 
+The onset of convection occurs at a critical Rayleigh number of $Ra_c > 1708$, in the form of a pair of convection rolls.
+When aligned in the streamwise direction, the convection rolls are seemingly analogous to a pair of counter-rotating vortices, an optimal initial condition for transient growth. 
+Our investigation naturally answers a few questions related to turbulent-laminar bands.
+For example, does the onset of turbulent-laminar bands, $Re_{cr}$ decrease with increasing $Ra$?
+Do $Ra$-effects influence the structure of turbulent-laminar bands i.e band angle/width? 
+
+The answers to our research will have important implications Rayleigh-B\'{e}nard Poiseuille flows, ubiquitous in atmospheric, geophysical and engineering flows.
