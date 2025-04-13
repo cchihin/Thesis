@@ -462,21 +462,41 @@ Notably, ITBs persist at $Re \approx 700$ for $t = 10000$ (far beyond figure \re
 \end{figure}
 
 Rayleigh-B\'{e}nard convection (RBC) is a paradigmatic fluid configuration describing the motion of the fluid confined between two infinite-parallel plates heated from below and cooled from the top.
-The basic physical mechanism underpinning RBC is an increase in buoyancy due to heating, leading to fluid motion, referred to buoyancy-driven flows, offering a simple description of natural convection.
+% The basic physical mechanism underpinning RBC is variation of buoyancy due to heat, offering a simple description of natural convection.
 As the bottom plate is heated, the bottom layer fluid becomes more buoyant and tends to rise, while the colder top fluid layer is becomes relatively less buoyant and tends to sink, leading to an overturning of layers.
 Viscous forces between neighbouring fluid parcels act to resist the motion. 
-As buoyancy overcomes these viscous forces, the fluid layers overturn, resulting in the initiation of convection.
-One of the earliest experimental work is performed by Henri B\'{e}nard \citep{benard_tourbillons_1901}, who observed the onset of hexagonal convection cells above a certain threshold of $\Delta T$, referred to as B\'{e}nard cells shown in figure \ref{fig:benard_cells}(a) (performed by \citep{koschmieder_heat_1974}).
-Utilising linear stability tools similar to \S \ref{subsec:modal}, \cite{rayleigh_lix_1916} predicted the onset of convection at a critical Rayleigh number of $Ra_c = \frac{27}{4}\pi^4  = 657.5$ for stress-free boundary conditions, forming the earliest record of linear stability analysis of buoayncy convection.
-However, it is worth highlighting a key difference in B\'{e}nard's experiment and Rayleigh's analysis.
-B\'{e}nard's experiments considered thin layers of fluid heated and cooled by the ambient air \citep{block_surface_1956}, where surface tension (Maragoni) effects were significant.
-Surface tension driven convection, now known as B\'{e}nard-Maragoni convection typically lead to the onset of hexagonal patterns \citep{hoard_experiments_1970,koschmieder_heat_1974} shown in figure \ref{fig:benard_cells}(a).
-In buoyancy driven convection confined to rigid plates, convection patterns usually take the form parallel elongated rollers, known as ideal straight rolls (ISRs) \citep{bodenschatz_recent_2000}.
-In the case of a circular dish, these ISRs conform to the geometry of the boundaries, taking the form of concentric rolls shown in figure \ref{fig:benard_cells}(b).
+As buoyancy overcomes these viscous forces, the fluid layers overturn, resulting in the initiation of buoyancy-driven convection, the physical mechanism underpinning RBC.
 
-It is also worth noting that \cite{rayleigh_lix_1916} considered a stress-free boundary conditions in his analysis, which has been extended to rigid boundary conditions, the critical Rayleigh number increased to well known $Ra_c = 1707.8$ \citep{pellew_maintained_1940}, and is independent or $Pr$ \citep{bodenschatz_recent_2000}.
-The critical wavelength in this case is $q_c = 3.12 / d$ (or $\lambda_c \approx  2d$), which suggest that distance separating the plates, $d$, dictates the length of a single roll, $l_{roll} = \lambda_c / 2 \approx d$.
-In this thesis, I consider RBC with rigid-rigid boundary conditions, simply refered to RBC for the rest of this thesis.
+One of the earliest experimental studies dedicated to buoyancy-driven convection was conducted by Henri B\'{e}nard \citep{benard_tourbillons_1901}, who observed the formation of hexagonal convection cells above a certain temperature threshold $\Delta T$.
+These hexagonal patterns are referred to as B\'{e}nard cells are illustrated in figure \ref{fig:benard_cells}(a) (adapted from \citep{koschmieder_heat_1974}).
+Subsequently, \cite{rayleigh_lix_1916} carried out one of first linear stability analyses of buoyancy-driven convection, predicting the onset of convection at a critical Rayleigh number of $Ra_c = 657.5$.
+However, Rayleigh's analysis assumed an idealised free-free boundary conditions, which differed from the rigid-free setup of B\'{e}nard's experiment.
+The linear stability analysis for rigid-free configuration was later performed by \cite{jeffreys_cases_1928} yielding a higher critical Rayleigh number of $Ra_c = 1058$.
+In the rigid-rigid configuration, the critical Rayleigh number increases further to $Ra_c = 1708$ \citep{pellew_maintained_1940}.
+The Rayleigh number in B\'{e}nard's original experiment was found to be 300 to 1500 smaller than $Ra_c$ for the free-free and rigid-free cases \citep{wesfreid_henri_2017}.
+% However, it is worth highlighting a key difference in B\'{e}nard's experiment and Rayleigh's analysis.
+This contradiction, not recognised by B\'{e}nard at the time, lies in the significant role of surface tension in thin fluid layers exposed to air, now known as B\'{e}nard-Maragoni (BM) convection \citep{block_surface_1956, cloot_nonlinear_1984, manneville_thirty_2006, wesfreid_henri_2017}.
+In BM convection, fluid motion is primarily driven by surface tension gradients due to variations of temperature, forming hexagonal cells, as in figure \ref{fig:benard_cells}(a).
+The preference for hexagonal cells in BM convection was later confirmed based on weakly nonlinear stability analysis \citep{cloot_nonlinear_1984}.
+% as in B\'{e}nard experiments, a thin layer of fluid exposed to the air is chiefly driven by the variation of surface tension due to temperature difference, leading to the growth of hexagonal cells, in figure \ref{fig:benard_cells}(a).
+As the fluid layer becomes thicker, surface-tension effects diminish and buoyancy-driven convection becomes dominant.
+Similarly, placing a rigid lid on top of a thin fluid layer suppresses surface-tension effects, also resulting in buoyancy-driven convection.
+% Surface-tension effects diminish as the fluid depth increases, or removed in the presence of a top rigid lid, where buoyancy becomes the dominant mechanism.
+The preferred convection patterns based on weakly nonlinear stability analysis are the two-dimensional parallel rolls, now referred to as ideal straight rolls (ISRs) \citep{schluter_stability_1965, bodenschatz_recent_2000}.
+% This also have the same effect as placing a lid on top of thin layer of fluid where surface-tension effects are removed, leading to ISRs.
+% This key discrepancy was later identified as B\'{e}nard's experiments considered thin layers of fluid heated and cooled by the ambient air \citep{block_surface_1956}, where surface tension (Maragoni) effects were significant.
+In circular ontainers, the ISRs conform to the geometry of the boundaries, forming of concentric convection rolls illustrated in figure \ref{fig:benard_cells}(b).
+Interestingly, hexgaonal cells have been observed in buoyancy-driven flows of non-Boussinesq fluids \citep{hoard_experiments_1970,bodenschatz_recent_2000}.
+In this thesis, I will consider RBC with rigid-rigid boundary conditions with for which the critical Rayleigh number is $Ra_c = 1708$.
+Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_c \approx  2d$), suggesting that distance separating the plates, $d$, dictates the length of a single roll, $l_{roll} = \lambda_c / 2 \approx d$.
+% 1. Bousinessq fluids (silicon oil) leads to 2D rolls or Hexagonal rolls for rigid-rigid and open-rigid B.Cs - highlighting the importance of the top B.C
+%     a. Are they buoyancy driven or surface-tension driven?
+% 
+% 2. Non-bouseinessq (Aroclor) lead to rigid-rigid boundary conditions lead to rolls for thick layers, and hexes in thin layers. In open-rigid boundary conditions, 2D concentric rolls develop in thick layers while hexagonal cells form in thin layers.
+
+
+% While the $Ra_c$ for free-free and rigid-free have been reported \citep{rayleigh_lix_1916,jeffreys_cases_1928}.
+% It is also worth noting that \cite{rayleigh_lix_1916} considered a stress-free boundary conditions in his analysis, which has been extended to rigid boundary conditions, the critical Rayleigh number increased to well known $Ra_c = 1707.8$ \citep{pellew_maintained_1940}, and is independent or $Pr$ \citep{bodenschatz_recent_2000}.
 
 % ension decreases  generated a tangential forces towards regions of higher surface tension at the surface, where cold fluid resides, ampliying convection, now known as B\'{e}nard-Maragoni convection \citep{manneville_thirty_2006}. 
 %, with a critical wavenumber of $q_c = \frac{\pi}{\sqrt{2}d}$.
@@ -489,20 +509,60 @@ In this thesis, I consider RBC with rigid-rigid boundary conditions, simply refe
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{Background/Figures/BusseBalloonFull.png}
-\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon diigitised from \citep{plapp_spiral_1997} for $Pr \approx 1$}
+    \includegraphics[width=0.8\textwidth]{Background/Figures/BusseBalloonFull.png}
+\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon digitised from \citep{plapp_spiral_1997} for $Pr \approx 1$}
     \label{fig:busseballon}
 \end{figure}
 
-Slightly above the onset of convection, described using the reduced Rayleigh number $\varepsilon = (\frac{Ra}{Ra_c} - 1)$, a set of stable convection rolls near $q_c$ are found to exist (CITATIONS?).
-The theoretical foundations of performing stability analysis using expansion in powers of amplitude  (\emph{weakly nonlinear analysis}) was considered by \cite{eckhaus_studies_1965}, in which he applied it to the problem of parallel shear flows.
-The important contribution was that slightly above the onset, stable stationary rolls are found within the range of $Ra > Ra_c + 3\eta(\alpha - \alpha_c)^2$, where $\eta = \frac{1}{2}\frac{\partial Ra}{\partial \alpha}|_{Ra_c}$.
-\cite{busse_instabilities_1971} then extended the same technique to Rayleigh-B\'{e}nard convection, in which $\eta$ was found to depend on $Pr$.
-Whilst this technique is useful in detailing the stability regions of stationary rolls, it appears to be limited as it contradict some experiments in which time-dependent oscillatory rolls were discovered \citep{rossby_study_1969,willis_oscillatory_1970}, which has been found to be a secondary instability of stationary convection rolls with complex eigenvalues.
-As noted by \cite{busse_oscillatory_1972}, the applicability of weakly nonlinear analysis is limited to small $\varepsilon$.
-This limitation is addressed by using directly computing the linear stability of saturated convection rolls computed based on a Galerkin truncation and a root-finding algorithm.
-The results from linear stability analysis led to the well known Busse balloon which described the stability boundary of the convection rolls in the two dimensional space of $\varepsilon - q$, known as the Busse balloon \citep{busse_non-linear_1978} (figure \ref{fig:busseballon}).
+As mentioned earlier, stationary ISRs near $q_c$ emerge just above $Ra_c$, based on weakly nonlinear stabity analysis. \citep{eckhaus_studies_1965, schluter_stability_1965, busse_instabilities_1971}.
+However, this prediction contradicted by the emergence of time-dependent oscillatory ISRs in experiments \citep{rossby_study_1969,willis_oscillatory_1970} at $Ra = 9200$ (or roughly five times $Ra_c$), where weakly nonlinear stability becomes inapplicable.
+To address this, secondary stability analysis was employed to study the stability of ISRs further from $Ra_c$, based on Galerkin analysis \citep{busse_oscillatory_1972}
+% \cite{busse_oscillatory_1972} performed secondary linear stability analysis of ISRs based on Galerkin truncation of orthogonal functions.
+The results from the analysis is described by the Busse balloon, which illustrates the stability boundaries of ISRs as a function of $Ra$, $Pr$ and roll wavenumber $\alpha$ in figure \ref{fig:busseballon} \citep{busse_non-linear_1978}.
+The boundaries of the Busse balloon are described by various secondary instabilities, each arising from different physical mechanisms \citep{busse_non-linear_1978}.
+At lower wavenumbers, the zig-zag (ZZ) and cross-roll (CR) instabilities at high and intermediate Prandtl numbers.
+% We start by discussing the small wavenumbers secondary instabilities, such as the cross roll (CR), and and zig-zag instabilities.
+The ZZ instabilities cause zig-zag liked undulations of ISRs, while the CR instabilities lead to the formation of a roll orthogonal to the underlying ISRs. 
+Both mechanisms increases the effective roll wavenumber, adhering within the stability boundaries.
+% The cross-roll instability generates an additional roll orthogonal to the existing roll, while the zig-zag instabilities leads to the emergence of zig-zag ISRs.
+At higher wavenumbers, the skewed varicose (SV) instability becomes relevant at intermediate Prandlt numbers, characterised by roll pinching and merging that effectively reduces the roll wavenumber.
+For larger Rayleigh numbers and $Pr \lesssim 1$, the oscillatory instability (OS) arises, forming oscillatory ISRs \citep{willis_oscillatory_1970}.
+In contrast, for higher $Pr$, the knot instability appears, modifying the cross-roll pattern into a spoke-like structure.
+In general, the Eckhaus instability (not shown) appears, acts to generate or destory rolls, adhering within the Busse balloon.
+In this thesis, we focus on at $Pr = 1$, where the skewed-varicose, Eckhaus and cross-roll instabilities typically arise.
 
+% Depending on $Pr$, either mechanism could arise, increasing the effective roll wavenumber of the stability to adhere within the stability boundaries of the Busse balloon.
+% For higher roll wavenumbers instabilities, the skewed-variose secondary instabilities arise, described by roll-pinching and merging where the effective roll-wavenumber is reduced to fall within the Busse balloon.
+% At higher $Ra$, the oscillatory (OS) instability appears for $Pr \lesssim 1$ while the knotted stability appear for higher $Pr$.
+% The oscillatory instability forms oscillatory ISRs reported by \cite{willis_oscillatory_1970}, while the knotted instability leads to spoke-liked covection patterns.
+% , the cross roll (CR),  zig-zag and the well known Eckhaus secondary instabilties emerge.
+% Lastly, the onset of a generic Eckhaus instability leads to either a roll destruction or emergence to stay within the Busse balloon.
+% We will focus the secondary instabilities at $Pr = 1$ in this thesis.
+
+% At $Pr \approx 1$, the secondary instabilities for large wavelengths are delimited by the cross-roll (CR) instability and the Eckhaus instability (not shown).
+% The CR instability generates an addition roll orthogonal to the existing roll which increasing the effect roll wavenumber.
+% Depending of the initial roll wavenumber, the Eckhaus instability either generates an additional or destroy rolls so that the stability boundaries are adhered to.
+% The secondary instabilities for small wavelengths are delimited by the skewed-varicosed instability, where adjacent rolls pinches and merge wher a new ISR emerge adhering to the stability boundaries.
+
+% For high Prandtl number fluids, the zig-zag instability occurs at small wavenumbers, causing wavy distortions.
+
+ % long-wavelength modulation instabilities, where the disturbance wavenumber $|\mathbf{s}| \ll |\mathbf{q}|$ perturbs the ISR pattern. Depending on the direction and structure of the perturbation, one observes different instability types: the Eckhaus instability (ECK), involving modulations of roll spacing with $\mathbf{s} \parallel \mathbf{q}$; the zig-zag instability (ZZ), characterised by undulations along the roll axis with $\mathbf{s} \perp \mathbf{q}$; and the more general skewed varicose instability (SV), which encompasses both. For Prandtl numbers near unity ($Pr \approx 1$), SV instabilities delineate the high-wavenumber ($q$) boundary of the Busse balloon.
+
+% In contrast, at low Prandtl numbers ($Pr \ll 1$), an oscillatory instability limits the stability region from above. This mode, marked by $\text{Im}(\omega(k)) \neq 0$ and $\mathbf{s} \approx \mathbf{q}$, leads to time-dependent behavior with propagating wave patterns and significant vertical vorticity. Additionally, short-wavelength instabilities can destabilize the ISR pattern through disturbances with $|\mathbf{s}| \approx |\mathbf{q}|$ but at a finite angle relative to $\mathbf{q}$. For $Pr \approx 1$, the cross-roll instability (CR) becomes prominent at small $q$, where new rolls form orthogonally to the original ones, preventing the development of overly short-wavelength patterns.
+
+% Despite the idealised assumptions underlying the Busse balloon, experiments \citep[see][]{egolf_dynamical_1998} have demonstrated that its stability boundaries remain locally applicable to patches of ISR even in more disordered or weakly turbulent regimes. As such, the Busse balloon remains a central tool in understanding the transition from regular convection patterns to spatiotemporal complexity in Rayleigh–Bénard convection.
+% Depending on the value of the Prandlt number, different types of secondary instabilities may arise, secondary instabilities may arise.
+% % The secondary instabilities of thermal convection rolls are crucial for understanding the transition to more complex flow patterns.
+% In low Prandtl number fluids, the oscillatory instability appears dominant, characterised by oscillations propagating along the ro, and the knot instability, a modification of the cross-roll instability that introduces a spoke pattern form of convectionlls.
+% For intermediate $Pr$, skewed varicose instability, causing in a merging of neighbour rolls elongating the wavelength of the rolls.
+% These instabilities, arising from different physical mechanisms related to momentum and heat transfer, dictate the stability and evolution of convection patterns as parameters like the Rayleigh and Prandtl numbers change.
+
+% It is noted that weakly nonlinear stability analysis is only limited to $Ra$ slight above $Ra_c$ \citep{busse_oscillatory_1972}.
+% As noted by \cite{busse_oscillatory_1972}, the applicability of weakly nonlinear analysis to slightly above onset, 
+%which has been found to be a secondary instability of stationary convection rolls with complex eigenvalues.
+% The theoretical foundations of performing stability analysis using expansion in powers of amplitude  (\emph{weakly nonlinear analysis}) was considered by \cite{eckhaus_studies_1965}, in which he applied it to the problem of parallel shear flows.
+% The important contribution was that slightly above the onset, stable stationary rolls are found within the range of $Ra > Ra_c + 3\eta(\alpha - \alpha_c)^2$, where $\eta = \frac{1}{2}\frac{\partial Ra}{\partial \alpha}|_{Ra_c}$.
+% \cite{busse_instabilities_1971} then extended the same technique to Rayleigh-B\'{e}nard convection, in which $\eta$ was found to depend on $Pr$.
 
 While the Busse balloon describes the stability boundaries of ISRs over a range of wavenumbers, predicting the wavenumber of an ISR state remains an central challenge \citep{bodenschatz_recent_2000}.
 Indeed, experimental investigations of RBC in moderate domain sizes ($\Gamma \geq 7,$ where $\Gamma$ refers to the domain's aspect ratio) in rectangular (straight rolls) and cylinderical (concentric rolls) domains showed that the wavenumbers are confined within the Busse balloon.
