@@ -527,7 +527,7 @@ Examples of these instabilities at $Pr = 100$ are illustrated in figure \ref{fig
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{Background/Figures/BusseBalloon/SecondaryInstabilities.pdf}
-    \caption{ISRs experiencing (a) cross-roll instability at $Ra = 3000, Pr = 100$ and (b) zig-zag instability at $Ra = 3600, Pr = 100$. \citep{busse_instabilities_1971}. (c) Skew-varicosed instability at $Ra = 5568, Pr = 1$ \citep{plapp_spiral_1997}, and (d) oscillatory instability at $Ra = 10384, Pr = 1$ \citep{cakmur_bistability_1997}.}
+    \caption{ISRs experiencing (a) cross-roll instability at $Ra = 3000, Pr = 100$ and (b) zig-zag instability at $Ra = 3600, Pr = 100$ \citep{busse_instabilities_1971}. (c) Skew-varicosed instability at $Ra = 5568, Pr = 1$ \citep{plapp_spiral_1997}, and (d) oscillatory instability at $Ra = 10384, Pr = 1$ \citep{cakmur_bistability_1997}.}
     \label{fig:busseballoon_secinstab}
 \end{figure}
 
@@ -556,9 +556,9 @@ In particular, bifurcation analyses performed by \cite{ma_multiplicity_2006}, re
 
 In larger domains ($\Gamma \geq 28$), giant rotating spirals were identified and thoroughly investigated \citep{plapp_core_1996, plapp_dynamics_1998}.
 Experimental and numerical studies of RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting an no-slip) \citep{tuckerman_global_1988, siggers_dynamics_2003, paul_pattern_2003,boulle_bifurcation_2022}, non-Boussinesq convection \citep{bodenschatz_experiments_1992}, and rotational effects \citep{hu_convection_1997} were investigated, where multiple states were also reported.
+More recently, \cite{reetz_invariant_2020, reetz_invariant_2020-1} computed up to sixteen stable and unstable invariant states and identified heteroclinic orbits between the multiple states in an inclined RBC
 The existence of multiple stable states apart from ISRs suggest that RBC forms a multiple bistable systate above $Ra_c$.
 To compliate matter further, an instrinsic chaotic state of convection was discovered.
-% More recently, (Reetz & Schneider 2020; Reetz et al. 2020) computed up to sixteen stable and unstable invariant states and identified heteroclinic orbits between the multiple states in an inclined RBC
 
 % SDC
 In the late 1990s, convection rolls exhibiting spatio-temporal chaotic behaviour known as spiral defect chaos (SDC) are found in the same stability boundaries where ISRs were expected \citep{morris_spiral_1993, hu_convection_1993,decker_spiral_1994,hu_convection_1995,morris_spatio-temporal_1996,cakmur_bistability_1997,ahlers_experiments_nodate,egolf_importance_1998,egolf_mechanisms_2000,chiam_mean_2003,vitral_spiral_2020}
@@ -579,7 +579,7 @@ Notably, SDC has been reported in large domains ($\Gamma \gtrsim 20$), implying 
 The chaotic properties of SDC is also dependent of aspect ratio, where the leading Lyapunov exponents decreases with aspect ratio \citep{egolf_mechanisms_2000, paul_extensive_2007}.
 Investigations into the spatial-temporal description of SDC such as the averaged roll-curvature \cite{hu_convection_1995}, probability distribution of spirals \cite{ecke_excitation_1995, liu_spiral-defect_1996} and correlation length-/time-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997} have been undertaken. 
 Specifically, the correlation length-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997} scales exponentially with $Ra$, suggesting that onset of SDC from ISRs mimicks a phase transition.
-Spatiotemporal chaotic behaviour similar to SDC has been found also in other pattern-formation systems such as rotational RBC \cite{hu_convection_1997}, dielectric barrier discharge \cite{dong_observation_2005} and chemical systems \cite{affan_spiral_2014}.
+Spatiotemporal chaotic behaviour similar to SDC has been found also in other pattern-formation systems such as rotational RBC \cite{hu_convection_1997}, dielectric barrier discharge \cite{dong_observation_2005} and advection diffusion reaction systems \cite{affan_spiral_2014}.
 
 % Given the co-existence of ISRs and SDC in the parameter space of $\varepsilon$, it is known that they form bistability at $Pr \approx 1$ in a spatially extended domain, supported by experiments over a range of $\varepsilon(>0)$ \cite{Cakmur97}.
 % The chaotic state of SDC is unstable at $Pr=4$, where multiple spiral patterns coarsen into a single spiral, before evolving into straight-curved rolls over a long period \cite{bajaj1997}.
@@ -627,10 +627,6 @@ Spatiotemporal chaotic behaviour similar to SDC has been found also in other pat
 % For example, investigations of cylinderical RBC in small aspect-ratio revealed eight stationary statesand two oscillatory states.
 % These findings were later supported by numerical experiments and bifurcation analyses.
 
-
-
-
-
 % \begin{enumerate}
 %     \item Saturated States
 %     \item Busse balloon for Pr = 1
@@ -657,21 +653,53 @@ Spatiotemporal chaotic behaviour similar to SDC has been found also in other pat
 
 \section{Rayleigh-B\'{e}nard Poiseuille (RBP) flows}\label{sec:bkgrd_RBP}
 
-\cite{gage_stability_1968} first investigated the primary instabilities of RBP flows, which can be determined by $Re$, $Ra$, $Pr$, and the planar $x$-$z$ perturbations wavenumbers $\alpha, \beta$ respectively.
-For a given $Ra$ and $Pr$, the neutral stability curves are limited by the development of Tollmien-Schlicting waves for $Re \geq Re_{TS} = 5772.22$ \citep{orszag_accurate_1971}, and convection rolls within $0 \leq Re < Re_{TS}$.
-Convection rolls can be categorised based on their orientation to the mean flow, namely, longitudinal ($\alpha= 0, \beta \neq 0$), transverse ($\alpha \neq 0, \beta = 0$) and oblique rolls ($\alpha \neq 0, \beta \neq 0$).
-The linearised system governing the onset of longitudinal rolls is analogous to the linearised RBC system, with a critical Rayleigh number, $Ra_{\parallel} = Ra_{RB} = 1708.8$ and critical wavenumber, $\alpha_{\parallel} = \alpha_{RB} = 3.13$ \citep{pellew_maintained_1940, kelly_onset_1994}, independent of $Re$ and $Pr$.
-The critical Rayleigh number for oblique and transverse rolls matches that of RBC at $Re=0$ due to horizontal isotropy, but increases as $Re$ increases, depending on $Pr$, i.e., $Ra_{\perp} = f(Re,Pr)$ \citep{gage_stability_1968, muller_transversal_1992, nicolas_two-dimensional_1997}.
-When spatially developing instabilities are considered, longitudinal rolls are always convectively unstable, and transverse rolls can become absolutely unstable \citep{muller_convective_1989, muller_transversal_1992, carriere_convective_1999}.
-Nonmodal stability analyses of subcritical RBP indicate that the optimal transient growth $G_{max}$ increases gradually with $Ra$.
-The wavenumber of the optimal initial conditions, $\beta_{max}$, resembles that observed in shear flows \citep{reddy_energy_1993}, and gradually approaches the critical wavenumber of convection rolls, $\alpha_{\parallel}$, as $Ra$ increases \citep{john_soundar_jerome_transient_2012}.
-For $Re > 0$, the longitudinal rolls appear as the dominant primary instability \citep{gage_stability_1968}.
-Secondary stability analyses of longitudinal rolls reveal a wavy instability near $Re \sim 100$ \citep{clever_instabilities_1991}, leading to wavy longitudinal rolls, which are convectively unstable \citep{pabiou_wavy_2005, nicolas_characterisation_2010}.
-The influence of finite lateral extensions in RBP flows on the stability of longitudinal and transverse rolls \citep{kato_prediction_2000,nicolas_linear_2000}, as well as wavy rolls \citep{xin_stability_2006, nicolas_characterisation_2010}, has been reported.
-In finite streamwise extensions of RBP flows, the onset of convection rolls and the heat flux variations due to entrance effects have been investigated \citep{mahaney_effect_1988,lee_effect_1991,nonino_laminar_1991}.
-More recently, shear-driven turbulence can enhance heat fluxes in turbulent RBP flows \citep{scagliarini_heat_2014, scagliarini_law_2015, pirozzoli_mixed_2017}.
-RBP flows with sinusoidal heating and wavy walls have also been studied \citep{hossain_spectral_2021}.
-For an in-depth discussion of RBP flows, see the reviews by \cite{kelly_onset_1994} and \cite{nicolas_revue_2002}.
+% The RBP system consist of the primary instabilities of the RBC and RBP configurations and in the limiting cases, we observe the onset of convection rolls at $Ra_c = 1708$, and Tollmien Schlicting waves at $Re = 5772$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/RBP/RBP.pdf}
+    \caption{(a) Neutral stability curves of longitudinal rolls (LR), oblique rolls (OR), transverse rolls (LR) and Tollmien-Schlicting (TS) waves, adapted from \cite{john_soundar_jerome_transient_2012}. The shaded area refers to damped perturbations. Sketch of (b) longitudinal and (c) transverse rolls, adapted from \cite{kelly_onset_1994}.}
+    \label{fig:primary_instabilities}
+\end{figure}
+
+The neutral stability curves in the Rayleigh-B\'{e}nard Poiseuille (RBP) comprising of both plane Poisueuille flow (PPF) and Rayleigh-B\'{e}anrd convection (RBC) systems, are bounded by the onset of Tollmien-Schlicting waves at $Re_{c} = 5772.22$ \citep{orszag_accurate_1971}, and by the onset of convection rolls at $Ra_c = 1708$ \citep{pellew_maintained_1940}, respectively.
+The imposed mean Poiseuille flow in the RBP system breaks the rotational invariance of the convection rolls, categorising them based on their orientation to the mean flow direction, namely: longitudinal ($\alpha= 0, \beta \neq 0$), transverse ($\alpha \neq 0, \beta = 0$) and oblique rolls ($\alpha \neq 0, \beta \neq 0$).
+% Due to the imposed mean flow, the convection rolls are not rotationally invariant, and their orientation with respect to the mean matters.
+% Generally, convection rolls that are aligned, diagonal and perpendicular to the mean flow are referred to longitudinal, oblique and transverse rolls.
+The primary instabilities leading to these rolls were first investigated by \cite{gage_stability_1968} in an infinitely extended layer.
+For the onset of longitudinal rolls, the linearised system reduces to that of RBC.
+Hence, the critical Rayleigh number for the onset of longitudinal rolls remains the same, $Ra_{\parallel} = Ra_{c} = 1708.8$ with a critical wavenumber, $\alpha_{\parallel} = \alpha_{c} = 3.13$ \citep{pellew_maintained_1940, kelly_onset_1994}, independent of both Reynolds number, $Re$, and Prandtl number $Pr$.
+In contrast, the onset of transverse rolls exhibits a critical Rayleigh number, $Ra_\perp = f(Re,Pr)$, that increases with $Re$ and is dependent on $Pr$ \citep{gage_stability_1968, muller_transversal_1992, nicolas_two-dimensional_1997}.
+The critical Rayleigh number for the onset of obliqued rolls can be obtained by applying a Squire transformation \citep{squire_stability_1933} to the linearised problem for transverse rolls.
+For a given $Ra$, the corresponding critical $Re$ for the onset of oblique rolls is higher than that of transverse rolls \citep{gage_stability_1968}.
+% The critical Rayleigh number for the onset of obliqued rolls are obtained by performing a Squire transformation on the linearised transverse roll system where for a given $Ra$, the critical $Re$ of oblique rolls is higher than the critical $Re$ for transverse rolls \citep{gage_stability_1968}.
+The neutral stability curves associated with the transverse rolls (TR), oblique rolls (OR) and longitudinal rolls (LR) are shown in figure \ref{fig:primary_instabilities}.
+
+Experimental observations of the onset of longitudinal rolls have been reported in channels with large transverse aspect ratios (i.e span-to-depth) \citep{akiyama_experiments_1971,ostrach_heat_1975,fukui_longitudinal_1983}, while the onset of transverse rolls are observed in narrower channels \citep{luijkx_existence_1981,ouazzani_etude_1989,ouazzani_etude_1990}.
+Indeed, linear stability analysis conducted for finite channels revealed that critical Rayleigh number $Ra_\parallel$ remains independent for transverse aspect ratios greater than five, and increases quickly below that.
+Therefore, the critical Rayleigh number for onset of transverse rolls, $Ra_\perp$, is lower than $Ra_\parallel$ in narrow channels for small Reynolds numbers \citep{nicolas_linear_2000}, providing support for the preference of transverse rolls in narrow channels.
+% Indeed, linear stability analysis of narrow channel reveal that the $Ra_{\parallel}$ are increased relative to the $Ra_\perp$ for small $Re$ \citep{nicolas_linear_2000}.
+\cite{ouazzani_etude_1990} reported laminar Poiseuille flow in the $Ra, Re$ parameter space where transverse rolls are expected based on temporal linear stability analysis.
+% However, linear temporal stability analysis failed to explain the experimental results from \cite{ouazzani_etude_1990}, where a laminar Poiseuille is observed in the parameter space where transverse rolls are expected.
+This contraction was address by \cite{muller_transversal_1992}, who showed that transverse rolls can be either convectively or absolutely unstable, and the boundary between them matches with the experimental results of \cite{ouazzani_etude_1990}.
+By considering the response from three-dimensional impulse, \cite{carriere_convective_1999} further demostrated that the longitudinal rolls, unlike the transverse rolls, are always convectively unstable.
+% The critical Rayleigh number for oblique and transverse rolls matches that of RBC at $Re=0$ due to horizontal isotropy, but increases as $Re$ increases, depending on $Pr$, i.e., $Ra_{\perp} = f(Re,Pr)
+Nonmodal stability analysis of subcritical RBP, $Ra < Ra_c, Re < Re_{c}$, performed by \cite{john_soundar_jerome_transient_2012} revealed that the optimal transient growth is primarily dominanted by streamwise rollers of plane Poiseuille flow \citep{reddy_energy_1993}, with a spanwise wavenumber of $\beta_{opt} \approx 2.05$.
+The maximum amplifcation factor, $G_{max}$ increases modestly with $Ra$, and the critical wavenumber approaches, $\alpha_{\parallel}$, indicative of longitudinal rolls.
+% Nonmodal stability analyses of subcritical RBP indicate that the optimal transient growth $G_{max}$ increases gradually with $Ra$.
+% The wavenumber of the optimal initial conditions, $\beta_{max}$, resembles that observed in shear flows \citep{reddy_energy_1993}, and gradually approaches the critical wavenumber of convection rolls, $\alpha_{\parallel}$, as $Ra$ increases \citep{john_soundar_jerome_transient_2012}.
+% For $Re > 0$, the longitudinal rolls appear as the dominant primary instability \citep{gage_stability_1968}.
+Since longitudinal rolls are the dominant primary instability for $Re > 0$ in infinite domains, their secondary stability have been analysed by \cite{clever_instabilities_1991}.
+Their study revealed the presence of a secondary, time-dependent wavy instability near $Re \sim 100$ \citep{clever_instabilities_1991}, leading to the onset of tertiary solutions in the form of wavy rolls.
+These have been observed experimentally and was found to be convectively unstable \citep{pabiou_observations_2003, pabiou_wavy_2005, nicolas_characterisation_2010}.
+\cite{clever_instabilities_1991} also speculated that the wavy rolls are less efficient at transporting heating than longitudinal rolls at the same control parameters, confirmed numerically \citep{nicolas_influence_2012}.
+The impact of finite transverse aspect ratios on the onset of wavy rolls have been also studied \citep{xin_stability_2006, nicolas_characterisation_2010}, where the critical $Ra$ was found to be approximatgely 1.5 times higher than that in an infinite domain \cite{clever_instabilities_1991}.
+The influence of external excitations on the development length of wavy rolls have been explored.
+An increase in external excitation amplitude have shown to reduced the required development length of wavy rolls \citep{nicolas_characterisation_2010,nicolas_influence_2012}.
+More recently, studies of turbulent RBP flows showed that shear-driven turbulence can enhance heat fluxes \citep{scagliarini_heat_2014, scagliarini_law_2015, pirozzoli_mixed_2017}.
+% In finite streamwise extensions of RBP flows, the onset of convection rolls and the heat flux variations due to entrance effects have been investigated \citep{mahaney_effect_1988,lee_effect_1991,nonino_laminar_1991}.
+Extensions of the RBP configuration, such as flows over wavy walls or with sinusoidal thermal forcing have been investigated, potentially offering a reduction in drag and enhancing heat transport \citep{hossain_drag_2012,hossain_drag_2016,hossain_role_2020}.
+% RBP flows with sinusoidal heating and wavy walls have also been studied \citep{hossain_spectral_2021}.
+For a comprehensive overview of RBP flows, the reader is referred to the reviews by \cite{kelly_onset_1994} and \cite{nicolas_revue_2002}.
 
 %%%%%%%%%%%%%%%%
 % THESIS OUTLINE
