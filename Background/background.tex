@@ -485,7 +485,7 @@ Similarly, placing a rigid lid on top of a thin fluid layer suppresses surface-t
 The preferred convection patterns based on weakly nonlinear stability analysis are the two-dimensional parallel rolls, now referred to as ideal straight rolls (ISRs) \citep{schluter_stability_1965, bodenschatz_recent_2000}.
 % This also have the same effect as placing a lid on top of thin layer of fluid where surface-tension effects are removed, leading to ISRs.
 % This key discrepancy was later identified as B\'{e}nard's experiments considered thin layers of fluid heated and cooled by the ambient air \citep{block_surface_1956}, where surface tension (Maragoni) effects were significant.
-In circular ontainers, the ISRs conform to the geometry of the boundaries, forming of concentric convection rolls illustrated in figure \ref{fig:benard_cells}(b).
+In circular ontainers, the ISRs conform to the geometry of the boundaries, forming concentric convection rolls illustrated in figure \ref{fig:benard_cells}(b).
 Interestingly, hexgaonal cells have been observed in buoyancy-driven flows of non-Boussinesq fluids \citep{hoard_experiments_1970,bodenschatz_recent_2000}.
 In this thesis, I will consider RBC with rigid-rigid boundary conditions with for which the critical Rayleigh number is $Ra_c = 1708$.
 Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_c \approx  2d$), suggesting that distance separating the plates, $d$, dictates the length of a single roll, $l_{roll} = \lambda_c / 2 \approx d$.
@@ -510,27 +510,85 @@ Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Background/Figures/BusseBalloonFull.png}
-\caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon digitised from \citep{plapp_spiral_1997} for $Pr \approx 1$}
+    \caption{The Busse ballon describes the stability boundaries of ISRs in a $\varepsilon-q$ space. For larger wavenumbers, the instability mechanisms is described by the skewed-varicose (SV) instability. For smaller wavenumbers, the instability mechanism is described by the Eckhaus instability. For large $\varepsilon$, the instability is described by the onset of oscillatory instability. Busse balloon digitised from \citep{plapp_spiral_1997} for $Pr \approx 1$.}
     \label{fig:busseballon}
 \end{figure}
 
-As mentioned earlier, stationary ISRs near $q_c$ emerge just above $Ra_c$, based on weakly nonlinear stabity analysis. \citep{eckhaus_studies_1965, schluter_stability_1965, busse_instabilities_1971}.
-However, this prediction contradicted by the emergence of time-dependent oscillatory ISRs in experiments \citep{rossby_study_1969,willis_oscillatory_1970} at $Ra = 9200$ (or roughly five times $Ra_c$), where weakly nonlinear stability becomes inapplicable.
-To address this, secondary stability analysis was employed to study the stability of ISRs further from $Ra_c$, based on Galerkin analysis \citep{busse_oscillatory_1972}
+As mentioned earlier, stationary ISRs near $q_c$ emerge just above $Ra_c$, based on weakly nonlinear stabity analysis. \citep{eckhaus_studies_1965, schluter_stability_1965}.
+However, this prediction contradicted by the emergence of time-dependent oscillatory ISRs in experiments \citep{rossby_study_1969,willis_oscillatory_1970} at $Ra = 9200$ (or roughly five times $Ra_c$), where weakly nonlinear stability becomes inapplicable far from threshold.
+To address this, a direct secondary stability analysis was employed to study the stability of ISRs further from $Ra_c$, based on Galerkin analysis \citep{busse_oscillatory_1972}
 % \cite{busse_oscillatory_1972} performed secondary linear stability analysis of ISRs based on Galerkin truncation of orthogonal functions.
-The results from the analysis is described by the Busse balloon, which illustrates the stability boundaries of ISRs as a function of $Ra$, $Pr$ and roll wavenumber $\alpha$ in figure \ref{fig:busseballon} \citep{busse_non-linear_1978}.
-The boundaries of the Busse balloon are described by various secondary instabilities, each arising from different physical mechanisms \citep{busse_non-linear_1978}.
-At lower wavenumbers, the zig-zag (ZZ) and cross-roll (CR) instabilities at high and intermediate Prandtl numbers.
-% We start by discussing the small wavenumbers secondary instabilities, such as the cross roll (CR), and and zig-zag instabilities.
-The ZZ instabilities cause zig-zag liked undulations of ISRs, while the CR instabilities lead to the formation of a roll orthogonal to the underlying ISRs. 
-Both mechanisms increases the effective roll wavenumber, adhering within the stability boundaries.
-% The cross-roll instability generates an additional roll orthogonal to the existing roll, while the zig-zag instabilities leads to the emergence of zig-zag ISRs.
-At higher wavenumbers, the skewed varicose (SV) instability becomes relevant at intermediate Prandlt numbers, characterised by roll pinching and merging that effectively reduces the roll wavenumber.
-For larger Rayleigh numbers and $Pr \lesssim 1$, the oscillatory instability (OS) arises, forming oscillatory ISRs \citep{willis_oscillatory_1970}.
-In contrast, for higher $Pr$, the knot instability appears, modifying the cross-roll pattern into a spoke-like structure.
-In general, the Eckhaus instability (not shown) appears, acts to generate or destory rolls, adhering within the Busse balloon.
-In this thesis, we focus on at $Pr = 1$, where the skewed-varicose, Eckhaus and cross-roll instabilities typically arise.
+The results from the analysis is described by the Busse balloon, which illustrates the stability boundaries of ISRs as a function of $Ra$ and $Pr$ and roll wavenumber, $\alpha$, shown figure \ref{fig:busseballon} \citep{busse_non-linear_1978}.
+The boundaries of the Busse balloon are described by a range of secondary instabilities, each arising from different physical mechanisms \citep{busse_non-linear_1978}.
+At large Prandtl numbers, $Pr = O(10^2)$, the zig-zag (ZZ) and cross-roll (CR) instabilities delimits the balloon for small and large roll wavenumbers.
+The zig-zag instabilities cause zig-zag undulations while the CR instabilities generates rolls orthogonal to the underlying ISR structure, effectively increasing or decreasing the roll wavenumber respectively \citep{busse_instabilities_1971}.
+Examples of these instabilities at $Pr = 100$ are illustrated in figure \ref{fig:busseballoon_secinstab}(a,b).
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Background/Figures/BusseBalloon/SecondaryInstabilities.pdf}
+    \caption{ISRs experiencing (a) cross-roll instability at $Ra = 3000, Pr = 100$ and (b) zig-zag instability at $Ra = 3600, Pr = 100$. \citep{busse_instabilities_1971}. (c) Skew-varicosed instability at $Ra = 5568, Pr = 1$ \citep{plapp_spiral_1997}, and (d) oscillatory instability at $Ra = 10384, Pr = 1$ \citep{cakmur_bistability_1997}.}
+    \label{fig:busseballoon_secinstab}
+\end{figure}
+
+At moderate Prandtl numbers, $Pr = O(1)$, the Busee balloon is bounded by the skewed varicosed (SV) for high roll wavenumbers and the oscillatory (OS) instability at large $Ra$.
+% The cross-roll instability generates an additional roll orthogonal to the existing roll, while the zig-zag instabilities leads to the emergence of zig-zag ISRs.
+The skewed-varicosed (SV) instability leads to roll-pinching where pinched rolls merged into a single roll, reducing roll wavenumber while the oscillatory instability leads to the onset of an oscillatory ISRs. 
+Examples of the respective instabilities at $Pr = 1$ are shown in figure \ref{fig:busseballoon_secinstab}(c,d).
+At higher wavenumbers, the skewed varicose (SV) instability becomes relevant at intermediate Prandlt numbers, characterised by roll pinching and merging that effectively reduces the roll wavenumber.
+% For larger Rayleigh numbers and $Pr \lesssim 1$, the oscillatory instability (OS) arises, forming oscillatory ISRs \citep{willis_oscillatory_1970}.
+% In contrast, for higher $Pr$, the knot instability appears, modifying the cross-roll pattern into a spoke-like structure.
+Finally, the Eckhaus instability (not shown), related to the symmetry of the system, appears close to the $Ra_c$, leading a disturbance parallel to the underlying rolls which either creates or destroy rolls such that the resultant roll wavenumber adheres to the stability boundaries \citep{lowe_pattern_1985}.
+Near $Pr = 1$, the Eckhaus instability coincides with the crossroll instability (figure 6 from \cite{bodenschatz_recent_2000}, adapted from \cite{plapp_spiral_1997}.)
+In this thesis, we focus on fluids with $Pr = 1$, where the skewed-varicose, Eckhaus and cross-roll instabilities typically arises.
+The stability boundaries of the Busse balloon have been experimentally verified \citep{busse_instabilities_1971, croquette_convective_1989, plapp_spiral_1997}.
+However, the exact roll wavenumbers of ISRs exhibits hysteresis.
+As $Ra$ is was continously modified, the ISRs with wavenumbers that are outside of the stability boundaries of the Busse balloon, undergo spontaneous rolls dislocations from various secondary instabilities described above.
+These instabilities either increase or decrease the roll wavenumber, adhering to the the stability boundaries of the Busse balloon.
+The hysteretic behaviour indicates that the roll wavenumber of the ISRs is strongly dependent on the system's history \citep{bodenschatz_recent_2000}.
+
+% MULTIPLE STATES
+It is worth noting that the solutions in the form of ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1}.
+The coexistence of multiple ‘non-ISR’ states, in the form of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection patterns have been found over several years \citep{le_gal_square_1985, croquette_convective_1989, plapp_spiral_1997, hof_flow_1999, rudiger_pattern_2000, boronska_extreme_2010, boronska_extreme_2010-1}.
+Investigation of cylindrical RBC with small aspect-ratio ($\Gamma = 2$) found eight stationary states (at the same $Ra = 142000$), and two oscillatory states ($Ra > 14200$) \citep{hof_flow_1999}.
+These findings were later supported by numerical experiments and bifurcation analyses \citep{ma_multiplicity_2006, boronska_extreme_2010, boronska_extreme_2010-1}.
+In particular, bifurcation analyses performed by \cite{ma_multiplicity_2006}, revealed twelve stable branches in the form of symmetric and asymmetric convection rolls near onset ($Ra \leq 2500$), with the potential emergence of hundreds of branches at higher Rayleigh numbers, $Ra \leq 30000 $ \citep{boronska_extreme_2010-1}.
+
+In larger domains ($\Gamma \geq 28$), giant rotating spirals were identified and thoroughly investigated \citep{plapp_core_1996, plapp_dynamics_1998}.
+Experimental and numerical studies of RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting an no-slip) \citep{tuckerman_global_1988, siggers_dynamics_2003, paul_pattern_2003,boulle_bifurcation_2022}, non-Boussinesq convection \citep{bodenschatz_experiments_1992}, and rotational effects \citep{hu_convection_1997} were investigated, where multiple states were also reported.
+The existence of multiple stable states apart from ISRs suggest that RBC forms a multiple bistable systate above $Ra_c$.
+To compliate matter further, an instrinsic chaotic state of convection was discovered.
+% More recently, (Reetz & Schneider 2020; Reetz et al. 2020) computed up to sixteen stable and unstable invariant states and identified heteroclinic orbits between the multiple states in an inclined RBC
+
+% SDC
+In the late 1990s, convection rolls exhibiting spatio-temporal chaotic behaviour known as spiral defect chaos (SDC) are found in the same stability boundaries where ISRs were expected \citep{morris_spiral_1993, hu_convection_1993,decker_spiral_1994,hu_convection_1995,morris_spatio-temporal_1996,cakmur_bistability_1997,ahlers_experiments_nodate,egolf_importance_1998,egolf_mechanisms_2000,chiam_mean_2003,vitral_spiral_2020}
+Notably only carefully prepared experiment setups led to ISRs while uncontrolled initial conditions yield SDC.
+It is well established that SDC exists as intrinsic attractor of RBC, independent of sidewall conditions \cite{morris_spatio-temporal_1996}, forming a bistable system with ISRs \citep{cakmur_bistability_1997} across a range of $Ra$ at $Pr$ illustrated in figure \ref{fig:sdc_isr}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/bistability.png}
+    \caption{The coexistence of spiral defect chaos (SDC, top row) and ideal straight rolls (ISRs, bottom row) at (a,b) $Ra = 3279$, (c,d) $Ra = 6832$ and (e,f) $Ra = 10384$. The domain size is $\Gamma = 50$ and $Pr = 1$, adapted from \cite{cakmur_bistability_1997}.}
+    \label{fig:sdc_isr}
+\end{figure}
+However, the SDC attractor have been found to be unstable at $Pr = 4$, decaying towards ISRs over long periods \citep{bajaj_competition_1997}.
+SDC has also been modalled in numerical simulations of the two-dimensional Swift-Hohenberg equations \citep{swift_hydrodynamic_1977,xi_spiral_1993,xi_spatiotemporal_1995,schmitz_spiral-defect_2002,karimi_exploring_2011}.
+The critical Rayleigh number for the onset of SDC, $Ra_s$, depends on the domain's aspect ratio, and Prandtl number \citep{hu_convection_1995,bajaj_competition_1997,cakmur_transition_1997,bodenschatz_recent_2000}, and remain inconclusive.
+% Investigations into quantifying the onset of SDC in terms of Rayleigh number remain inconclusive as it appears to depend on the domain's aspect ratio, and Prandtl number \citep{hu_convection_1995,bajaj_competition_1997,cakmur_transition_1997,bodenschatz_recent_2000}.
+% The critical reduced Rayleigh number for the onset of SDC, $\varepsilon_s$, has been observed to decrease with increasing $\Gamma$, and increase with increasing $Pr$ \cite{hu1995a, hu1995b, bajaj1997, Cakmur97, bodenschatz2000}.
+Notably, SDC has been reported in large domains ($\Gamma \gtrsim 20$), implying that there is a minimal $\Gamma$ for SDC to occur \citep{bodenschatz_recent_2000}, supporting the dependence of the $Ra_{s}$ on $\Gamma$.
+The chaotic properties of SDC is also dependent of aspect ratio, where the leading Lyapunov exponents decreases with aspect ratio \citep{egolf_mechanisms_2000, paul_extensive_2007}.
+Investigations into the spatial-temporal description of SDC such as the averaged roll-curvature \cite{hu_convection_1995}, probability distribution of spirals \cite{ecke_excitation_1995, liu_spiral-defect_1996} and correlation length-/time-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997} have been undertaken. 
+Specifically, the correlation length-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997} scales exponentially with $Ra$, suggesting that onset of SDC from ISRs mimicks a phase transition.
+Spatiotemporal chaotic behaviour similar to SDC has been found also in other pattern-formation systems such as rotational RBC \cite{hu_convection_1997}, dielectric barrier discharge \cite{dong_observation_2005} and chemical systems \cite{affan_spiral_2014}.
+
+% Given the co-existence of ISRs and SDC in the parameter space of $\varepsilon$, it is known that they form bistability at $Pr \approx 1$ in a spatially extended domain, supported by experiments over a range of $\varepsilon(>0)$ \cite{Cakmur97}.
+% The chaotic state of SDC is unstable at $Pr=4$, where multiple spiral patterns coarsen into a single spiral, before evolving into straight-curved rolls over a long period \cite{bajaj1997}.
+
+% For large aspect ratios, $\Gamma \gtrsim  20$, convection rolls can exhibit spatiotemporal chaotic behaviour, known as spiral defect chaos (SDC) within the same $Ra$ range \citep{Morris93,Decker94,hu1995b,morris1996,Cakmur97,ahlers1998,egolf1998,chiam2003,vitral2020}.
+% It is now established that both SDC and ISR can coexist at the same $Ra$, forming a bistable system confirmed experimentally \citep{Cakmur97}.
+
+% HYSTERSIS
+% Experimental investigations of RBC in moderate domain sizes ($\Gamma  = L/d \approx 14$ refers to the domain's aspect ratio) in rectangular (straight rolls) and cylinderical (concentric rolls) domains showed that the wavenumbers are confined within the Busse balloon.
 % Depending on $Pr$, either mechanism could arise, increasing the effective roll wavenumber of the stability to adhere within the stability boundaries of the Busse balloon.
 % For higher roll wavenumbers instabilities, the skewed-variose secondary instabilities arise, described by roll-pinching and merging where the effective roll-wavenumber is reduced to fall within the Busse balloon.
 % At higher $Ra$, the oscillatory (OS) instability appears for $Pr \lesssim 1$ while the knotted stability appear for higher $Pr$.
@@ -564,30 +622,12 @@ In this thesis, we focus on at $Pr = 1$, where the skewed-varicose, Eckhaus and 
 % The important contribution was that slightly above the onset, stable stationary rolls are found within the range of $Ra > Ra_c + 3\eta(\alpha - \alpha_c)^2$, where $\eta = \frac{1}{2}\frac{\partial Ra}{\partial \alpha}|_{Ra_c}$.
 % \cite{busse_instabilities_1971} then extended the same technique to Rayleigh-B\'{e}nard convection, in which $\eta$ was found to depend on $Pr$.
 
-While the Busse balloon describes the stability boundaries of ISRs over a range of wavenumbers, predicting the wavenumber of an ISR state remains an central challenge \citep{bodenschatz_recent_2000}.
-Indeed, experimental investigations of RBC in moderate domain sizes ($\Gamma \geq 7,$ where $\Gamma$ refers to the domain's aspect ratio) in rectangular (straight rolls) and cylinderical (concentric rolls) domains showed that the wavenumbers are confined within the Busse balloon.
-As $\varepsilon$ is was continously modified, the ISRs with wavenumbers that are now outside of the Busse balloon, rolls dislocations and defects spontaneously nucleate, either increasing or decreasing the roll wavenumber, adhering to the the stability boundaries of the Busse balloon.
-The hysteretic nature of the system implies that the roll wavenumber of the ISRs strongly depends on the system's history \citep{bodenschatz_recent_2000}.
 
 % To complicate the subject further, ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1} as multiple `non-ISR' states, in the form os squares, travelling/stationary targets, giant rotating spirals and oscillatory convection patterns have been found over the years \citep{croquette_convective_1989,croquette_convective_1989-1,plapp_dynamics_1998,hof_flow_1999,rudiger_pattern_2000,boronska_extreme_2010,boronska_extreme_2010-1}.
 % For example, investigations of cylinderical RBC in small aspect-ratio revealed eight stationary statesand two oscillatory states.
 % These findings were later supported by numerical experiments and bifurcation analyses.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{Background/Figures/bistability.png}
-    \caption{Spiral defect chaos (top row) coexisting with ISRs (bottom row) forming a bistable system.}
-    \label{fig:sdc_isr}
-\end{figure}
 
-It is worth noting that the solutions in the form of ISRs appear to be an exception rather than the rule \citep{croquette_convective_1989-1}.
-The coexistence of multiple ‘non-ISR’ states, in the form of squares, travelling/stationary targets, giant rotating spirals, and oscillatory convection patterns have been found over several years \citep{le_gal_square_1985, croquette_convective_1989, plapp_spiral_1997, hof_flow_1999, rudiger_pattern_2000, boronska_extreme_2010, boronska_extreme_2010-1}.
-Investigation of cylindrical RBC with small aspect-ratio ($\Gamma = 2$) found eight stationary states (at the same $Ra = 142000$), and two oscillatory states ($Ra > 14200$) \citep{hof_flow_1999}.
-These findings were later supported by numerical experiments and bifurcation analyses \citep{ma_multiplicity_2006, boronska_extreme_2010, boronska_extreme_2010-1}.
-In particular, bifurcation analyses performed by \cite{ma_multiplicity_2006}, revealed twelve stable branches in the form of symmetric and asymmetric convection rolls near onset ($Ra \leq 2500$), with the potential emergence of hundreds of branches at higher Rayleigh numbers, $Ra \leq 30000 $ \citep{boronska_extreme_2010-1}.
-In larger domains ($\Gamma \geq 28$), giant rotating spirals were identified and thoroughly investigated \citep{plapp_core_1996, plapp_dynamics_1998}.
-Experimental and numerical studies of RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting an no-slip) \citep{tuckerman_global_1988, siggers_dynamics_2003, paul_pattern_2003,boulle_bifurcation_2022}, non-Boussinesq convection \citep{bodenschatz_experiments_1992}, and rotational effects \citep{hu_convection_1997} were investigated, where multiple states were also reported.
-% More recently, (Reetz & Schneider 2020; Reetz et al. 2020) computed up to sixteen stable and unstable invariant states and identified heteroclinic orbits between the multiple states in an inclined RBC
 
 
 
