@@ -1,20 +1,107 @@
 \chapter{Numerical Techniques}\label{chap:3}
 In this chapter, I will present the numerical methods relevant to this thesis.
+The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field.
+One of the foundations of solving partial differential equations begin with the method of weighted residuals. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3.1 METHOD OF WEIGHTED RESIDUALS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method of weighted residuals}
-The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field. To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method. Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
-SEMs belong to a general class of methods known as the method of weighted residual, a generic method for approximating a solution of a differential equation. The method of weighted residual will be described with a worked example as follows. Consider that the solution of a differential equation $u(x)$ can be represented as an infinite sum of \emph{trial} functions (also known as basis functions, expansion functions, mode shapes).
+We discuss the method of weighted residuals which provides a mathematical framework for approximating the solutions of partial differential equations.
+We first  consider a generic linear partial differential equation as,
+\begin{equation}
+    \mathbf{L}[u(x)] = 0,
+\end{equation}
+where $\mathbf{L}$ refers to a spatial (linear) differential operator and $u(x)$, the solution sought after for a specific form of $\mathbf{L}$.
+Typical examples of spatial differential operators are the Laplace, Poisson or Helmholtz operators.
+We assume that the solution $u(x)$, may be approximated by $N$ basis expansions, $\phi(x)$,given as,
+\begin{equation}\label{eq:approximate}
+    u(x) \approx u^\delta(x) = \sum_{i=0}^{N-1} \hat{u}_i \phi_i(x),
+\end{equation}
+where $u^\delta(x)$ refers to the approximate solution of $u(x)$, comprising of a linear combination of the product between the $i^{th}$ basis coefficient, $\hat{u}_i$, and $\phi_i(x)$.
+% Typical examples of basis exapansions are, Fourier expansions, Chebyshev polynomials or Legendre polynomials.
+In approximating the solution of equation \eqref{eq:helmholtz}, we expect a non-zero difference (or `error') between the exact solution, $u(x)$, and $u^\delta(x)$, known as the residual, $R$, that depends on $u^\delta$,
+\begin{equation}\label{eq:residual}
+    \mathbf{L}[u^\delta(x)] = R[u^\delta(x)].
+\end{equation}
+The residual depends on the approximate solution $u^\delta(x)$, which is non-zero and varies in $\Omega$.
+In other words, equation \eqref{eq:helmholtz} might not be satisfied everywhere in $\Omega$.
+In the method of weighted residuals, we can apply some restrictions on the residual, such that it $R \rightarrow 0$.
+One way to place a restriction on $R$ is by using $N$ weight functions, $w_j(x)$, such that it is orthogonal with the residual,
+\begin{equation}\label{eq:weightinnerresidual}
+    (w_j(x), R[u^\delta(x)]) = 0, \quad j = 0, ..., N-1.
+\end{equation}
+The inner-product is defined by,
+\begin{equation}
+       (f, g) = \int_\Omega f(x) g(x) dx,
+\end{equation}
+measures the orthogonality between functions $f(x), g(x)$.
+Equation \eqref{eq:weightinnerresidual} becomes a system of $N$ ordinary differential equations, where the basis coefficients, $\hat{u}_i$, could be determined as we shall see later.
+The choice of weight function defines the class of projection methods, and the common projection methods are shown in table \ref{tab:weightFunction}.
+Notably, the method of weighted residuals merely describes the projection method and does not specify the type of basis functions employed.
+The choice of projection method (weight functions), and basis expansions will have different convergence properties, i.e. how does the residual decay as basis expansions are increased.
+By considering Fourier basis expansions, one can expect exponential convergence, desirable for an efficient representation of turbulent dynamics.
+% Certain mathematical properties such as spectral convergence as desired in the case of Galerkin projection using Fourier expansions, 
+% The choice of \emph{trial} functions used in \emph{nektar++} will be elaborated in Section \ref{sec:modifiedBasis}.
+% the method of weighted residuals is only restrictive to the weight
+% Table \ref{tab:weightFunction} shows the different forms of weight functions and its corresponding numerical method.
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{table}[h]
+    \centering
+        \begin{tabular}{cc}
+            Weight functions & Projection method \\
+            \hline
+            $w_j(x) = \delta(x-x_j)$ & Collocation \\
+            $w_j(x) =\left\{\begin{array}{ll}
+                1 & \mbox{if } x \in \Omega_j\\
+                0 & \mbox{if } x \notin \Omega_j \\
+           \end{array}\right. $& Finite-Volume \\
+            $w_j(x) = \phi_j$& Galerkin \\
+            $w_j(x) = \frac{\partial R}{\partial \hat{u}_j}$ & Least-squares \\
+            \hline
+        \end{tabular}
+        \caption{Examples of weight functions and projection methods}
+    \label{tab:weightFunction}
+\end{table}
+% For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$.
+% The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$.
+\section{Galerkin Projection}
+Galerkin projection remain as common method in finite elements where the weight functions are the same as the basis expansions.
+To motivate an example, we consider the linear differential operator defined earlier to be the one-dimensional Helmholtz equation given as,
+\begin{subequations}\label{eq:helmholtz}
+    \begin{equation}
+        \mathbf{L}[u(x)] \equiv \frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) - f(x) = 0, \quad x \in \Omega := [0, l]
+    \end{equation}
+    \begin{equation}
+        u(0) = g_D, \quad \frac{\partial u}{\partial x}\Big|_{x=l} = g_{N}.
+    \end{equation}
+\end{subequations}
+where the $\mathbf{L}, u(x), \lambda, f, \Omega$ refers to the linear (spatial) differential operator, solution to the diffential equation, a real positive constant, forcing function and the spatial domain bounded between 0 and $l$, respectively.
+In order for the problem to be well-posed, we impose both Dirichlet and Neumann, boundary conditions corresponding to $g_D$ and $g_N$ at $x= 0 $ and $x=l$, respectively.
+By expanding equation \eqref{eq:weightinnerresidual} using integration by parts,
+\begin{equation}
+    \int_0^l \frac{\partial w_j}{\partial x}\frac{\partial u}{\partial x} \mathrm{d}x - \int_0^l \lambda w_j u \mathrm{d}x + \int_0^l w_j \mathrm{d}x + \left[ w_j \frac{\partial u}{\partial x} \right]_0^l = 0
+\end{equation}
+
+The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions.
+Usually, the weight functions are selected 
+An approximate solution has $K+1$ unknowns ($\hat{u}_0, ...,\hat{u}_K$), hence, it is natural to impose $K+1$ restrictions on the residual to form a determined system and the type of restriction defines the numerical method. 
+The goal is to choose appropriate basis expansions and weights such that the approximate solution approaches the exact solution where $R[u^\delta(x)] \rightarrow 0$.
+We premultiply equation \eqref{eq:residual} with a suitable weight function, $w(x)$, and take the inner-product defined as,
+he solution is an approximate one, equation \eqref{ref:helmholtz}, id no
+% In the context fluid mechanics, the Fourier series can be used to represent isotropic turbulence with homogenenous (periodic) boundary conditions.
+% In a channel flow, Fourier series are used in the homogenenous streamwise ad spanwise directions while Chebyshev or Legendre polynomials are used in the wall-normal direction.
+
+Consider equation \ref{eq:infiniteExpansions} to be a solution of a 1-dimensional Poisson equation, bounded by the domain $\Omega \in [x_a, x_b]$,
+Next, we consider that the expansion functions, $\phi_i(x)$, belongs to an element of a Hilbert space, with a suitable inner-product.
+
+The mathematical framework begins by first assuming that the solution, $u(x)$, is an element of a Hilbert space, $\mathcal{H}$ with a suitable inner-product $(\cdot, \cdot)$ and norm $|| \cdot ||$.
+For 
+SEMs belong to a general class of methods known as the method of weighted residual, a generic method for approximating a solution of a differential equation. The method of weighted residual will be described with a worked example as follows. Consider that the solution of a differential equation $u(x)$ can be represented as an infinite sum of \emph{trial} \citep{karniadakis_spectralhp_2005}. functions (also known as basis functions, expansion functions, mode shapes).
 \begin{equation}\label{eq:infiniteExpansions}
-    u(x) = \sum_{i=0}^{\infty} \hat{u}_i \phi_i(x),
 \end{equation}
-where $\phi_i(x)$ are the \emph{trial} functions and $\hat{u}_i$ are the trial function coefficients to be determined. Typical examples of trial functions are, Fourier series $e^{ikx}$, Chebyshev polynomials $T(x)$ or Legendre series $L_g(x)$. The choice of basis expansions depends on the given problem. In the context fluid mechanics, the Fourier series can be used to represent isotropic turbulence with homogenenous (periodic) boundary conditions. In a channel flow, Fourier series are used in the homogenenous streamwise ad spanwise directions while Chebyshev or Legendre polynomials are used in the wall-normal direction. Consider equation \ref{eq:infiniteExpansions} to be a solution of a 1-dimensional Poisson equation, bounded by the domain $\Omega \in [x_a, x_b]$,
-\begin{equation}\label{eq:linearOperator}
-    \mathbb{L}u(x) \equiv \frac{\partial u(x)}{\partial x} - \lambda u(x) = f(x), \qquad x_a \leq x \leq x_b,
-\end{equation}
+where $\phi_i(x)$ are the \emph{trial} functions and $\hat{u}_i$ are the trial function coefficients to be determined.
 with the appropriate boundary conditions, and $\mathbb{L}$ refers to a linear differential operator. Note that equation \ref{eq:infiniteExpansions} exactly satisfies the differential equation of \ref{eq:linearOperator} i.e $\mathbb{L}u(x)- f(x) = 0$. The exact solution would require a computation of infinite basis coefficients $\hat{u}$ which is practically infeasible. Therefore, an approximate solution $u^\delta(x)$ is sought after by truncating an infinite number of basis expansions to a finite number,
 \begin{equation}\label{eq:truncatedExpansions}
     u(x) \approx u^\delta (x) = \sum_{i=0}^{K}\hat{u_i}\phi_i(x),
@@ -23,32 +110,11 @@ where there is a finite number of $K$ basis expansions. The approximate solution
 \begin{equation}
     R(u^\delta(x)) = \mathbb{L}u^\delta(x) - f(x)
 \end{equation}
-where $R(u^\delta)$ is the residual. The residual depends on the approximate solution $u^\delta(x)$, which varies in $x$. In other words, the error is non-zero and varies within $\Omega$. Although equation \ref{eq:linearOperator} may not be satisfied everywhere in $\Omega$, it is possible to apply some restrictions (conditions) on the residual so that it tends to zero by the choice of restrictions imposed. An approximate solution has $K+1$ unknowns ($\hat{u}_0, ...,\hat{u}_K$), hence, it is natural to impose $K+1$ restrictions on the residual to form a determined system and the type of restriction defines the numerical method. 
 
 The method of weighted residual is a general method that allows for various types the restriction to be implemented. The method "nullifies" the residual by equating the inner product with a \emph{test} function, $v_j(x)$ (also known as a weight function - hence the name 'weighted residual') to zero,
 \begin{equation}\label{eq:residual}
     (v_j(x), R(u^\delta(x))) = \int_{x_a}^{x_b} v_j\,R(u^\delta(x))\; \mathrm{d}x = 0, \qquad j = 0,...,K.
 \end{equation}
-The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$. For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$. Table \ref{tab:weightFunction} shows the different forms of weight functions and its corresponding numerical method. The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions. It is worth to mention that the method of weighted residual merely describe the projection method but does not specify the type of \emph{trial} functions used. The choice of \emph{trial} functions used in \emph{nektar++} will be elaborated in Section \ref{sec:modifiedBasis}.
-\renewcommand{\arraystretch}{2.5} % Default value: 1
-\begin{table}[h]
-    \centering
-        \begin{tabular}{cc}
-            \hline
-            Weight Function& Type of method \\
-            \hline
-            $v_j(x) = \delta(x-x_j)$ & Collocation \\
-            $v_j(x) =\left\{\begin{array}{ll}
-                1 & \mbox{if } x \in \Omega_j\\
-                0 & \mbox{if } x \notin \Omega_j \\
-           \end{array}\right. $& Finite-Volume \\
-            $v_j(x) = \phi_j$& Galerkin \\
-            $v_j(x) = \frac{\partial R}{\partial \hat{u}_j}$ & Least-squares \\
-            \hline
-        \end{tabular}
-        \caption{Types of weight function}
-    \label{tab:weightFunction}
-\end{table}
 
 % \subsection{Galerkin methods}
 Galerkin methods are commonly found in finite/spectral element solvers, used in \emph{nektar++}. The Galerkin method belongs to a general class of weighted residual methods that assumes the \emph{trial} functions take on the same form as the \emph{test} functions (Table \ref{tab:weightFunction}). To describe the method, a worked example is illustrated. The Galerkin method is appplied to solve the Poisson equation \ref{eq:linearOperator} with the following boundary conditions,
@@ -112,6 +178,8 @@ where $\mathbf{\hat{u}}^{H,\delta} = [\hat{u}_0^{H,\delta}, ..., \hat{u}_K^{H, \
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The Spectral/{hp} element methods}
+To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
+Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
 The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
 \begin{enumerate}
     \item Finite elements:
