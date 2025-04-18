@@ -33,7 +33,7 @@ One way to place a restriction on $R$ is by using $N$ weight functions, $w_j(x)$
     (w_j(x), R[u^\delta(x)]) = 0, \quad j = 0, ..., N-1.
 \end{equation}
 The inner-product is defined by,
-\begin{equation}
+\begin{equation}\label{eq:inner-product}
        (f, g) = \int_\Omega f(x) g(x) dx,
 \end{equation}
 measures the orthogonality between functions $f(x), g(x)$.
@@ -67,8 +67,8 @@ By considering Fourier basis expansions, one can expect exponential convergence,
 % For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$.
 % The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$.
 \section{Galerkin Projection}
-Galerkin projection remain as common method in finite elements where the weight functions are the same as the basis expansions.
-To motivate an example, we consider the linear differential operator defined earlier to be the one-dimensional Helmholtz equation given as,
+The Galerkin projection is a common method in finite elements where the weight functions are chosen to be the same as the basis expansions used in the expansion of the approximate solution.
+To motivate this approach, we consider the linear differential operator defined earlier to be the one-dimensional Helmholtz equation given as,
 \begin{subequations}\label{eq:helmholtz}
     \begin{equation}
         \mathbf{L}[u(x)] \equiv \frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) - f(x) = 0, \quad x \in \Omega := [0, l]
@@ -77,19 +77,240 @@ To motivate an example, we consider the linear differential operator defined ear
         u(0) = g_D, \quad \frac{\partial u}{\partial x}\Big|_{x=l} = g_{N}.
     \end{equation}
 \end{subequations}
-where the $\mathbf{L}, u(x), \lambda, f, \Omega$ refers to the linear (spatial) differential operator, solution to the diffential equation, a real positive constant, forcing function and the spatial domain bounded between 0 and $l$, respectively.
-In order for the problem to be well-posed, we impose both Dirichlet and Neumann, boundary conditions corresponding to $g_D$ and $g_N$ at $x= 0 $ and $x=l$, respectively.
-By expanding equation \eqref{eq:weightinnerresidual} using integration by parts,
+Here, $\mathbf{L}$ denotes the linear (spatial) differential operator, $u(x)$ is the unkown solution to the differential equations, $\lambda$ is a real positive constant, $f(x)$ is the forcing function, and $\Omega$ the spatial domain bounded between $0$ and $l$. 
+% $ hh u(x), \lambda, f, \Omega$ refers to the linear (spatial) differential operator, solution to the diffential equation, a real positive constant, forcing function and the spatial domain bounded between 0 and $l$, respectively.
+To ensure that problem is well-posed, we impose both Dirichlet and Neumann boundary conditions, corresponding to $g_D$ and $g_N$, at $x = 0$ and $x = l$, respectively.
+% In order for the problem to be well-posed, we impose both Dirichlet and Neumann, boundary conditions corresponding to $g_D$ and $g_N$ at $x= 0 $ and $x=l$, respectively.
+Equation \ref{eq:helmholtz} is said to be written in the \textit{strong} or \textit{classical} form.
+
+Next, we begin to construct the weak form by taking the inner product of the Helmholtz equation with a weight function, which satisfies homogeneous Dirichlet boundary conditions, and require this inner product to vanish, that is,
+\begin{equation}\label{eq:helmholtz_inner}
+    (w, \mathbf{L}[u(x)]) = \int_0^l w\left[\frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) + f(x)\right] \mathrm{d}x =  0.
+\end{equation}
+This step is equivalent to applying the method of weighted residuals, where $u(x)$ could refer to the approximate solution, $u^\delta(x)$. 
+Next, we perform integration by parts,
+\begin{equation}\label{eq:weak_form}
+    \underbrace{\int_0^l \frac{\partial w}{\partial x}\frac{\partial u}{\partial x} \mathrm{d}x + \int_0^l \lambda w u \mathrm{d}x}_{a(w,u)}= \underbrace{\int_0^l w f \mathrm{d}x + \left[ w \frac{\partial u}{\partial x} \right]_0^l}_{f(w)}.
+\end{equation}
+This equation is typically referred to as the weak form of equation \eqref{eq:helmholtz}.
+In compact notation, we define the bilinear and linear forms as,
+\begin{subequations}
+    \begin{equation}
+        a(w,u) = f(w),
+    \end{equation}
+\end{subequations}
+where $a(w,u)$ and $f(w)$ are typically refered to as the strain energy and forcing function in structural mechanics, assumed to remain finite.
+To ensure this, we restrict the choice of solutions $u(x)$ to lie in the trial space, $\mathcal{U}$, defined as,
 \begin{equation}
-    \int_0^l \frac{\partial w_j}{\partial x}\frac{\partial u}{\partial x} \mathrm{d}x - \int_0^l \lambda w_j u \mathrm{d}x + \int_0^l w_j \mathrm{d}x + \left[ w_j \frac{\partial u}{\partial x} \right]_0^l = 0
+    \mathcal{U} := \{ u | u \in H^1, u(0) = g_D \},
+\end{equation}
+where $u \in H^1$ refers to functions $u$ in the Sobolev space such that the Dirichlet condition $u(0) = g_D$ is statisfied and the square integral of $u$ and its first derivatives remained bounded,
+% the the Dirichlet boundary condition $g_D$ and the square integral of $u$ and its first derivatives remain bounded given as,
+\begin{equation}
+    \int_\Omega \left ( u^2 + \left(\frac{\partial u}{\partial x} \right)^2 \right) \mathrm{d}\Omega < \infty.
+\end{equation}
+Here, we consider funcctions up to the first-derivatives, the highest-order derivative of equation \eqref{eq:helmholtz_inner}.
+Similarly the space of weight functions, or weight space, $\mathcal{W}$, is defined as,
+\begin{equation}
+    \mathcal{W} := \{ w | w \in H^1, w(0) = 0 \},
+\end{equation}
+where $w \in H^1$ are functions whose values and first derivatives are square-integrable and satisfy a homogeneous Dirichlet boundary condition at $x = 0$.
+The generalised weak form is therefore finding $u(x) \in \mathcal{X}$, such that
+\begin{equation}
+    a(w,u) = f(w), \quad \forall w \in \mathcal{W}.
+\end{equation}
+This formulation is still infinite-dimensional, as the function space $\mathcal{U}, \mathcal{W}$ contain infinitely many functions.
+To obtain an approximate solution, $u^\delta(x)$, we restrict ourselves to finite-dimensional subspaces, $\mathcal{U}^\delta \subset \mathcal{U}$, and $\mathcal{W}^\delta \subset \mathcal{W}$.
+The problem is then to find $u^\delta \in \mathcal{U}^\delta$, such that
+\begin{equation}
+    a(w^\delta, u^\delta) = f(w^\delta), \quad w^\delta \in \mathcal{W}^\delta
+\end{equation}
+Here, both $u^\delta \in \mathcal{U}^\delta$ and $w^\delta \in \mathcal{W}^\delta$ do not lie in same subspace, necessary for the standard Galerkin projection procedure where they should lie in the same subspace.
+To overcome this, we lift the solution $u^\delta$ into two parts,
+\begin{equation}
+    u^\delta = u^\mathcal{H} + u^\mathcal{D}.
+\end{equation}
+where $u^\mathcal{H} \in \mathcal{W}^\delta$ satisfies the homogeneous Dirichlet condition, lying in the same subsapce as $w^\delta \in \mathcal{W}^\delta$, and $u^\mathcal{D} \in \mathcal{U}^\delta$ satisfies the Dirichlet boundary conditions $u^\mathcal{D}(0) = g_D$.
+Substituting this decomposition, we search for $u^\mathcal{H} \in \mathcal{V}^\delta$ such that,
+\begin{equation}
+    a(w^\delta, u^\mathcal{H}) = f(w^\delta) - a(w^\delta, u^\mathcal{D}).
 \end{equation}
 
-The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions.
-Usually, the weight functions are selected 
-An approximate solution has $K+1$ unknowns ($\hat{u}_0, ...,\hat{u}_K$), hence, it is natural to impose $K+1$ restrictions on the residual to form a determined system and the type of restriction defines the numerical method. 
-The goal is to choose appropriate basis expansions and weights such that the approximate solution approaches the exact solution where $R[u^\delta(x)] \rightarrow 0$.
-We premultiply equation \eqref{eq:residual} with a suitable weight function, $w(x)$, and take the inner-product defined as,
-he solution is an approximate one, equation \eqref{ref:helmholtz}, id no
+
+%%%%%%%%%%%%%%%%%%%%%%
+% SPECTRAL/HP ELEMENTS
+%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Spectral/\emph{hp} element methods}
+% To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
+% Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
+% The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
+The spectral/\emph{hp} element method is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
+% represented by a polynomial of up to order $p$.
+% which leverages the advantages of offering geometric flexibility by decomposing the global domain into a set of non-overlapping (finite) elements of size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $p$.
+It leverages the geometric flexibility of classical finite-element methods, allowing for the representation of complex engineering geometries, and the exponential (spectral) convergence properties of classical spectral methods, where the solution error decreases exponentially.
+% The Spectral/\emph{hp} element method leverages the advantages of both methods - geometric flexibility and spectral covergence.
+% The spectral/\emph{hp} method uses a series of high-order polynomials (Lagrange/Legendre) within each element.
+Suppose we consider $P+1$ linearly independent polynomials spanning the polynomial space of $\mathcal{P}_P$, the error of a smooth solution with element size of $h$ and polynomial order $P$ has the property of \citep{karniadakis_spectralhp_2005}, 
+\begin{equation}\label{eq:error_convergence}
+    ||u(x) - u^{\delta}(x)|| \leq Ch^P||u(x)|| \approx \mathcal{O}(h^P).
+\end{equation}
+where $C$ is some constant.
+Equation \ref{eq:error_convergence} implies that the error decreases linearly with $h$, and exponentially with $P$.
+
+% % It offers the flexibility of offering refinements in either $h$ or $p$, or both.
+% \begin{enumerate}
+%     \item Finite elements:
+%         \subitem The finite element method decomposes the global domain into a set of non-overlapping subdomains (finite elements), represented by linear shape functions. In a 1D domain, the size of each element is given by $h$ and the approximate solution should covergence as $h$ is decreased - also known as \emph{h}-refinement. The flexibility of domain decomposition allows for complex engineering geometries to be represented. 
+%     \item Spectral method:
+%         \subitem The spectral method performs a global discretisation of the domain. The domain is represented by a linear combination of global continuous functions, such as the Fourier series. Spectral methods benefit from the property of \emph{spectral convergence}, where the solution error decreases by $\mathcal{O}(c^{-N})$, where $c$ is some constant $0 \leq c \leq 1$ and $N$ is the number of polynomials (\cite{trefethen_2000}). In other words, as the number of functions is increased, the error decreases exponentially.
+% \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%
+% DOMAIN PARTITION
+%%%%%%%%%%%%%%%%%%
+\subsection{Domain partition}
+We consider a one-dimensional domain, $\Omega$ defined earlier, and seek to decompose it into a set of $N_{el}$ elements, where $\Omega^e$, refers to the elemental partitions with $1 \geq e \geq N_{el}$ such that they meet at their boundaries,
+\begin{equation}
+    \Omega = \bigcup_{e = 1}^{N_{el}} \Omega^e, \quad \text{where} \; \bigcap_{e=1}^{N_{el}} \Omega^e = \emptyset
+\end{equation}
+where $e^{th}$ element is defined as,
+\begin{equation}
+    \Omega^e = \{x | x_{e-1} \geq x \geq x_e \},
+\end{equation}
+Each element it then represented by a linear combination, $\phi(x)$, where $x$ is referred to the \emph{global} domain.
+
+%%%%%%%%%%%%%%%%%%%
+% STANDARD ELEMENTS
+%%%%%%%%%%%%%%%%%%%
+\subsection{Standard Elements}
+In general, we can expect non-uniform elements so it is useful to define a \emph{standard} element,
+\begin{equation}
+    \Omega_{set} := \{ \xi | -1 \geq \xi \geq 1 \},
+\end{equation}
+where $\Omega_{st}$ refers to the standard element, defined over local coordinates, $\xi \in [-1, 1]$.
+By considering formulations using the standard elements, the formulations of basis expansions, differential and integration operations can be performed in local coordinates, $\xi$, before mapping the results back to the global domain, $x$.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{NumericalTechniques/Figures/standard_element.pdf}
+    \caption{A spectral/\emph{hp} element representation of a 1D continuous function, $u(x)$, deomposed into four non-overlapping finite elements, each containing a linear combination of three expansion bases.}
+    \label{fig:standard_element}
+\end{figure}
+We can map the standard element into any arbitrary global coordinates based on a linear mapping $\chi^e:\Omega_{st} \rightarrow \Omega$,
+\begin{equation}
+    x = \chi^e(\xi) = \frac{1-\xi}{2} x_e + \frac{1 + \xi}{2}x_{e+1}, \quad \xi \in \Omega_{st}
+\end{equation}
+which has an analytical inverse, $(\chi^e)^{-1}(x)$,
+\begin{equation}
+    \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega_{st}.
+\end{equation}
+In each standard element, we can define a linear combination of expansion basis within $\Omega_{st}$ using the standard coordinate $\xi$,
+\begin{equation}
+    \phi_0(\xi) = \frac{1 - \xi}{2}, \quad \phi_1(\xi) = (1 + \xi)(1 - \xi), \quad \phi_2(\xi) =  \frac{1 + \xi}{2},
+\end{equation}
+where $\phi_0, \phi_2$ are the linear elements with $P = 1$, while $\phi_1$ is a quadratic element with $P=2$. 
+If we put everything together, a 1D continuous function can be approximated as the following,
+\begin{equation}
+    u^\delta(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
+\end{equation}
+where $u^\delta$ now lie in $\mathcal{X}^\delta$ defined as,
+\begin{equation}
+    \mathcal{X}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \text{span}\{\phi_0, \phi_1, \phi_2\},\ e = 1, 2, 3, 4 \right\}
+\end{equation}
+Figure \ref{fig:standard_element} summarises the approach outlined.
+
+
+%%%%%%%%%%%%%%%%%
+% BASIS FUNCTIONS
+%%%%%%%%%%%%%%%%%
+
+\subsection{Expansion functions}
+Here, we discuss the expansion functions of $\phi(\xi)$, where in general could be categorised into \emph{modal} (hierarchical) expansions or \emph{nodal} expansions.
+% Modal expansions
+\subsubsection{Modal expansions}
+The most common modal expansions are the Jacobi polynomials, denoted by $P_p^{\alpha,\beta}(x)$, which represent a family of polynomial solutions to the Sturm-Liouville problem wihin, $x \in [-1, 1]$.
+Notably, the Legendre polynomials is a special case of Jacobi polynomials.
+% The \emph{trial} functions $\phi_p$ (or basis expansions) used in spectral/\emph{hp} method consist of \emph{boundary} and \emph{interior} modes.
+% \emph{Interior} modes are defined to be zero on all boundaries, and non-zero within the boundary, satisfying homogeneous boundary conditions.
+% \emph{Boundary} modes take on non-zero values on the boundary, satisfying non-homogeneous boundary conditions and providing $C^0$ continuity between elements (\cite{karniadakis_2005spectral}).
+Within the Nektar++ framework, the Jacobi polynomials $\mathbb{P}_p^{\alpha.\beta}(\xi)$ modified with linear elements are used as the \emph{trial} functions. Using $\alpha=1$, $\beta=1$, and linear basis functions as \emph{boundary} modes, the modified Jacobi polynomials are,
+\renewcommand{\arraystretch}{1.25} % Default value: 1
+\begin{equation}\label{eq:modifiedJacobi}
+    \phi_p(\xi) = \psi_p(\xi) = \left\{
+            \begin{array}{ll}
+                \frac{1-\xi}{2} & \mbox{for } p=P\\
+                \frac{1-\xi}{2}\frac{1+\xi}{2}\mathbb{P}_{P-1}(\xi)^{1,1} & \mbox{for } P \geq 2 \\
+                \frac{1+\xi}{2} & \mbox{for } p=P,
+           \end{array}\right.
+\end{equation}
+where $P$ denotes the highest polynomial order. Figure \ref{fig:Modified Jacobi polynomials} shows the modified Jacobi polynomials for $p \in [0, 5]$ described by equation \ref{eq:modifiedJacobi}. The boundary modes are $\psi_0$ and $\psi_5$ while the rest are boundary modes.
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=15cm]{NumericalTechniques/Figures/modifiedBasis.pdf}
+        \caption{Modified Jacobi polymoials $\psi_p$ for $p \in [0, 5]$}
+        \label{fig:Modified Jacobi polynomials}
+\end{figure}
+
+% Nodal expansions
+\subsubsection{Nodal expansions}
+
+% \subsection{Fourier spectral/\emph{hp} modes}
+The Fourier spectral/\emph{hp} element method uses a combination of Fourier expansions and spectral/\emph{hp} element method to discretise the spatial domain. In a turbulent channel flow, the Fourier expansions are used to represent the periodic streamwise and cross stream directions, while the spectral/\emph{hp} elements are used to discretise the wall-normal direction. Within the \emph{nektar++} framekwork, the Fourier spectral/\emph{hp} element method (also known as a Quasi-3D approach), can be implemented either with 2D spectral/\emph{hp} elements and 1D Fourier expansions (3DH1D) or 1D spectral/\emph{hp} elements and 2D Fourier expansions (3DH2D). In this work, the 2D spectral/\emph{hp} elements with 1D Fourier expansions are used to discretise the cross stream plane and streamwise flow respectively. The use of 2D spectral/\emph{hp} elements in the cross stream plane is necessary to represent the riblet geometry (\cite{chu_1993}). The time- and spatially-varying velocity and pressure in the cross stream planes are approximated as a finite sum of 2D modified Jacobi polynomials up to the $P^{th}$-order,
+\renewcommand{\arraystretch}{1.} % Default value: 1
+\begin{equation}\label{eq:crossStream}
+    \begin{bmatrix}
+        \mathbf{u}^\delta(y,z,t) \\
+        p^\delta(y,z,t)
+    \end{bmatrix}
+    =
+    \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z)
+    \begin{bmatrix}
+         \hat{\mathbf{u}}_{p,q}(t) \\
+         \hat{p}_{p,q}(t)
+    \end{bmatrix}
+\end{equation}
+where $\hat{\mathbf{u}}_{p,q}(t)$ and $\hat{p}_{p,q}(t)$ are the time-varying coefficients. Extending equation \ref{eq:crossStream} to include the streamwise direction represented by Fourier expansions,
+\begin{equation}\label{eq:fourierSpectral}
+    \begin{bmatrix}
+        \mathbf{u}^\delta(x,y,z,t) \\
+        p^\delta(x,y,z,t)
+    \end{bmatrix}
+    =
+    \sum_{k=0}^{N-1} \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z) e^{ik\alpha x}
+    \begin{bmatrix}
+         \hat{\mathbf{u}}_{p,q,k}(t) \\
+         \hat{p}_{p,q,k}(t)
+    \end{bmatrix}
+    =
+    \sum_{k=0}^{N-1} e^{ik\alpha x} \begin{bmatrix}
+        \mathbf{u}_k(y,z,t) \\ p_k(y,z,t)
+    \end{bmatrix}
+\end{equation}
+where $\alpha = \frac{2\pi}{L_x}$ is the streamwise wavenumber, $L_x$ is the streamwise domain length and $N$ refers to the number of Fourier expansions. Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations and taking the Fourier transform (equivalently to the Galerkin projection with respect to Fourier expansion as a test function) yields $N$-systems of equations,
+\begin{equation}
+    \frac{\partial \mathbf{u}_k}{\partial t} = - \tilde{\nabla}_k p_k + \nu(\nabla^2_{y,z} - k^2\alpha^2)\mathbf{u}_k - \widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u}\right]}_k, \qquad \tilde{\nabla}\mathbf{u}_k = 0
+\end{equation}
+where, $\tilde{\nabla} = (ik\alpha, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$, $\nabla_{y,z}^2 = (\frac{\partial^2}{\partial y^2}, \frac{\partial^2}{\partial z^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
+
+\subsection{Numerical differentiation}
+\subsection{Numerical integration}
+\subsection{Assembly process}
+\subsection{Example in 1D}
+
+\section{Techniques for solving the Navier-Stokes equations}
+\subsection{Velocity Correction Scheme}
+\subsection{Enforcing constant flow rate}
+
+\section{Stability analysis of the Navier-Stokes equations}
+\subsection{Linear Stability analysis}
+\subsection{Edge state computations}
+
+% The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions.
+% Usually, the weight functions are selected 
+% An approximate solution has $K+1$ unknowns ($\hat{u}_0, ...,\hat{u}_K$), hence, it is natural to impose $K+1$ restrictions on the residual to form a determined system and the type of restriction defines the numerical method. 
+% The goal is to choose appropriate basis expansions and weights such that the approximate solution approaches the exact solution where $R[u^\delta(x)] \rightarrow 0$.
+% We premultiply equation \eqref{eq:residual} with a suitable weight function, $w(x)$, and take the inner-product defined as,
+% he solution is an approximate one, equation \eqref{ref:helmholtz}, id no
 % In the context fluid mechanics, the Fourier series can be used to represent isotropic turbulence with homogenenous (periodic) boundary conditions.
 % In a channel flow, Fourier series are used in the homogenenous streamwise ad spanwise directions while Chebyshev or Legendre polynomials are used in the wall-normal direction.
 
@@ -194,63 +415,6 @@ The Spectral/\emph{hp} element method leverages the advantages of both methods -
 Equation \ref{eq:errorConvergence} implies that the error decreases as the $h$ is decrease (mesh refinement) or as $P$ is increased using higher-order polynomials.
 
 % \subsection{Polynomial expansions in SEM}\label{sec:modifiedBasis}
-The \emph{trial} functions $\phi_p$ (or basis expansions) used in spectral/\emph{hp} method consist of \emph{boundary} and \emph{interior} modes. \emph{Interior} modes are defined to be zero on all boundaries, and non-zero within the boundary, satisfying homogeneous boundary conditions. \emph{Boundary} modes take on non-zero values on the boundary, satisfying non-homogeneous boundary conditions and providing $C^0$ continuity between elements (\cite{karniadakis_2005spectral}).
-Within the \emph{nektar++} framework, the Jacobi polynomials $\mathbb{P}_p^{\alpha.\beta}(\xi)$ modified with linear elements are used as the \emph{trial} functions. Using $\alpha=1$, $\beta=1$, and linear basis functions as \emph{boundary} modes, the modified Jacobi polynomials are,
-\renewcommand{\arraystretch}{1.25} % Default value: 1
-\begin{equation}\label{eq:modifiedJacobi}
-    \phi_p(\xi) = \psi_p(\xi) = \left\{
-            \begin{array}{ll}
-                \frac{1-\xi}{2} & \mbox{for } p=P\\
-                \frac{1-\xi}{2}\frac{1+\xi}{2}\mathbb{P}_{P-1}(\xi)^{1,1} & \mbox{for } P \geq 2 \\
-                \frac{1+\xi}{2} & \mbox{for } p=P,
-           \end{array}\right.
-\end{equation}
-where $P$ denotes the highest polynomial order. Figure \ref{fig:Modified Jacobi polynomials} shows the modified Jacobi polynomials for $p \in [0, 5]$ described by equation \ref{eq:modifiedJacobi}. The boundary modes are $\psi_0$ and $\psi_5$ while the rest are boundary modes.
-\begin{figure}[h]
-    \centering
-        \includegraphics[width=15cm]{NumericalTechniques/Figures/modifiedBasis.pdf}
-        \caption{Modified Jacobi polymoials $\psi_p$ for $p \in [0, 5]$}
-        \label{fig:Modified Jacobi polynomials}
-\end{figure}
-
-% \subsection{Fourier spectral/\emph{hp} modes}
-The Fourier spectral/\emph{hp} element method uses a combination of Fourier expansions and spectral/\emph{hp} element method to discretise the spatial domain. In a turbulent channel flow, the Fourier expansions are used to represent the periodic streamwise and cross stream directions, while the spectral/\emph{hp} elements are used to discretise the wall-normal direction. Within the \emph{nektar++} framekwork, the Fourier spectral/\emph{hp} element method (also known as a Quasi-3D approach), can be implemented either with 2D spectral/\emph{hp} elements and 1D Fourier expansions (3DH1D) or 1D spectral/\emph{hp} elements and 2D Fourier expansions (3DH2D). In this work, the 2D spectral/\emph{hp} elements with 1D Fourier expansions are used to discretise the cross stream plane and streamwise flow respectively. The use of 2D spectral/\emph{hp} elements in the cross stream plane is necessary to represent the riblet geometry (\cite{chu_1993}). The time- and spatially-varying velocity and pressure in the cross stream planes are approximated as a finite sum of 2D modified Jacobi polynomials up to the $P^{th}$-order,
-\renewcommand{\arraystretch}{1.} % Default value: 1
-\begin{equation}\label{eq:crossStream}
-    \begin{bmatrix}
-        \mathbf{u}^\delta(y,z,t) \\
-        p^\delta(y,z,t)
-    \end{bmatrix}
-    =
-    \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z)
-    \begin{bmatrix}
-         \hat{\mathbf{u}}_{p,q}(t) \\
-         \hat{p}_{p,q}(t)
-    \end{bmatrix}
-\end{equation}
-where $\hat{\mathbf{u}}_{p,q}(t)$ and $\hat{p}_{p,q}(t)$ are the time-varying coefficients. Extending equation \ref{eq:crossStream} to include the streamwise direction represented by Fourier expansions,
-\begin{equation}\label{eq:fourierSpectral}
-    \begin{bmatrix}
-        \mathbf{u}^\delta(x,y,z,t) \\
-        p^\delta(x,y,z,t)
-    \end{bmatrix}
-    =
-    \sum_{k=0}^{N-1} \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z) e^{ik\alpha x}
-    \begin{bmatrix}
-         \hat{\mathbf{u}}_{p,q,k}(t) \\
-         \hat{p}_{p,q,k}(t)
-    \end{bmatrix}
-    =
-    \sum_{k=0}^{N-1} e^{ik\alpha x} \begin{bmatrix}
-        \mathbf{u}_k(y,z,t) \\ p_k(y,z,t)
-    \end{bmatrix}
-\end{equation}
-where $\alpha = \frac{2\pi}{L_x}$ is the streamwise wavenumber, $L_x$ is the streamwise domain length and $N$ refers to the number of Fourier expansions. Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations and taking the Fourier transform (equivalently to the Galerkin projection with respect to Fourier expansion as a test function) yields $N$-systems of equations,
-\begin{equation}
-    \frac{\partial \mathbf{u}_k}{\partial t} = - \tilde{\nabla}_k p_k + \nu(\nabla^2_{y,z} - k^2\alpha^2)\mathbf{u}_k - \widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u}\right]}_k, \qquad \tilde{\nabla}\mathbf{u}_k = 0
-\end{equation}
-where, $\tilde{\nabla} = (ik\alpha, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$, $\nabla_{y,z}^2 = (\frac{\partial^2}{\partial y^2}, \frac{\partial^2}{\partial z^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3.3 TEMPORAL DISCRETISATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
