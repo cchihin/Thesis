@@ -148,24 +148,6 @@ We emphasise that the streamwise direction is in $z$.
 The discretised equations are solved using a velocity correction scheme, based on a second-order stiffly splitting scheme, where the nonlinear advection and forcing terms are treated explicitly, while the pressure and diffusion terms are treated implicitly \citep{karniadakis_1991}.
 The $3/2$ and polynomial de-aliasing rule for the Fourier expansions and spectral/\emph{hp} elements are applied during the evaluation of the nonlinear advection terms.
 We refer to the solution obtained at the end of the velocity correction scheme as the homogenous velocity, $\mathbf{u}_h$.
-Due to the enforced periodicity in the streamwise $z$ direction via Fourier expansions, a pressure drop cannot be prescribed to drive the flow for $Re > 0$ scenarios.
-To sustain the flow, we use a Green's function approach \citep{chu1992parallel} to impose a constant flow rate,
-\begin{equation}
-    W_b = Q(\mathbf{u})=\frac{1}{2L_x h}\int_{x,y} \mathbf{u} \; \mathrm{d}x\mathrm{d}z,
-\end{equation}
-where $W_b$ and $Q(\cdot)$ refer to the desired flow rate and flow rate operator.
-A correction velocity, $\mathbf{u}_{corr}$, is obtained by solving the linear Stokes equation with unit forcing once and is stored for reuse.
-At the end of every time-step, the final velocity field, $\mathbf{u}$, is then updated by adding this correction velocity to the homogeneous velocity obtained from the velocity correction scheme,
-\begin{equation}
-    \mathbf{u} = \mathbf{u}_h + \gamma \mathbf{u}_{corr}, 
-\end{equation}
-where $\gamma$ defined as,
-\begin{equation}
-    \gamma = \frac{ W_b - Q(\mathbf{u}_h)}{Q(\mathbf{u}_{corr})},
-\end{equation}
-is adjusted to satisfy the desired flow rate, $W_b$.
-The flow rate, $W_b$, is related to the laminar centreline velocity $W_c = 3/2 W_b$, which defines the Reynolds number, $Re = W_c h / \nu$.
-For more details on the numerical method, the reader is referred to \cite{hossain2021spectral}.
 
 \subsection{$Ra$-$Re$ sweep}\label{sec:Raresweep}
 We consider fifty-two numerical experiments at $Re = 0, 0.1, 1, 10, 100, 500, 750, 1000, 1050$, $2000$, and $Ra = 0, 2000, 3000, 5000, 8000, 10000$ at $Pr = 1$ with a large aspect ratio of $\Gamma = 4\pi$.
