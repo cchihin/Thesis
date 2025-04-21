@@ -191,7 +191,7 @@ where $\Omega_{st}$ refers to the standard element, defined over local coordinat
 By considering formulations using the standard elements, the formulations of basis expansions, differential and integration operations can be performed in local coordinates, $\xi$, before mapping the results back to the global domain, $x$.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{NumericalTechniques/Figures/standard_element.pdf}
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element.pdf}
     \caption{A spectral/\emph{hp} element representation of a 1D continuous function, $u(x)$, deomposed into four non-overlapping finite elements, each containing a linear combination of three local expansion bases.}
     \label{fig:standard_element}
 \end{figure}
@@ -356,7 +356,7 @@ Within the Nektar++ framework, it is common to use the \emph{modified} basis bas
 where $P$ denotes the highest polynomial order. Figure \ref{fig:Modifiedbasis} shows the modified Jacobi polynomials for $p \in [0, 5]$ described by equation \ref{eq:modifiedJacobi}. The boundary modes are $\psi_0$ and $\psi_5$ while the rest are boundary modes.
 \begin{figure}[h]
     \centering
-        \includegraphics[width=\textwidth]{NumericalTechniques/Figures/modifiedBasis.pdf}
+        \includegraphics[width=\textwidth]{NumericalMethods/Figures/modifiedBasis.pdf}
         \caption{Two-dimensional and one-dimension modified basis, $\psi_p(\xi_1)$ and $\psi_q(\xi_2)$, $P = [0, 4].$}
         \label{fig:Modifiedbasis}
 \end{figure}
@@ -379,7 +379,7 @@ Typically, the zeros are located using the zeros of the Gauss-Lobatto polynomial
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{NumericalTechniques/Figures/Lagrange.pdf}
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/Lagrange.pdf}
     \caption{Two-dimensional and one-dimension Lagrange basis, $h_p(\xi_1)$ and $h_q(\xi_2)$, $P = [0, 4].$}
     \label{fig:Lagrangebasis}
 \end{figure}
@@ -580,97 +580,205 @@ Finally, we can assemble them using the assembly matrix,
 
 \section{Numerical techniques for solving the Navier-Stokes equations}
 \subsection{Velocity Correction Scheme}
-While methods for temporal and spatial discretisation have been discussed, it is not possible to apply these techniques in a straight-forward manner to the incompressible Navier-Stokes equations. This is because of the unique role of the pressure field which ensures that the time-dependent velocity field is divergence-free. However, the velocity and the pressure fields form a coupled-system through the continuity and momentum equations which requires the solution of both fields simultaneously. In general, there are 3 ways to deal with velocity-pressure coupling: (1) Coupled methods (\emph{Uzawa} method), (2) Change of variables (streamfunction-vorticity formulation) and (3) Splitting methods which decouples velocity and pressure. The velocity correction scheme (VCS) (\cite{karniadakis_1991}), a type of splitting method, decouples the velocity field from the pressure field used in \emph{nektar++} will be discussed in this section. The velocity correction scheme is a stiffly-stable time-integration (IMEX) scheme which treats the nonlinear terms (advection) explicitly and linear terms (pressure gradient and diffusion) implicitly.
-The VCS will be demonstrated through a worked example. The incompressible Navier-Stokes equations with unit density, constant density and viscosity is written as,
-\begin{equation}\label{eq:navierStokes}
-    \frac{\partial \mathbf{u}}{\partial t} = \mathrm{\mathbf{N}(\mathbf{u})} - \nabla p +  \nu \mathrm{\mathbf{L}}(\mathbf{u}), \qquad \nabla \cdot \mathbf{u},
+The spatial discretisation of the Helmholtz operator and its numerical solution procedure has been discussed using the spectral/\emph{hp} element methods.
+Here, we describe the numerical methods that is used to solve the Navier-Stokes equations given as,
+\begin{subequations}
+    \begin{equation}\label{eq:velocity_explicit}
+    \frac{\partial u}{\partial t}  + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + \nu \nabla^2 \mathbf{u} + \mathbf{f}
 \end{equation}
-where $\mathbf{u},\; p,\; \rho,\; \nu$ refers to the fluid's velocity, pressure, density and kinematic viscosity respectively. The convection and diffusion terms are conveniently written as nonlinear and linear functions,
 \begin{equation}
-    \mathrm{\mathbf{N}}(\mathbf{u}) \equiv - (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{2}\left[(\mathbf{u} \cdot \nabla )\mathbf{u} + \nabla\cdot(\mathbf{u}\mathbf{u})\right], \qquad \mathrm{\mathbf{L}}(\mathbf{u}) \equiv \nabla^2 \mathbf{u}.
+    \nabla \cdot \mathbf{u} = 0,
 \end{equation}
-The nonlinear terms are written in the skew-symmetric to minimise aliasing errors (\cite{karniadakis_1991}). The first step in the scheme is to time integrate the nonlinear terms explicitly,
+\text{with boundary conditions,}
+\begin{equation}
+    \mathbf{u} = 0, \quad \text{on} \; \partial \Omega.
+\end{equation}
+\end{subequations}
+Here, the primitive variables are velocity and pressure $(\mathbf{u}, p)$ and we assumed unit density, $\rho = 1$, with the kinematic viscosity appearing as the control parameter.
+The time evolution of velocity is explicit expressed in equation \eqref{eq:velocity_explicit}, but does not appear for the pressure, which is coupled to the velocity field, enforcing the incompressibility condition.
+%  THe pressure field is coupled to the velocity field, where algorithms designed were challenged
+Several strategies exist for addressing the coupled velocity-pressure fields by
+\begin{enumerate}
+    \item Solving the coupled system such as the Uzawa algorithm,
+    \item Splitting methods,
+    \item Change of coordinates (vorticity-streamfunction).
+\end{enumerate}
+% There are several ways in which this coupling challenge can be approached, 1) to solve the coupled system of equations using the Uzawa algorithm, 2) splitting-methods and the 3) velocity-vorticity formulation.
+We adopt splitting methods, which `splits' the evolution of the Navier-Stokes equation into independent substeps.
+% In this thesis we tdophe splitting methods, where the time-evolution of the Navier-Stokes equations are split into different substeps.
+These methods, belonging to the broader family of projection methods first introduced by Teman, can be further classified into pressure-correction or velocity-correction schemes.
+We focus on a high-order velocity-correction scheme.
+% The splitting methods belong to a family of methods, known as projection methods, were first introduced by Chorin and Teman.
+% In general, the splitting scheme can be further classified into pressure-correction or velocity-correction schemes.
+% Our focus of this thesis is on a higher-order velocity-correction scheme.
+% which treats the nonlinear terms (advection) explicitly and linear terms (pressure gradient and diffusion) implicitly.
+% The VCS will be demonstrated through a worked example.
+We rewrite the incompressible Navier-Stokes equations in semi-discrete form with using linear and nonlinear operators as,
+\begin{subequations}\label{eq:semidiscreteNS}
+    \begin{equation}
+        \frac{\partial \mathbf{u}}{\partial t} = \mathrm{\mathbf{N}(\mathbf{u})} - \nabla p +  \nu \mathrm{\mathbf{L}}(\mathbf{u}),
+    \end{equation}
+    \begin{equation}
+        \nabla \cdot \mathbf{u} = 0,
+    \end{equation}
+    \text{with boundary conditions,}
+    \begin{equation}
+        \mathbf{u}|_\Omega = 0, \quad \mathbf{u}(t=0) = \mathbf{u}_0.
+    \end{equation}
+\end{subequations}
+The nonlinear, $\mathbf{N}$, linear, $\mathbf{L}$, operators are obtained from a suitable spatial-discretisation method such as the spectral/\emph{hp} element method.
+The nonlinear and linear operators are defined as,
+\begin{equation}
+    \mathrm{\mathbf{N}}(\mathbf{u}) \equiv - (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{2}\left[(\mathbf{u} \cdot \nabla )\mathbf{u} + \nabla\cdot(\mathbf{u}\mathbf{u})\right], \qquad \mathrm{\mathbf{L}}(\mathbf{u}) \equiv \nabla^2 \mathbf{u},
+\end{equation}
+% while the body-forcing operator may or may not depend on the solution $\mathbf{f}$.
+We note that the nonlinear terms are written in the skew-symmetric to minimise aliasing errors \citep{karniadakis_high-order_1991}. 
+To advance the velocity at time step, $\mathbf{u}^{n}$, to the next time step, $\mathbf{u}^{n+1}$, we integrate equation \eqref{eq:semidiscreteNS} over a time step $\Delta t$,
+\begin{equation}\label{eq:split}
+\mathbf{u}^{n+1} - \mathbf{u}^n = \underbrace{\int_{t_n}^{t_{n+1}} \mathbf{N}(\mathbf{u}) \, \mathrm{d}t}_{\Delta t \sum_{q=0}^{J_e - 1} \beta_q \mathbf{N}(\mathbf{u}^{n-q})} \; - \; \underbrace{\int_{t_n}^{t_{n+1}} \nabla p \, \mathrm{d} t}_{\Delta t \nabla \bar{p}^{n+1}} \; + \; \nu\underbrace{\int_{t_n}^{t_{n+1}} \mathbf{L}(\mathbf{u})\, \mathrm{d}t}_{\Delta t \sum_{q = 0}^{J_i - 1} \gamma_q \mathbf{L}(\mathbf{u}^{n+1-q})}.
+\end{equation}
+The velocity correction scheme evaluates the underbraced terms in three successive independently from left to right independently, effectively `splitting' equation \eqref{eq:semidiscreteNS} from this point onwards.
+The first step we perform is to extrapolate the advection velocities, by approximating the nonlinear terms using an explicit scheme such as the Adams-Bashforth family of $J_e$ order,
 \begin{equation}\label{eq:firstStep}
     \frac{\mathbf{\hat{u}} - \sum_{q=0}^{J_e-1} \alpha_{q} \mathbf{u}^{n-q}}{\Delta t} = \sum_{q=0}^{J_e-1} \beta_q \mathrm{\mathbf{N}}(\mathbf{u}^{n-q}),
 \end{equation}
-where $\mathbf{\hat{u}}$ is the first intermediate velocity field, $J_e$ denotes the order of the explicit scheme, superscript $n$ denotes the solution at the $n^{th}$ time-step and $\alpha_q,\; \beta_q$ refers to constant related to the IMEX schemes. Next, the second intermediate velocity field $\hat{\hat{\mathbf{u}}}$ is obtained from the gradient of the pressure field at $n+1$,
+where $\mathbf{\hat{u}}$ is denotes the primary intermediate velocity field desired and $\alpha_e,\beta_e$ refers to the time integration coefficients for a prescribe $J_e$-th order, described later.
+After evaluting $\mathbf{\hat{u}}$, we move onto the second term in equation \eqref{eq:split}, which defines the pressure at time step $n+1$ as,
 \begin{equation}\label{eq:secondStep}
     \frac{\mathbf{\hat{\hat{u}}} - \mathbf{\hat{u}}}{\Delta t} = -\nabla p^{n+1}.
 \end{equation}
-However, the pressure field at time-step $n+1$ is not known. Taking the divergence of equation \ref{eq:secondStep}, and assuming that $\hat{\hat{\mathbf{u}}}$ is divergence-free, the Poisson equation for pressure is given as,
-\begin{equation}\label{eq:pressurePoisson}
-    \nabla^2 p^{n+1} = \nabla \cdot \left(\frac{\mathbf{\hat{u}}}{\Delta t}\right).
-\end{equation}
-with the following boundary condition,
-\begin{equation}\label{eq:pressureBC}
-\frac{\partial p^{n+1}}{\partial n} = \mathbf{n} \cdot \left(\frac{\mathbf{\hat{\hat{u}}} - \mathbf{\hat{u}}}{\Delta t}\right)
-\end{equation}
-However, this boundary condition often suffer from splitting errors and may lead to wrong solutions (\cite{karniadakis_1991}). To rectify this, the boundary condition is directly obtain by taking normal dot product with \ref{eq:navierStokes} and evaluated explicity (\cite{alessandro_phd_2013}),
+$\mathbf{\hat{\hat{u}}}$ denotes as the secondary intermediate velocity.
+In this single equation, we seek to obtain two unknown solutions, $\mathbf{\hat{\hat{u}}}$ and $p^{n+1}$, which is ill-posed, and seek to impose certain restrictions.
+The splitting method assumes that the secondary intermediate velocity is divergence free, $\nabla \cdot \mathbf{\hat{\hat{u}}} = 0$, and satisfies the Dirichlet boundary conditions normal to the boundary, $\mathbf{\hat{\hat{u}}} \cdot \mathbf{n} = \mathbf{u}|_\Omega \cdot \mathbf{n}$.
+By considering the assumptions above and the divergence of equation \eqref{eq:secondStep}, we obtain the pressure Poisson equation with the primary intermediate velocity acting as the forcing term,
+\begin{subequations}
+    \begin{equation}\label{eq:pressurePoisson}
+        \nabla^2 p^{n+1} = \nabla \cdot \left(\frac{\mathbf{\hat{u}}}{\Delta t}\right)
+    \end{equation}
+    \text{and boundary conditions,}
+    \begin{equation}\label{eq:pressureBC}
+    \frac{\partial p^{n+1}}{\partial n} = \mathbf{n} \cdot \left(\frac{\mathbf{\hat{\hat{u}}} - \mathbf{\hat{u}}}{\Delta t}\right).
+    \end{equation}
+\end{subequations}
+While the pressure boundary condition \eqref{eq:pressureBC} is straightforward to evalute, it is sensitive to large splitting errors \citep{karniadakis_high-order_1991}.
+To overcome this, we consider a high-order boundary condition of pressure, obtained by taking the normal dot product of equation \eqref{eq:semidiscreteNS},
 \begin{equation}\label{eq:modifiedpressureBC}
-    \frac{\partial p^{n+1}}{\partial t} = -\sum_{q=0}^{J_e-1} \beta_q \left[ \frac{1}{\Delta t} \mathbf{u}^{n-q} + \nu (\nabla \times \omega^{n-q}) + (\mathbf{u}^{n-q} \cdot \nabla)\mathbf{u}^{n-q} \right] \cdot \mathbf{n}.
+    \frac{\partial p^{n+1}}{\partial t} = -\sum_{q=0}^{J_e-1} \beta_q \left[ \frac{1}{\Delta t} \mathbf{u}^{n-q} + \nu [\nabla \times (\nabla \times \mathbf{u}^{n-q})] + (\mathbf{u}^{n-q} \cdot \nabla)\mathbf{u}^{n-q} \right] \cdot \mathbf{n}.
 \end{equation}
-where $\omega = \nabla \times \mathbf{u}$, $J_e$ is the order for the explicit scheme, $\beta_q$ is the coefficient related to the time-integration scheme. We obtain the pressure field at time-step $n+1$ by solving the pressure Poisson equation (\ref{eq:pressurePoisson}) with the modified boundary conditions (\ref{eq:modifiedpressureBC}). Then, the second intermediate velocity field $\hat{\hat{\mathbf{u}}}$ is obtained from equation \ref{eq:secondStep}. Finally, the velocity field at $n+1$ is obtain from the final step of the scheme by solving
+Notably, the linear operator is expressed as $\mathbf{L}(\mathbf{u}) = \nabla(\nabla \cdot \mathbf{u}) - \nabla \times (\nabla \times \mathbf{u})$, favouring numerical stability \citep{orszag_boundary_1986,karniadakis_high-order_1991}.
+% Next, the second intermediate velocity field $\hat{\hat{\mathbf{u}}}$ is obtained from the gradient of the pressure field at $n+1$,
+% However, the pressure field at time-step $n+1$ is not known. Taking the divergence of equation \ref{eq:secondStep}, and assuming that $\hat{\hat{\mathbf{u}}}$ is divergence-free, the Poisson equation for pressure is given as,
+$J_e$ is the order the explicit scheme as in equation \eqref{eq:firstStep}.
+After solving for the pressure Poisson equation, the secondary intermediate velocity could be subsequently obtained using equation \eqref{eq:secondStep}.
+% We obtain the pressure field at time-step $n+1$ by solving the pressure Poisson equation (\ref{eq:pressurePoisson}) with the modified boundary conditions (\ref{eq:modifiedpressureBC}).
+After which, we can move onto the final substep in equation \eqref{eq:split}, by solving a Helmholtz equation for $\mathbf{u}^{n+1}$, 
 \begin{equation}\label{eq:thirdStep}
-    \frac{\gamma_0\mathbf{u}^{n+1} - \hat{\hat{\mathbf{u}}}}{\Delta t} = \nu \sum_{q=0}^{J_i-1} \beta_q \mathrm{\mathbf{L}}(\mathbf{u}^{n+1-q}), \qquad \mathbf{u}^{n+1}|_{\delta\Omega} = g_D
+    \frac{\gamma_0\mathbf{u}^{n+1} - \hat{\hat{\mathbf{u}}}}{\Delta t} = \nu \sum_{q=0}^{J_i-1} \gamma_q \mathrm{\mathbf{L}}(\mathbf{u}^{n+1-q}),
 \end{equation}
-where $J_i$ denotes the order of the implicit scheme, $\gamma_0,\; \beta_q$ are coefficients related to the stiffly stable time-integration scheme and $\mathbf{u}^{n+1}$ satisfies the Dirichlet boundary conditions. Table \ref{tab:stiffyStableCoefficients} shows the coefficients of stiffly-stable time-integration schemes (\cite{alessandro_phd_2013}).
-\renewcommand{\arraystretch}{1.5} % Default value: 1
+where the linear terms are treated based similar to the family of Adams-Moulton implicit scheme and $J_i, \gamma_q$ denotes the order of the scheme and time integration coefficients, completing the velocity correction scheme.
+The time integration coefficients are determined from stiffly stable schemes shown in table \ref{tab:stiffyStableCoefficients}, an improvement from the Adams-family schemes \citep{karniadakis_high-order_1991}.
+\renewcommand{\arraystretch}{1.} % Default value: 1
 \begin{table}[h]
     \centering
-        \begin{tabular}{c|c|c}
-            test & $1^{st}$ order & $2^{nd}$ order \\
+        \begin{tabular}{c c c c}
+            Coefficients & $1^{st}$ order & $2^{nd}$ order & $3^{rd}$ order \\
             \hline
-            $\gamma_0$ & 1 & 3/2 \\
-            $\beta_0$ & 1 & 2 \\
-            $\beta_1$ & 0 & -1 \\
-            $\alpha_0$ & 0 & -1/2 \\
-            $\alpha_1$ & 0 & 0 
+            $\gamma_0$ & 1 & 3/2 & 11/6 \\
+            $\alpha_0$ & 1 & 2   & 3    \\
+            $\alpha_1$ & 0 & -1/2 & -3/2 \\
+            $\alpha_2$ & 0 & 0  & 1/3 \\
+            $\beta_0$ & 1 & 2 & 3 \\ 
+            $\beta_1$ & 0 & -1 &  -3 \\
+            $\beta_2$ & 0 & 0 &   1 \\
         \end{tabular}
-        \caption{Stiffly-stable splitting scheme coefficients}
+        \caption{Integration coefficient of stiffly stable schemes from \cite{karniadakis_high-order_1991}.}
     \label{tab:stiffyStableCoefficients}
 \end{table}
+Before we do so, we have to define the test functional spaces of velocity, $\mathcal{W}$, and pressure $\mathcal{Q}$, defined as,
+\begin{subequations}
+    \begin{equation}
+        \mathcal{V} := \{ v \, | \, v \in H_0^1(\Omega), \, v|_{\partial \Omega} = 0\}
+    \end{equation}
+    \begin{equation}
+        \mathcal{Q} := \{ q \, | \, q \in L_0^2(\Omega), \, \int_\Omega q \, \mathrm{d}x = 0\}.
+    \end{equation}
+\end{subequations}
+The Dirichlet boundary conditions for the test functional space, $\mathcal{V}$, is consistent with the primitive velocity, $\mathbf{u}$, while the $L_0^2$ denotes a zero mean instead of homogeneous Dirichlet boundary conditions. 
+The test function space for pressure is a polynomial other lower since derivatives for pressure do not appear in the weak formulation as we shall see below.
+We neglect the unsteady term, leading to a steady Stokes problem, appearing as the right-hand if we consider time-advacing the solutions,
+\begin{subequations}
+\begin{equation}
+    (\nabla \mathbf{v}, \nu \nabla \mathbf{u}) - (\nabla \cdot \mathbf{v}, p) = (\mathbf{v}, \mathbf{f}), \quad &\forall \, \mathbf{v} \in \mathcal{V} 
+\end{equation}
+\begin{equation}
+    (q, \nabla \cdot \mathbf{u}) = 0, \quad  &\forall \, q \in \mathcal{Q}
+\end{equation}
+\end{subequations}
+
+which is a time-dependent nonlinear partial differential equation, 
+While methods for temporal and spatial discretisation have been discussed, it is not possible to apply these techniques in a straight-forward manner to the incompressible Navier-Stokes equations.
+This is because of the unique role of the pressure field which ensures that the time-dependent velocity field is divergence-free.
+However, the velocity and the pressure fields form a coupled-system through the continuity and momentum equations which requires the solution of both fields simultaneously.
+In general, there are 3 ways to deal with velocity-pressure coupling: (1) Coupled methods (\emph{Uzawa} method), (2) Change of variables (streamfunction-vorticity formulation) and (3) Splitting methods which decouples velocity and pressure.
+The velocity correction scheme (VCS) (\cite{karniadakis_1991}), a type of splitting method, decouples the velocity field from the pressure field used in \emph{nektar++} will be discussed in this section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOURIER SPECTRAL/HP ELEMENT METHODS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Fourier spectral/\emph{hp} modes}
-The Fourier spectral/\emph{hp} element method uses a combination of Fourier expansions and spectral/\emph{hp} element method to discretise the spatial domain. In a turbulent channel flow, the Fourier expansions are used to represent the periodic streamwise and cross stream directions, while the spectral/\emph{hp} elements are used to discretise the wall-normal direction. Within the \emph{nektar++} framekwork, the Fourier spectral/\emph{hp} element method (also known as a Quasi-3D approach), can be implemented either with 2D spectral/\emph{hp} elements and 1D Fourier expansions (3DH1D) or 1D spectral/\emph{hp} elements and 2D Fourier expansions (3DH2D). In this work, the 2D spectral/\emph{hp} elements with 1D Fourier expansions are used to discretise the cross stream plane and streamwise flow respectively. The use of 2D spectral/\emph{hp} elements in the cross stream plane is necessary to represent the riblet geometry (\cite{chu_1993}). The time- and spatially-varying velocity and pressure in the cross stream planes are approximated as a finite sum of 2D modified Jacobi polynomials up to the $P^{th}$-order,
-\renewcommand{\arraystretch}{1.} % Default value: 1
-\begin{equation}\label{eq:crossStream}
-    \begin{bmatrix}
-        \mathbf{u}^\delta(y,z,t) \\
-        p^\delta(y,z,t)
-    \end{bmatrix}
-    =
-    \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z)
-    \begin{bmatrix}
-         \hat{\mathbf{u}}_{p,q}(t) \\
-         \hat{p}_{p,q}(t)
-    \end{bmatrix}
-\end{equation}
-where $\hat{\mathbf{u}}_{p,q}(t)$ and $\hat{p}_{p,q}(t)$ are the time-varying coefficients. Extending equation \ref{eq:crossStream} to include the streamwise direction represented by Fourier expansions,
+Fourier-Chebyshev-Fourier type discretisation have been recognised as preferred method for performing direct numerical simulations (DNS) of transitional or turbulent channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions respectively.
+The Fourier spectral/\emph{hp} element method draws on this approach, where the homogeneous directions is represented by the Fourier expansions while the spectral/\emph{hp} elements.
+This approach has been commonly referred to as the Quasi-3D or (2.5D) approach, allowing for a flexible description of the inhomogeneous directions, such as riblets [doug chu].
+% The Fourier spectral/\emph{hp} element method uses a combination of Fourier expansions and spectral/\emph{hp} element method to discretise the spatial domain.
+For example, in the turbulent channel flows with riblets, the Fourier expansions are used to represent the periodic streamwise, while the spectral/\emph{hp} elements are used to discretise the wall-normal direction.
+In the analysis of three-dimensional wakes of cylinders where the Fourier expansions are treated in the spanwise directions.
+% Within the \emph{nektar++} framekwork, the Fourier spectral/\emph{hp} element method (also known as a Quasi-3D approach), can be implemented either with 2D spectral/\emph{hp} elements and 1D Fourier expansions (3DH1D) or 1D spectral/\emph{hp} elements and 2D Fourier expansions (3DH2D).
+In this thesis, we routinely use the the Quasi-3D approach, consisting of the 2D spectral/\emph{hp} elements with 1D Fourier expansions are used to discretise the cross stream plane and streamwise flow respectively. 
+The velocity and pressure in the spectral/\emph{hp} plane is described by two dimensional modified bases with Fourier expansions,
 \begin{equation}\label{eq:fourierSpectral}
     \begin{bmatrix}
         \mathbf{u}^\delta(x,y,z,t) \\
         p^\delta(x,y,z,t)
     \end{bmatrix}
     =
-    \sum_{k=0}^{N-1} \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z) e^{ik\alpha x}
+    \sum_{k=0}^{N_z-1} \sum_{p=0}^{P} \sum_{q=0}^{P} \psi_p(x) \psi_q(y) e^{ik\beta z}
     \begin{bmatrix}
          \hat{\mathbf{u}}_{p,q,k}(t) \\
          \hat{p}_{p,q,k}(t)
     \end{bmatrix}
     =
-    \sum_{k=0}^{N-1} e^{ik\alpha x} \begin{bmatrix}
-        \mathbf{u}_k(y,z,t) \\ p_k(y,z,t)
+    \sum_{k=0}^{N-1} e^{ik\beta z} \begin{bmatrix}
+        \mathbf{\tilde{u}}_k(x,y,t) \\ \tilde{p}_k(x,y,t)
     \end{bmatrix}
 \end{equation}
-where $\alpha = \frac{2\pi}{L_x}$ is the streamwise wavenumber, $L_x$ is the streamwise domain length and $N$ refers to the number of Fourier expansions. Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations and taking the Fourier transform (equivalently to the Galerkin projection with respect to Fourier expansion as a test function) yields $N$-systems of equations,
+% The time- and spatially-varying velocity and pressure in the cross stream planes are approximated as a finite sum of 2D modified Jacobi polynomials up to the $P^{th}$-order,
+% \renewcommand{\arraystretch}{1.} % Default value: 1
+% \begin{equation}\label{eq:crossStream}
+%     \begin{bmatrix}
+%         \mathbf{u}^\delta(y,z,t) \\
+%         p^\delta(y,z,t)
+%     \end{bmatrix}
+%     =
+%     \sum_{p=0}^P \sum_{q=0}^P \psi_p(y) \psi_q(z)
+%     \begin{bmatrix}
+%          \hat{\mathbf{u}}_{p,q}(t) \\
+%          \hat{p}_{p,q}(t)
+%     \end{bmatrix}
+% \end{equation}
+% where $\hat{\mathbf{u}}_{p,q}(t)$ and $\hat{p}_{p,q}(t)$ are the time-varying coefficients.
+where $\beta = \frac{2\pi}{L_z}$ is the spanwise wavenumber, $L_z$ the spanwise length, $N_z$ the number of Fourier expansions.
+Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations and taking the Fourier transform (equivalently to the Galerkin projection with respect to Fourier expansion as a test function) yields a system of $N_z$ decoupled equations, amenable for parallel processing,
+\begin{subequations}\label{eq:fouriertransformedNS}
 \begin{equation}
-    \frac{\partial \mathbf{u}_k}{\partial t} = - \tilde{\nabla}_k p_k + \nu(\nabla^2_{y,z} - k^2\alpha^2)\mathbf{u}_k - \widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u}\right]}_k, \qquad \tilde{\nabla}\mathbf{u}_k = 0
+    \frac{\partial \mathbf{\tilde{u}}_k}{\partial t} = - \tilde{\nabla}_k \tilde{p}_k + \nu(\nabla^2_{x,y} - k^2\beta^2)\mathbf{\tilde{u}}_k - \widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u}\right]}_k 
 \end{equation}
-where, $\tilde{\nabla} = (ik\alpha, \frac{\partial}{\partial y}, \frac{\partial}{\partial z})$, $\nabla_{y,z}^2 = (\frac{\partial^2}{\partial y^2}, \frac{\partial^2}{\partial z^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
+\begin{equation}
+    - k \beta \tilde{\nabla} \cdot \mathbf{\tilde{u}}_k = 0, \quad k = 0, ..., N_z-1
+\end{equation}
+\end{subequations}
+
+where, $\tilde{\nabla}_k = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, ik\beta)$, $\nabla_{x,y}^2 = (\frac{\partial^2}{\partial x^2}, \frac{\partial^2}{\partial y^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
 
 \subsection{Enforcing constant flow rate}
 Due to the enforced periodicity in the streamwise $z$ direction via Fourier expansions, a pressure drop cannot be prescribed to drive the flow for $Re > 0$ scenarios.
