@@ -51,6 +51,62 @@ The pressure is scaled by $ \rho \kappa^2 / d^2 $, while $\theta(\equiv(T-T_U)/\
 The Rayleigh number $Ra$, and the Prandtl number, $Pr$, are defined as in \S\ref{sec:1}.
 In this study, we set $Pr = 1$.
 
+\section{Projection methods for Navier-Stokes equations}
+In this section, we describe the projection methods for solving the incompressible Navier Stokes equations.
+The projection methods belong to a general class of splitting methods, where the solution step for obtaining the velocity and pressure from the incompressible Navier Stokes are uncoupled.
+The premise for being able to do this is because the pressure terms act as a Lagrange multiplier which enforces the incompressibility constraint.
+Suppose we want to find the function $u$ that minimises the functional,
+\begin{equation}
+\min_{\mathbf{u} \neq \mathbf{0}} \frac{\nu}{2} (\nabla \mathbf{u}, \nabla \mathbf{u}) - (f, \mathbf{u}), \quad \text{s.t} \quad \nabla \cdot \mathbf{u} = 0
+\end{equation}
+where $(\mathbf{x}, \mathbf{y}) = \int_\Omega \mathbf{x}^T \mathbf{y} \, \mathrm{d}\Omega$ refers to a suitable inner product.
+To solve this optimisation problem, we use the method of Lagrange multipliers which handles the constrain, by converting the equation above into an unconstrained optimisation problem defined by the Lagrangian
+\begin{equation}
+\mathcal{L} = \frac{\nu}{2} (\nabla \mathbf{u}, \nabla, \mathbf{u}) - (f, \mathbf{u}) - (p, \nabla \cdot \mathbf{u})
+\end{equation}
+Taking the variation $\delta \mathcal{L}$, with respect $\delta \mathbf{u}$, we get
+\begin{align}
+    \frac{\delta \mathcal{L}}{\delta \mathbf{u}} &= \nu (\nabla \mathbf{u}, \nabla \delta \mathbf{u}) - (f, \delta \mathbf{u}) - (p, \nabla \cdot \delta\mathbf{u}), \\
+                                                 &= - \nu (\nabla^2 \mathbf{u}, \delta \mathbf{u}) - (f, \delta \mathbf{u}) + (\nabla p, \delta \mathbf{u}) \\
+                                                 & = (-\nu \nabla^2 \mathbf{u} - f + \nabla p , \delta \mathbf{u}).
+\end{align}
+and with respect to $\delta p$, we get,
+\begin{equation}
+    -\frac{\delta \mathcal{L}}{\delta p} = (\delta p, \nabla \cdot \mathbf{u}).
+\end{equation}
+The optimal condition is defined by vanishing variations, hence, we recover the Stokes equations,
+\begin{subequations}
+    \begin{equation}
+        \nu \nabla^2 \mathbf{u} + \nabla p = -f
+    \end{equation}
+    \begin{equation}
+        \nabla \cdot \mathbf{u} = 0        
+    \end{equation}
+\end{subequations}
+In other words, the role of pressure is to serve as a constrain to enforce incompressibility, where we can consider a velocity field that is not divergence fre, which is then corrected by pressure later - the splitting method.
+To witness this is action, we consider the basic approach of Chorin's projection which is a two step method,
+\begin{subequations}
+\begin{equation}
+    \frac{\mathbf{u}^* - \mathbf{u}^n}{\Delta t} = - (\mathbf{u}^n \cdot \nabla) \mathbf{u}^n + \nu \nabla^2 \mathbf{u}^n
+\end{equation}
+\text{then,}
+\begin{equation}
+    \mathbf{u}^{n+1} =  \mathbf{u}^* + {\Delta t} \nabla p^{n+1}.
+\end{equation}
+\end{subequations}
+The idea of projection stems of taking the weak formulation of the second equation with $v \in \mathbf{V} := { \mathbf{v} \in H_0^1(\Omega) \, : \, \nabla \cdot \mathbf{v} = 0 }$,
+\begin{equation}
+    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) + (\nabla p^{n+1}, \mathbf{v})
+\end{equation}
+Taking integration by parts we get,
+\begin{equation}
+    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) - \underbrace{ (p^{n+1}, \nabla \cdot \mathbf{v})}_ {=0},
+\end{equation}
+Hence,
+\begin{equation}
+    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v})
+\end{equation}
+
 \section{Simulation parameters for $Ra$-$Re$ sweep}\label{app:params}
 \begin{table}\scriptsize
 \centering

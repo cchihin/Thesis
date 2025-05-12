@@ -20,9 +20,19 @@
 \usepackage{makecell}
 \usepackage{tikz}
 \usepackage{newtxtext}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% Used for definitions
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}
 
 % \includeonly{Background/background}
 \includeonly{NumericalMethods/numericalmethods}
+% \includeonly{Appendices/appendices}
 % \includeonly{Cover/cover}
 
 \begin{document}
@@ -37,6 +47,7 @@
 \include{NumericalMethods/numericalmethods}
 \include{TransitionalRBP/transitionalrbp}
 \include{StateSpaceStructureOfSDC/statespacestructureofsdc}
+
 % \include{ResultsDiscussion/lowre}
 % \include{ResultsDiscussion/highre}
 \include{Conclusions/conclusions}

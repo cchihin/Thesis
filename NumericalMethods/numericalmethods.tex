@@ -1,45 +1,59 @@
 \chapter{Numerical Techniques}\label{chap:3}
-In this chapter, I will present the numerical methods relevant to this thesis.
-The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field.
-One of the foundations of solving partial differential equations begin with the method of weighted residuals. 
+We will discuss the fundamentals of numerical methods relevant to solving the Navier-Stokes equations.
+We begin the discussion of the weighted of residuals (\S \ref{sec:methodofweightedresiduals}) and the spatial discretisation using spectral/\emph{hp} element methods in one dimension (\S \ref{sec:spectralhpelementmethods}).
+This is followed by techniques for solving the Navier-Stokes equations (\S \ref{sec:numeraltechniquesforNS}), introducing the velocity-correction scheme, enforcing a constant flow rate and the quasi-3D approach for semi-homogeneous domains. 
+This chapter concludes with numerical techniques for the stability analysis of the Navier-Stokes equations (\S \ref{sec:stabilityanalysisofNS}), including eigenvalue computation and edge tracking.
+% In this chapter, I will present the numerical methods ultilised in this thesis.
+% The premise of numerical methods is to solve for the the partial differential equations, the Navier-Stokes equations.
+% The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field.
+% One of the foundations of solving partial differential equations begin with the method of weighted residuals. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3.1 METHOD OF WEIGHTED RESIDUALS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Method of weighted residuals}
-We discuss the method of weighted residuals which provides a mathematical framework for approximating the solutions of partial differential equations.
-We first  consider a generic linear partial differential equation as,
+\section{Method of weighted residuals}\label{sec:methodofweightedresiduals}
+Spatial discretisation errors, or residuals, arises as one seeks an approximate solution to some partial differential equation (PDE).
+The method of weighted residual provides a generic mathematical framework in which constraints on the residual could be applied flexibly, defining the spatial discretisation scheme and its convergence properties.
+In summary, we approximate the solution of PDE by considering a finite expansion of a suitable basis, to which its coefficients are sought after by minimising the inner product between the PDE and a test (or weight) function.
+To demonstrate this, we consider a linear partial differential equation as,
 \begin{equation}\label{eq:linear_operator}
-    \mathbf{L}[u(x)] = 0, \quad x \in \Omega
+    \mathbf{L}[u(x)] = 0, \quad x \in \Omega,
 \end{equation}
-where $\mathbf{L}$ refers to a spatial (linear) differential operator subjected to some boundary conditions within the domain, $\Omega$ while $u(x)$ refers to the solution.
-Typical examples of spatial differential operators are the Laplace, Poisson or Helmholtz operators.
-In seeking the solution, $u(x)$, we assume that it could be approximated by a finite number of $N$ basis (or expansion) functions, $\Phi(x)$, 
+where $\mathbf{L}$ refers to a linear spatial differential operator subjected to some boundary conditions within the domain, $\Omega$, while $u(x)$ refers to the exact solution of $\mathbf{L}$.
+Examples of PDEs with linear spatial differential operators include the Laplace equation, $\nabla^2 u = 0 $, Poisson equation, $\nabla^2 u = f$, and the Helmholtz equation, $\nabla^2 u + \lambda u  = f$.
+We suppose that the exact solution $u(x)$ can be approximated (discretised) by $N$ finite number of basis (or expansion) functions, $\Phi(x)$.
 \begin{equation}\label{eq:approximate}
     u(x) \approx u^\delta(x) = \sum_{i=0}^{N-1} \hat{u}_i \Phi_i(x),
 \end{equation}
-where $u^\delta(x)$ refers to the approximate solution of $u(x)$, comprising of a linear combination of the product between the $i^{th}$ basis coefficient, $\hat{u}_i$, and a basis function $\Phi_i(x)$, that is defined within $\Omega$.
-Since $u^\delta(x)$ is an approximate solution of equation \eqref{eq:helmholtz}, we expect a non-zero difference (or `error') between the exact solution, $u(x)$, and $u^\delta(x)$, known as the residual, $R$, given as,
+where $u^\delta(x)$ refers to the approximate solution of $u(x)$, consisting of a linear combination of the product between the $i^{th}$ basis coefficient, $\hat{u}_i$, and the $i^{th}$ basis function $\Phi_i(x)$, defined within $\Omega$.
+Since $u^\delta(x)$ is an approximate solution of equation \eqref{eq:helmholtz}, we expect a non-zero difference (or `error') between the exact solution, $u(x)$, and $u^\delta(x)$, known as the residual, $R$,
 \begin{equation}\label{eq:residual}
     \mathbf{L}[u^\delta(x)] = R[u^\delta(x)].
 \end{equation}
-The residual depends on the approximate solution $u^\delta(x)$, and is non-zero, varying within $\Omega$.
+The residual depends on the approximate solution $u^\delta(x)$ is non-zero, and vary within $\Omega$.
 In other words, equation \eqref{eq:helmholtz} might not be satisfied everywhere in $\Omega$. 
-We need to place restrictions on the residual, such that it $R \rightarrow 0$, and the approximate solution approaches the exact solution, $u^\delta(x) \rightarrow u(x)$.
-The method of residuals allow us to place a restriction on $R$ is by using $N$ weight (or test) functions, $v_j(x)$, such that it is orthogonal with the residual,
+We need to place restrictions on the residual, such that it the residual approaches zero, $R \rightarrow 0$, and the approximate solution approaches the exact solution, $u^\delta(x) \rightarrow u(x)$.
+The method of residuals places a restriction on the residual by applying an inner product between the governing equation, and $N$ test (or weight) functions, $v_j(x)$, and setting it to zero,
 \begin{equation}\label{eq:weightinnerresidual}
     (v_j(x), R[u^\delta(x)]) = 0, \quad j = 0, ..., N-1.
 \end{equation}
-where $(\, \cdot \, , \, \cdot \,)$ refers to an inner-product, a measure of orthogonality between functions defined as,
-\begin{equation}\label{eq:inner-product}
-       (f, g) = \int_\Omega f(x) g(x) dx.
+\begin{definition}[Inner product]
+The inner product between two functions $f(x)$ and $g(x)$ is,
+\begin{equation}
+       (f, g) = \int_\Omega f(x) g(x) dx \nonumber.
 \end{equation}
-By setting the inner-product to $0$, equation \eqref{eq:weightinnerresidual} becomes a system of $N$ ordinary differential equations, where the basis coefficients, $\hat{u}_i$, could be determined as we shall see later.
-The choice of weight function defines the class of projection methods, and the common projection methods are shown in table \ref{tab:weightFunction}.
-It is worth noting that the method of weighted residuals describes the projection method, and does not specify the type of basis functions employed.
-The choice of projection method, and basis expansions will have different solution convergence properties, i.e. how does the residual decay as the number of basis expansions increases?
-By considering Fourier basis expansions, one can expect exponential convergence, desirable for an efficient representation of turbulent dynamics.
+\end{definition}
+% where $(\, \cdot \, , \, \cdot \,)$ refers to an inner product, a measure of orthogonality between function $f(x)$ and $g(x)$ defined as,
+% \begin{equation}\label{eq:inner-product}
+%        (f, g) = \int_\Omega f(x) g(x) dx.
+% \end{equation}
+By setting equation \eqref{eq:weightinnerresidual} to zero, it becomes a system of $N$ ordinary differential equations, where the $N$ basis coefficients, $\hat{u}_i$.
+The choice of test function defines the projection methods, and examples of projection methods are shown in table \ref{tab:weightFunction}.
+We emphasise that the method of weighted residuals merely describes the projection method, but does not specify the type of basis functions, as we will discuss later in \S \ref{sec:spectralhpelementmethods}.
+The choice of projection method coupled with suitable basis expansions will have different solution convergence properties.
+A particular interest is on how quickly the residual vanishes as the number of basis expansions increases.
+For instance, by considering the Galerkin method coupled with Fourier expansions, one can expect exponential convergence, desirable for an efficient representation of turbulent dynamics.
 % Certain mathematical properties such as spectral convergence as desired in the case of Galerkin projection using Fourier expansions, 
 % The choice of \emph{trial} functions used in \emph{nektar++} will be elaborated in Section \ref{sec:modifiedBasis}.
 % the method of weighted residuals is only restrictive to the weight
@@ -64,10 +78,10 @@ By considering Fourier basis expansions, one can expect exponential convergence,
 \end{table}
 % For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$.
 % The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$.
-\section{Galerkin Projection}
-The Galerkin projection is a remain as a projection method in finite elements, where the weight functions, $v(x)$, are chosen to be the same as the basis functions, $\Phi(x)$.
-We will elaborate on what defines being the `same' later.
-To demostrate the Galerkin projection method, we consider that the spatial (linear) differential operator in equation \eqref{eq:linear_operator} as a 1D Helmholtz equation,
+\section{Galerkin Projection}\label{sec:galerkinprojection}
+The Galerkin projection remains a standard projection method in the context of the finite element method, where the test functions, $v(x)$, are chosen to be the same as the basis functions, $\Phi(x)$.
+Mathematically, the test and basis functions belong to the same functional space.
+To demostrate the Galerkin projection method, we consider that the differential operator earlier in equation \eqref{eq:linear_operator} as a 1D Helmholtz equation,
 \begin{subequations}\label{eq:helmholtz}
     \begin{equation}
         \mathbf{L}[u(x)] \equiv \frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) - f(x) = 0, \quad x \in \Omega := [0, l]
@@ -76,75 +90,90 @@ To demostrate the Galerkin projection method, we consider that the spatial (line
         u(0) = g_D, \quad \frac{\partial u}{\partial x}\Big|_{x=l} = g_{N}.
     \end{equation}
 \end{subequations}
-where $\lambda$ is a real positive constant, $f(x)$ is the forcing function, and $\Omega$ the spatial domain bounded between $0$ and $l$. 
+where $\lambda$ is a real positive constant, $f(x)$ is a forcing function, and $\Omega$ refers to the spatial domain bounded between $0$ and $l$. 
 % $ hh u(x), \lambda, f, \Omega$ refers to the linear (spatial) differential operator, solution to the diffential equation, a real positive constant, forcing function and the spatial domain bounded between 0 and $l$, respectively.
-To ensure that problem is well-posed, we impose both Dirichlet and Neumann boundary conditions, corresponding to $g_D$ and $g_N$, at $x = 0$ and $x = l$, respectively.
+To ensure that problem is well posed, Dirichlet and Neumann boundary conditions, $g_D$ and $g_N$, are imposed at $x = 0$ and $x = l$ respectively.
 % In order for the problem to be well-posed, we impose both Dirichlet and Neumann, boundary conditions corresponding to $g_D$ and $g_N$ at $x= 0 $ and $x=l$, respectively.
-Equation \ref{eq:helmholtz} is said to be written in the \textit{strong} or \textit{classical} form.
+Equation \ref{eq:helmholtz} is commonly referred to as the strong or classical form.
 
-Next, we begin to construct the weak form by taking the inner product of the Helmholtz equation with a weight function, which satisfies the homogeneous Dirichlet boundary conditions by definition, and require this inner product to vanish, that is,
+The subsequent step in Galerkin projection methods is take the inner product of the equation \eqref{eq:helmholtz} with a test function, $v(x)$, that satisfies the homogeneous Dirichlet boundary conditions by definition, i.e. $v(0) = 0$, and setting the inner product to zero,
 \begin{equation}\label{eq:helmholtz_inner}
-    (w, \mathbf{L}[u(x)]) = \int_0^l w\left[\frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) + f(x)\right] \mathrm{d}x =  0.
+    (v(x), \, \mathbf{L}[u(x)]) = \int_0^l w\left[\frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) + f(x)\right] \mathrm{d}x =  0.
 \end{equation}
-This step is equivalent to applying the method of weighted residuals, where $u(x)$ could refer to the approximate solution, $u^\delta(x)$. 
-We perform integration by parts next, 
+This step is equivalent to applying the method of weighted residuals (\S \ref{sec:methodofweightedresiduals}), where $u(x)$ could refer to the approximate solution, $u^\delta(x)$. 
+Next, we perform integration by parts,
 \begin{equation}\label{eq:weak_form}
-    \underbrace{\int_0^l \frac{\partial v}{\partial x}\frac{\partial u}{\partial x} \mathrm{d}x + \int_0^l \lambda v u \mathrm{d}x}_{a(v,u)}= \underbrace{\int_0^l v f \mathrm{d}x + \left[ v \frac{\partial u}{\partial x} \right]_0^l}_{f(v)}.
+    \underbrace{\int_0^l \frac{\partial v}{\partial x}\frac{\partial u}{\partial x} \, \mathrm{d}x + \int_0^l \lambda v u \, \mathrm{d}x}_{a(v,u)}= \underbrace{\int_0^l v f \, \mathrm{d}x + \left[ v \frac{\partial u}{\partial x} \right]_0^l}_{f(v)}.
 \end{equation}
-This equation is typically referred to as the weak form of equation \eqref{eq:helmholtz}.
+This equation is typically referred to as the weak \footnote{The notions of the \emph{weak} and \emph{strong} are refers to the smoothness (regularity) required of admissible solutions. In the weak formulation, the highest derivative involved is up to first-order, so the solution space is $H^1$. This space is generally larger than that of the strong formulation, which required $u \in \mathcal{H}^2(\Omega)$. Since $H^2(\Omega) \subset H^1(\Omega)$ the weak formualation imposesd a `less stringent' constraint of the solution space of admissible functions.} form of equation \eqref{eq:helmholtz}.
 In compact notation, we define the bilinear and linear forms as,
 \begin{subequations}
     \begin{equation}
         a(v,u) = f(v),
     \end{equation}
 \end{subequations}
-where $a(v,u)$ and $f(v)$ are typically refered to as the strain energy and forcing function in structural mechanics, assumed to remain finite.
-To ensure this, we restrict the choice of solutions $u(x)$ to lie in the functional solution space, $\mathcal{U}$, defined as
-\begin{equation}
-    \mathcal{U} := \{ u | u \in H^1, u(0) = g_D \},
+where $a(v,u)$ and $f(v)$ are typically refered to as the strain energy and forcing function in structural mechanics, required to remain finite.
+To ensure this, we restrict the choice of solutions $u(x)$ to lie in the solution space, $\mathcal{U}$, defined as
+\begin{equation}\label{eq:solution_space}
+    \mathcal{U} := \{ u \, | \, u \in H^1(\Omega), u(0) = g_D \},
 \end{equation}
-where $u \in H^1$ contains functions of $u$ in the Sobolev space such that the Dirichlet condition $u(0) = g_D$ is statisfied and the sum of square integral of $u$ and its first derivatives, $\frac{\partial u}{\partial x}$ remains bounded,
-\begin{equation}
-    \int_\Omega \left ( u^2 + \left(\frac{\partial u}{\partial x} \right)^2 \right) \mathrm{d}\Omega < \infty.
+% where $u \in H^1$ contains functions of $u$ in the Sobolev space such that the Dirichlet condition $u(0) = g_D$ is statisfied and the sum of square integral of $u$ and its first derivatives, $\frac{\partial u}{\partial x}$ remains bounded,
+where $u \in H^1$ refers to functions of $u$ belonging to Sobolev space of order 1, and satistfying the Dirichlet condition, $u(0) = g_D$,  at $x = 0$.
+\begin{definition}[Sobolev space]
+    We define Sobolev space of order $n \geq 1$ on $\Omega$,
+    \begin{equation}
+        H^n(\Omega) = \{u \, | \, u \in L_2(\Omega), D^\alpha u \in L_2(\Omega), \forall \alpha : \alpha \leq n\}, \nonumber
+    \end{equation}
+    where $D^\alpha u$ refers to derivatives up to order $\alpha$ and $L_2(\Omega)$ refers to functions that are square integrable.
+\end{definition}
+\begin{definition}[$L_2$ space]
+    The space $L_2(\Omega)$ refers to functions that are square integrable,
+    \begin{equation}
+        (u, u)_{L_2} = \int_\Omega |u(x)|^2 \, \mathrm{d}\Omega < \infty. 
+    \end{equation}
+\end{definition}
+We consider admissible functions up to the first derivatives, the highest order derivative in the weak formulation of equation \eqref{eq:helmholtz_inner}.
+Similarly, the space of test functions, $\mathcal{V}$, is defined as,
+\begin{equation}\label{eq:test_space}
+    \mathcal{V} := \{ v \, | \, v \in H^1, v(0) = 0 \},
 \end{equation}
-We consider functions up to the first-derivatives since the it is the highest-order derivative in equation \eqref{eq:helmholtz_inner}.
-Similarly, the functional space of weight functions, $\mathcal{V}$, is defined as,
-\begin{equation}
-    \mathcal{V} := \{ v | v \in H^1, v(0) = 0 \},
+where $v \in H^1$ are refer to test functions belonging to the Sobolev the space of order 1, and is defined to be zero, $v(0) = 0$ on Dirichlet boundary condition, $x = 0$.
+The generalised weak form is therefore finding $u(x) \in \mathcal{U}$, such that
+\begin{equation}\label{eq:bilinear_infinite}
+    a(v,u) = f(v), \quad \forall v \in \mathcal{V}.
 \end{equation}
-where $v \in H^1$ are functions whose values and first derivatives are square-integrable and satisfy a homogeneous Dirichlet boundary condition at $x = 0$.
-The generalised weak form is therefore finding $u(x) \in \mathcal{X}$, such that
-\begin{equation}
-    a(v,u) = f(v), \quad \forall v \in \mathcal{W}.
-\end{equation}
-This formulation is still infinite-dimensional, as the function space $\mathcal{U}, \mathcal{W}$ contain infinitely many functions.
-To obtain an approximate solution, $u^\delta(x)$, we restrict ourselves to finite-dimensional subspaces, $\mathcal{U}^\delta \subset \mathcal{U}$, and $\mathcal{V}^\delta \subset \mathcal{V}$.
+At this point, equation \eqref{eq:bilinear_infinite} is infinite dimension as the function spaces, $\mathcal{U}$ and $\mathcal{V}$, contain infinitely many functions.
+% This formulation is infinite dimensional, as the function space $\mathcal{U}, \mathcal{W}$ contain infinitely many functions.
+To obtain an approximate solution, $u^\delta(x)$, we restrict ourselves to finite dimensional subspaces, $\mathcal{U}^\delta \subset \mathcal{U}$, and $\mathcal{V}^\delta \subset \mathcal{V}$.
 The problem is then to find $u^\delta \in \mathcal{U}^\delta$, such that
 \begin{equation}
-    a(v^\delta, u^\delta) = f(v^\delta), \quad v^\delta \in \mathcal{V}^\delta
+    a(v^\delta, u^\delta) = f(v^\delta), \quad v^\delta \in \mathcal{V}^\delta.
 \end{equation}
-Here, both $u^\delta \in \mathcal{U}^\delta$ and $v^\delta \in \mathcal{V}^\delta$ do not lie in same subspace, necessary for the standard Galerkin projection procedure where they should lie in the same subspace.
-To overcome this, we lift the solution $u^\delta$ into two parts,
+Here, the subspaces $u^\delta \in \mathcal{U}^\delta$ and $v^\delta \in \mathcal{V}^\delta$ are not the same, compare equations \eqref{eq:solution_space} and \eqref{eq:test_space}, necessary for the standard Galerkin projection procedure where they should lie in the same subspace.
+To ensure that they belong to the same space, we lift the solution $u^\delta$ into two parts,
 \begin{equation}
     u^\delta = u^\mathcal{H} + u^\mathcal{D}.
 \end{equation}
-where $u^\mathcal{H} \in \mathcal{V}^\delta$ satisfies the homogeneous Dirichlet condition, lying in the same subsapce as $w^\delta \in \mathcal{V}^\delta$, and $u^\mathcal{D} \in \mathcal{U}^\delta$ satisfies the Dirichlet boundary conditions $u^\mathcal{D}(0) = g_D$.
-Substituting this decomposition, the standard Galerkin projection methos is to search for the solution $u^\mathcal{H} \in \mathcal{V}^\delta$ such that,
+where $u^\mathcal{H} \in \mathcal{V}^\delta$ satisfies the homogeneous Dirichlet condition (e.g. is zero on Dirichlet boundaries), belonging to the same subsapce as $v^\delta \in \mathcal{V}^\delta$, while $u^\mathcal{D} \in \mathcal{U}^\delta$ satisfies the Dirichlet boundary conditions $u^\mathcal{D}(0) = g_D$.
+Hence, the standard Galerkin projection method is to search for the homogeneous solution, $u^\mathcal{H} \in \mathcal{V}^\delta$, such that,
 \begin{equation}\label{eq:standard_galerkin}
     a(v^\delta, u^\mathcal{H}) = f(v^\delta) - a(v^\delta, u^\mathcal{D}).
 \end{equation}
-We have briefly described the mathematical framework for approximating a solution to the linear (spatial) partial differential operator.
-In the following, we will expand on the type of basis and weight functions , $\Phi(x)$, specifically, using the spectral/\emph{hp} element method, and describe essential differential and integral operations performed numerically, equation \eqref{eq:standard_galerkin} reduces to a system of linear equations.
-
+This concludes the classical Galerkin formulation. 
+Under certain assumptions of $a$, a solution is guaranteed under the Lax-Milgram theorem \citep{bers_ix_1955}.
 %%%%%%%%%%%%%%%%%%%%%%
 % SPECTRAL/HP ELEMENTS
 %%%%%%%%%%%%%%%%%%%%%%
 
-\section{Spectral/\emph{hp} element methods}
+\section{Spectral/\emph{hp} element methods}\label{sec:spectralhpelementmethods}
+We have briefly described the procedure for approximating a solution of a PDE using the standard Galerkin projection technique above.
+However, the choice of basis (and also test) functions, $\Phi(x)$, is not discussed.
+In this section, we discuss the spectral/\emph{hp} element method, and describe the essential numerical differential and integral techniques.
+% , equation \eqref{eq:standard_galerkin} reduces to a system of linear equations.
 % To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
 % Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
 % The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
-The spectral/\emph{hp} element method is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
+The spectral/\emph{hp} element method pioneered by \citep{patera_spectral_1984} is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
 % represented by a polynomial of up to order $p$.
 % which leverages the advantages of offering geometric flexibility by decomposing the global domain into a set of non-overlapping (finite) elements of size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $p$.
 It leverages the geometric flexibility of classical finite-element methods, allowing for the representation of complex engineering geometries, and the exponential (spectral) convergence properties of classical spectral methods, where the solution error decreases exponentially.
@@ -572,13 +601,15 @@ Finally, we can assemble them using the assembly matrix,
 \begin{equation}
     \mathbf{A}^T ( \lambda \mathbf{M}_l + \mathbf{L}_l) \mathbf{A} \mathbf{\hat{u}}_g = \mathbf{A}^T(\mathbf{\hat{f}}^l + \mathbf{g}_D + \mathbf{g}_N),
 \end{equation}
+We note that we have did not show the formulation for 2D spectral/\textit{hp} elements as it has been abstracted away within nektar++.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TECHNIQUES FOR SOLVING NS EQUATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Numerical techniques for solving the Navier-Stokes equations}
+\section{Numerical techniques for solving the Navier-Stokes equations}\label{sec:numeraltechniquesforNS}
 \subsection{Velocity Correction Scheme}
 The spatial discretisation of the Helmholtz operator and its numerical solution procedure has been discussed using the spectral/\emph{hp} element methods.
 Here, we describe the numerical methods that is used to solve the Navier-Stokes equations given as,
@@ -708,10 +739,10 @@ The test function space for pressure is a polynomial other lower since derivativ
 We neglect the unsteady term, leading to a steady Stokes problem, appearing as the right-hand if we consider time-advacing the solutions,
 \begin{subequations}
 \begin{equation}
-    (\nabla \mathbf{v}, \nu \nabla \mathbf{u}) - (\nabla \cdot \mathbf{v}, p) = (\mathbf{v}, \mathbf{f}), \quad &\forall \, \mathbf{v} \in \mathcal{V} 
+    (\nabla \mathbf{v}, \nu \nabla \mathbf{u}) - (\nabla \cdot \mathbf{v}, p) = (\mathbf{v}, \mathbf{f}), \quad \forall \, \mathbf{v} \in \mathcal{V} 
 \end{equation}
 \begin{equation}
-    (q, \nabla \cdot \mathbf{u}) = 0, \quad  &\forall \, q \in \mathcal{Q}
+    (q, \nabla \cdot \mathbf{u}) = 0, \quad  \forall \, q \in \mathcal{Q}
 \end{equation}
 \end{subequations}
 
@@ -800,13 +831,198 @@ is adjusted to satisfy the desired flow rate, $W_b$.
 The flow rate, $W_b$, is related to the laminar centreline velocity $W_c = 3/2 W_b$, which defines the Reynolds number, $Re = W_c h / \nu$.
 For more details on the numerical method, the reader is referred to \cite{hossain2021spectral}.
 
-\section{Stability analysis of the Navier-Stokes equations}
+\section{Stability analysis of the Navier-Stokes equations}\label{sec:stabilityanalysisofNS}
 \subsection{Linear Stability analysis}
-\subsection{Edge state computations}
+Linear stability analysis concerns the study of the evolution of small perturbations around a base flow.
+% By understanding the dynamics of exponentially growing perturbations guided by unstable eigenmodes, insights into the transition process could be gleaned upon.
+To study the dynamics of infinitetisimal perturbations about a base flow, the time evolution equation for the perturbations dynamics typically reduces to,
+\begin{equation}
+    \frac{\partial}{\partial t} \mathbf{u'} = \mathbf{L}\mathbf{u'},
+\end{equation}
+where $\mathbf{L}, \mathbf{u}$ refers to the linearised operator and a vector of velocity perturbations.
+In this case, the linear operator is the linearised Navier Stokes equation which has the form,
+\begin{equation}
+\mathbf{L} =
+\begin{bmatrix}
+    - (\mathbf{U} \cdot\nabla) - (\nabla \mathbf{U})\cdot + \frac{1}{Re}\nabla^2 & -\nabla \\
+    \nabla \cdot & \matbf{0} 
+\end{bmatrix},
+\end{equation}
+where $\mathbf{U}$ is referred to as the base flow, where the linear operator $\mathbf{L} \in \mathbf{R}^{N_g,N_g}$, $N_g$ refers to the number of global degrees of freedom.
+For a given initial condition, $\mathbf{u}'(\mathbf{x}, t = 0) = \mathbf{u}_0$, the evolution of velocity perturbation up to time $T$ is therefore,
+\begin{equation}
+    \mathbf{u}(\mathbf{x}', t) = \mathcal{A}(T, Re)\mathbf{u}_0
+\end{equation}
+where $\mathcal{A}(T,Re) = \exp(\mathbf{L} T)$ refers to the linear evolution operator that propagates perturbations to $t=T$.
+Suppose that the perturbation velocities can be represented by eigenmode solutions,
+\begin{equation}
+    \mathbf{u}'(\mathbf{x},t ) = \mathbf{\tilde{u}}(\mathbf{x})\exp(\lambda t) + \text{c.c}
+\end{equation}
+where $\lambda_j, \mathbf{\tilde{u}}_j$ refer to the $j^{th}$ eigenvalue and eigenmode which can becomplex, and $\text{c.c}$ refers to the  complex conjugate.
+Substituting the ansatz above, we get an eigenvalue problem of 
+\begin{equation}
+    \mathcal{A}(T,Re)\tilde{\mathbf{u}}_j = \mu_j \tilde{\mathbf{u}}_j, \quad \mu_j = \exp(\lambda_j T).
+\end{equation}
+For steady base flows, we are primarily interested in $\lambda_j$ instead of $\mu_j$, and $T$ is chosen to be one \citep{barkley_direct_2008}.
+In choosing T, one has be careful not to choose a value larger than the period of the leading eigenvalue in order to avoid aliasing issues.
+For periodic base flows, $\mu_j$ is referred to the Floquet multiplier.
+If $|\lambda_j| > 1$, then infinitisimal perturbations grow exponentially and the fluid system is recognised as being linearly unstable.
+For $|\lambda_j| < 0$, infinitisimal perturbations will decay exponentially and the fluid system if linearly stable.
+If $|\lambda| = 0$, it indicates a bifurcation point.
+Matrix $\mathcal{A}(T,Re)$ is considered sufficiently large that direct diagonalisation using the QR algorithm where the operation count is of $O(N_{g}^3)$ becomes infeasible.
+Furthermore, $\mathbcal{A}$ is not directly available in the splitting code.
+Instead, perform the computating in a matrix-free way, where we act matrix $\mathcal{A}$ with some arbitrary vector $\mathbf{u}_0$ iteratively \citep{tuckerman_bifurcation_2000}.
+% Computing the eigenvalue sof $\mathcal{A}(T,Re)$ is a non-trivial task, here we outline the method based on a time-stepper based algorithm from \citep{tuckerman_bifurcation_2000, barkley_direct_2008}.
+By applying matrix $\mathcal{A}$ to $\mathbf{u}_0$ $n$ times, we generate a sequence of of vectors give as $\mathbf{u}_n = \mathcal{A}^n \mathbf{u}_0$ which approaches the dominant eigenvector, corresponding to the largest magnitude where the Rayleigh quotients $h_n = \mathbf{u}_n^T \mathcal{A} \mathbf{u}_n / \mathbf{u}_n^T\mathbf{u}$ converges to the eigenvalue.
+This idea of the time-stepper approach to compute the eigenvalues is that minimal modifications are required to be made to an existing unsteady code.
+However, this idea only computes the dominant eigenmode, and in practice we desire 2-4 eigenpairs, and require perhaps 4-8 eigenpairs to serve as an `error-absorbing' buffer.
+The calculation of several pairs is known as the Arnoldi methods, which is related to the generalisation of the power method, ultilised in this thesis.
+% This method is known as the \emph{modified} Arnoldi iteration method, ultilised throughout this thesis.
+% The main key is based on Krylov subspace methods, spanned by the product between some non-zero initial vector,$\mathbf{u}_0$ of unit-norm with  $\mathcal{A}(T,Re)$.
+In this method, we generate a sequence of vectors $\mathbf{T}_{k}$ of normalised vectors are generated such that.
+\begin{equation}
+    \mathbf{T}_{k} = [\mathbf{u}_0, \mathbf{u}_1, ...., \mathbf{u}_{k-1} ] = \left [\mathbf{u}_0, \frac{\mathcal{A}(T,Re)\mathbf{u}_0}{\alpha_1}, \frac{\mathcal{A}(T,Re)\mathbf{u}_1}{\alpha_2}, ..., \frac{\mathcal{A}(T,Re)\mathbf{u}_{k-1}}{\alpha_k} \right],
+\end{equation}
+where $\alpha_j$ is a factor chosen such that $||\mathbf{u}_j|| = 1$ has unit-norm and the span of $\mathbf{T}_{k}$ span the \emph{Krylov subspace}, where $k$ refers to the number of eigenpairs sough after.
+% In the words, the Krylov subspace projected by $\mathcal{A}(T,Re)$ is spanned by the sequence of $\mathbf{T}_k$.
+Then, an iterative QR decomposition of the Krylove subspace is performed,
+\begin{equation}
+    \mathbf{K}_{k} \mathbf{V}_k = \mathbf{V}_{k}  \mathbf{H}_k,
+\end{equation}
+where $\mathbf{H} \in \mathbf{R}^{k, k}, \mathbf{V} \in \mathbf{R}^{N_g,k}$ refers to the Hessenberg matrix and an upper triangular matrix.
+The eigenvalues of $\mathcal{A}$ is approximated by the eigenvalues of $\mathbf{H}$, and its eigenvectors multiplied by $\mathbf{V}$ approximate the eigenvectors of $\mathcal{A}$ [similarity transform..].
+We note that the solving the eigenvalue problem of $\mathbf{H} \in \mathbf{R}^{k,k}$ is much cheaper than $\mathcal{A} \in \mathbf{R}^{N_g, N_g}$.
+We also note that since $\mathcal{A} = \exp(\mathbf{L}t)$, this method if referred to the exponential power method, where the dominant eigenvector of $\mathcal{A}$ is the eigenvalue of $\mathcal{L}$ with the largest real part.
+% Once a sequence of $\mathbf{T}_{k}$ is constructed, where $k$ is a user input, a $QR$ decomposition is performed corresponding to,
+% where $\mathbf{R}, \mathbf{H}$ refers to the upper triangular matrix and upper Hessenberg matrix, where $\mathbf{H}$ approximates the dominant eigenvalue of $\mathcal{A}(T, Re)$.
+% \begin{equation}
+%     \mathcal{L} = 
+%      \begin{bmatrix}
+%      | & & | \\
+%      \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
+%      | & & |
+%      \end{bmatrix}
+%      \begin{bmatrix}
+%      \lambda_1 &  & 0 \\
+%       & \ddots &  \\
+%      0 &  & \lambda_n
+%      \end{bmatrix}
+%      \begin{bmatrix}
+%      | & & | \\
+%      \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
+%      | & & |
+%      \end{bmatrix}^{-1}
+%      = \mathcal{S}\Lambda\mathcal{S}^{-1}.
+% \end{equation}
+\subsubsection{Maths}
+\begin{theorem}[Krylov Subspaces]
+    Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0 \in \mathbb{R}^n$, the $k^{th}$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$ is generated by,
+    \begin{equation}
+        \mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k) = \text{span}\{\mathbf{x}_0, \mathbf{A}\mathbf{x}_0, \mathbf{A}^2\mathbf{x}_0, \mathbf{A}^3\mathbf{x}_0, ..., \mathbf{A}^{k-1} \mathbf{x}_0 \}.
+    \end{equation}
+\end{theorem}
+By using the span of the $k^{th}$-Krylov subspace, we can approximate matrix $\mathcal{A}$ by an upper Hessenberg matrix, $\mathbf{H}$, (all entries below the first subdiagonal are zero) using the Hessenberg reduction,
+\begin{theorem}{Hessenberg reduction}
+    Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$, there exists an orthogonal matrix $\mathbf{Q} \in \mathbb{R}^{n \times n}$ and a Hessenberg matrix $\mathbf{H} \in \mathbb{R}^{n \times n}$ such that
+    \begin{equation}
+        \mathbf{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T
+    \end{equation}  
+\end{theorem}
+Since matrices $\mathbf{A}$ and $\mathbf{H}$ are similar matrices by definition, then their eigenvalues are similar, $\lambda{\mathbf{A}} = \lambda{\mathbf{H}}$.
+In practice, we do not compute $\mathbf{H}$ in full.
+Instead, we construct $k$-columns of matrix $\mathbf{Q}$ by considering an orthornomal set of $k$ vectors, $\mathbf{q}_0, \mathbf{q}_1, ..., \mathbf{q}_{k-1}$ from the $k$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$,
+\begin{equation}
+    \text{span}\{\mathbf{q}_0, \mathbf{q}_1, ..., \mathbf{q}_{k-1}\} = \text{span}\{\mathbf{x}_0, \mathbf{A}\mathbf{x}_0, ..., \mathbf{A}^{k-1} \mathbf{x}_0 \}
+\end{equation}
 
+The orthornomal vectors $\mathbf{Q}$ is generated by performing a Gram-schmidt orthogonalisation
+The power method is defined as,
+\begin{theorem}[Power method]
+    If $\mathbf{A} \in \mathbb{R}^{n \times n}$ is a diagonalisable, then there is a non-zero vector, $\mathbf{u}_0$ such that the sequence of vector given by,
+    \begin{equation}
+    \end{equation}
+    approaches the dominant of eigenvector of $\mathbf{A}$.
 
+    Let $\lambda_i$ be the eigenvalues of a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$. $\lambda_1$ is called the dominant eigenvalue of $\mathbf{A}$ if,
+    \begin{equation}
+        |\lambda_1 | > |\lambda_i|, \quad i = 2,..., n
+    \end{equation}
+    The eigenvector corresponding to $\lambda_1$ is called the dominant eigenvector of $\mathbf{A}$. 
+\end{theorem}
 
+\subsection{Edge tracking}
+In the section, we consider the dynamical system interpretation of transition, where the laminar state is separated by the turbulent state by an edge, referred to the edge of chaos.
+Along this edge, there could be attractors, sometimes in the form of travelling-waves, tori, and high-order invariant sets, known as the edge states.
+For the edge tracking, we use the bisection method \citep{skufca_edge_2006, schneider_turbulence_2007, khapko_edge_2016}, with an initial condition given by
+\begin{equation}\label{eq:bisection}
+    \mathbf{x}_0 = \chi\mathbf{x}_L  + (1 - \chi)\mathbf{x}_T
+\end{equation}
+where $\mathbf{x}_0$ refers to an initial condition consisting of a weighted sum, $\chi \in [0,1] $, between a laminar state, $\mathbf{x}_{l}$, and a turbulent state, $\mathbf{x}_{T}$.
+Since the laminar and turbulent state forms a bistable system, there could be (at least) one critical value of $\chi \in [0, 1]$, where the trajectory walks along the `edge' between the turbulent and laminar state without decaying to either states.
+To find this $\chi_c$, we perform $n$ successive bisections between $\chi_L^n, \chi_T^n$, the upper and lower bounds such that the trajectory relaminarises or become turbulent respectively, where $\chi^n$ is updated by $\chi^n = \frac{1}{2}(\chi_L^n + \chi_T^n)$
+At every $n^{th}$ bisection, it involves a stopping criteria, a tolerance based on the deviation of an observable (e.g. wall shear stresses) away from the initial condition.
+Then, a direct numerical simulation is reinitialised with an initial condition given by equation \eqref{eq:bisection}
+For every successive bisection, the difference between two trajectories, $\Delta \chi^n = \chi_L^n - \chi_T^n$, decays like $\Delta \chi^n \sim 0.5^n$, and is related to the Lyapunov exponent of the edge
+\begin{equation}
+    \Delta \chi \approx C\exp(\mu_e t)
+\end{equation}
+where $\mu_e,C$ refers to the Lyapunov exponent of the edge and a constant.
+In practice, we consider $n = 10, 20$ and for $n = 10$, the solution along the edge is converged.
+After we determine the critical $\chi_c$, we repeat the bisections step by replacing the laminar state, $\mathbf{x}_L$, and the turbulent state $\mathbf{x}_T$, which the solution trajectory  with $\chi_L$ and $\chi_T$, that has been terminated after exceeded the threshold.
+We refer this repetition as the number of `outer' bisections, while the bisection for $\chi^n$ is referred to `inner bisections'
+After a certain number of `outer' bisections, the trajectory may converge towards an attractor, which may exist in a from of travelling-waves, periodic orbits or a chaotic attractor.
+This attractor sits along the edge is referred to as the edge state, a saddle acting as a separatrix between the turbulent and laminar attractor.
+We describe the algorithm of edge tracking in algorithm \ref{alg:edge-tracking}
+% Algorithm \ref{alg:edge-tracking} presents the logic behind the edge tracking algorithm between the laminar state, and tubrulent state.
+\begin{algorithm}[h]
+    \begin{algorithmic}[1]
+    \State Initialise \texttt{maxInBisects, maxOutBisects} \Comment{Maximum inner and outer bisections}
+    \State Initialise \texttt{tol} \Comment{Tolerance for stopping criteria (e.g., wall-shear stress)}
+    \State \texttt{outBisects} $\gets 0$
 
+    \While {\texttt{outBisects} < \texttt{maxOutBisects}}
+        \If{\texttt{outBisects} == 0}
+            \State $\mathbf{x}_L, \mathbf{x}_T \gets \texttt{input()}$ \Comment{Initial laminar and turbulent states}
+        \EndIf
+
+        \State $\chi_L \gets 0,\ \chi_T \gets 1,\ \chi \gets \frac{1}{2}(\chi_L + \chi_T)$ \Comment{Initialise bisection coefficients}
+        \State $\mathbf{x}_0 \gets \chi \mathbf{x}_T + (1 - \chi)\mathbf{x}_L$ \Comment{Initialise initial condition}
+        \State \texttt{inBisects} $\gets 0$
+
+        \While {\texttt{inBisects} < \texttt{maxInBisects}}
+            \State \texttt{k} $\gets 0$, $\Delta \gets 10^6$
+
+            \While {$\Delta >$ \texttt{tol}}
+                \State $\mathbf{x}_{k+1} \gets \texttt{TimeIntegrate}(\mathbf{x}_{k})$
+                \State $\Delta \gets |\mathbf{x}_{k+1} - \mathbf{x}_0|$ \Comment{Deviation from initial condition}
+                \State \texttt{k} $\gets$ \texttt{k} + 1
+            \EndWhile
+
+            \If {\texttt{isTurbulent}($\mathbf{x}_k$)} \Comment{Check if terminal state is turbulent}
+                \State $\chi_L \gets \chi$ \Comment{$\mathbf{x}_L$ gets larger weight}
+                \If {\texttt{inBisects} == \texttt{maxInBisects} - 1}
+                    \State $\mathbf{x}_T \gets \mathbf{x}_k$ \Comment{Save turbulent-leaning initial condition}
+                    \State \texttt{break}
+                \EndIf
+            \Else
+                \State $\chi_T \gets \chi$
+                \If {\texttt{inBisects} == \texttt{maxInBisects} - 1}
+                    \State $\mathbf{x}_L \gets \mathbf{x}_k$ \Comment{Save laminar-leaning initial condition}
+                    \State \texttt{break}
+                \EndIf
+            \EndIf
+
+            \State $\chi \gets \frac{1}{2}(\chi_L + \chi_T)$ 
+            \State $\mathbf{x}_0 \gets \chi \mathbf{x}_L + (1 - \chi)\mathbf{x}_T$ \Comment{Update initial conditions}
+            \State \texttt{inBisects++}
+        \EndWhile
+
+    \State \texttt{outBisects++}
+    \EndWhile
+    \end{algorithmic}
+    \label{alg:edge-tracking}
+    \caption{Algorithm for edge tracking between a turbulent and laminar state}
+\end{algorithm}
 % The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions.
 % Usually, the weight functions are selected 
 % An approximate solution has $K+1$ unknowns ($\hat{u}_0, ...,\hat{u}_K$), hence, it is natural to impose $K+1$ restrictions on the residual to form a determined system and the type of restriction defines the numerical method. 
@@ -816,105 +1032,105 @@ For more details on the numerical method, the reader is referred to \cite{hossai
 % In the context fluid mechanics, the Fourier series can be used to represent isotropic turbulence with homogenenous (periodic) boundary conditions.
 % In a channel flow, Fourier series are used in the homogenenous streamwise ad spanwise directions while Chebyshev or Legendre polynomials are used in the wall-normal direction.
 
-Consider equation \ref{eq:infiniteExpansions} to be a solution of a 1-dimensional Poisson equation, bounded by the domain $\Omega \in [x_a, x_b]$,
-Next, we consider that the expansion functions, $\phi_i(x)$, belongs to an element of a Hilbert space, with a suitable inner-product.
-
-The mathematical framework begins by first assuming that the solution, $u(x)$, is an element of a Hilbert space, $\mathcal{H}$ with a suitable inner-product $(\cdot, \cdot)$ and norm $|| \cdot ||$.
-For 
-SEMs belong to a general class of methods known as the method of weighted residual, a generic method for approximating a solution of a differential equation. The method of weighted residual will be described with a worked example as follows. Consider that the solution of a differential equation $u(x)$ can be represented as an infinite sum of \emph{trial} \citep{karniadakis_spectralhp_2005}. functions (also known as basis functions, expansion functions, mode shapes).
-\begin{equation}\label{eq:infiniteExpansions}
-\end{equation}
-where $\phi_i(x)$ are the \emph{trial} functions and $\hat{u}_i$ are the trial function coefficients to be determined.
-with the appropriate boundary conditions, and $\mathbb{L}$ refers to a linear differential operator. Note that equation \ref{eq:infiniteExpansions} exactly satisfies the differential equation of \ref{eq:linearOperator} i.e $\mathbb{L}u(x)- f(x) = 0$. The exact solution would require a computation of infinite basis coefficients $\hat{u}$ which is practically infeasible. Therefore, an approximate solution $u^\delta(x)$ is sought after by truncating an infinite number of basis expansions to a finite number,
-\begin{equation}\label{eq:truncatedExpansions}
-    u(x) \approx u^\delta (x) = \sum_{i=0}^{K}\hat{u_i}\phi_i(x),
-\end{equation}
-where there is a finite number of $K$ basis expansions. The approximate solution does not satisfy \ref{eq:linearOperator} exactly, leading to an 'error' known as a residual,
-\begin{equation}
-    R(u^\delta(x)) = \mathbb{L}u^\delta(x) - f(x)
-\end{equation}
-
-The method of weighted residual is a general method that allows for various types the restriction to be implemented. The method "nullifies" the residual by equating the inner product with a \emph{test} function, $v_j(x)$ (also known as a weight function - hence the name 'weighted residual') to zero,
-\begin{equation}\label{eq:residual}
-    (v_j(x), R(u^\delta(x))) = \int_{x_a}^{x_b} v_j\,R(u^\delta(x))\; \mathrm{d}x = 0, \qquad j = 0,...,K.
-\end{equation}
-
-% \subsection{Galerkin methods}
-Galerkin methods are commonly found in finite/spectral element solvers, used in \emph{nektar++}. The Galerkin method belongs to a general class of weighted residual methods that assumes the \emph{trial} functions take on the same form as the \emph{test} functions (Table \ref{tab:weightFunction}). To describe the method, a worked example is illustrated. The Galerkin method is appplied to solve the Poisson equation \ref{eq:linearOperator} with the following boundary conditions,
-\begin{equation}\label{eq:boundaryConditions}
-    B^- = g^- \quad \textrm{at} \quad x = x_a, \qquad B^+ = g^+ \quad \textrm{at} \quad x = x_b
-\end{equation}
-where $B^-$, $B^+$ are the boundary conditions which could be either Dirichlet, Neumann or Robin conditions. Equation \ref{eq:linearOperator} and \ref{eq:boundaryConditions} together forms a boundary value problem and is said to be in the \emph{strong} \footnote{\emph{strong} loosely mean that the trial functions are required to be both $C^0$ and $C^1$ continuous} form. The Galerkin method assumes that the trial functions $\phi_i(x)$ satisfies equation \ref{eq:linearOperator} with homogeneous boundary conditions,
-\begin{equation}
-    \phi_i(x_a) = \phi_i(x_b) = 0.
-\end{equation}
-Next, the solution $u(x)$ is decomposed into a linear combination of $\tilde{u}(x)$ and $u^H(x)$,
-\begin{equation}
-    u(x) = \tilde{u}(x) + u^H(x),
-\end{equation}
-where $\tilde{u}(x)$ is any function that satisfy the boundary conditions assosciated with equation \ref{eq:boundaryConditions} and $u^H(x)$ is the homogeneous solution that satisfies the homogeneous boundary conditions - $B_H^-(x_a) = B_H^+(x_b) = 0$. The resulting problem for $u^H(x)$ becomes
-\begin{equation}\label{eq:linearHomogeneous}
-    \mathbb{L}u^H(x) - h(x) = 0, \qquad x_a \leq x \leq x_b,
-\end{equation}
-where $h =  f(x) - \mathbb{L}\tilde{u}(x)$. It is worth noting that the steps thus simply mathematical, and no approximation have been made. The solutions of $u(x) = \tilde{u}(x) - u^H(x)$ represented by an infinite expansions (equation \ref{eq:infiniteExpansions}) are exact. Next, the homogeneous solution  $u^H(x)$ can be approximated by a finite expansion of \emph{trial} functions,
-\begin{equation}\label{eq:homogeneousCoefficients}
-    u^H(x) \approx u^{H,\delta} (x) = \sum_{i=0} ^ K \hat{u}^{H,\delta}_i\phi_i(x),
-\end{equation}
-where $\hat{u}^{H,\delta}_i$ are the coefficients to be determined. Since $\phi_i(x)$ satisfies the homogeneous boundary conditions, $\hat{u}^{H, \delta}_i$ can take on any values and $u^{H, \delta}(x)$ will still satisfy the homogeneous boundary conditions. Substituing the approximate solution of $u^{H,\delta}(x)$ into equation \ref{eq:linearHomogeneous}, and applying the method of weighted resiudal,
-\begin{equation}\label{eq:galerkinResidual}
-    (R(u^{H,\delta}), v_j(x)) = \int_{x_a}^{x_b} \left(\mathbb{L}u^{H,\delta}(x) - h(x) \right) v_j(x) \; \mathrm{d}x = 0, \qquad j=0, ..., K,
-\end{equation}
-where $v_j(x)$ is some \emph{test} function and there are $K+1$ finite expansions. In the Galerkin method (or Bubnov-Galerkin), the weight function $v_j(x)$ takes on the same form as the trial functions $\phi_j(x)$ (Table \ref{tab:weightFunction}). In other words, the differential equation is satisfied when projected on the \emph{test/trial} functions. Substituting equation \ref{eq:homogeneousCoefficients} into the residual equation \ref{eq:galerkinResidual} and applying $v_j(x) = \phi_j(x)$,
-\begin{equation}\label{eq:generalisedGalerkin}
-    \sum_{i=0}^{K} \hat{u}^{H,\delta}_i \int_{x_a}^{x_b} \mathbb{L}\phi_i\phi_j \; \mathrm{d}x = \int_{x_a}^{x_b} \left(f(x) - \mathbb{L}\tilde{u}(x) \right) \phi_j \; \mathrm{d}x, \qquad j = 0, .., K
-\end{equation}
-Equation \ref{eq:generalisedGalerkin} furnishes a system of $K+1$ linear equations with $K+1$ unknowns i.e $\{\hat{u}^{H,\delta}_0,....,\hat{u}^{H,\delta}_K\}$. Applying integration by parts to equation \ref{eq:generalisedGalerkin}, the equation reduces to,
-\begin{equation}
-    \sum_{i=0}^K \hat{u}_i^{H,\delta} \left[\int_{x_a}^{x_b} \frac{\partial \phi_j}{\partial x}\frac{\partial \phi_i}{\partial x} + \lambda \phi_j\phi_i \; \mathrm{d}x\right] = - \int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x}\frac{\partial \phi_j}{\partial x} + (\lambda\tilde{u} + f(x))\phi_j \; \mathrm{d}x,
-\end{equation}
-which is known as the \emph{weak}\footnote{\emph{trial} functions are only required to be $C^0$ continuous} form. The boundary conditions of the \emph{weak} form naturally appears in the right-hand side of equation \ref{eq:systemOfLinear}, which makes it convenient to implement. Equation \ref{eq:generalisedGalerkin} can be re-written in matrix form,
-\renewcommand{\arraystretch}{1.25} % Default value: 1
-\begin{equation}\label{eq:systemOfLinear}
-    \begin{split}
-    &\begin{bmatrix}
-        \int_{x_a}^{x_b} \frac{\partial \phi_0}{\partial x}\frac{\partial \phi_0}{\partial x} + \lambda\phi_0\phi_0 \; \mathrm{d}x & \hdots & 
-        \int_{x_a}^{x_b} \frac{\partial \phi_0}{\partial x} \frac{\partial \phi_K}{\partial x} + \lambda\phi_0\phi_K \; \mathrm{d}x \\
-        \vdots & \ddots & \vdots \\
-        \int_{x_a}^{x_b} \frac{\partial \phi_K}{\partial x}\frac{\partial \phi_0}{\partial x} + \lambda\phi_0\phi_0 \; \mathrm{d}x & \hdots & 
-        \int_{x_a}^{x_b} \frac{\partial \phi_K}{\partial x} \frac{\partial \phi_K}{\partial x} + \lambda\phi_0\phi_K \; \mathrm{d}x \\
-    \end{bmatrix}
-    \begin{bmatrix}
-        \hat{u}_0^{H,\delta} \\ \vdots \\ \hat{u}_K^{H, \delta}
-    \end{bmatrix}
-    = \\
-    &\begin{bmatrix}
-        -\int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x} \frac{\partial \phi_0}{\partial x} + (\lambda \tilde{u} + f(x))\phi_0 \; \mathrm{d}x \\ 
-        \vdots \\ 
-        -\int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x} \frac{\partial \phi_K}{\partial x} + (\lambda \tilde{u} + f(x))\phi_K \; \mathrm{d}x \\ 
-    \end{bmatrix}
-    \end{split}
-\end{equation}
-where $\mathbf{\hat{u}}^{H,\delta} = [\hat{u}_0^{H,\delta}, ..., \hat{u}_K^{H, \delta}]$ is determined by solving the system of linear equations. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 3.2 Spectral/hp element methods
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{The Spectral/{hp} element methods}
-To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
-Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
-The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
-\begin{enumerate}
-    \item Finite elements:
-        \subitem The finite element method decomposes the global domain into a set of non-overlapping subdomains (finite elements), represented by linear shape functions. In a 1D domain, the size of each element is given by $h$ and the approximate solution should covergence as $h$ is decreased - also known as \emph{h}-refinement. The flexibility of domain decomposition allows for complex engineering geometries to be represented. 
-    \item Spectral method:
-        \subitem The spectral method performs a global discretisation of the domain. The domain is represented by a linear combination of global continuous functions, such as the Fourier series. Spectral methods benefit from the property of \emph{spectral convergence}, where the solution error decreases by $\mathcal{O}(c^{-N})$, where $c$ is some constant $0 \leq c \leq 1$ and $N$ is the number of polynomials (\cite{trefethen_2000}). In other words, as the number of functions is increased, the error decreases exponentially.
-\end{enumerate}
-The Spectral/\emph{hp} element method leverages the advantages of both methods - geometric flexibility and spectral covergence. The spectral/\emph{hp} method uses a series of high-order polynomials (Lagrange/Legendre) within each element. Considering each element consists of $P+1$ linearly independent polynomials (where $P$ refers to the highest polynomial order) spanning the polynomial space of $\mathcal{P}_P$, the error of a smooth solution with mesh-size $h$ and polynomial order $P$ has the property of (\cite{karniadakis_2005spectral}),
-\begin{equation}\label{eq:errorConvergence}
-    ||u(x) - u^{\delta}(x)|| \leq Ch^P||u(x)|| \approx \mathcal{O}(h^P).
-\end{equation}
-Equation \ref{eq:errorConvergence} implies that the error decreases as the $h$ is decrease (mesh refinement) or as $P$ is increased using higher-order polynomials.
+% Consider equation \ref{eq:infiniteExpansions} to be a solution of a 1-dimensional Poisson equation, bounded by the domain $\Omega \in [x_a, x_b]$,
+% Next, we consider that the expansion functions, $\phi_i(x)$, belongs to an element of a Hilbert space, with a suitable inner-product.
+% 
+% The mathematical framework begins by first assuming that the solution, $u(x)$, is an element of a Hilbert space, $\mathcal{H}$ with a suitable inner-product $(\cdot, \cdot)$ and norm $|| \cdot ||$.
+% For 
+% SEMs belong to a general class of methods known as the method of weighted residual, a generic method for approximating a solution of a differential equation. The method of weighted residual will be described with a worked example as follows. Consider that the solution of a differential equation $u(x)$ can be represented as an infinite sum of \emph{trial} \citep{karniadakis_spectralhp_2005}. functions (also known as basis functions, expansion functions, mode shapes).
+% \begin{equation}\label{eq:infiniteExpansions}
+% \end{equation}
+% where $\phi_i(x)$ are the \emph{trial} functions and $\hat{u}_i$ are the trial function coefficients to be determined.
+% with the appropriate boundary conditions, and $\mathbb{L}$ refers to a linear differential operator. Note that equation \ref{eq:infiniteExpansions} exactly satisfies the differential equation of \ref{eq:linearOperator} i.e $\mathbb{L}u(x)- f(x) = 0$. The exact solution would require a computation of infinite basis coefficients $\hat{u}$ which is practically infeasible. Therefore, an approximate solution $u^\delta(x)$ is sought after by truncating an infinite number of basis expansions to a finite number,
+% \begin{equation}\label{eq:truncatedExpansions}
+%     u(x) \approx u^\delta (x) = \sum_{i=0}^{K}\hat{u_i}\phi_i(x),
+% \end{equation}
+% where there is a finite number of $K$ basis expansions. The approximate solution does not satisfy \ref{eq:linearOperator} exactly, leading to an 'error' known as a residual,
+% \begin{equation}
+%     R(u^\delta(x)) = \mathbb{L}u^\delta(x) - f(x)
+% \end{equation}
+% 
+% The method of weighted residual is a general method that allows for various types the restriction to be implemented. The method "nullifies" the residual by equating the inner product with a \emph{test} function, $v_j(x)$ (also known as a weight function - hence the name 'weighted residual') to zero,
+% \begin{equation}\label{eq:residual}
+%     (v_j(x), R(u^\delta(x))) = \int_{x_a}^{x_b} v_j\,R(u^\delta(x))\; \mathrm{d}x = 0, \qquad j = 0,...,K.
+% \end{equation}
+% 
+% % \subsection{Galerkin methods}
+% Galerkin methods are commonly found in finite/spectral element solvers, used in \emph{nektar++}. The Galerkin method belongs to a general class of weighted residual methods that assumes the \emph{trial} functions take on the same form as the \emph{test} functions (Table \ref{tab:weightFunction}). To describe the method, a worked example is illustrated. The Galerkin method is appplied to solve the Poisson equation \ref{eq:linearOperator} with the following boundary conditions,
+% \begin{equation}\label{eq:boundaryConditions}
+%     B^- = g^- \quad \textrm{at} \quad x = x_a, \qquad B^+ = g^+ \quad \textrm{at} \quad x = x_b
+% \end{equation}
+% where $B^-$, $B^+$ are the boundary conditions which could be either Dirichlet, Neumann or Robin conditions. Equation \ref{eq:linearOperator} and \ref{eq:boundaryConditions} together forms a boundary value problem and is said to be in the \emph{strong} \footnote{\emph{strong} loosely mean that the trial functions are required to be both $C^0$ and $C^1$ continuous} form. The Galerkin method assumes that the trial functions $\phi_i(x)$ satisfies equation \ref{eq:linearOperator} with homogeneous boundary conditions,
+% \begin{equation}
+%     \phi_i(x_a) = \phi_i(x_b) = 0.
+% \end{equation}
+% Next, the solution $u(x)$ is decomposed into a linear combination of $\tilde{u}(x)$ and $u^H(x)$,
+% \begin{equation}
+%     u(x) = \tilde{u}(x) + u^H(x),
+% \end{equation}
+% where $\tilde{u}(x)$ is any function that satisfy the boundary conditions assosciated with equation \ref{eq:boundaryConditions} and $u^H(x)$ is the homogeneous solution that satisfies the homogeneous boundary conditions - $B_H^-(x_a) = B_H^+(x_b) = 0$. The resulting problem for $u^H(x)$ becomes
+% \begin{equation}\label{eq:linearHomogeneous}
+%     \mathbb{L}u^H(x) - h(x) = 0, \qquad x_a \leq x \leq x_b,
+% \end{equation}
+% where $h =  f(x) - \mathbb{L}\tilde{u}(x)$. It is worth noting that the steps thus simply mathematical, and no approximation have been made. The solutions of $u(x) = \tilde{u}(x) - u^H(x)$ represented by an infinite expansions (equation \ref{eq:infiniteExpansions}) are exact. Next, the homogeneous solution  $u^H(x)$ can be approximated by a finite expansion of \emph{trial} functions,
+% \begin{equation}\label{eq:homogeneousCoefficients}
+%     u^H(x) \approx u^{H,\delta} (x) = \sum_{i=0} ^ K \hat{u}^{H,\delta}_i\phi_i(x),
+% \end{equation}
+% where $\hat{u}^{H,\delta}_i$ are the coefficients to be determined. Since $\phi_i(x)$ satisfies the homogeneous boundary conditions, $\hat{u}^{H, \delta}_i$ can take on any values and $u^{H, \delta}(x)$ will still satisfy the homogeneous boundary conditions. Substituing the approximate solution of $u^{H,\delta}(x)$ into equation \ref{eq:linearHomogeneous}, and applying the method of weighted resiudal,
+% \begin{equation}\label{eq:galerkinResidual}
+%     (R(u^{H,\delta}), v_j(x)) = \int_{x_a}^{x_b} \left(\mathbb{L}u^{H,\delta}(x) - h(x) \right) v_j(x) \; \mathrm{d}x = 0, \qquad j=0, ..., K,
+% \end{equation}
+% where $v_j(x)$ is some \emph{test} function and there are $K+1$ finite expansions. In the Galerkin method (or Bubnov-Galerkin), the weight function $v_j(x)$ takes on the same form as the trial functions $\phi_j(x)$ (Table \ref{tab:weightFunction}). In other words, the differential equation is satisfied when projected on the \emph{test/trial} functions. Substituting equation \ref{eq:homogeneousCoefficients} into the residual equation \ref{eq:galerkinResidual} and applying $v_j(x) = \phi_j(x)$,
+% \begin{equation}\label{eq:generalisedGalerkin}
+%     \sum_{i=0}^{K} \hat{u}^{H,\delta}_i \int_{x_a}^{x_b} \mathbb{L}\phi_i\phi_j \; \mathrm{d}x = \int_{x_a}^{x_b} \left(f(x) - \mathbb{L}\tilde{u}(x) \right) \phi_j \; \mathrm{d}x, \qquad j = 0, .., K
+% \end{equation}
+% Equation \ref{eq:generalisedGalerkin} furnishes a system of $K+1$ linear equations with $K+1$ unknowns i.e $\{\hat{u}^{H,\delta}_0,....,\hat{u}^{H,\delta}_K\}$. Applying integration by parts to equation \ref{eq:generalisedGalerkin}, the equation reduces to,
+% \begin{equation}
+%     \sum_{i=0}^K \hat{u}_i^{H,\delta} \left[\int_{x_a}^{x_b} \frac{\partial \phi_j}{\partial x}\frac{\partial \phi_i}{\partial x} + \lambda \phi_j\phi_i \; \mathrm{d}x\right] = - \int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x}\frac{\partial \phi_j}{\partial x} + (\lambda\tilde{u} + f(x))\phi_j \; \mathrm{d}x,
+% \end{equation}
+% which is known as the \emph{weak}\footnote{\emph{trial} functions are only required to be $C^0$ continuous} form. The boundary conditions of the \emph{weak} form naturally appears in the right-hand side of equation \ref{eq:systemOfLinear}, which makes it convenient to implement. Equation \ref{eq:generalisedGalerkin} can be re-written in matrix form,
+% \renewcommand{\arraystretch}{1.25} % Default value: 1
+% \begin{equation}\label{eq:systemOfLinear}
+%     \begin{split}
+%     &\begin{bmatrix}
+%         \int_{x_a}^{x_b} \frac{\partial \phi_0}{\partial x}\frac{\partial \phi_0}{\partial x} + \lambda\phi_0\phi_0 \; \mathrm{d}x & \hdots & 
+%         \int_{x_a}^{x_b} \frac{\partial \phi_0}{\partial x} \frac{\partial \phi_K}{\partial x} + \lambda\phi_0\phi_K \; \mathrm{d}x \\
+%         \vdots & \ddots & \vdots \\
+%         \int_{x_a}^{x_b} \frac{\partial \phi_K}{\partial x}\frac{\partial \phi_0}{\partial x} + \lambda\phi_0\phi_0 \; \mathrm{d}x & \hdots & 
+%         \int_{x_a}^{x_b} \frac{\partial \phi_K}{\partial x} \frac{\partial \phi_K}{\partial x} + \lambda\phi_0\phi_K \; \mathrm{d}x \\
+%     \end{bmatrix}
+%     \begin{bmatrix}
+%         \hat{u}_0^{H,\delta} \\ \vdots \\ \hat{u}_K^{H, \delta}
+%     \end{bmatrix}
+%     = \\
+%     &\begin{bmatrix}
+%         -\int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x} \frac{\partial \phi_0}{\partial x} + (\lambda \tilde{u} + f(x))\phi_0 \; \mathrm{d}x \\ 
+%         \vdots \\ 
+%         -\int_{x_a}^{x_b} \frac{\partial \tilde{u}}{\partial x} \frac{\partial \phi_K}{\partial x} + (\lambda \tilde{u} + f(x))\phi_K \; \mathrm{d}x \\ 
+%     \end{bmatrix}
+%     \end{split}
+% \end{equation}
+% where $\mathbf{\hat{u}}^{H,\delta} = [\hat{u}_0^{H,\delta}, ..., \hat{u}_K^{H, \delta}]$ is determined by solving the system of linear equations. 
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % 3.2 Spectral/hp element methods
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% \section{The Spectral/{hp} element methods}
+% To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
+% Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
+% The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
+% \begin{enumerate}
+%     \item Finite elements:
+%         \subitem The finite element method decomposes the global domain into a set of non-overlapping subdomains (finite elements), represented by linear shape functions. In a 1D domain, the size of each element is given by $h$ and the approximate solution should covergence as $h$ is decreased - also known as \emph{h}-refinement. The flexibility of domain decomposition allows for complex engineering geometries to be represented. 
+%     \item Spectral method:
+%         \subitem The spectral method performs a global discretisation of the domain. The domain is represented by a linear combination of global continuous functions, such as the Fourier series. Spectral methods benefit from the property of \emph{spectral convergence}, where the solution error decreases by $\mathcal{O}(c^{-N})$, where $c$ is some constant $0 \leq c \leq 1$ and $N$ is the number of polynomials (\cite{trefethen_2000}). In other words, as the number of functions is increased, the error decreases exponentially.
+% \end{enumerate}
+% The Spectral/\emph{hp} element method leverages the advantages of both methods - geometric flexibility and spectral covergence. The spectral/\emph{hp} method uses a series of high-order polynomials (Lagrange/Legendre) within each element. Considering each element consists of $P+1$ linearly independent polynomials (where $P$ refers to the highest polynomial order) spanning the polynomial space of $\mathcal{P}_P$, the error of a smooth solution with mesh-size $h$ and polynomial order $P$ has the property of (\cite{karniadakis_2005spectral}),
+% \begin{equation}\label{eq:errorConvergence}
+%     ||u(x) - u^{\delta}(x)|| \leq Ch^P||u(x)|| \approx \mathcal{O}(h^P).
+% \end{equation}
+% Equation \ref{eq:errorConvergence} implies that the error decreases as the $h$ is decrease (mesh refinement) or as $P$ is increased using higher-order polynomials.
 
 % \subsection{Polynomial expansions in SEM}\label{sec:modifiedBasis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1053,54 +1269,29 @@ Equation \ref{eq:errorConvergence} implies that the error decreases as the $h$ i
 % 3.4 VELOCITY CORRECTION SCHEME
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Velocity correction scheme for incompressible Navier Stokes equations}
+% \section{Velocity correction scheme for incompressible Navier Stokes equations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3.5 LINEAR STABILITY ANALYSIS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Linear Stability Analysis}
+% \section{Linear Stability Analysis}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3.6 EDGE-TRACKING
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Edge Tracking}
+% \section{Edge Tracking}
 % \section{Hydrodynamic stability analysis}
 % \subsection{Linear stability analysis}
 % \subsubsection{Fourier-Chebyshev methods}
 % \subsubsection{Timestepping methods: Arnoldi Iteration}
 % \subsubsection{Transient growth}
-To study the dynamics of infinitetisimal perturbations about a base flow, the time evolution equation for the perturbations dynamics typically reduces to,
-\begin{equation}
-    \frac{\partial}{\partial t} \mathbf{u} = \mathcal{L}\mathbf{u},
-\end{equation}
-where $\mathcal{L}, \mathbf{u}$ refers to the linearised operator and a vector of perturbations. Suppose the that linear operator is diagonlisable,
-\begin{equation}
-    \mathcal{L} = 
-     \begin{bmatrix}
-     | & & | \\
-     \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
-     | & & |
-     \end{bmatrix}
-     \begin{bmatrix}
-     \lambda_1 &  & 0 \\
-      & \ddots &  \\
-     0 &  & \lambda_n
-     \end{bmatrix}
-     \begin{bmatrix}
-     | & & | \\
-     \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
-     | & & |
-     \end{bmatrix}^{-1}
-     = \mathcal{S}\Lambda\mathcal{S}^{-1}.
-\end{equation}
 
-Suppose we can decompose our initial conditions into a superposition of eigenmodes,
-\begin{equation}
-    \mathbf{u}_0 = \alpha_{1,0}\mathbf{s}_1 + \alpha_{2,0}\mathbf{s}_2 + ... + \alpha_{N,0} \mathbf{s}_n = \sum_{i=1}^{n} \alpha_{i,0}\mathbf{s}_i,
-\end{equation}
-and w
+% Suppose we can decompose our initial conditions into a superposition of eigenmodes,
+% \begin{equation}
+%     \mathbf{u}_0 = \alpha_{1,0}\mathbf{s}_1 + \alpha_{2,0}\mathbf{s}_2 + ... + \alpha_{N,0} \mathbf{s}_n = \sum_{i=1}^{n} \alpha_{i,0}\mathbf{s}_i,
+% \end{equation}
 
 % \subsection{Nonlinear stability tools}
-\subsubsection{Edge state tracking}
-\subsubsection{Computing Invariant solutions}
+% \subsubsection{Edge state tracking}
+% \subsubsection{Computing Invariant solutions}
