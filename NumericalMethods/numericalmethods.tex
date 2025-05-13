@@ -166,14 +166,16 @@ Under certain assumptions of $a$, a solution is guaranteed under the Lax-Milgram
 %%%%%%%%%%%%%%%%%%%%%%
 
 \section{Spectral/\emph{hp} element methods}\label{sec:spectralhpelementmethods}
-We have briefly described the procedure for approximating a solution of a PDE using the standard Galerkin projection technique above.
-However, the choice of basis (and also test) functions, $\Phi(x)$, is not discussed.
-In this section, we discuss the spectral/\emph{hp} element method, and describe the essential numerical differential and integral techniques.
+We have described the procedure for approximating a solution of a PDE using the classical Galerkin projection technique.
+However, the spatial discretisation scheme, related to the choice of basis (and test) functions, remains undiscussed.
+% and describe the essential numerical differential and integral techniques.
 % , equation \eqref{eq:standard_galerkin} reduces to a system of linear equations.
 % To represent the spatially-dependent velocity and pressure fields, spatial discretisation is performed using the spectral/\emph{hp} element method.
 % Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
 % The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
-The spectral/\emph{hp} element method pioneered by \citep{patera_spectral_1984} is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
+In this section, we discuss the spectral/\emph{hp} element method \citep{patera_spectral_1984},
+where the solution is partitioned into a set of non-overlapping finite elements of size $h$, consisting of a linear combinbation of continuous orthogonal polynomial functions up to order $P$.
+% The spectral/\emph{hp} element method pioneered by \citep{patera_spectral_1984} is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
 % represented by a polynomial of up to order $p$.
 % which leverages the advantages of offering geometric flexibility by decomposing the global domain into a set of non-overlapping (finite) elements of size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $p$.
 It leverages the geometric flexibility of classical finite-element methods, allowing for the representation of complex engineering geometries, and the exponential (spectral) convergence properties of classical spectral methods, where the solution error decreases exponentially.
@@ -181,11 +183,11 @@ It leverages the geometric flexibility of classical finite-element methods, allo
 % The spectral/\emph{hp} method uses a series of high-order polynomials (Lagrange/Legendre) within each element.
 Suppose we consider $P+1$ linearly independent polynomials spanning the polynomial space of $\mathcal{P}_P$, the error of a smooth solution with element size of $h$ and polynomial order $P$ has the property of \citep{karniadakis_spectralhp_2005}, 
 \begin{equation}\label{eq:error_convergence}
-    ||u(x) - u^{\delta}(x)|| \leq Ch^P||u(x)|| \approx \mathcal{O}(h^P).
+    ||u(x) - u^{\delta}(x)|| \leq Ch^P||u(x)|| \approx O(h^P).
 \end{equation}
 where $C$ is some constant.
 Equation \ref{eq:error_convergence} implies that the error decreases linearly with $h$, and exponentially with $P$.
-
+This section is organised into domain partition, standard elements, assembly process, modal and nodal expansion functions, numerical integration and differentiation, concluding with an example in 1D.
 % % It offers the flexibility of offering refinements in either $h$ or $p$, or both.
 % \begin{enumerate}
 %     \item Finite elements:
@@ -198,30 +200,34 @@ Equation \ref{eq:error_convergence} implies that the error decreases linearly wi
 % DOMAIN PARTITION
 %%%%%%%%%%%%%%%%%%
 \subsection{Domain partition}
-We consider a one-dimensional domain, $\Omega$ defined earlier, and seek to decompose it into a set of $N_{el}$ elements, where $\Omega^e$, refers to the elemental partitions with $1 \geq e \geq N_{el}$ such that they meet at their boundaries,
+The first step concerns the partitioning the domain into a set of (finite) elemental regions.
+We consider an example in one dimension within $\Omega$, and partition it into a set of $N_{el}$ elements, where $\Omega^e$, refers to the elemental partitions with $1 \geq e \geq N_{el}$, such that they meet at their boundaries and do not overlap,
 \begin{equation}
     \Omega = \bigcup_{e = 1}^{N_{el}} \Omega^e, \quad \text{where} \; \bigcap_{e=1}^{N_{el}} \Omega^e = \emptyset
 \end{equation}
-where $e^{th}$ element is defined as,
+where the $e^{th}$ element is defined as,
 \begin{equation}
-    \Omega^e = \{x | x_{e-1} \geq x \geq x_e \},
+    \Omega^e = \{x \, | \, x_{e-1} \geq x \geq x_e \}.
 \end{equation}
-Each element it then represented by a linear combination, $\phi(x)$, where $x$ is referred to the \emph{global} domain.
+Each element can be represented by a linear combination of orthogonal basis expansions.
+The basis expansions can be either modal or nodal expansions, as we shall see later.
+% Each element it then represented by a linear combination, $\phi(x)$, where $x$ is referred to the \emph{global} domain.
 
 %%%%%%%%%%%%%%%%%%%
 % STANDARD ELEMENTS
 %%%%%%%%%%%%%%%%%%%
 \subsection{Standard Elements}
-In general, we can expect non-uniform elements so it is useful to define a \emph{standard} element,
+In general, we expect to work with non-uniform elements that may have arbitrarily shapes, making the definition of basis expansions potentially unwieldy.
+To simplify the formulation, it is convenient to define a \textit{standard} element,
 \begin{equation}
-    \Omega_{set} := \{ \xi | -1 \geq \xi \geq 1 \},
+    \Omega_{st} = \{ \xi \, | \, -1 \geq \xi \geq 1 \},
 \end{equation}
-where $\Omega_{st}$ refers to the standard element, defined over local coordinates, $\xi \in [-1, 1]$.
-By considering formulations using the standard elements, the formulations of basis expansions, differential and integration operations can be performed in local coordinates, $\xi$, before mapping the results back to the global domain, $x$.
+where $\Omega_{st}$ refers to the standard element defined in local coordinates, $\xi \in [-1, 1]$.
+Within this standard element, the formulation of basis expansions, as well as differential and integration operations, can be carried out in the local coordinate system $\xi$, before mapping the solution back to the global domain, $x$.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element.pdf}
-    \caption{A spectral/\emph{hp} element representation of a 1D continuous function, $u(x)$, deomposed into four non-overlapping finite elements, each containing a linear combination of three local expansion bases.}
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element_3elements.pdf}
+    \caption{A spectral/\emph{hp} element representation of $u(x)$, consisting of three non-overlapping finite elements, each containing a linear combination of local expansion bases of up to $P=2$.}
     \label{fig:standard_element}
 \end{figure}
 We can map the standard element into any arbitrary global coordinates based on a linear mapping $\chi^e:\Omega_{st} \rightarrow \Omega$,
@@ -230,36 +236,40 @@ We can map the standard element into any arbitrary global coordinates based on a
 \end{equation}
 which has an analytical inverse, $(\chi^e)^{-1}(x)$,
 \begin{equation}
-    \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega_{st}.
+    \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega^{e}.
 \end{equation}
-In each standard element, we can represent the solution by using a linear combination of local expansion basis, $\phi(\xi)$,
+To motivate an example, we consider that the standard element can be represented by three local basis expansions of polynomial order of up to $P = 2$,
 \begin{equation}
-    \phi_0(\xi) = \frac{1 - \xi}{2}, \quad \phi_1(\xi) = (1 + \xi)(1 - \xi), \quad \phi_2(\xi) =  \frac{1 + \xi}{2},
+    \phi_0^e(\xi) = \frac{1 - \xi}{2}, \quad \phi_1^e(\xi) = (1 + \xi)(1 - \xi), \quad \phi_2^e(\xi) =  \frac{1 + \xi}{2},
 \end{equation}
-where $\phi_0, \phi_2$ denotes a linear local expansion basis with $P = 1$, while $\phi_1$ is a quadratic local expansion basis with $P=2$. 
+where $\phi_0^e, \phi_2^e$ and $\phi_1^e$ refers to the linear and quadratic local basis expansions of the $e^{th}$ element.
+These local basis expansions is illustrated in figure \ref{fig:standard_element}.
+We note that the formulations of local basis expansion here is merely an example.
+In practice, the local basis expansions are usually chosen to have certain orthogonality properties under an inner product.
 The approximate solution is now represented as,
 \begin{equation}
     u^\delta(x) = \sum_{i=0}^{N-1}\hat{u}_i\Phi_i(x) = \sum_{e=0}^{N_{el}-1}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
 \end{equation}
-where $\hat{u}_i^e, N_{el}$ refers to the local expansion basis coefficients the number of elements.
-Consequentially, $u^\delta(x)$ now lie within $\mathcal{X}^\delta$.
+where $\hat{u}_i^e$ refers to the local expansion basis coefficients.
+The approximate solution, $u^\delta(x)$, now lie within the solution space $\mathcal{U}^\delta$ defined as,
 \begin{equation}
-    \mathcal{X}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \text{span}\{\phi_0, \phi_1, \phi_2\},\ e = 1, 2, 3, 4 \right\}
+    \mathcal{U}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \phi_i^e(\xi), \forall i : 0 \leq i \leq P, \forall e : 0 \leq e \leq N_{el} \right\}
 \end{equation}
-Figure \ref{fig:standard_element} summarises the domain partition based on standard elements.
+% Figure \ref{fig:standard_element} presents the sketch of representing a continous function using spectral/\textit{hp} element methods for $P = 2$ and $N_{el} = 3$.
 
 %%%%%%%%%%%%%%%%%%%%
 % ASSEMBLY FUNCTIONS
 %%%%%%%%%%%%%%%%%%%%
 
-\subsection{Assembly process}
-As we represent our solution using local expansion basis within standard elements, their solution across the elemental boundaries may become discontinuous.
+\subsection{Global assembly}
+As we represent our solution using local basis expansions within standard elements, their solution across the elemental boundaries may become discontinuous.
 In the approach of continuous Galerkin projection methods, we enforce our solution to be $C^0$ continuous across the elemental boundaries.
 In other words, the neighbouring linear interior elements must meet at the boundaries, such that the local expansion coefficients are constrained by,
 \begin{equation}
     \hat{u}^{e-1}_P = \hat{u}^e_0.
 \end{equation}
-This constrain enforeced by consider a mapping between the (global) expansion coefficients, and local expansion coefficients, 
+We can ultilise a mapping b
+This constraint by consider a mapping between the (global) expansion coefficients, and local expansion coefficients, 
 % Due to the constraint described above, we need a mathematical process which maps the local coefficients to the global coefficients.
 % To fulfil this description, we introduce a vector of global coefficients, $\mathbf{\hat{u}}_g$, and local coefficients $\mathbf{\hat{u}}_l$, and a linear map $\mathbf{A}$, given as,
 % In this case, we introduce the definition of global modes given as,
