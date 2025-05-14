@@ -26,12 +26,12 @@ We suppose that the exact solution $u(x)$ can be approximated (discretised) by $
 \begin{equation}\label{eq:approximate}
     u(x) \approx u^\delta(x) = \sum_{i=0}^{N-1} \hat{u}_i \Phi_i(x),
 \end{equation}
-where $u^\delta(x)$ refers to the approximate solution of $u(x)$, consisting of a linear combination of the product between the $i^{th}$ basis coefficient, $\hat{u}_i$, and the $i^{th}$ basis function $\Phi_i(x)$, defined within $\Omega$.
-Since $u^\delta(x)$ is an approximate solution of equation \eqref{eq:helmholtz}, we expect a non-zero difference (or `error') between the exact solution, $u(x)$, and $u^\delta(x)$, known as the residual, $R$,
+where $u^\delta(x)$ refers to the approximate solution of $u(x)$, consisting of a linear combination of the product between the $i^{th}$ basis coefficient, $\hat{u}_i$, and the $i^{th}$ global basis expansion, $\Phi_i(x)$, defined within $\Omega$.
+Since $u^\delta(x)$ is an approximate solution of equation \eqref{eq:helmholtz}, we expect a residual (or `error') between the exact solution, $u(x)$, and $u^\delta(x)$,
 \begin{equation}\label{eq:residual}
-    \mathbf{L}[u^\delta(x)] = R[u^\delta(x)].
+    \mathbf{L}[u^\delta(x)] = R[u^\delta(x)],
 \end{equation}
-The residual depends on the approximate solution $u^\delta(x)$ is non-zero, and vary within $\Omega$.
+where $R[u^\delta(x)]$ refers to the residual which depends on the approximate solution $u^\delta(x)$ and varying within $\Omega$.
 In other words, equation \eqref{eq:helmholtz} might not be satisfied everywhere in $\Omega$. 
 We need to place restrictions on the residual, such that it the residual approaches zero, $R \rightarrow 0$, and the approximate solution approaches the exact solution, $u^\delta(x) \rightarrow u(x)$.
 The method of residuals places a restriction on the residual by applying an inner product between the governing equation, and $N$ test (or weight) functions, $v_j(x)$, and setting it to zero,
@@ -50,7 +50,7 @@ The inner product between two functions $f(x)$ and $g(x)$ is,
 % \end{equation}
 By setting equation \eqref{eq:weightinnerresidual} to zero, it becomes a system of $N$ ordinary differential equations, where the $N$ basis coefficients, $\hat{u}_i$.
 The choice of test function defines the projection methods, and examples of projection methods are shown in table \ref{tab:weightFunction}.
-We emphasise that the method of weighted residuals merely describes the projection method, but does not specify the type of basis functions, as we will discuss later in \S \ref{sec:spectralhpelementmethods}.
+We emphasise that the method of weighted residuals merely describes the projection method, but does not specify the type of basis expansions, as we will discuss later in \S \ref{sec:spectralhpelementmethods}.
 The choice of projection method coupled with suitable basis expansions will have different solution convergence properties.
 A particular interest is on how quickly the residual vanishes as the number of basis expansions increases.
 For instance, by considering the Galerkin method coupled with Fourier expansions, one can expect exponential convergence, desirable for an efficient representation of turbulent dynamics.
@@ -79,8 +79,7 @@ For instance, by considering the Galerkin method coupled with Fourier expansions
 % For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$.
 % The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$.
 \section{Galerkin Projection}\label{sec:galerkinprojection}
-The Galerkin projection remains a standard projection method in the context of the finite element method, where the test functions, $v(x)$, are chosen to be the same as the basis functions, $\Phi(x)$.
-Mathematically, the test and basis functions belong to the same functional space.
+The Galerkin projection remains a standard projection method in the context of the finite element method, where the test functions, $v(x)$, are chosen to be lie in the same functional space as the global basis functions, $\Phi(x)$.
 To demostrate the Galerkin projection method, we consider that the differential operator earlier in equation \eqref{eq:linear_operator} as a 1D Helmholtz equation,
 \begin{subequations}\label{eq:helmholtz}
     \begin{equation}
@@ -217,6 +216,12 @@ The basis expansions can be either modal or nodal expansions, as we shall see la
 % STANDARD ELEMENTS
 %%%%%%%%%%%%%%%%%%%
 \subsection{Standard Elements}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element_3elements.pdf}
+    \caption{A spectral/\emph{hp} element representation of $u(x)$, consisting of three non-overlapping finite elements, each containing a linear combination of local expansion bases of up to $P=2$.}
+    \label{fig:standard_element}
+\end{figure}
 In general, we expect to work with non-uniform elements that may have arbitrarily shapes, making the definition of basis expansions potentially unwieldy.
 To simplify the formulation, it is convenient to define a \textit{standard} element,
 \begin{equation}
@@ -224,12 +229,6 @@ To simplify the formulation, it is convenient to define a \textit{standard} elem
 \end{equation}
 where $\Omega_{st}$ refers to the standard element defined in local coordinates, $\xi \in [-1, 1]$.
 Within this standard element, the formulation of basis expansions, as well as differential and integration operations, can be carried out in the local coordinate system $\xi$, before mapping the solution back to the global domain, $x$.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element_3elements.pdf}
-    \caption{A spectral/\emph{hp} element representation of $u(x)$, consisting of three non-overlapping finite elements, each containing a linear combination of local expansion bases of up to $P=2$.}
-    \label{fig:standard_element}
-\end{figure}
 We can map the standard element into any arbitrary global coordinates based on a linear mapping $\chi^e:\Omega_{st} \rightarrow \Omega$,
 \begin{equation}
     x = \chi^e(\xi) = \frac{1-\xi}{2} x_e + \frac{1 + \xi}{2}x_{e+1}, \quad \xi \in \Omega_{st}
@@ -238,17 +237,17 @@ which has an analytical inverse, $(\chi^e)^{-1}(x)$,
 \begin{equation}
     \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega^{e}.
 \end{equation}
-To motivate an example, we consider that the standard element can be represented by three local basis expansions of polynomial order of up to $P = 2$,
-\begin{equation}
+For illustration purposes, we consider that the standard element can be represented by three local basis expansions of polynomial order of up to $P = 2$,
+\begin{equation}\label{eq:def_local_expansions}
     \phi_0^e(\xi) = \frac{1 - \xi}{2}, \quad \phi_1^e(\xi) = (1 + \xi)(1 - \xi), \quad \phi_2^e(\xi) =  \frac{1 + \xi}{2},
 \end{equation}
 where $\phi_0^e, \phi_2^e$ and $\phi_1^e$ refers to the linear and quadratic local basis expansions of the $e^{th}$ element.
 These local basis expansions is illustrated in figure \ref{fig:standard_element}.
 We note that the formulations of local basis expansion here is merely an example.
-In practice, the local basis expansions are usually chosen to have certain orthogonality properties under an inner product.
+In practice, the local basis expansions are usually chosen to have orthogonality properties under a certain inner product.
 The approximate solution is now represented as,
-\begin{equation}
-    u^\delta(x) = \sum_{i=0}^{N-1}\hat{u}_i\Phi_i(x) = \sum_{e=0}^{N_{el}-1}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
+\begin{equation}\label{eq:local_expansions}
+    u^\delta(x) = \sum_{e=0}^{N_{el}-1}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
 \end{equation}
 where $\hat{u}_i^e$ refers to the local expansion basis coefficients.
 The approximate solution, $u^\delta(x)$, now lie within the solution space $\mathcal{U}^\delta$ defined as,
@@ -262,14 +261,45 @@ The approximate solution, $u^\delta(x)$, now lie within the solution space $\mat
 %%%%%%%%%%%%%%%%%%%%
 
 \subsection{Global assembly}
-As we represent our solution using local basis expansions within standard elements, their solution across the elemental boundaries may become discontinuous.
-In the approach of continuous Galerkin projection methods, we enforce our solution to be $C^0$ continuous across the elemental boundaries.
-In other words, the neighbouring linear interior elements must meet at the boundaries, such that the local expansion coefficients are constrained by,
+In this section, we introduce the concept of global assembly (or direct stiffness summation) which relates the global basis expansions (equation \eqref{eq:approximate}), $\Phi_i(x)$, to the local basis expansions (equation \eqref{eq:local_expansions}), $\phi_i^e(x)$, where the solution can be approximated using either formulation,
+\begin{equation}
+    u^\delta(x) = \sum_{i=0}^{N-1}\hat{u}_i\Phi_i(x) = \sum_{e=0}^{N_{el}-1}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
+\end{equation}
+In general, we can represent the global and local basis coefficients each as a column vector,
+\begin{equation}
+    \mathbf{\hat{u}}_g = 
+\begin{pmatrix}
+    \hat{u}_0 \\
+    \vdots \\ 
+    \hat{u}_N
+\end{pmatrix},
+\quad 
+\mathbf{\hat{u}}_l = 
+ \begin{pmatrix}
+     \mathbf{\hat{u}}^0 \\ 
+     \vdots \\
+     \mathbf{\hat{u}}^{N_{el}-1}
+ \end{pmatrix},
+\end{equation}
+where $\mathbf{\hat{u}}^{e} = (\hat{u}_0^e, ..., \hat{u}_P^e)^T$, $\mathbf{\hat{u}}_g \in \mathbb{R}^N$, $\mathbf{\hat{u}}_l \in \mathbb{R}^{N_{loc}}$ and $N_{loc} = N_{el}(P+1)$.
+As there can be more global degrees of freedom than local degrees of freedom, $N > N_{loc}$, we need to impose some conditions on the local expansion coefficients.
+One of the common approach is to enforce $C^0$ continuity across elemental boundaries, referred to as the continous Galerkin projection.
+Following the definition of local basis expansions in equation \eqref{eq:def_local_expansions}, this condition can be supplemented using,
 \begin{equation}
     \hat{u}^{e-1}_P = \hat{u}^e_0.
 \end{equation}
-We can ultilise a mapping b
-This constraint by consider a mapping between the (global) expansion coefficients, and local expansion coefficients, 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{NumericalMethods/Figures/standard_element_3elements_C0.pdf}
+\caption{A graphical representation of $C^0$ across elemental boundaries and the relationship between local basis coefficients, $u_0^e, u_P^e$, and global basis expansions, $u_i$.}
+\label{fig:local_to_global}
+\end{figure}
+The graphical representation of this condition enforcing $C^0$ continuity between the element boundaries for three finite elements with $P=2$ local basis expansions, and the relationship between global and local basis coefficients are shown in figure \ref{fig:local_to_global}.
+% In the approach of continuous Galerkin projection methods, we enforce our solution to be $C^0$ continuous across the elemental boundaries.
+% In other words, the neighbouring linear interior elements must meet at the boundaries, such that the local expansion coefficients are constrained by,
+% We can ultilise a mapping b
+We can relate the global and local basis coefficients with an assembly matrix, $\mathbf{A} \in \mathbb{R}^{N_{loc} \times N}$,
+% This constraint by consider a mapping between the (global) expansion coefficients, and local expansion coefficients, 
 % Due to the constraint described above, we need a mathematical process which maps the local coefficients to the global coefficients.
 % To fulfil this description, we introduce a vector of global coefficients, $\mathbf{\hat{u}}_g$, and local coefficients $\mathbf{\hat{u}}_l$, and a linear map $\mathbf{A}$, given as,
 % In this case, we introduce the definition of global modes given as,
@@ -277,28 +307,29 @@ This constraint by consider a mapping between the (global) expansion coefficient
 %     u^\delta(x) = \sum_{i=0}^{N_{dof}-1} \hat{u}_i \Phi_i(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
 % \end{equation}
 % where $\Phi_i(x)$ refers to global modes, that is defined in the entire domain.
-\begin{subequations}
-
-    \begin{equation}
-        \mathbf{\hat{u}}_l = \mathbf{A} \mathbf{\hat{u}}_g   
-    \end{equation}
-    \text{with,}
-    \begin{equation}
+\begin{equation}
+    \mathbf{\hat{u}}_l = \mathbf{A} \mathbf{\hat{u}}_g.
+\end{equation}
+In the case for $P=2$ and three finite elements as in the case of figures \ref{fig:standard_element}and \ref{fig:local_to_global}, the assembly matrix and the vectors of global and local basis coefficients are given as,
+\begin{equation}
+    \begingroup
+    \setlength\arraycolsep{2pt}
+    \renewcommand{\arraystretch}{1} % Smaller line spacing
         \mathbf{\hat{u}}_l = 
-        \begin{bmatrix}
+        \begin{pmatrix}
+            \hat{u}_0^0  \\
+            \hat{u}_1^0  \\
+            \hat{u}_2^0  \\
             \hat{u}_0^1  \\
             \hat{u}_1^1  \\
             \hat{u}_2^1  \\
             \hat{u}_0^2  \\
             \hat{u}_1^2  \\
             \hat{u}_2^2  \\
-            \hat{u}_1^3  \\
-            \hat{u}_2^3  \\
-            \hat{u}_3^3  \\
-        \end{bmatrix}
+        \end{pmatrix},
         \quad
         \mathbf{A} = 
-        \begin{bmatrix}
+        \begin{pmatrix}
             1 & 0 & 0 & 0 & 0 & 0 & 0\\
             0 & 1 & 0 & 0 & 0 & 0 & 0\\
             0 & 0 & 1 & 0 & 0 & 0 & 0\\
@@ -308,34 +339,34 @@ This constraint by consider a mapping between the (global) expansion coefficient
             0 & 0 & 0 & 0 & 1 & 0 & 0\\
             0 & 0 & 0 & 0 & 0 & 1 & 0\\
             0 & 0 & 0 & 0 & 0 & 0 & 1\\
-        \end{bmatrix}
+        \end{pmatrix}
         ,
         \quad 
         \mathbf{\hat{u}}_g
-        \begin{bmatrix}
+        \begin{pmatrix}
             \hat{u}_0  \\
             \hat{u}_1  \\
             \hat{u}_3  \\
             \hat{u}_4  \\
             \hat{u}_5  \\
             \hat{u}_6  \\
-            \hat{u}_7 
-        \end{bmatrix}
-    \end{equation}
-\end{subequations}
-where $\mathbf{\hat{u}}_l, \mathbf{\hat{u}}_g, \mathbf{A} \in \mathbb{R}^{N_l, N_g}$ refers to the vector of local, global expansion and scatter matrix, and $N_l = N_{el} \times (P + 1)$ refers to the total local degrees of freedom while $N_g = N_l - (N_{el} - 1)$, the global degrees of freedom.
-Notably, matrix $\mathbf{A}$ `scatters' the global degrees of freedom to local degrees of freedom.
-In the spectral/\textit{hp} approach, we typically define local expansion basis, and perform integration and differentiation operation in standard element.
-After doing so, we need to assemble the operations from the standard element to the global domain by using $\mathbf{A}^T$, is known as an assembly operation, assembling local degrees of freedom to global degrees of freedom.
-For instance, we wish to perform integration in the domain $\Omega$, 
+        \end{pmatrix},
+    \endgroup
+\end{equation}
+% where $\mathbf{\hat{u}}_l, \mathbf{\hat{u}}_g, \mathbf{A} \in \mathbb{R}^{N_l, N_g}$ refers to the vector of local, global expansion and scatter matrix, and $N_l = N_{el} \times (P + 1)$ refers to the total local degrees of freedom while $N_g = N_l - (N_{el} - 1)$, the global degrees of freedom.
+The assembly matrix $\mathbf{A}$ `scatters' the global degrees of freedom to local degrees of freedom, while the transpose of it, $\mathbf{A}^T$, performs the reverse, referred to as global assembly.
+% , is known as an assembly operation, assembling local degrees of freedom to global degrees of freedom.
+For example, we wish to perform integration in the domain $\Omega$, 
 \begin{equation}
     \mathbf{I}_g[j] = (\Phi_j(x), u^\delta(x)),
 \end{equation}
-which equivalent to performing integration using local expansion basis within standard elements, and assembling in the global space by using $\mathbf{A}^T$,
+where $\mathbf{I}_g \in \mathbb{R}^{N}$ refers to a vector containing the integral between $\Phi_i(x)$ and $u^\delta(x)$.
+This is related to first performing integration using local expansion basis within standard elements, and then assembling using $\mathbf{A}^T$,
 \begin{subequations}
     \begin{equation}
-        \mathbf{I}_g = \mathbf{A}^T \mathbf{I}_l
+        \mathbf{I}_g = \mathbf{A}^T \mathbf{I}_l,
     \end{equation}
+    \text{where,}
     \begin{equation}
     \mathbf{I}_g =  
     \begin{bmatrix}
@@ -351,16 +382,20 @@ which equivalent to performing integration using local expansion basis within st
         \vdots \\
         \mathbf{I}^{N_{el}-1}
     \end{bmatrix}
-    ,\quad \text{where} \quad
+    ,\quad \text{with} \quad
     \mathbf{I}^e =  
     \begin{bmatrix}
         \int_{-1}^1 \phi_0^e(\xi) u(\chi^e)\frac{\mathrm{d} \chi^e}{\mathrm{d} \xi}\, \mathrm{d}\xi \\
         \vdots \\
         \int_{-1}^1 \phi_{P-1}^e(\xi) u(\chi^e)\frac{\mathrm{d} \chi^e}{\mathrm{d} \xi}\, \mathrm{d}\xi
-    \end{bmatrix}
+    \end{bmatrix},
     \end{equation}
 \end{subequations}
-and $\mathbf{I}_g, \mathbf{I}_l, \mathbf{I}^e$ refer to the integration operations perform in global, local and elemental space.
+and $\mathbf{I}_l \in \mathbb{R}^{N_{loc}}$ refer to the vector of integration operations performed within a standard element.
+In the spectral/\textit{hp} element approach, we perform integration and differentiation using local basis expansions within a standard element.
+After doing so, we assemble the local operations from the standard element to the global domain by using $\mathbf{A}^T$, as we shall show later using a 1D example.
+We note that the structure of assembly matrix is generally sparse, where the entries either contain 0, 1 or -1 in multidimensional formulation.
+Therefore, the assembly matrix is not constructed in practice, and a mapping array is used instead.
 
 % \begin{equation}
 %     \mathbf{I}_g[j] = (\Phi_j(x), u^\delta(x)) = \int_\Omega \Phi_j(x) \, \sum_{i=0}^P\sum_{e=0}^{N_{el} -1} \hat{u}_i^e\phi_i^e(\chi^e(\xi)) \, \mathrm{d} x
@@ -372,12 +407,16 @@ and $\mathbf{I}_g, \mathbf{I}_l, \mathbf{I}^e$ refer to the integration operatio
 % BASIS FUNCTIONS
 %%%%%%%%%%%%%%%%%
 
-\subsection{Expansion functions}
-Here, we discuss the expansion functions of $\phi(\xi)$, where in general could be categorised into \emph{modal} (hierarchical) expansions or \emph{nodal} expansions.
+\subsection{Local basis expansions}
+The choice of local basis expansions, $\phi_i^e(\xi)$, pertains the representation of the solution, and the convergence properties of the numerical solver, in particular, the condition number of the mass and laplacian matrices.
+In general, the the local basis expansions can be classified into two groups, either \textit{modal} or \textit{nodal} expansions.
+% Here, we discuss the expansion functions of $\phi(\xi)$, where in general could be categorised into \emph{modal} (hierarchical) expansions or \emph{nodal} expansions.
+
 % Modal expansions
 \subsubsection{Modal expansions}
-The most common modal employed in Nektar++ are the Jacobi polynomials, denoted by $P_p^{\alpha,\beta}(x)$, which represent a family of polynomial solutions to the Sturm-Liouville problem wihin, $x \in [-1, 1]$.
-The Legendre polynomials are a special case of Jacobi polynomials, $L_n(\xi) = P_n^{0,0}(\xi)$ with $\alpha = \beta = 1$.
+Modal expansions, or hierarchical expansions, describes a set of expansion basis where an expansion set of order $P-1$, $\mathcal{X}_{P-1}^\delta$, is contained within a set of order $P$, $\mathcal{X}_P^\delta$, e.g. $\mathcal{X}_{P-1}^\delta \subset \mathcal{X}_P^\delta$.
+The Jacobi polynomials, $P_p^{\alpha,\beta}(x)$, representing a family of solutions with arbitrary values of $(\alpha, \beta)$ to the Sturm-Liouville problem within, $x \in [-1, 1]$, are modal expansions.
+Notably, the Legendre polynomials are a special case of Jacobi polynomials, $L_n(\xi) = P_n^{0,0}(\xi)$ with $\alpha = \beta = 1$.
 % The \emph{trial} functions $\phi_p$ (or basis expansions) used in spectral/\emph{hp} method consist of \emph{boundary} and \emph{interior} modes.
 % \emph{Interior} modes are defined to be zero on all boundaries, and non-zero within the boundary, satisfying homogeneous boundary conditions.
 % \emph{Boundary} modes take on non-zero values on the boundary, satisfying non-homogeneous boundary conditions and providing $C^0$ continuity between elements (\cite{karniadakis_2005spectral}).
@@ -402,15 +441,15 @@ where $P$ denotes the highest polynomial order. Figure \ref{fig:Modifiedbasis} s
 
 % Nodal expansions
 \subsubsection{Nodal expansions}
-A popular nodal expansions are the Lagrange polynomials, common used in the spectral \textit{element} codes such as Semtex and Nek5000.
-The Lagrange polynomials are given as
+Nodal expansions are basis expansions that are non-hierchical, $Lagrange polynomials are an example of \textit{nodal} expansions, defined as,
 \begin{equation}
     \phi_p(\xi) = h_p(\xi) = \frac{\prod_{q = 0, q \neq p}^P (\xi - \xi_q)}{\prod_{q = 0, q \neq p}^P (\xi_p - \xi_q)}
 \end{equation}
-The Lagrange polynomials are particular attractive as it has a unit value at $\xi_q$ and zero everywhere else,
+The Lagrange polynomials are particular attractive as it has a unit value at $\xi_q$ and zero everywhere else, $h_p(\xi_q) = \delta_{pq}$, which implies that
 \begin{equation}
-    h_p(\xi_q) = \delta_{pq}.
+    u^\delta(\xi_q) = \sum_{p=0}^{P} \hat{u}_ph_p(\xi_q) = \sum_{p=0}^{P} \hat{u}_p\delta_{pq} = \hat{u}_q,
 \end{equation}
+where the Lagrange coefficient $\hat{u}_q$ is the same as the value evaluted at the node $\xi_q$, hence referred to nodal expansions.
 Typically, the zeros are located using the zeros of the Gauss-Lobatto polynomials where the zeros are defined using
 \begin{equation}
     \phi_p(\xi) \rightarrow h_p(\xi) = \begin{cases} 1, & \quad \xi = \xi_p, \\ \frac{(\xi^2 -1)[P_{Q-1}^{\alpha,\beta}(\xi)]'}{(Q-1)(Q+\alpha+\beta)P_{Q-1}^{\alpha,\beta}(\xi_j)(\xi - \xi_j)}, & \quad \text{otherwise.} \end{cases}
@@ -424,7 +463,6 @@ Typically, the zeros are located using the zeros of the Gauss-Lobatto polynomial
 \end{figure}
 Figure \ref{fig:Lagrangebasis} presents nodal expansions based on two-dimensional and one-dimensional Lagrange polynomials, $h_p(\xi_1), h_q(\xi_2)$ respectively.
 
-The modified basis and Lagrange exhibits stark differences.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NUMERICAL Integration
