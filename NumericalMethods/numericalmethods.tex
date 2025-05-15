@@ -164,7 +164,7 @@ Under certain assumptions of $a$, a solution is guaranteed under the Lax-Milgram
 % SPECTRAL/HP ELEMENTS
 %%%%%%%%%%%%%%%%%%%%%%
 
-\section{Spectral/\emph{hp} element methods}\label{sec:spectralhpelementmethods}
+\section{Spectral/\emph{hp} element method}\label{sec:spectralhpelementmethods}
 We have described the procedure for approximating a solution of a PDE using the classical Galerkin projection technique.
 However, the spatial discretisation scheme, related to the choice of basis (and test) functions, remains undiscussed.
 % and describe the essential numerical differential and integral techniques.
@@ -408,66 +408,103 @@ Therefore, the assembly matrix is not constructed in practice, and a mapping arr
 %%%%%%%%%%%%%%%%%
 
 \subsection{Local basis expansions}
-The choice of local basis expansions, $\phi_i^e(\xi)$, pertains the representation of the solution, and the convergence properties of the numerical solver, in particular, the condition number of the mass and laplacian matrices.
+The choice of local basis expansions, $\phi_i^e(\xi)$, concerns the representation of the solution, and the convergence properties of the numerical solver, in particular, the condition number of the mass and laplacian matrices.
 In general, the the local basis expansions can be classified into two groups, either \textit{modal} or \textit{nodal} expansions.
 % Here, we discuss the expansion functions of $\phi(\xi)$, where in general could be categorised into \emph{modal} (hierarchical) expansions or \emph{nodal} expansions.
 
 % Modal expansions
 \subsubsection{Modal expansions}
-Modal expansions, or hierarchical expansions, describes a set of expansion basis where an expansion set of order $P-1$, $\mathcal{X}_{P-1}^\delta$, is contained within a set of order $P$, $\mathcal{X}_P^\delta$, e.g. $\mathcal{X}_{P-1}^\delta \subset \mathcal{X}_P^\delta$.
-The Jacobi polynomials, $P_p^{\alpha,\beta}(x)$, representing a family of solutions with arbitrary values of $(\alpha, \beta)$ to the Sturm-Liouville problem within, $x \in [-1, 1]$, are modal expansions.
-Notably, the Legendre polynomials are a special case of Jacobi polynomials, $L_n(\xi) = P_n^{0,0}(\xi)$ with $\alpha = \beta = 1$.
+Modal expansions, or hierarchical expansions, describes a set of expansion basis where an expansion set ($\mathcal{X}_{P-1}^\delta$) of order $P-1$, is contained within a set ($\mathcal{X}_P^\delta$) of order $P$, e.g. $\mathcal{X}_{P-1}^\delta \subset \mathcal{X}_P^\delta$.
+An example of modal expansions are the Jacobi polynomials, $P_p^{\alpha,\beta}(x)$, representing a family of solutions to the Sturm-Liouville problem within, $x \in [-1, 1]$.
+The Jacobi polynomials become symmetric for $\alpha = \beta$, referred to ultraspheric polynomials. 
+Special cases of ultraspheric polynomials are the Legendre polynomials, $\alpha = \beta = 1$, and the Chebyshev polynomials, $\alpha = \beta = 1/2$.
+% Notably, the Legendre polynomials are a special case of Jacobi polynomials, $L_n(\xi) = P_n^{0,0}(\xi)$ with $\alpha = \beta = 0$.
 % The \emph{trial} functions $\phi_p$ (or basis expansions) used in spectral/\emph{hp} method consist of \emph{boundary} and \emph{interior} modes.
 % \emph{Interior} modes are defined to be zero on all boundaries, and non-zero within the boundary, satisfying homogeneous boundary conditions.
 % \emph{Boundary} modes take on non-zero values on the boundary, satisfying non-homogeneous boundary conditions and providing $C^0$ continuity between elements (\cite{karniadakis_2005spectral}).
-Within the Nektar++ framework, it is common to use the \emph{modified} basis based on Jacobi polynomials, ${P}_p^{\alpha,\beta}(\xi)$ which are modified with linear elements as
+Within the Nektar++ framework, we utilise the \emph{modified} basis, constructed using on the Jacobi polynomials and modified (hence its name) by linear expansions given as,
 % are used as the \emph{trial} functions. Using $\alpha=1$, $\beta=1$, and linear basis functions as \emph{boundary} modes, the modified Jacobi polynomials are,
-\renewcommand{\arraystretch}{1.25} % Default value: 1
+\renewcommand{\arraystretch}{1.5} % Default value: 1
 \begin{equation}\label{eq:modifiedJacobi}
-    \phi_p(\xi) = \psi_p(\xi) = \left\{
+    \phi_p(\xi) \rightarrow \psi_p(\xi) = \left\{
             \begin{array}{ll}
-                \frac{1-\xi}{2} & \mbox{for } p=P\\
-                \frac{1-\xi}{2}\frac{1+\xi}{2}{P}_{P-1}^{1,1}(\xi) & \mbox{for } P \geq 2 \\
+                \frac{1-\xi}{2} & \mbox{for } p=0\\
+                \left(\frac{1-\xi}{2}\right)\left(\frac{1+\xi}{2}\right){P}_{p-1}^{1,1}(\xi)\righ & \mbox{for }  0 < p < P \\
                 \frac{1+\xi}{2} & \mbox{for } p=P,
            \end{array}\right.
 \end{equation}
-where $P$ denotes the highest polynomial order. Figure \ref{fig:Modifiedbasis} shows the modified Jacobi polynomials for $p \in [0, 5]$ described by equation \ref{eq:modifiedJacobi}. The boundary modes are $\psi_0$ and $\psi_5$ while the rest are boundary modes.
-\begin{figure}[h]
+We note that $\phi_p(\xi)$ refers to a general local expansion basis while $\psi_p(\xi)$ to definition of the modified basis.
+\begin{figure}
     \centering
-        \includegraphics[width=\textwidth]{NumericalMethods/Figures/modifiedBasis.pdf}
-        \caption{Two-dimensional and one-dimension modified basis, $\psi_p(\xi_1)$ and $\psi_q(\xi_2)$, $P = [0, 4].$}
-        \label{fig:Modifiedbasis}
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/modifiedBasis_1D.pdf}
+    \caption{The modified basis for up to $P=5$ normalised to $-1 \leq \psi_p \leq 1$.}
+    \label{fig:modified_basis}
 \end{figure}
+The one-dimensional expansion modes of the modified basis of up to $P=5$ is shown in figure \ref{fig:modified_basis}.
+The linear modes, corresponding to $p = 0$ and $p = P$, are the only expansions which has a magnitude of at the boundaries, referred to as boundary modes.
+The modified basis for $0 < p < P$, are clearly hierarchical, and have non-zero values except at the boundaries, referred to as interior/bubble modes.
 
 % Nodal expansions
 \subsubsection{Nodal expansions}
-Nodal expansions are basis expansions that are non-hierchical, $Lagrange polynomials are an example of \textit{nodal} expansions, defined as,
+Nodal expansions are basis expansions that are non-hierchical, $\mathcal{X}_{P-1}^\delta \not\subset \mathcal{X}_P^\delta$.
+An example of nodal expansions are the Lagrange polynomials,
 \begin{equation}
-    \phi_p(\xi) = h_p(\xi) = \frac{\prod_{q = 0, q \neq p}^P (\xi - \xi_q)}{\prod_{q = 0, q \neq p}^P (\xi_p - \xi_q)}
+    \phi_p(\xi) \rightarrow h_p(\xi) = \frac{\prod_{q = 0, q \neq p}^P (\xi - \xi_q)}{\prod_{q = 0, q \neq p}^P (\xi_p - \xi_q)}
 \end{equation}
-The Lagrange polynomials are particular attractive as it has a unit value at $\xi_q$ and zero everywhere else, $h_p(\xi_q) = \delta_{pq}$, which implies that
+The Lagrange polynomials, $h_p(\xi)$, are particular attractive as it has a unit value at discrete nodal values, $\xi_q$, and zero everywhere else, $h_p(\xi_q) = \delta_{pq}$, which implies that
 \begin{equation}
     u^\delta(\xi_q) = \sum_{p=0}^{P} \hat{u}_ph_p(\xi_q) = \sum_{p=0}^{P} \hat{u}_p\delta_{pq} = \hat{u}_q,
 \end{equation}
-where the Lagrange coefficient $\hat{u}_q$ is the same as the value evaluted at the node $\xi_q$, hence referred to nodal expansions.
-Typically, the zeros are located using the zeros of the Gauss-Lobatto polynomials where the zeros are defined using
-\begin{equation}
-    \phi_p(\xi) \rightarrow h_p(\xi) = \begin{cases} 1, & \quad \xi = \xi_p, \\ \frac{(\xi^2 -1)[P_{Q-1}^{\alpha,\beta}(\xi)]'}{(Q-1)(Q+\alpha+\beta)P_{Q-1}^{\alpha,\beta}(\xi_j)(\xi - \xi_j)}, & \quad \text{otherwise.} \end{cases}
-\end{equation}
-
+where the Lagrange coefficient $\hat{u}_q$ is the same as the value evaluated at the node $\xi_q$.
+The nodal values, $\xi_q$, are based on the Gauss-Lobatto-Legendre (GLL) points which will be defined later in \S \ref{sec:Gaussian_quadrature}.
+Figure \ref{fig:Lagrange_basis} presents Lagrange expansions evaluated along the GLL points.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{NumericalMethods/Figures/Lagrange.pdf}
-    \caption{Two-dimensional and one-dimension Lagrange basis, $h_p(\xi_1)$ and $h_q(\xi_2)$, $P = [0, 4].$}
-    \label{fig:Lagrangebasis}
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/Lagrange_1D.pdf}
+    \caption{Lagrange polynomials for $P = 5$ with nodal values along GLL points.}
+    \label{fig:Lagrange_basis}
 \end{figure}
-Figure \ref{fig:Lagrangebasis} presents nodal expansions based on two-dimensional and one-dimensional Lagrange polynomials, $h_p(\xi_1), h_q(\xi_2)$ respectively.
+\subsubsection{Multi-dimensional expansions}
+We have introduced modal and nodal expansions in one dimension, and its extension to multi-dimensions bases can be generalised using a tensorial expansion of the local expansion bases. 
+The standard element in a quadrilateral, $\mathcal{Q}^2$, and a hexahedral $\mathcal{H}^3$,
+\begin{equation}
+    \mathcal{Q}^2 = \{-1 \leq \xi_1, \xi_2 \leq 1 \}, \quad \mathcal{H}^2 = \{-1 \leq \xi_1, \xi_2, \xi_3 \leq 1 \}
+\end{equation}
+where $\xi_1, \xi_2, \xi_3$ refers to the local coordinates in multi-dimensions.
+The tensorial bases for quadrilaterals and hexadrals using modified bases are
+\begin{equation}
+    \phi_{pq}(\xi_1, \xi_2) =\psi_q(\xi_1)\psi_q(\xi_2), \quad \text{and} \quad
+    \phi_{pqr}(\xi_1, \xi_2, \xi_3) =\psi_q(\xi_1)\psi_q(\xi_2)\psi_r(\xi_3).
+\end{equation}
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=\textwidth]{NumericalMethods/Figures/modifiedBasis.pdf}
+        \caption{Two dimensional modified basis with $p = q = 4$ in a standard quadrilateral, $-1 \leq \xi_1,\xi_2 \leq 1$. The modified bases are normalised to $-1 \leq \phi_{pq} \leq 1$.}
+        \label{fig:TensorialModifiedbasis}
+\end{figure}
+An example of the modal tensorial bases, for $p = q = 4$ in a standard quadrilateral element in shown in figure \ref{fig:TensorialModifiedbasis}.
+While we have discussed the tensorial the expansions for regular domains such as the standard quadrilateral and hexahedral elements, the extensions for simplex domains such as triangles, tehtrahedrals, prisms and pyramids commonly used to represent complex geometries, are less straightforward.
+The challenge for simplexes is that the local coordinates, $\xi_1,\xi_2,\xi_3$, become dependent where a direct tensorial expansion becomes unwieldy.
+% For complex geometries, it may be preferred to use triangular elements, where the local coordinates $\xi_1, \xi_2$ depend on each other and the tensorial expression becomes unwieldy.
+Instead, a collapsed coordinate system is introduced, providing a transformation from a standard simplex element to a standard regular element.
+In this thesis, we ultilise quadrilateral elements.
+The reader is referred to \cite{karniadakis_spectralhp_2005} for more details about the multi-dimensional formulation of regular and simplex elements.
+% \begin{equation}
+%     \phi_p(\xi) \rightarrow h_p(\xi) = \begin{cases} 1, & \quad \xi = \xi_p, \\ \frac{(\xi^2 -1)[P_{Q-1}^{\alpha,\beta}(\xi)]'}{(Q-1)(Q+\alpha+\beta)P_{Q-1}^{\alpha,\beta}(\xi_j)(\xi - \xi_j)}, & \quad \text{otherwise.} \end{cases}
+% \end{equation}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=\textwidth]{NumericalMethods/Figures/Lagrange.pdf}
+%     \caption{Two-dimensional and one-dimension Lagrange basis, $h_p(\xi_1)$ and $h_q(\xi_2)$, $P = [0, 4].$}
+%     \label{fig:Lagrangebasis}
+% \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NUMERICAL Integration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Numerical integration}
+\subsection{Gaussian quadrature}\label{sec:Gaussian_quadrature}
 In the Galerkin formulation, we perform integration routinely.
 Suppose we want to approximate the integral of a smooth function in a standard element numerically,
 \begin{equation}
@@ -475,11 +512,14 @@ Suppose we want to approximate the integral of a smooth function in a standard e
 \end{equation}
 where $Q, w_i, \xi_i, R(u)$ refers to the quadrature points, integration weights and zeros (or abscissae) and the integral of the error.
 By evaluating the integral, how are we able to minimise the integral error, $R(u)$, with the least number of quadrature points, $Q$, at some weights and zeros.
-If $u(\xi)$ is of polynomial order $P$, we can expect we might need at least $P+1$ equipspaced points to accurately represent the function and evalute its integral, a rather inefficient method.
-Gaussain quadrature is allow us to approximate an integral of a function of order $P$ with far lesser thatn $P+1$ points, as we shall see later.
-The three generic types of Gaussian quadrature rules are known as: Gauss, Gauss-Radau and Gauss-Lobatto.
-The main difference between the three methods are in the treatment of the zeros, where Gauss quadrature uses zeros without the end points $\xi = \pm 1$.
-Gauss-Radau quadrature either select one of the end points, usually at $\xi = -1$, and Gauss-Lobatto consider the end points.
+% If $u(\xi)$ is of polynomial order $P$, we may expect that we require $P+1$ equipspaced points to accurately represent the function and evalute its integral.
+If $u(\xi)$ is of polynomial order of $P$, we may expect that we require at least $P+1$ equipspaced points to represent $u(\xi)$.
+To evalute this the integral, we may also expect that 
+By using Gaussian quadrature rules, we can approximate an integral of a function of order $P$ with far fewer that $P+1$ points.
+
+Gaussian quadrature rules can be grouped into three catergories: Gauss, Gauss-Radau and Gauss-Lobatto quadrature.
+The main difference between the three categories are in the treatment of the end points, where Gauss quadrature rule evaluates the integral without the end points $\xi = \pm 1$.
+Gauss-Radau quadrature either select one of the end points, usually at $\xi = -1$, and Gauss-Lobatto consider the both end points.
 We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials known as the Gauss-Lobatto-Jacobi quadrature rules given as,
 \begin{subequations}
     \begin{equation}

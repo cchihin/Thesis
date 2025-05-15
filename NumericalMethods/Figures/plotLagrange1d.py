@@ -52,7 +52,7 @@ def getmodified(xi, P, alpha, beta):
 def getlagrange(xi, P):
 
     """Compute the basis matrix B of shape (len(xi), P+1)"""
-    xj = get_gll_points(P)  # GLL interpolation nodes
+    xj = get_gll_points(P+1)  # GLL interpolation nodes
     nQ = len(xi)
     B = np.ones((nQ, P + 1))
 
@@ -68,62 +68,31 @@ def getlagrange(xi, P):
             B[i, j] = num / den
     return B
 
-P = 4
-Q = 4
+P = 5
 
-fig = plt.figure()
-
-gs = GridSpec(Q+2, P+2, figure=fig)
-
-axlist = [[None] * (P+2) for _ in range(Q+2)]
-
-for col in range(P+2):
-    for row in range(Q+2):
-        axlist[row][col] = fig.add_subplot(gs[row, col])
-
+fig, ax = plt.subplots()
 
 alpha = 1
 beta = 1
 
-nx = 101
+nx = 501
 
 xi = np.linspace(-1,1,nx)
 
-B = getmodified(xi, P, alpha, beta)
+B = getlagrange(xi, P)
 
 for i in range(P+1):
-    axlist[0][i+1].plot(xi, B[:,i]/np.max(abs(B[:,i])), label=r'$\psi_{'+str(i)+'}$'+r'$(\xi)$', linewidth=1.5)
-    axlist[0][i+1].set_xlabel(r'$\xi_1$')
-    axlist[0][i+1].set_title(fr'$\psi_{i}(\xi_1)$')
-    axlist[0][i+1].grid()
-    axlist[0][i+1].set_xlim([-1,1])
-    axlist[0][i+1].set_ylim([-1,1])
+    ax.plot(xi, B[:,i], label=r'$h_{'+str(i)+'}$'+r'$(\xi)$', linewidth=2.5)
 
-for i in range(Q+1):
-    axlist[i+1][0].plot(xi, B[:,i]/np.max(abs(B[:,i])), color='C1', label=r'$\psi_{'+str(i)+'}$'+r'$(\xi)$', linewidth=1.5)
-    axlist[i+1][0].set_xlabel(r'$\xi_2$')
-    axlist[i+1][0].set_ylabel(fr'$\psi_{i}(\xi_2)$', labelpad=10)
-    axlist[i+1][0].grid()
-    axlist[i+1][0].set_xlim([-1,1])
-    axlist[i+1][0].set_ylim([-1,1])
+ax.set_xlabel(r'$\xi$')
+# ax.set_title(fr'$P = {P}$')
+ax.grid()
+ax.legend()
+ax.set_ylabel(r'$h_p(\xi)$')
+ax.set_xticks([-1, -0.5, 0, 0.5, 1])
+# ax.set_yticks([-1, -0.5, 0, 0.5, 1])
+ax.set_xlim([-1,1])
+ax.set_ylim([-0.25,1])
 
-
-for i in range(P+1):
-
-    for j in range(Q+1):
-        
-        # b_tensor = np.outer(B[:,i]/np.max(abs(B[:,i])), B[:,j]/np.max(abs(B[:,j])))
-        b_tensor = np.outer(B[:,j]/np.max(abs(B[:,j])), B[:,i]/np.max(abs(B[:,i])))
-        im = axlist[i+1][j+1].imshow(np.rot90(b_tensor), extent=[-1, 1, -1, 1], interpolation='quadric', cmap='RdYlBu', vmin=-1, vmax=1)
-        axlist[i+1][j+1].set_xlabel(r'$\xi_1$')
-        axlist[i+1][j+1].set_ylabel(r'$\xi_2$')
-        axlist[i+1][j+1].set_xlim([-1,1])
-        axlist[i+1][j+1].set_ylim([-1,1])
-
-axlist[0][0].set_axis_off()
-cbar_ax = fig.add_axes([0.95, 0.12, 0.01, 0.6])  # [left, bottom, width, height
-fig.colorbar(im, cax=cbar_ax, label=fr'$\psi_p(\xi_1)\psi(\xi_2)$')
-
-fig.set_size_inches(9,9)
-fig.subplots_adjust(wspace=1, hspace=1)
-fig.savefig('modifiedBasis.pdf', dpi=300, format='pdf', bbox_inches='tight')
+fig.set_size_inches(9,4)
+fig.savefig('Lagrange_1D.pdf', dpi=300, format='pdf', bbox_inches='tight')
