@@ -260,7 +260,7 @@ The approximate solution, $u^\delta(x)$, now lie within the solution space $\mat
 % ASSEMBLY FUNCTIONS
 %%%%%%%%%%%%%%%%%%%%
 
-\subsection{Global assembly}
+\subsection{Global assembly}\label{sec:global_assembly}
 In this section, we introduce the concept of global assembly (or direct stiffness summation) which relates the global basis expansions (equation \eqref{eq:approximate}), $\Phi_i(x)$, to the local basis expansions (equation \eqref{eq:local_expansions}), $\phi_i^e(x)$, where the solution can be approximated using either formulation,
 \begin{equation}
     u^\delta(x) = \sum_{i=0}^{N-1}\hat{u}_i\Phi_i(x) = \sum_{e=0}^{N_{el}-1}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\chi^e(\xi)).
@@ -466,12 +466,12 @@ Figure \ref{fig:Lagrange_basis} presents Lagrange expansions evaluated along the
 \end{figure}
 \subsubsection{Multi-dimensional expansions}
 We have introduced modal and nodal expansions in one dimension, and its extension to multi-dimensions bases can be generalised using a tensorial expansion of the local expansion bases. 
-The standard element in a quadrilateral, $\mathcal{Q}^2$, and a hexahedral $\mathcal{H}^3$,
+The standard element in a two dimensional quadrilateral, $\mathcal{Q}^2$, and a three dimensional hexahedral $\mathcal{H}^3$, are given as,
 \begin{equation}
     \mathcal{Q}^2 = \{-1 \leq \xi_1, \xi_2 \leq 1 \}, \quad \mathcal{H}^2 = \{-1 \leq \xi_1, \xi_2, \xi_3 \leq 1 \}
 \end{equation}
 where $\xi_1, \xi_2, \xi_3$ refers to the local coordinates in multi-dimensions.
-The tensorial bases for quadrilaterals and hexadrals using modified bases are
+Thus, the multi-dimensional expansion bases for quadrilaterals and hexadrals using modified bases are simply a tensor product of the one dimensional modified bases,
 \begin{equation}
     \phi_{pq}(\xi_1, \xi_2) =\psi_q(\xi_1)\psi_q(\xi_2), \quad \text{and} \quad
     \phi_{pqr}(\xi_1, \xi_2, \xi_3) =\psi_q(\xi_1)\psi_q(\xi_2)\psi_r(\xi_3).
@@ -505,21 +505,22 @@ The reader is referred to \cite{karniadakis_spectralhp_2005} for more details ab
 % NUMERICAL Integration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gaussian quadrature}\label{sec:Gaussian_quadrature}
-In the Galerkin formulation, we perform integration routinely.
-Suppose we want to approximate the integral of a smooth function in a standard element numerically,
+In the Galerkin formulation, we perform integration between basis functions rountinely, and an efficient numerical technique is sought after.
+Suppose we want to approximate the integral of a function, $u(\xi)$, in a standard element numerically given as,
 \begin{equation}
-    \int_{-1}^1 u(\xi) \; \mathrm{d}\xi = \sum_{i=0}^{Q-1} w_i u(\xi_i) + R(u),
+    \int_{-1}^1 u(\xi) \; \mathrm{d}\xi = \sum_{i=0}^{Q-1} w_i u(\xi_i) + R(u).
 \end{equation}
-where $Q, w_i, \xi_i, R(u)$ refers to the quadrature points, integration weights and zeros (or abscissae) and the integral of the error.
-By evaluating the integral, how are we able to minimise the integral error, $R(u)$, with the least number of quadrature points, $Q$, at some weights and zeros.
+% where $Q, w_i, \xi_i, R(u)$ refers to the quadrature points, integration weights and zeros (or abscissae) and the integral of the error.
+The premise is determine the optimal number of quadrature points, $Q$, integration weights, $w_i$, and zeros, $\xi_i$, in which the integral error, $R(u)$, can be minimised.
+% By evaluating the integral, how are we able to minimise the integral error, $R(u)$, with the least number of quadrature points, $Q$, at some weights and zeros.
 % If $u(\xi)$ is of polynomial order $P$, we may expect that we require $P+1$ equipspaced points to accurately represent the function and evalute its integral.
-If $u(\xi)$ is of polynomial order of $P$, we may expect that we require at least $P+1$ equipspaced points to represent $u(\xi)$.
-To evalute this the integral, we may also expect that 
-By using Gaussian quadrature rules, we can approximate an integral of a function of order $P$ with far fewer that $P+1$ points.
-
-Gaussian quadrature rules can be grouped into three catergories: Gauss, Gauss-Radau and Gauss-Lobatto quadrature.
-The main difference between the three categories are in the treatment of the end points, where Gauss quadrature rule evaluates the integral without the end points $\xi = \pm 1$.
-Gauss-Radau quadrature either select one of the end points, usually at $\xi = -1$, and Gauss-Lobatto consider the both end points.
+If $u(\xi)$ is of polynomial order of $P$, we may expect that we require at least $P+1$ equipspaced points to represent $u(\xi)$ sufficiently.
+Using Gaussian quadrature rules, we can approximate an integral of a function of order $P$, with far fewer that $P+1$ points with specific integration weights and zeros.
+In general, Gaussian quadrature rules can be grouped into three catergories: Gauss, Gauss-Radau and Gauss-Lobatto quadrature.
+The main difference between the three categories are on the inclusion of the end points.
+Gauss quadrature rule evaluates the integral without the end points $\xi = \pm 1$.
+Gauss-Radau quadrature rule either select one of the end points, typically at $\xi = -1$.
+Gauss-Lobatto quadrature rule consider both end points.
 We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials known as the Gauss-Lobatto-Jacobi quadrature rules given as,
 \begin{subequations}
     \begin{equation}
@@ -540,61 +541,68 @@ We will only focus on describing the Gauss-Lobatto quadrature rules and the zero
         C_{i,Q-2}^{\alpha, \beta} = \frac{2^{\alpha+\beta+1}\Gamma(\alpha+Q)\Gamma(\beta+Q)}{(Q-1)(Q-1)!\Gamma(\alpha+\beta+Q+1)[P_{Q-1}^{\alpha,\beta}(\xi_i)]^2}
     \end{equation}
 \end{subequations}
-where $w_i^{\alpha,\beta}, \xi_i^{\alpha,\beta}$ are the zeros and weights of the Gauss-Lobatto-Jacobi quadrature rules, and $\Gamma$ refers to the Gamma function.
-By using these conventions, we can obtain an exact integral of a continuous function, $u(\xi)$ of polynomial $P$, with at least $Q \geq (P+3)/2$ quadrature points.
+where $w_i^{\alpha,\beta}, \xi_i^{\alpha,\beta}$ are the zeros (or sometimes referred to as quadrature points) and weights of the Gauss-Lobatto-Jacobi quadrature rules, and $\Gamma$ refers to the Gamma function.
+For $\alpha = \beta = 0$, the quadrature points is known as the Gauss-Lobatto-Legendre (GLL) points, typically employed for Lagrange polynomials.
+By evaluating the integral using the zeros and integrations weights defined above, we can obtain an exact integral of the function $u(\xi)$, of polynomial order $P$, with at least $Q \geq (P+3)/2$ quadrature points.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NUMERICAL DIFFERENTIATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Numerical differentiation}
-In the same fashion as Gaussian quadrature, we want to numerical differentiate efficiently, a crucial step in the weak formulation of the Helmholtz equations.
+In the same fashion as Gaussian quadrature rules, we want to evaluate the derivative of a function, $u^\delta(\xi)$ numerically.
 Suppose that we want to differentiate in $x$ using local coordinates given as,
 \begin{equation}
     \frac{\mathrm{d} u^\delta(\xi)}{\mathrm{d} x} = \frac{\mathrm{d} u ^\delta(\xi)}{\mathrm{d} \xi}\frac{\mathrm{d} \xi}{\mathrm{d} x} = \sum_{p = 0}^P \hat{u}_p \frac{\mathrm{d} \phi_p(\xi)}{\mathrm{d}\xi}\frac{\mathrm{d}\xi}{\mathrm{d} x},
 \end{equation}
-where $\mathrm{d}\xi/\mathrm{d}x$ is simply the Jacobian and the main step in differentiation is in evaluting $\mathrm{d} \phi_p(\xi) / \mathrm{d} \xi$.
-Now suppose that we express the solution of polynomial order $P$ with Lagrange polynomials, the derivative of the solution commutes,
+where $\mathrm{d}\xi/\mathrm{d}x$ is the jacobian.
+The main step in involves evaluating the derivative of the local expansion bases, $\mathrm{d} \phi_p(\xi) / \mathrm{d} \xi$, referred to as collocation differentiation as differentiation is performed in physical space.
+Suppose that we express the solution of polynomial order $P$ with modified polynomials, $\phi_p(\xi) \rightarrow \psi_p(\xi)$, through a set of $Q \geq P + 1$ quadrature points, the derivative in discrete local coordinates is expressed as,
 \begin{equation}
-    \frac{\mathrm{d} u(\xi)}{\mathrm{d} \xi} = \sum_{i=0}^{Q-1} u(\xi_i) \frac{\mathrm{d}}{\mathrm{d} \xi} h_i(\xi),
+    \frac{\mathrm{d} u ^\delta (\xi)}{\mathrm{d} \xi}\Big |_{\xi = \xi_i} = \sum_{j=0}^{Q-1} \hat{u}_j \frac{\mathrm{d} \psi_j(\xi)}{\mathrm{d} \xi} \Big|_{\xi = \xi_i} = \sum_{j = 0}^{Q-1} D_{ij}\hat{u}_j,
 \end{equation}
-where we only require the derivative to be evaluted at the nodal points, resulting in a derivative matrix of,
+where $D_{ij}$ refers to the differential matrix containing values of the derivative of the basis at discrete quadrature points given as,
 \begin{equation}
-    D_{ij} = \frac{\mathrm{d} h_j (\xi)}{\mathrm{d} \xi}\Big|_{\xi = \xi_i}, 
+    D_{ij} = \frac{\mathrm{d} h_j (\xi)}{\mathrm{d} \xi}\Big|_{\xi = \xi_i},
 \end{equation}
-and the derivative of $u(\xi)$ is simply,
-\begin{equation}
-    \frac{\mathrm{d} u(\xi)}{\mathrm{d} \xi} \Big|_ {\xi = \xi_i} = \sum_{j=0}^{Q-1} D_{ij}\hat{u}_j.
-\end{equation}
-A general representation of the differential operator can be presented as
-\begin{equation}
-    D_{ij} = \begin{cases} 
+which is often pre-computed.
+To differentiate a function, $u(\xi)$, we typically need to construct the differential matrices, and
+the general representation of the differential matrix is,
+\begin{equation}\label{eq:differential_matrices}
+    D_{ij} = 
+    \begin{cases} 
     \frac{p'_Q(\xi_i)}{p'_Q(\xi_j)} \frac{1}{\xi_i - \xi_j}, \quad & i \neq j, \\
     \frac{p''_Q(\xi_i)}{2p'_Q(\xi_i)}, \quad & i = j.
 \end{cases}
 \end{equation}
-where $p'_Q(\xi), p''_Q(\xi)$ are specific restricted to the quadrature used.
-For the Gauss-Lobatto-Jacobi quadrature rules used here, these forms could be found in Appendix C.2 in \cite{karniadakis_spectralhp_2005}.
+where $p'_Q(\xi_i), p''_Q(\xi_i)$ refers to the first and second differentive of Jacobi polynomials evaluated at the quadrature points $\xi_i$.
+% For the Gauss-Lobatto-Jacobi quadrature rules used here, these forms could be found in Appendix C.2 in \cite{karniadakis_spectralhp_2005}.
 
 %%%%%%%%%%%%%%%
 % EXAMPLE IN 1D
 %%%%%%%%%%%%%%%
 
 \subsection{Example in 1D}
-We have outlined the basic formulation of spectral/\emph{hp} element methods in $1D$ and we will describe its solution procedure, where we start from the weak-form of the Helmholtz equation and convert it into a system of linear equations, amenable to be solved with standard numerical linear algebra techniques.
-We describe the solution steps as follows,
-\subsubsection{1. Performing numerical differentiation and integration in the standard region}
-\begin{equation}
-    \lambda \underbrace{\int_{-1}^1 v^\delta u^\mathcal{H} \, \mathrm{d}\xi}_{\mathbf{M}^e\mathbf{\hat{u}}^e} + \underbrace{\int_{-1}^1 \frac{\partial v^\delta}{\partial \xi}\frac{\partial u^\mathcal{H}}{\partial \xi} \mathrm{d}\xi}_{\mathbf{L}^e \mathbf{\hat{u}}^e} = \underbrace{\int_{-1}^1 v^\delta f \mathrm{d}\xi}_{\mathbf{\hat{f}}^e}
+We have outlined the basic formulation of spectral/\emph{hp} element methods in a single dimension.
+To conclude the section on spectral/\textit{hp} element methods, we will describe its solution procedure, converting the weak form of the Helmholtz equation into a system of linear equations, and introduce the mass and laplacian matrices.
+Starting from the weak form,
+% \subsubsection{1. Performing numerical differentiation and integration in the standard region}
+\begin{equation}\label{eq:example_weak_form}
+    \lambda \underbrace{\int_{-1}^1 v^\delta u^\mathcal{H} \, \mathrm{d}\xi}_{\mathbf{M}^e\mathbf{\hat{u}}^e} + \underbrace{\int_{-1}^1 \frac{\partial v^\delta}{\partial \xi}\frac{\partial u^\mathcal{H}}{\partial \xi} \mathrm{d}\xi}_{\mathbf{L}^e \mathbf{\hat{u}}^e} = \underbrace{\int_{-1}^1 v^\delta f \mathrm{d}\xi}_{\mathbf{\hat{f}}^e} - \underbrace{\int_{-1}^1 \frac{\partial v^\delta}{\partial \xi}\frac{\partial u^\mathcal{D}}{\partial \xi} \, \mathrm{d}\xi}_{\mathbf{L}^0} + v(l)g_N,
 \end{equation}
-\subsubsection{Elemental mass operator}
-Here we introduce the elemental mass operator given as $\mathbf{M}^e$,
+we wish to seek the solution $u^\mathcal{H}(\xi)$.
+Recall that the solution space of $u^\mathcal{H}(\xi)$ and $v^\delta(\xi)$ are the same, following the standard Galerkin projection procedure.
+Suppose they can be discretised by spectral/\textit{hp} elements with $e$ elements and local basis expansions of up to polynomial order $P$,
+\begin{equation}
+    u^\mathcal{H}(\xi) = \sum_{i=0}^P \hat{u}_i^e\phi_i^e(\xi), \quad v^\delta(\xi) = \sum_{i=0}^P \hat{v}_i^e\phi_i^e(\xi).
+\end{equation}
+Substituting into equation \eqref{eq:example_weak_form} and evaluating the first term on the left hand side through a set of $Q$ quadrature points.
 \begin{align}
-    \int_{-1}^1 \sum_{i = 0}^{P}\hat{v}^e_i\phi^e_i(\xi) \sum_{i = 0}^{P}\hat{u}^e_i\phi^e_i(\xi) \, \mathrm{d}\xi &= \sum_{q=0}^{Q} \left[ \sum_{i = 0}^{P}\hat{v}_i^e\phi_i^e(\xi_q) \sum_{i = 0}^{P}\hat{u}^e_i\phi_i^e(\xi_q) \right]w_q^e\\ \nonumber
+    \int_{-1}^1 \sum_{i = 0}^{P}\hat{v}^e_i\phi^e_i(\xi) \sum_{i = 0}^{P}\hat{u}^e_i\phi^e_i(\xi) \, \mathrm{d}\xi &= \sum_{q=0}^{Q-1} \left[ \sum_{i = 0}^{P}\hat{v}_i^e\phi_i^e(\xi_q) \sum_{i = 0}^{P}\hat{u}^e_i\phi_i^e(\xi_q) \right]w_q^e\\ \nonumber
  & = (\mathbf{\hat{v}}^e)^T (\mathbf{B}^e)^T \mathbf{W}^e \mathbf{B}^e \mathbf{\hat{u}}^e \\ \nonumber
 & = \mathbf{\hat{v}}^T \mathbf{M}^e \mathbf{\hat{u}}^e
 \end{align}
-where $\mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W} \mathbf{B}^e$ refers to the elementral mass matrix, while $\mathbf{B}^e \in \mathbb{R}^{Q-1,P}$ and $\mathbf{W}^e\in \mathbb{R}^{Q-1,Q-1}$ refers to the elemental basis and weight matrices, a diagonal matrix consisting of integration weights, $w_q^e$, respectively,
+where $\mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W} \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)}$ refers to the elemental mass matrix, while $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental basis matrix, and $\mathbf{W}^e\in \mathbb{R}^{Q \times Q}$, the elemental weight matrix, a diagonal matrix consisting of discrete integration weights along $Q$ quadrature points.
 \begin{equation}
     \mathbf{B}^e = 
     % \begin{bmatrix}
@@ -624,30 +632,29 @@ where $\mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W} \mathbf{B}^e$ refers to the el
     \begin{bmatrix}
         w_0^e &  & 0 \\
          & \ddots &  \\
-        0 & & w_Q^e  
+        0 & & w_{Q-1}^e  
     \end{bmatrix}
 \end{equation}
-\subsubsection{Elemental laplacian matrices}
-Now we consider, convert the product of two first-derivatives in to matrix form,
+Next, we move onto the second term on the left hand side, 
 \begin{align}
     \int_{-1}^1 \sum_{i = 0}^{P}\hat{v}^e_i\frac{\mathrm{d} \phi^e_i}{\mathrm{d} \xi} \sum_{i = 0}^{P}\hat{u}^e_i\frac{\mathrm{d} \phi^e_i}{\mathrm{d} \xi} \, \mathrm{d}\xi &= \sum_{q=0}^{Q} \left[ \sum_{i = 0}^{P}\hat{v}^e_i{D}_{qi}^e\phi^e_i(\xi_q) \sum_{i = 0}^{P}\hat{u}^e_i{D}^e_{qi}\phi_i^e(\xi_q) \right]w_q^e\\ \nonumber
 & = \mathbf{\hat{v}}^T (\mathbf{B}^e)^T (\mathbf{D}^e)^T \mathbf{W}^e \mathbf{D}^e \mathbf{B}^e \mathbf{\hat{u}}^e \\ \nonumber
 & = \mathbf{\hat{v}}^T \mathbf{L}^e \mathbf{\hat{u}}^e
 \end{align}
-where $\mathbf{L}^e = (\mathbf{B}^e)^T(\mathbf{D}^e)^T  \mathbf{W} \mathbf{D}^e \mathbf{B}^e$ refers to the elementral Laplacian matrix.
-\subsubsection{Forcing vector}
-Lastly, we consider the right-hand side,
+where $\mathbf{L}^e = (\mathbf{B}^e)^T(\mathbf{D}^e)^T  \mathbf{W} \mathbf{D}^e \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)}$ refers to the elemental Laplacian matrix while $\mathbf{D}^e \in \mathbb{R}^{Q \times (P +1)}$ refers to the differential matrix defined in equation \eqref{eq:differential_matrices}.
+Moving onto the first term on the right hand side,
 \begin{align}
     \int_{-1}^1 \sum_{i = 0}^P \hat{v}_i^e\phi_i^e(\xi) f^e(\xi) \, \mathrm{d}\xi & = \sum_{q=0}^P \sum_{i = 0}^P \hat{v}_i^e \phi_i^e (\xi_q) f^e(\xi_q) w_q^e, \\ \nonumber
                                                                                 & = \mathbf{\hat{v}}^T (\mathbf{B}^e)^T\mathbf{W}^e \mathbf{f}^e \\ \nonumber
                                                                                 & = \mathbf{\hat{v}}^T \mathbf{\hat{f}}^e,
 \end{align}
 where $\mathbf{\hat{f}}^e$, is referred to the elemental forcing vector.
-As we consider all of the matrices, the Helmholtz equations in elemental form is simply solving for,
+As we bolt the elemental laplacian, mass matrices, and forcing vector, the system of linear equations within a standard element is given as,
 \begin{equation}
     \left[ \lambda \mathbf{M}^e + \mathbf{L}^e \right] \mathbf{\hat{u}}^e = \mathbf{\hat{f}}^e.
 \end{equation}
-If we considered bolting the elements together and the boundary conditions,
+We note that the boundary conditions have been omitted.
+To include the boundary conditions, we consider the full system of linear of equations consisting of$e$ number of elements,  
 \begin{equation}
     \lambda 
     \underbrace{
@@ -684,14 +691,14 @@ If we considered bolting the elements together and the boundary conditions,
         g_N
 \end{bmatrix}}_{\mathbf{g}_N},
 \end{equation}
-where $\mathbf{M}_l, \mathbf{L}_l, \mathbf{\hat{u}}_l, \mathbf{\hat{f}}_l, \mathbf{g}_D, \mathbf{g}_N$ refers to the local mass matrix, local laplacian matrix, and vector of local expansion coefficients , Dirichlet and Neumann boundary conditions.
-Finally, we can assemble them using the assembly matrix,
+where $\mathbf{M}_l \in \mathbb{R}^{N_{el}(P+1) \times N_{el}(P+1)}, \mathbf{L}_l\in \mathbb{R}^{N_{el}(P+1) \times N_{el}(P+1)}, \mathbf{\hat{u}}_l\in \mathbb{R}^{N_{el}(P+1)}$ refers to the local mass matrix, local laplacian matrix and the vector of local expansion coefficients.
+On the right hand side, $\mathbf{\hat{f}}_l \in \mathbb{R}^{N_{el}(P+1)}, \mathbf{g}_D^{N_{el}(P+1)}, \mathbf{g}_N^{N_{el}(P+1)}$ refers local forcing vector, Dirichlet and Neumann boundary conditionsin vector form.
+Lastly, to ensure that the solution remains $C^0$ continuous across the elemental boundaries, we perform the assembly process by using the assemble matrices (see \S \ref{sec:global_assembly}),
 \begin{equation}
-    \mathbf{A}^T ( \lambda \mathbf{M}_l + \mathbf{L}_l) \mathbf{A} \mathbf{\hat{u}}_g = \mathbf{A}^T(\mathbf{\hat{f}}^l + \mathbf{g}_D + \mathbf{g}_N),
+    \lambda \mathbf{A}^T (\mathbf{M}_l + \mathbf{L}_l) \mathbf{A} \mathbf{\hat{u}}_g = \mathbf{A}^T(\mathbf{\hat{f}}^l + \mathbf{g}_D + \mathbf{g}_N),
 \end{equation}
-We note that we have did not show the formulation for 2D spectral/\textit{hp} elements as it has been abstracted away within nektar++.
-
-
+and obtain the solution for $\mathbf{\hat{u}}_g$.
+% We note that we have did not show the formulation for 2D spectral/\textit{hp} elements as it has been abstracted away within nektar++.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TECHNIQUES FOR SOLVING NS EQUATIONS
@@ -720,13 +727,13 @@ Several strategies exist for addressing the coupled velocity-pressure fields by
 \begin{enumerate}
     \item Solving the coupled system such as the Uzawa algorithm,
     \item Splitting methods,
-    \item Change of coordinates (vorticity-streamfunction).
+    \item Change of coordinates (e.g. vorticity-streamfunction approach).
 \end{enumerate}
 % There are several ways in which this coupling challenge can be approached, 1) to solve the coupled system of equations using the Uzawa algorithm, 2) splitting-methods and the 3) velocity-vorticity formulation.
-We adopt splitting methods, which `splits' the evolution of the Navier-Stokes equation into independent substeps.
+We adopt splitting methods, which solves the of the Navier-Stokes equation by splitting them into `subequations', and solving them sequentially.
 % In this thesis we tdophe splitting methods, where the time-evolution of the Navier-Stokes equations are split into different substeps.
-These methods, belonging to the broader family of projection methods first introduced by Teman, can be further classified into pressure-correction or velocity-correction schemes.
-We focus on a high-order velocity-correction scheme.
+These methods, belonging to the broader family of projection methods introduced by \cite{chorin_numerical_1967} and \cite{temam_sur_1969}, and can be further classified into pressure-correction or velocity-correction schemes.
+This thesis employs the use of the high-order velocity-correction scheme introduced by \cite{karniadakis_high-order_1991}.
 % The splitting methods belong to a family of methods, known as projection methods, were first introduced by Chorin and Teman.
 % In general, the splitting scheme can be further classified into pressure-correction or velocity-correction schemes.
 % Our focus of this thesis is on a higher-order velocity-correction scheme.
@@ -813,33 +820,38 @@ The time integration coefficients are determined from stiffly stable schemes sho
         \caption{Integration coefficient of stiffly stable schemes from \cite{karniadakis_high-order_1991}.}
     \label{tab:stiffyStableCoefficients}
 \end{table}
-Before we do so, we have to define the test functional spaces of velocity, $\mathcal{W}$, and pressure $\mathcal{Q}$, defined as,
-\begin{subequations}
-    \begin{equation}
-        \mathcal{V} := \{ v \, | \, v \in H_0^1(\Omega), \, v|_{\partial \Omega} = 0\}
-    \end{equation}
-    \begin{equation}
-        \mathcal{Q} := \{ q \, | \, q \in L_0^2(\Omega), \, \int_\Omega q \, \mathrm{d}x = 0\}.
-    \end{equation}
-\end{subequations}
-The Dirichlet boundary conditions for the test functional space, $\mathcal{V}$, is consistent with the primitive velocity, $\mathbf{u}$, while the $L_0^2$ denotes a zero mean instead of homogeneous Dirichlet boundary conditions. 
-The test function space for pressure is a polynomial other lower since derivatives for pressure do not appear in the weak formulation as we shall see below.
-We neglect the unsteady term, leading to a steady Stokes problem, appearing as the right-hand if we consider time-advacing the solutions,
-\begin{subequations}
+The high order velocity correction scheme and be summarised in a three step process of the following,
 \begin{equation}
-    (\nabla \mathbf{v}, \nu \nabla \mathbf{u}) - (\nabla \cdot \mathbf{v}, p) = (\mathbf{v}, \mathbf{f}), \quad \forall \, \mathbf{v} \in \mathcal{V} 
+    \mathbf{u}^n \xrightarrow{\quad \mathbf{N}(\mathbf{u}^n) \quad} \mathbf{\hat{u}} \xrightarrow{\quad \nabla^2 p \quad} \mathbf{\hat{\hat{u}}} \xrightarrow{\quad \mathbf{L}(\mathbf{\hat{\hat{u}}}) \quad} \mathbf{u}^{n+1}, \nonumber
 \end{equation}
-\begin{equation}
-    (q, \nabla \cdot \mathbf{u}) = 0, \quad  \forall \, q \in \mathcal{Q}
-\end{equation}
-\end{subequations}
-
-which is a time-dependent nonlinear partial differential equation, 
-While methods for temporal and spatial discretisation have been discussed, it is not possible to apply these techniques in a straight-forward manner to the incompressible Navier-Stokes equations.
-This is because of the unique role of the pressure field which ensures that the time-dependent velocity field is divergence-free.
-However, the velocity and the pressure fields form a coupled-system through the continuity and momentum equations which requires the solution of both fields simultaneously.
-In general, there are 3 ways to deal with velocity-pressure coupling: (1) Coupled methods (\emph{Uzawa} method), (2) Change of variables (streamfunction-vorticity formulation) and (3) Splitting methods which decouples velocity and pressure.
-The velocity correction scheme (VCS) (\cite{karniadakis_1991}), a type of splitting method, decouples the velocity field from the pressure field used in \emph{nektar++} will be discussed in this section.
+evolving the velocity fields at time step $n$ to $n+1$.
+% Before we do so, we have to define the test functional spaces of velocity, $\mathcal{W}$, and pressure $\mathcal{Q}$, defined as,
+% \begin{subequations}
+%     \begin{equation}
+%         \mathcal{V} := \{ v \, | \, v \in H_0^1(\Omega), \, v|_{\partial \Omega} = 0\}
+%     \end{equation}
+%     \begin{equation}
+%         \mathcal{Q} := \{ q \, | \, q \in L_0^2(\Omega), \, \int_\Omega q \, \mathrm{d}x = 0\}.
+%     \end{equation}
+% \end{subequations}
+% The Dirichlet boundary conditions for the test functional space, $\mathcal{V}$, is consistent with the primitive velocity, $\mathbf{u}$, while the $L_0^2$ denotes a zero mean instead of homogeneous Dirichlet boundary conditions. 
+% The test function space for pressure is a polynomial other lower since derivatives for pressure do not appear in the weak formulation as we shall see below.
+% We neglect the unsteady term, leading to a steady Stokes problem, appearing as the right-hand if we consider time-advacing the solutions,
+% \begin{subequations}
+% \begin{equation}
+%     (\nabla \mathbf{v}, \nu \nabla \mathbf{u}) - (\nabla \cdot \mathbf{v}, p) = (\mathbf{v}, \mathbf{f}), \quad \forall \, \mathbf{v} \in \mathcal{V} 
+% \end{equation}
+% \begin{equation}
+%     (q, \nabla \cdot \mathbf{u}) = 0, \quad  \forall \, q \in \mathcal{Q}
+% \end{equation}
+% \end{subequations}
+% 
+% which is a time-dependent nonlinear partial differential equation, 
+% While methods for temporal and spatial discretisation have been discussed, it is not possible to apply these techniques in a straight-forward manner to the incompressible Navier-Stokes equations.
+% This is because of the unique role of the pressure field which ensures that the time-dependent velocity field is divergence-free.
+% However, the velocity and the pressure fields form a coupled-system through the continuity and momentum equations which requires the solution of both fields simultaneously.
+% In general, there are 3 ways to deal with velocity-pressure coupling: (1) Coupled methods (\emph{Uzawa} method), (2) Change of variables (streamfunction-vorticity formulation) and (3) Splitting methods which decouples velocity and pressure.
+% The velocity correction scheme (VCS) (\cite{karniadakis_1991}), a type of splitting method, decouples the velocity field from the pressure field used in \emph{nektar++} will be discussed in this section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FOURIER SPECTRAL/HP ELEMENT METHODS
@@ -847,8 +859,9 @@ The velocity correction scheme (VCS) (\cite{karniadakis_1991}), a type of splitt
 
 \subsection{Fourier spectral/\emph{hp} modes}
 Fourier-Chebyshev-Fourier type discretisation have been recognised as preferred method for performing direct numerical simulations (DNS) of transitional or turbulent channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions respectively.
-The Fourier spectral/\emph{hp} element method draws on this approach, where the homogeneous directions is represented by the Fourier expansions while the spectral/\emph{hp} elements.
-This approach has been commonly referred to as the Quasi-3D or (2.5D) approach, allowing for a flexible description of the inhomogeneous directions, such as riblets [doug chu].
+
+The Fourier spectral/\emph{hp} element method draws on this approach, where the homogeneous and the inhomogeneous directions are represented by the Fourier expansions and spectral/\emph{hp} elements respectively.
+This approach has been commonly referred to as the Quasi-3D or (2.5D) approach, allowing for the representation of two inhomogeneous directions.
 % The Fourier spectral/\emph{hp} element method uses a combination of Fourier expansions and spectral/\emph{hp} element method to discretise the spatial domain.
 For example, in the turbulent channel flows with riblets, the Fourier expansions are used to represent the periodic streamwise, while the spectral/\emph{hp} elements are used to discretise the wall-normal direction.
 In the analysis of three-dimensional wakes of cylinders where the Fourier expansions are treated in the spanwise directions.
@@ -899,25 +912,163 @@ Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations 
 
 where, $\tilde{\nabla}_k = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, ik\beta)$, $\nabla_{x,y}^2 = (\frac{\partial^2}{\partial x^2}, \frac{\partial^2}{\partial y^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
 
-\subsection{Enforcing constant flow rate}
-Due to the enforced periodicity in the streamwise $z$ direction via Fourier expansions, a pressure drop cannot be prescribed to drive the flow for $Re > 0$ scenarios.
-To sustain the flow, we use a Green's function approach \citep{chu1992parallel} to impose a constant flow rate,
-\begin{equation}
-    W_b = Q(\mathbf{u})=\frac{1}{2L_x h}\int_{x,y} \mathbf{u} \; \mathrm{d}x\mathrm{d}z,
+\subsection{Maintaining fluid flow through a channel}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{NumericalMethods/Figures/flowrate.pdf}
+    \caption{(a) Flow rate driven by a pressure gradient from an reservoir elevated by $h$. (b) Flow driven by a piston at a constant flow rate.}
+    \label{fig:flowrate}
+\end{figure}
+In general, there are two approaches to drive a fluid flow through a channel, either by maintaining a constant pressure drop, or a constant volumetric flux (flow rate).
+This difference is illustrated in figure \ref{fig:flowrate}, whereby the flow through the channel is driven by a constant pressure drop from an elevated reservoir of constant height $h$ in figure \ref{fig:flowrate}(a), while a piston moves at a constant speed rightwards, drawing fluid through the channel at a constant volumetric flux in figure \ref{fig:flowrate}(b).
+\subsubsection{Constant pressure via body-forcing}
+As a prescribe the homogeneous direction along the streamwise directions, a pressure drop cannot be prescribe directly.
+Instea, we substitute the constant pressure drop with a constant body force $\mathbf{f} = f_x \mathbf{\hat{e}}_x$ in the streamwise direction, 
+\begin{equation}\label{eq:streamwise_equation}
+    \frac{\partial u}{\partial t} + (u \cdot \nabla) u = -\nabla p + \nu \nabla^2 u + f_x,
 \end{equation}
-where $W_b$ and $Q(\cdot)$ refer to the desired flow rate and flow rate operator.
-A correction velocity, $\mathbf{u}_{corr}$, is obtained by solving the linear Stokes equation with unit forcing once and is stored for reuse.
-At the end of every time-step, the final velocity field, $\mathbf{u}$, is then updated by adding this correction velocity to the homogeneous velocity obtained from the velocity correction scheme,
+% \begin{subequations}
+%     \begin{equation}\label{eq:streamwise_equation}
+%         \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + \nu \nabla^2 \mathbf{u} + f, 
+%     \end{equation}
+%     \begin{equation}
+%         \nabla \cdot \mathbf{u} = 0.
+%     \end{equation}
+% \end{subequations}
+The central question now becomes what is the magnitude of body force required a laminar or turbulent flow.
+To begin this discussion, we assume that we can decompose our flow variables into a mean and a fluctuating component, 
 \begin{equation}
-    \mathbf{u} = \mathbf{u}_h + \gamma \mathbf{u}_{corr}, 
+    u(x,y,t) = U(y) + u'(x,y,t),
 \end{equation}
-where $\gamma$ defined as,
+where $U(y) = \langle u \rangle$ refers to the averaged velocity and $\langle \cdot \rangle = \frac{1}{TL_xL_z}\int \; \cdot \; dzdxdt$ refers to the temporal and span-averaged operator.
+The fluctuating component is defined with an average of 0, i.e. $\langle u' \rangle = 0$.
+Next, we substitute this decomposition into equation \eqref{eq:streamwise_equation}, and perform the averaging operation,
 \begin{equation}
-    \gamma = \frac{ W_b - Q(\mathbf{u}_h)}{Q(\mathbf{u}_{corr})},
+    \begin{split}
+    & \Biggl\langle \frac{\partial (U + u')}{\partial t} + (U+u') \frac{\partial (U+u')}{\partial x} + (V + v') \frac{\partial (V + v')}{\partial y} \\
+    & = -\frac{\partial (P + p')}{\partial x} + \nu\nabla^2(U + u') + F_x + f_x' \Biggr\rangle.
+    \end{split}
 \end{equation}
-is adjusted to satisfy the desired flow rate, $W_b$.
-The flow rate, $W_b$, is related to the laminar centreline velocity $W_c = 3/2 W_b$, which defines the Reynolds number, $Re = W_c h / \nu$.
-For more details on the numerical method, the reader is referred to \cite{hossain2021spectral}.
+% Suppose that we want to simulate turbulent flow, we invoke the following assumptions,
+For a statistically stationary turbulent (or laminar) channel flow with periodic streamwise boundary conditions, we can make the following assumptions:
+\begin{enumerate}
+    \item stationary flow $\frac{\partial U}{\partial t} =  0$,
+    \item fully-developed in $x$, $\frac{\partial}{\partial x} \rightarrow 0$, 
+    \item $\frac{\partial V}{\partial y} = 0$, as a consequence of continuity and the no-slip boundary condition.
+    \item $\langle u',v',w',p' \rangle  = 0$, based on the definition of fluctuations,
+    \item $\frac{\partial p}{\partial x} = 0 $ due to the enforced periodicity in $x$.
+\end{enumerate}
+Applying the assumptions above, the mean momentum equations simplify into,
+\begin{equation}
+\langle F_x \rangle = \left\langle \frac{\partial (u'v')}{\partial y} \right\rangle - \nu \frac{\partial U^2}{\partial y^2},
+\end{equation}
+where the body force on the left-hand side balances the sum of Reynolds stresses and viscous diffusion on the right-hand side.
+Next, we integrate the expression from $y \in [-1, 1]$, 
+% We note that the body force term considered here is a constant, so we will use $\langle F_x \rangle = f$.
+% Indeed, the second derivative of a parabolic velocity profile is simply a constant.
+% However, for turbulent flows, we do not know the Reynolds stresses and velocity profile a priori, and hence $f$.
+\begin{equation}
+    2F_x = [\left\langle u'v'\right\rangle]_{y=-1}^{y=1} + \nu \left [\frac{\partial U}{\partial y}\biggr|_{y=1} - \frac{\partial U}{\partial y}\biggr|_{y=-1} \right].
+\end{equation}
+The wall shear stress is defined by $\tau_w = \nu \frac{\partial U}{\partial y}|_{y=1}$ ($\rho$ is assumed to be 1), and it is antisymmetric about the channel centreline, $\nu \frac{\partial U}{\partial y}|_{y=1} = - \nu \frac{\partial U}{\partial y}|_{y=-1}$.
+Due to the no-slip condition, the Reynolds shear stresses is zero, i.e. $[u'v']|_{y=-1,1} = 0$.
+% Recall that $\tau_w = \nu\frac{\partial u}{\partial y}|_{y=-1} = -\nu\frac{\partial u}{\partial y}|_{y=1}$ (due to symmetry and note that $\rho = 1$) is referred to as the wall-shear stress.
+Hence, the expression above simplifies to,
+\begin{equation}\label{eq:eq6}
+    \tau_w = F_x.
+\end{equation}
+In other words, the body force $F_x$ is balanced by the wall shear stress (drag), $\tau_w$, along the channel walls.
+In the case of laminar flow, $\tau_w$ can be determined analytically, and the body force required for sustaining a laminar flow for a velocity profile of $u(y) = 1 - y^2$, is $F_x = -2\nu$.
+However, to determine the wall shear stress (and hence the magnitude of body force) is not as straightforward task for transitional or turbulent channel flow as there isn't an analytical expression for $\tau_w$ and its dependence on Reynolds number.
+% For the case of laminar flow, the Reynolds stresses are $0$, and the viscous diffusion can be determined analytically from the laminar velocity profile, e.g. $f = -2\nu$.
+Instead, we can only rely on empirical relations of turbulent channel flow between the skin friction coefficient, $c_f = \tau_w / \frac{1}{2}\rho U_c^2$ and Reynolds number $Re_c$ from \cite{dean_reynolds_1978}.
+\begin{equation}
+    c_f = 0.00302Re_c^{-1/4},
+\end{equation}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{NumericalMethods/Figures/tauw-Rec.pdf}
+\caption{$\tau_w$ against $Re_c$ using skin friction coefficients from \cite{dean_reynolds_1978} with $\rho = U_c = 1$. Experimental scatter points from \citep{patel_observations_1969, kim_turbulence_1987, iida_relaminarization_1998, tsukahara_dns_2014}.}
+\label{fig:tauw_rec}
+\end{figure}
+where $Re_c$ is the Reynolds number based on the laminar centerline velocity.
+Similarly, the skin friction coefficient for the case of laminar flow is $c_f = 4/Re_c$ \citep{dean_reynolds_1978}.
+% where $c_f = \tau_w / (\frac{1}{2}\rho U_c^2)$ refers to the skin friction coefficient of a turbulent channel flow.
+Figure \ref{fig:tauw_rec} illustrates the relationship between $\tau_w$ and $Re_c$ of channel flow using empirical relationship from \cite{dean_reynolds_1978} (here $\rho = U_c = 1$) and experimental data from \cite{patel_observations_1969,kim_turbulence_1987, iida_relaminarization_1998, tsukahara_dns_2014}.
+While the empirial relation for laminar flow, $Re_c \lesssim 1000$ and turbulent flow $Re_c \gtrsim 2000$ appears reasonably robust, the wall shear stress in the transitional region is lacking therefore, the body forcing approach is not preferred.
+% In other words, the body-forcing term, $f$, balances the wall shear stresses, i.e. the drag on the channel walls.
+% The next step is to determine the amount of wall-shear stresses, and therefore $f$, so that laminar or turbulent flow can be sustained in the channel.
+
+\subsubsection{Constant volumetric flux}
+An alternative approach is to enforce a constant volumetric flux, illustrated using the piston method in figure \ref{fig:flowrate}(b).
+We employ the efficient Green's function approach introduced by \cite{chu_direct_1993}, and outline its solution procedure.
+The volumetric flux is defined as,
+\begin{equation}
+    Q(\mathbf{u})=\frac{1}{2\mu(R)}\int_{R} \mathbf{u} \cdot \mathrm{d}\mathbf{s},
+\end{equation}
+where $Q(\cdot)$ refer to the flow rate operator through the surface $R$ with surface area of $\mu(R)$.
+The idea is to append a correction velocity, $\mathbf{u}_{corr}$, to the velocity field at time step $n$, $\mathbf{u}^{n}$, such that the corrected solution, $\mathbf{\bar{u}}^{n} = \mathbf{u}^{n} + \mathbf{u}_{corr}$, has the desired volumetric flux $\bar{Q}= Q(\mathbf{\bar{u}}^{n})$.
+While adding two solutions together is straightforward, the resultant velocity field may not directly satisfy the Navier-Stokes equations.
+Fortunately, we can leverage the velocity correction scheme which (in general) evaluates the nonlinear advection terms followed by a linear terms (pressure and dissipation).
+This process is summarised as,
+\begin{equation}\label{eq:two_step}
+    \begin{cases} 
+        \frac{\partial \mathbf{u}}{\partial t} = \mathbf{N}(\mathbf{u})\\ 
+        \mathbf{u}(\mathbf{x}, 0) = \mathbf{u}^{n}
+    \end{cases}
+    \quad 
+    \xrightarrow{\qquad \mathbf{\hat{u}}(\mathbf{x}, \Delta t) \qquad}
+    \quad 
+    \begin{cases} 
+        \frac{\partial \mathbf{u}}{\partial t} = -\nabla p + \nu \mathbf{L}(\mathbf{u}) \\
+        \mathbf{u}(\mathbf{x}, 0) = \mathbf{\hat{u}}(\mathbf{x}, \Delta t),
+    \end{cases}
+\end{equation}
+where $\mathbf{u}(\mathbf{x},0) = \mathbf{u}^n$ and $ \mathbf{\hat{u}}(\mathbf{x}, \Delta t)$ refer to the initial condition for the nonlinear advection terms, and the intermediate velocity, the initial condition for the linear terms, respectively.
+Since the second step correspond to solving the linear Stokes equation, any solution of the linear Stokes (such as $\mathbf{u}_{corr}$) added to the final solution will still satisfy the linear Stokes equations - a property of linear differential equations.
+We consider the linear Stokes equation governing the evolution of the correction velocity,
+\begin{equation}\label{eq:alpha}
+    \frac{\partial \mathbf{u}_{corr}}{\partial t} = - \nabla p_{corr} + \nu \mathbf{L}(\mathbf{u}_{corr}) + \alpha^n \mathbf{\hat{e}_x},
+\end{equation} 
+where $\alpha^n$ is the undetermined magnitude of body force at time step $n$ in the streamwise direction, $\mathbf{\hat{e}}_x$, required to maintain the desired flow rate $\bar{Q} = Q(\mathbf{u}^n) + Q(\mathbf{u}_{corr})$. 
+Since $\mathbf{u}_{corr}$ is appended to $\mathbf{u}^n$, the initial condition for $\mathbf{u}_{corr}$ must be $\mathbf{u}_{corr}(\mathbf{x}, 0) = 0$, so that $\mathbf{u}^n$ remains compatible with the initial conditions in equation \eqref{eq:two_step}.
+Since $\alpha^n$ is undetermined, we normalise the equation with respect to $\alpha^n$, yielding the linear Stokes equations with unit forcing,
+\begin{equation}\label{eq:unit_stokes}
+    \frac{\partial \mathbf{v}}{\partial t} = - \nabla \hat{p} + \nu \mathbf{L}(\mathbf{v}) + \mathbf{\hat{e}_x}, \quad \mathbf{v}(\mathbf{x}, 0) = \mathbf{0}, 
+\end{equation} 
+where $\mathbf{v} = \mathbf{u}_{corr} / \alpha^n$ and $\hat{p}  = p_{corr} / \alpha^n$.
+The corrected velocity field becomes
+\begin{equation}
+    \mathbf{\bar{u}} = \mathbf{u} + \alpha^n \mathbf{v}^1,
+\end{equation}
+where $\mathbf{v}^1$ is solution field obtained by solving equation \eqref{eq:unit_stokes} in the first time step.
+To match the target volumetric flux, $\bar{Q}$, we need to scale $\alpha^n$ such that,
+\begin{equation}
+    \bar{Q} = Q(\mathbf{\bar{u}}^n) =  Q(\mathbf{u}^n) + Q(\alpha^n \mathbf{v}^1).
+\end{equation}
+which gives,
+\begin{equation}
+    \alpha^n = \frac{\bar{Q} - Q(\mathbf{u}^n)}{Q(\mathbf{v}^1)},
+\end{equation}
+evaluated at every time step $n$.
+The Green's function approach is computationally efficient as we only need to compute $\mathbf{v}^1$ and $Q(\mathbf{v^1})$ once during the first time step and reuse it for subsequent time steps.
+The process can be summarised based on the following,
+\begin{equation}
+    \mathbf{u}^n \xrightarrow{\quad \mathbf{N}(\mathbf{u}^n) \quad} \mathbf{\hat{u}} \xrightarrow{\quad \nabla^2 p \quad} \mathbf{\hat{\hat{u}}} \xrightarrow{\quad \mathbf{L}(\mathbf{\hat{\hat{u}}}) \quad} \mathbf{u}^{n+1} \xrightarrow {\quad \alpha^{n+1} \mathbf{v}^1 \quad} \mathbf{\bar{u}}^{n+1} \nonumber.
+\end{equation}
+
+% To obtain the corrected velocity with desired flow rate, we only need to solve $\mathbf{v}^1$ and scale $\alpha^n$ such that the final velocity at time step $n$ has the desired flow rate at $\bar{Q}$, 
+% At the end of every time-step, the final velocity field, $\mathbf{u}$, is then updated by adding this correction velocity to the homogeneous velocity obtained from the velocity correction scheme,
+% \begin{equation}
+%     \mathbf{u} = \mathbf{u}_h + \gamma \mathbf{u}_{corr}, 
+% \end{equation}
+% where $\gamma$ defined as,
+% \begin{equation}
+%     \gamma = \frac{ W_b - Q(\mathbf{u}_h)}{Q(\mathbf{u}_{corr})},
+% \end{equation}
+% is adjusted to satisfy the desired flow rate, $W_b$.
+% The flow rate, $W_b$, is related to the laminar centreline velocity $W_c = 3/2 W_b$, which defines the Reynolds number, $Re = W_c h / \nu$.
+% For more details on the numerical method, the reader is referred to.
 
 \section{Stability analysis of the Navier-Stokes equations}\label{sec:stabilityanalysisofNS}
 \subsection{Linear Stability analysis}
