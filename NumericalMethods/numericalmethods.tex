@@ -429,7 +429,7 @@ Within the Nektar++ framework, we utilise the \emph{modified} basis, constructed
     \phi_p(\xi) \rightarrow \psi_p(\xi) = \left\{
             \begin{array}{ll}
                 \frac{1-\xi}{2} & \mbox{for } p=0\\
-                \left(\frac{1-\xi}{2}\right)\left(\frac{1+\xi}{2}\right){P}_{p-1}^{1,1}(\xi)\righ & \mbox{for }  0 < p < P \\
+                \left(\frac{1-\xi}{2}\right)\left(\frac{1+\xi}{2}\right)P_{p-1}^{1,1}(\xi)\right & \mbox{for }  0 < p < P \\
                 \frac{1+\xi}{2} & \mbox{for } p=P,
            \end{array}\right.
 \end{equation}
@@ -1073,22 +1073,31 @@ The process of adding the correction velocity at the end of velocity correction 
 \section{Stability analysis of the Navier-Stokes equations}\label{sec:stabilityanalysisofNS}
 \subsection{Algorithms for linear stability analysis}
 % This section concerns the stability analysis of a base flow, $\mathbf{U}$, describe by the behaviour of infinitisimal disturbances.
-In this section, we present a general discussion of the numerical procedure for linear stability analysis.
+In this section, we present a general overview of the numerical procedure for linear stability analysis.
 % The section describes the solution procedure in conducting linear stability analysis.
-Linear stability analysis concerns the study of the stability of the base state, by considering the evolution of infinitisimal perturbations about it.
-In general, perturbations could either grow or decay exponentially, leading to a linear unstable or stable base state.
-In the earlier section, we have briefly introduced linear stability analysis based on the linear analysis of wall bounded shear flows linearised about a base state with a single inhomongeous direction and two homogeneous directions, e.g. the laminar Poiseuille flow $U(y) = 1-y^2$ or Couette flow $U(y) = y$, referred to as \textit{local} stability analysis.
-As the number of inhomogenous dimensions increases, it is commonly referred to \texit{global} stability analysis.
-In particular, for base states with two inhomogeneous dimensions, $U(x,y)$, or three inhomogeneous dimensions, $U(x,y,z)$, it is commonly referred to as Biglobal or Triglobal stabilty analysis \citep{theofilis_advances_2003}.
+Linear stability analysis examines the stability of a base flow by considering the evolution of infinitesimal perturbations.
+% Linear stability analysis concerns the study of the stability of the base flow, by considering the evolution of infinitisimal perturbations about it.
+These perturbations in general, may either grow or decay exponentially, indicating whether the base flow is linearly unstable or stable respectively.
+% In general, perturbations could either grow or decay exponentially, leading to a linear unstable or stable base flow.
+In \S \ref{sec:bkgrd_transitional}, we introduced linear stability analysis in the context of wall-bounded shear flows leading to the Orr-Sommerfeld equations, where the base flows depend on a single inhomogeneous and two homogeneous directions, commonly referred to as local\footnote{Referring to being spatially local in the context of `real' flows which are typically inhomogeneous in all directions} stability analysis.
+For example, the laminar Poiseuille flow, $U(y) = 1 - y^2$ and the laminar Couette flow $U(y) = y$, $y \in [-1, 1]$.
+For some flows such as boundary layers, wakes and jets, their base flows are not strictly parallel.
+By considering a weak dependance on the stream and spanwise directions, their stability are described by the parabolised stability equations \citep{herbert_parabolized_1997}.
+% We have briefly introduced linear stability analysis based on the linear analysis of wall bounded shear flows linearised about a base flow with a single inhomongeous direction and two homogeneous directions, e.g. the laminar Poiseuille flow $U(y) = 1-y^2$ or Couette flow $U(y) = y$, referred to as \textit{local} stability analysis.
+When the base flow depends on two spatially inhomogeneous directions, $U(x,y)$, or three spatially inhomogeneous directions, $U(x,y,z)$, the analysis of such states are commonly referred to as biglobal or triglobal stability analysis, respectively \citep{theofilis_advances_2003}.
+% As the number of inhomogenous dimensions increases, it is commonly referred to \texit{global} stability analysis.
+% In particular, for base flows with two inhomogeneous dimensions, $U(x,y)$, or three inhomogeneous dimensions, $U(x,y,z)$, it is commonly referred to as Biglobal or Triglobal stabilty analysis \citep{theofilis_advances_2003}.
 % Linear stability analysis concerns the study of the evolution of small perturbations around a base flow, $\mathbf{U}$.
-The \texit{local} and \textit{global} terminologies concern the spatial dimensions of the base state, and if the base flow is time-dependent such as secondary stability analysis of cylinder flow, it is referred to as Floquet stability analysis \citep{henderson_secondary_1996}.
+% The \texit{local} and \textit{global} terminologies concern the spatial dimensions of the base flow
+If the base flow is time-dependent, such as in the secondary instability of cylinder flows, we use Floquet stability analysis \citep{henderson_secondary_1996}.
 % The base flow is a solution of the Navier-Stokes equations, and is often assumed to be stationary.
-For this study, we consider a time independent base flow and consider a generic decomposition of the velocity field in three dimensions,
+
+In this section, we consider a time-independent base flow and consider a generic decomposition of the velocity field in three spatial dimensions,
 \begin{equation}
     \mathbf{u}(\mathbf{x}, t) = \mathbf{U}(\mathbf{x}) + \mathbf{u}'(\mathbf{x}, t),
 \end{equation}
-where $\mathbf{U}(\mathbf{x}), \mathbf{u}'(\mathbf{x},t)$ refers to the base state and perturbations.
-Substituting this decomposition into the Navier-Stokes equations and linearising about $\mathbf{U}(\mathbf{x})$, we get the evolution equations for $\mathbf{u}'$,
+where $\mathbf{U}(\mathbf{x}), \mathbf{u}'(\mathbf{x},t)$ refers to the base flow and perturbations.
+Substituting this into the Navier-Stokes equations and linearising, 
 % By understanding the dynamics of exponentially growing perturbations guided by unstable eigenmodes, insights into the transition process could be gleaned upon.
 % The linearised Navier-Stokes equations governing the evolution of infinitisimal perturbations is given as 
 \begin{subequations}
@@ -1099,53 +1108,61 @@ Substituting this decomposition into the Navier-Stokes equations and linearising
     \nabla \cdot \mathbf{u}' = 0.
 \end{equation}
 \end{subequations}
-We can rewrite the evolution equations in matrix form given as, 
+This can be rewritten in as,
 % To study the dynamics of infinitetisimal perturbations about a base flow, the time evolution equation for the perturbations dynamics typically reduces to,
 \begin{equation}
-    \frac{\partial}{\partial t} \mathbf{q'} = \mathbf{L}\mathbf{q'}, \quad \mathbf{L} =
+    \frac{\partial}{\partial t} \mathbf{q'} = \mathcal{L}\mathbf{q'}, \quad \mathcal{L} =
     \begin{bmatrix}
-        - (\mathbf{U} \cdot\nabla) - (\nabla \mathbf{U})\cdot + \frac{1}{Re}\nabla^2 & -\nabla \\
-        \nabla \cdot & \matbf{0} 
+        - (\mathbf{U} \cdot\nabla) - (\nabla \mathbf{U}) + \frac{1}{Re}\nabla^2 & -\nabla \\
+        \nabla \cdot & \mathbf{0} 
     \end{bmatrix},
 \end{equation}
-where $\mathbf{L}, \mathbf{q} = (\mathbf{u}', p')^T$ refer to the linearised operator and a vector of perturbations.
+where $\mathcal{L}$ refer to the linearised operator and, $\mathbf{q}' = (\mathbf{u}', p')^T$.
 % In this case, the linear operator is the linearised Navier Stokes equation which has the form,
 % where $\mathbf{U}$ is referred to as the base flow, where the linear operator $\mathbf{L} \in \mathbf{R}^{N_g,N_g}$, $N_g$ refers to the number of global degrees of freedom.
-Assuming that we have an initial condition, $\mathbf{q}'(\mathbf{x}, t = 0) = \mathbf{q}_0$, the evolution of perturbations up to time $T$ is therefore,
+Assuming an initial perturbation, $\mathbf{q}'(\mathbf{x}, t = 0) = \mathbf{q}_0$, its evolution to time $T$ is given by,
 \begin{equation}\label{eq:linearised_propagation}
-    \mathbf{q}(\mathbf{x}', t) = \mathcal{A}(T, Re)\mathbf{q}_0
+    \mathbf{q}(\mathbf{x}', T) = \mathcal{A}(T, Re)\mathbf{q}_0, \quad \text{where} \quad \mathcal{A}(T,Re) = \exp(\mathcal{L}T).
 \end{equation}
-where $\mathcal{A}(T,Re) = \exp(\mathbf{L} T)$ refers to the linear evolution operator that propagates perturbations from $t = 0$ to $T$.
-Suppose that the vector of perturbations can be represented by an ansatz consisting of normal modes,
+We assume that the perturbations can be represented as a normal mode,
 \begin{equation}\label{eq:normal_modes}
     \mathbf{q}'(\mathbf{x},t ) = \mathbf{\tilde{q}}(\mathbf{x})\exp(\lambda t) + \text{c.c}
 \end{equation}
-where $\lambda_j, \mathbf{\tilde{q}}_j$ refer to the $j^{th}$ eigenvalue and eigenmode which can be complex, and $\text{c.c}$ refers to the  complex conjugate.
-Substituting the ansatz of equation \eqref{eq:normal_modes} to the equation \eqref{eq:linearised_propagation}, we obtain an eigenvalue problem,
+where $\lambda_j, \mathbf{\tilde{q}}_j(x)$ refer to the $j^{th}$ eigenvalue and eigenmode, and $\text{c.c}$ refers to the complex conjugate.
+Substituting the normal mode into equation \eqref{eq:linearised_propagation}, we obtain an eigenvalue problem,
+% Substituting the ansatz of equation \eqref{eq:normal_modes} to the equation \eqref{eq:linearised_propagation}, we obtain an eigenvalue problem,
 \begin{equation}
     \mathcal{A}(T,Re)\tilde{\mathbf{q}}_j = \mu_j \tilde{\mathbf{q}}_j, \quad \mu_j = \exp(\lambda_j T).
 \end{equation}
-where $\mu_j$ refers to the eigenvalue of $\mathcal{A}$, the eigenvalue computed in practice.
-We typically set $T = 1$ following \citep{barkley_direct_2008}.
+where $\mu_j$ refers to the eigenvalue of $\mathcal{A} = \exp(\mathcal{L}T)$, and we typically set $T = 1$ \citep{barkley_direct_2008}.
 % In choosing T, one has be careful not to choose a value larger than the period of the leading eigenvalue in order to avoid aliasing issues.
 % For steady base flows, we are primarily interested in $\lambda_j$ instead of $\mu_j$, and $T$ is chosen to be one \citep{barkley_direct_2008}.
 % For periodic base flows, $\mu_j$ is referred to the Floquet multiplier.
-Depending on the magnitude of $\lambda_j$, the base flow can be classified as linearly unstable ($|\lambda_j | > 1$), neutrally stable ($|\lambda_j| = 0$) and linearly stable ($|\lambda_j|< 0$).
+The real component of the eigenvalues determine the stability of the base flow, which can be either,
+\begin{enumerate}
+    \item Unstable: $\Re(\lambda) > 0$,
+    \item Stable: $\Re(\lambda) < 0$,
+    \item Neutral: $\Re(\lambda) = 0$.
+\end{enumerate}
+% Depending on the magnitude of $\lambda_j$, the base flow can be classified as linearly unstable ($|\lambda_j | > 1$), neutrally stable ($|\lambda_j| = 0$) and linearly stable ($|\lambda_j|< 0$).
 % If $|\lambda_j| > 1$, then infinitisimal perturbations grow exponentially and the fluid system is recognised as being linearly unstable.
 % For $|\lambda_j| < 0$, infinitisimal perturbations will decay exponentially and the fluid system if linearly stable.
 % If $|\lambda| = 0$, it indicates a bifurcation point.
-We approach the departing point where various computational linear algebra algorithms can be employed to diagonalise $\mathcal{A}(T,Re)$.
-In this work, we highlight some of the practical constraints in diagonalising $\mathcal{A}(T,Re)$,
-\begin{enumerate}
-    \item The typical size of $\mathcal{A}(T,Re) \in \mathbb{R}^{M\times M}$ (where $M \approx N_g \times N_{dim}$ and $N_{dim}$ refers to the size of matrix $\mathcal{A}$ and spatial dimensions) discretised using spectral/\textit{hp} elements, is very large, rendering full diagonalisation algorithms such as the QR algorithm $O(M^3)$ computationally inefficient.
-    \item We are mainly interested in computing the first few eigenpairs with the largest real part. 
-    \item We do typically have access to the matrix $\mathcal{A}(T,Re)$ in a splitting-based time stepping code.
-\end{enumerate}
+This concludes the mathematical overview of linear stabiltiy analysis, and the challenge lies in the computing the eigenpairs of $\mathcal{A}$ efficiently.
+For large matrices, $\mathcal{A} \in \mathbb{R}^{M \times M}$ (assuming it is real here for simplicity), direct eigenvalue solvers such as the QR algorithm costing $O(M^3)$ might be computationally infeasible.
+Another concern is that we are typically only interested in the most dangerous (leading) eigenvalues of largest real parts, and not the full spectrum.
+Lastly, we do not have access to $\mathcal{A}$ in a time stepping based code.
+% \begin{enumerate}
+%     \item The typical size of $\mathcal{A}(T,Re) \in \mathbb{R}^{M\times M}$ (where $M \approx N_g \times N_{dim}$ and $N_{dim}$ refers to the size of matrix $\mathcal{A}$ and spatial dimensions) discretised using spectral/\textit{hp} elements, is very large, rendering full diagonalisation algorithms such as the QR algorithm $O(M^3)$ computationally inefficient.
+%     \item We are mainly interested in computing the first few eigenpairs with the largest real part. 
+%     \item We do typically have access to the matrix $\mathcal{A}(T,Re)$ in a splitting-based time stepping code.
+% \end{enumerate}
 
 % \subsubsection{Modified Arnoldi Method}
-The basic method in computing eigenpairs is the power iteration method, where we retrieve the eigenvector after applying successive iterations of the matrix on some non-zero vector.
-\begin{definition}[Power iteration method]\label{dfn:power_iteration}
-    If $\mathbf{A} \in \mathbb{R}^{n \times n}$ is a diagonalisable, the sequence of matrix vector products between a non-zero vector $\mathbf{x}_0$ and $\mathbf{A}$ given as (we neglect normalisation here),
+\subsubsection{Power Iteration Method}
+A simple method in computing the dominant eigenpair is the power iteration method,
+\begin{definition}[Power iteration]\label{dfn:power_iteration}
+    Given a diagonalisable matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0$, the sequence of matrix vector products between them (we neglect normalisation here),
     \begin{equation}
         \mathbf{A}\mathbf{x}_0, 
         \mathbf{A}^2\mathbf{x}_0, 
@@ -1153,16 +1170,16 @@ The basic method in computing eigenpairs is the power iteration method, where we
         ..
         \mathbf{A}^k \mathbf{x}_0.
     \end{equation}
-    approaches the eigenvector of $\mathbf{A}$ with the largest magnitude, $\mathbf{\tilde{x}}_1 \approx \mathbf{A}^k\mathbf{x}_0$ as $k\rightarrow \infty$. Then, its corresponding eigenvalue, $\lambda_1$, can be computed using the Rayleigh quotient, $\lambda_1 = \frac{\mathbf{\tilde{x}}_1^T\mathbf{A}\mathbf{\tilde{x}}_1}{\mathbf{\tilde{x}}^T_1\mathbf{\tilde{x}}_1}$.
-Let $\lambda_i$ be the eigenvalues of a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$. $\lambda_1$ is called the dominant eigenvalue of $\mathbf{A}$ if,
-\begin{equation}
-    |\lambda_1 | > |\lambda_i|, \quad i = 2,..., n
-\end{equation}
-The eigenvector corresponding to $\lambda_1$ is called the dominant eigenvector of $\mathbf{A}$. 
+    approaches the eigenvector of $\mathbf{A}$ with the largest magnitude. i.e. $\mathbf{\tilde{x}}_1 = \lim_{k \rightarrow \infty} \mathbf{A}^k\mathbf{x}_0$. The dominant eigenvalue, $\lambda_1$, can be computed using the Rayleigh quotient, $\lambda_1 = \frac{\mathbf{\tilde{x}}_1^T\mathbf{A}\mathbf{\tilde{x}}_1}{\mathbf{\tilde{x}}^T_1\mathbf{\tilde{x}}_1}$.
+% Let $\lambda_i$ be the eigenvalues of a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$. $\lambda_1$ is called the dominant eigenvalue of $\mathbf{A}$ if,
+% \begin{equation}
+%     |\lambda_1 | > |\lambda_i|, \quad i = 2,..., n
+% \end{equation}
+% The eigenvector corresponding to $\lambda_1$ is called the dominant eigenvector of $\mathbf{A}$. 
 \end{definition}
-As we can see, the power iteration method only computes a single eigenpair with the largest magnitude. 
+\subsubsection{Arnoldi Method}
 We typically require two to four eigenpairs with the largest real parts.
-To compute more than one eigenpair, we ultilise the Arnoldi method \citep{arnoldi_principle_1951}, a Krylov subspace iterative method which performs a Hessenberg reduction.
+To compute more than one eigenpair, we ultilise the Arnoldi method \citep{arnoldi_principle_1951}, belonging to a class of Krylov subspace iterative methods, for performing a Hessenberg reduction.
 \begin{definition}[Krylov Subspaces]
     Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0 \in \mathbb{R}^n$, the $k^{th}$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$ is defined by,
     \begin{equation}
@@ -1171,87 +1188,103 @@ To compute more than one eigenpair, we ultilise the Arnoldi method \citep{arnold
 \end{definition}
 % To compute more than one eigenpair, we ultilise the Arnoldi method, belonging to a broader class of algorithms referred to as the Krylov subspace projection methods.
 \begin{definition}[Hessenberg reduction]
-    The Hessenberg reduction is a matrix decomposition technique typically used for the computing eigenvectors. 
-    We seek to decompose an unsymmetric matrix $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real for simplicity),
-    \begin{equation}
+    The Hessenberg reduction is a matrix decomposition technique commonly used for the computing eigenpairs of matrices. 
+    Given a unsymmetric matrix $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real for simplicity), we seek a decomposition of the form,
+    \begin{equation}\label{eq:hessenberg_reduction}
         \mathbf{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T,
     \end{equation}
-    where $\mathbf{H} \in \mathbb{R}^{N \times N}$, refers to the upper Hessenberg matrix ($a_{i,j} = 0$ for $i > j +1$) and $\mathbf{Q} \in \mathbb{R}^{N \times N}$, an orthonormal matrix ($\mathbf{Q}^{-1} = \mathbf{Q}^T$), consisting of $N$ columns of orthogonal vectors, $\mathbf{q}_1, ..., \mathbf{q}_N$.
-    If $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$, and $\mathbf{Q}^T = \mathbf{Q}^{-1}$, then,
+    where,
+    \begin{itemize}
+        \item $\mathbf{H} \in \mathbb{R}^{N \times N}$ is an upper Hessenberg matrix (i.e. $a_{i,j} = 0$ for $i > j +1$)
+        \item $\mathbf{Q} \in \mathbb{R}^{N \times N}$ is an orthonormal matrix (i.e. $\mathbf{Q}^{-1} = \mathbf{Q}^T$), whose columns $\mathbf{q}_1, ..., \mathbf{q}_N$, form an orthonormal basis.
+    \end{itemize}
+    The Hessenberg reduction shows that $\mathbf{A}$ and $\mathbf{H}$ are similar matrices, which have the same eigenvalues.
+    If $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$, using $\mathbf{Q}^T = \mathbf{Q}^{-1}$ and multiplying \eqref{eq:hessenberg_reduction} by $\mathbf{x}$,
     \begin{equation}
-        \mathbf{A}\mathbf{x} = \mathbf{Q}\mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \rightarrow \lambda \mathbf{x} = \mathbf{Q}\mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \rightarrow
-        \lambda \mathbf{Q}^{-1} \mathbf{x} = \mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \rightarrow \lambda(\mathbf{A}) = \lambda(\mathbf{H}),
+        \mathbf{A}\mathbf{x} = \mathbf{Q}\mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \quad \Rightarrow \quad \lambda \mathbf{x} = \mathbf{Q}\mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \quad \Rightarrow
+        \quad \lambda \mathbf{Q}^{-1} \mathbf{x} = \mathbf{H}\mathbf{Q}^{-1}\mathbf{x} \quad \Rightarrow \quad \lambda\mathbf{y} = \mathbf{H}\mathbf{y}.
     \end{equation}
-    where $\mathbf{H}$ and $\mathbf{A}$ are considered to be similar, with the same eigenvalues.
+    Hence, $\lambda(\mathbf{A}) = \lambda(\mathbf{H})$, and their eigenvectors are related by $\mathbf{x} = \mathbf{Q}\mathbf{y}$.
 \end{definition}
-The Arnoldi method generates a sequences of vectors $[\mathbf{u}_0, \mathcal{A}\mathbf{u}_0, .., \mathcal{A}^{k-1}\mathbf{u}_0]$ that spans the $k$-dimensional Krylov subspace, referred to as Arnoldi vectors \citep{golub_matrix_2013}. 
-Using Arnoldi vectors, we construct an orthogonal matrix, $\mathbf{Q} = [\mathbf{q}_1, \mathbf{q}_2, ..., \mathbf{q}_k] \in \mathbb{R}^{M \times K}$.
-This is equivalent to performing a Hessenberg reduction of $\mathcal{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T$, where the eigenvalues of $\mathcal{A}$ is similar to $\mathbf{H}$.
-In practice, we perform a $k-$step (partial) Hessenberg reduction where the eigenvalues of the $\mathcal{A}\in\mathbb{R}^{N \times N}$ is approximated with a smaller ($k << N$) upper Hessenberg matrix of $\mathbf{H}\in\mathbb{R}^{k \times k}$, amenable for direct eigenvalue computation such as the QR method.
-By performing a $k-$step Hessenberg reduction of $\mathcal{A}$ we get,
+The Arnoldi method generates a sequences of vectors $[\mathbf{u}_0, \mathcal{A}\mathbf{u}_0, .., \mathcal{A}^{k-1}\mathbf{u}_0]$ that spans the $k$-dimensional Krylov subspace.
+These vectors, are known as Arnoldi vectors \citep{golub_matrix_2013}, and are used to construct an orthogonal matrix via the Gram-Schmidt process, $\mathbf{Q} = [\mathbf{q}_1, \mathbf{q}_2, ..., \mathbf{q}_k] \in \mathbb{R}^{M \times K}$.
+This is equivalent to performing a partial Hessenberg reduction of $\mathcal{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T$, where the eigenvalues of $\mathcal{A} \in \mathbb{R}^{N \times N}$ can be approximated by a smaller Hessenberg matrix $\mathbf{H} \in \mathbb{R}^{k \times k}$, suitable for a direct eigenvalue computation using the QR algorithm,
+% In practice, we perform a $k-$step (partial) Hessenberg reduction where the eigenvalues of the $\mathcal{A}\in\mathbb{R}^{N \times N}$ is approximated with a smaller ($k << N$) upper Hessenberg matrix of $\mathbf{H}\in\mathbb{R}^{k \times k}$, amenable for direct eigenvalue computation such as the QR method.
+The $k-$step Arnoldi factorisation of $\mathcal{A}$ gives,
 \begin{equation}
 \mathcal{A}\mathbf{Q}_k = \mathbf{Q}_k\mathbf{H}_k + \mathbf{r}_k\mathbf{e}_k^T,
 \end{equation}
-where $\mathbf{H} \in \mathbb{R}^{k \times k}$ refers to the Hessenberg matrix, $\mathbf{e}_k = [0,...,0, 1] \in \mathbb{R}^k$, and $\mathbf{r}_k \in \mathbb{R}^N $ is a residual related to the approximation of the eigenpairs of $\mathcal{A}$ (e.g. $\mathcal{A}\mathbf{x} = \lambda\mathbf{x}$),
+where $\mathbf{H} \in \mathbb{R}^{k \times k}$ refers to the upper Hessenberg matrix, $\mathbf{e}_k = [0,...,0, 1] \in \mathbb{R}^k$, and $\mathbf{r}_k \in \mathbb{R}^N $ is a residual vector. 
+If $\mathbf{x} = \mathbf{Q}_k \mathbf{y}$, and $\mathbf{H}\mathbf{y} = \lambda\mathbf{y}$ then,
 \begin{equation}
-    (\mathcal{A} - \mathbf{I}\lambda)\mathbf{x} = (\mathbf{e}_k^T\mathbf{y}) \mathbf{r}_k,
+    (\mathcal{A} - \mathbf{I}\lambda)\mathbf{x} = (\mathbf{e}_k^T\mathbf{y}) \mathbf{r}_k.
 \end{equation}
-where $\mathbf{x} = \mathbf{Q}_k \mathbf{y}$, eigenvectors related to $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ and $\mathbf{H}_k \mathbf{y} = \lambda \mathbf{y}$.
-If $||\mathbf{r}_k|| = 0 $, then $\lambda(\mathbf{H}) \subseteq \lambda(\mathcal{A})$. 
+In other words, the residual vector difference between the approximation of $\lambda(\mathcal{A})$, using $\lambda(\mathbf{H})$. 
+If $||\mathbf{r}_k|| = 0$, then $\lambda(\mathbf{H}) \subseteq \lambda(\mathcal{A})$.
+% where $\mathbf{x} = \mathbf{Q}_k \mathbf{y}$, eigenvectors related to $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ and $\mathbf{H}_k \mathbf{y} = \lambda \mathbf{y}$.
+% If $||\mathbf{r}_k|| = 0 $, then $\lambda(\mathbf{H}) \subseteq \lambda(\mathcal{A})$. 
 % As we diagonalise the Hessenberg matrix using a QR algorithm, its eigenvalues approximates that of $\mathcal{A}$ and its eigenvectors multplied by \mathbf{V}, approximates the eigenvectors of $\mathcal{A}$.
 
-Now we present the algorithm, by first generating $k$ Arnoldi vectors,
+We now present the Arnoldi method by generating $k$ Arnoldi vectors,
 % we construct $k$-columns of matrix $\mathbf{Q}$ by considering an orthornomal set of $k$ vectors, $\mathbf{q}_0, \mathbf{q}_1, ..., \mathbf{q}_{k-1}$ from the $k$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$,
 \begin{equation}
     \mathbf{T}_{k} = [\mathbf{u}_0, \mathbf{u}_1, ...., \mathbf{u}_{k-1} ] = \left [\mathbf{u}_0, \frac{\mathcal{A}(T,Re)\mathbf{u}_0}{\alpha_1}, \frac{\mathcal{A}(T,Re)\mathbf{u}_1}{\alpha_2}, ..., \frac{\mathcal{A}(T,Re)\mathbf{u}_{k-1}}{\alpha_k} \right],
 \end{equation}
-where $\alpha_j$ is defined such that $||\mathbf{u}_j|| = 1$.
-Following \citep{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is related by
+where $\alpha_j$ is scaled such that $||\mathbf{u}_j|| = 1$.
+Following \citep{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is given as,
 \begin{equation}
     \mathcal{A}\mathbf{T}_k = \mathbf{T}_{k+1}D_k^{(k+1)},
 \end{equation}
-where $D_k^{(k+1)} \in \mathbb{R}^{(k+1) \times k}$ is a shifted diagonal matrix with elements $D_{ij} = \alpha_i\delta_{i, j+1}$.
-Next, we consider that $\mathbf{T}_k$ and $\mathbf{T}_{k+1}$ can be represented by their QR decompositions,
-\begin{equation}
+where $D_k^{(k+1)} \in \mathbb{R}^{(k+1) \times k}$ is a shifted diagonal matrix with entries $D_{ij} = \alpha_i\delta_{i, j+1}$.
+We assume that $\mathbf{T}_k$ and $\mathbf{T}_{k+1}$ admit QR decompositions,
+\begin{equation}\label{eq:QR_full}
     \mathcal{A}\mathbf{Q}_k\mathbf{R}_k = \mathbf{Q}_{k+1}\mathbf{R}_{k+1} \mathbf{D}_{k}^{(k+1)},
 \end{equation}
-where $\mathbf{Q}_k \in \mathbb{R}^{N \times k}$ and $\mathbf{R}_k \in \mathbb{R}^{k \times k}$ with $\mathbf{Q}_{k+1}, \mathbf{R}_{k+1}$ similarly defined.
-By introducing the upper Hessenberg matrix,
+where $\mathbf{Q}_k \in \mathbb{R}^{N \times k}$, $\mathbf{R}_k \in \mathbb{R}^{k \times k}$ and $\mathbf{Q}_{k+1}, \mathbf{R}_{k+1}$ are similarly defined.
+The upper Hessenberg matrix $\mathbf{H}_{k}^{(k+1)} \in \mathbb{R}^{(k +1) \times k}$ is defined as,
 \begin{equation}
     \mathbf{H}_{k}^{(k+1)} = \mathbf{R}_{k+1} \mathbf{D}_k^{(k+1)}\mathbf{R}_k^{-1},
 \end{equation}
-where the last row of has only a single non-zero element, $h^* = h_{k, k-1}$.
-We can simplify the expression above to 
+in which the last row of $\mathbf{H}_{k}^{(k+1)}$ only contains a single non-zero entry, $h^* = h_{k, k-1}$.
+By substituting the definition of the upper Hessenberg matrix and separating the last row of $\mathbf{H}_k^{(k+1)}$ we obtain,
 \begin{equation}\label{eq:arnoldi_projection}
     \mathcal{A}\mathbf{Q}_k = \mathbf{Q}_k\mathbf{H}_k + h^* \mathbf{q}_k \mathbf{e}_k^T.
 \end{equation}
-Equation \eqref{eq:arnoldi_projection} describes the projection of $\mathcal{A}$ onto $\mathbf{Q}_k$, leading to a smaller $\mathbf{H}_k$ matrix.
-The `quality' of this projection is measured by the last term.
-Suppose that $\mathbf{H}_k$ is diagonalisable, $\mathbf{H}_k = \mathbf{\Psi}_k \mathbf{\Lambda}_k \mathbf{\Psi}_k^{-1}$ and multiplying it into equation \eqref{eq:arnoldi_projection}, we get,
+Equation \eqref{eq:arnoldi_projection} describes the projection of $\mathcal{A}$ onto the Krylov subspace spanned by orthornomal bases $\mathbf{Q}_k$, yielding a smaller $\mathbf{H}_k$ matrix.
+The accuracy of this approximation is dictated by the magnitude of the residual term, $h^*\mathbf{q}_k\mathbf{e}_k^T$.
+Assuming that $\mathbf{H}_k$ is diagonalisable as $\mathbf{H}_k = \mathbf{\Psi}_k \mathbf{\Lambda}_k \mathbf{\Psi}_k^{-1}$, we multiply equation \eqref{eq:arnoldi_projection} by $\mathbf{\Psi}_k$,
 \begin{equation}
-    \mathcal{A}\mathbf{Q}_k\mathbf{\Psi}_k = \mathbf{Q}_k\mathbf{\Psi}_k\mathbf{\Psi}_k^{-1}\mathbf{H}_k\mathbf{\Psi}_k + h^*\mathbf{q}_k\mathbf{e}_k^T\mathbf{\Psi}_k,
+    \mathcal{A}\mathbf{Q}_k\mathbf{\Psi}_k = \mathbf{Q}_k\mathbf{\Psi}_k\mathbf{\Psi}_k^{-1}\mathbf{H}_k\mathbf{\Psi}_k + h^*\mathbf{q}_k\mathbf{e}_k^T\mathbf{\Psi}_k.
 \end{equation}
-then,
+Simplifying the expression above we get,
 \begin{equation}\label{eq:eigen_approximation}
     \mathcal{A}\mathbf{V}_k = \mathbf{V}_k\mathbf{\Lambda}_k + h^*\mathbf{q}_k\mathbf{e}_k^T\mathbf{\Psi}_k,
 \end{equation}
-where $\mathbf{V}_k = \mathbf{Q}_k\mathbf{\Psi}_k$ and $\mathbf{\Lambda}_k$ refers to the eigenvectors and eigenvalues of $\mathcal{A}$ approximated by diagonalising $\mathbf{H}_k$ with a standard QR algorithm.
-The error for approximating the $j^{th}$ eigenpair can be obtained from equation \eqref{eq:eigen_approximation} as,
+where $\mathbf{\Lambda}_k$ contains the $k$ eigenvalues and $\mathbf{V}_k = \mathbf{Q}_k\mathbf{\Psi}_k$ the eigenvectors of $\mathcal{A}$.
+The error in approximating the $j^{th}$ eigenpair is given by,
 \begin{equation}
     \varepsilon_j = ||\mathcal{A}\mathbf{v}_j - \lambda_j \mathbf{v}_j|| = ||h^* \mathbf{q}_k\mathbf{e}_k^T\mathbf{\psi}_j|| = |h^*||\mathbf{v}_j[k-1]|,
 \end{equation}
 where $\mathbf{v}_j[k-1]$ is the last component of the eigenvector $\mathbf{v}_j$.
-The reader is referred to \cite{barkley_direct_2008} for more details.
-Lastly, we note that Arnoldi method extracts the eigenpairs with the largest magnitude.
-We are interest in extracting the eigenpairs with the largest real part.
-To extract the eigenpairs with the largest real pair, we consider the exponential power method, which is the naturally adapted from a time-stepping code, where we evolve
+
+Lastly, we are generally interested in obtaining the eigenpairs with the the largest real part.
+We introduce exponential power method \citep{tuckerman_bifurcation_2000}, which is naturally considered by time stepping an initial perturbation $\mathbf{q}'_0$ from $t = 0$ to $T$,
 \begin{equation}
-    \mathbf{q}'(t + \Delta t) = e^{\mathbf{L}\Delta t} \mathbf{q}'(t), 
+    \mathbf{q}'(T) = \exp({\mathcal{L} T}) \mathbf{q}'_0 = \mathcal{A}(T)\mathbf{q}_0'.
 \end{equation}
-Since $\mathbf{L}$ is based on a splitting code, we can decompose it into $\mathbf{L} = \mathbf{N}_\mathbf{Q} + \mathbf{L}$, where $e^{\mathbf{N}_\mathbf{Q} \Delta t}= \mathbf{I} + \Delta \mathbf{N}_\mathbf{Q}$ refers to the explicit nonlinear terms linearised about, $\mathbf{Q}$, and $e^{\mathbf{L}\Delta t} = (\mathbf{I} - \Delta t \mathbf{L})^{-1}$, the linear terms treated implicitly.
-\begin{equation}
-    \mathbf{q}'(t + \Delta t) = (\mathbf{I} - \Delta t \mathbf{L})^{-1} (\mathbf{I} + \Delta t \mathbf{N}_\mathbf{Q}) \mathbf{q}'(t), 
-\end{equation}
+The dominant eigenvalues, $\mu$, of $\mathcal{A}$ obtained from the Arnoldi method described above, which correspond to the eigenvalue of the largest real part $\lambda$, of $\mathcal{L}$ by $\mu = \exp(\lambda  T)$, where $T$ is typically set to 1.
+For further details on this algorithm, the reader is referred to \cite{barkley_direct_2008} for more details.
+
+In summary, the algorithm described above have been implemented in Nektar++, referred to as the `modified' Arnoldi algorithm, which modifies the existing time-stepper code with a wrapper function that generates Arnoldi vectors and solves the Hessenberg matrix using the subroutine \texttt{dgeev} from LAPACK (Linear Algebra PACKage, \citep{anderson_lapack_1999}).
+The modified Arnoldi algorithm has been verified against using a separate implementation based on the third-party package ARPACK (ARnoldi PACKage \citep{lehoucq_arpack_1998}) \citep{rocco_advanced_nodate}.
+
+% Lastly, we note that Arnoldi method extracts the eigenpairs with the largest magnitude.
+% We are interest in extracting the eigenpairs with the largest real part.
+% To extract the eigenpairs with the largest real pair, we consider the exponential power method, which is the naturally adapted from a time-stepping code, where we evolve
+% Since $\mathbf{L}$ is based on a splitting code, we can decompose it into $\mathbf{L} = \mathbf{N}_\mathbf{Q} + \mathbf{L}$, where $e^{\mathbf{N}_\mathbf{Q} \Delta t}= \mathbf{I} + \Delta \mathbf{N}_\mathbf{Q}$ refers to the explicit nonlinear terms linearised about, $\mathbf{Q}$, and $e^{\mathbf{L}\Delta t} = (\mathbf{I} - \Delta t \mathbf{L})^{-1}$, the linear terms treated implicitly.
+% \begin{equation}
+%     \mathbf{q}'(t + \Delta t) = (\mathbf{I} - \Delta t \mathbf{L})^{-1} (\mathbf{I} + \Delta t \mathbf{N}_\mathbf{Q}) \mathbf{q}'(t), 
+% \end{equation}
 
 % The eigenvalues and eigenvectors of $\mathbf{H}_k = \Psi_k \Lambda_k \Psi_k^{-1}$ can be computed using a standard QR algorithm.
 
