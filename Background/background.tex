@@ -46,7 +46,7 @@ In the absence of a pressure gradient, the RBP configuration reduces to the clas
 In the limiting case without unstable stratification, $\Delta T = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
 
 For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
-To describe the motion of the fluid in RBP configurations, we cosider non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
+To describe the motion of the fluid in RBP configurations, we consider the non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
 \begin{subequations}\label{eq:rbp_equations}
 \begin{equation}
     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{Re^2Pr} \theta,
@@ -68,7 +68,7 @@ where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion c
 We describe important historical of hydrodynamic stability of planar shear flows and their theorectical frameworks in \S \ref{sec:bkgrd_transitional}.
 Theorectical frameworks used in the study of stability of flow such as linear stability, nonlinear dynamical systems and spatiotemporal character of transitional shear flows will be outlined.
 This followed the historical developments of Rayleigh-B\'{e}nard convection (RBC), where concepts of the stability of fluid flows will be ultilised in \S \ref{sec:bkgrd_RBC}.
-After which, we describe the historical developments of RBP flows \S \ref{sec:bkgrd_RBP}, and the outline of the thesis will be give in \S \ref{sec:thesis_outline}.
+After which, we describe the historical developments of RBP flows \S \ref{sec:bkgrd_RBP}, and the outline of the thesis will be provided in \S \ref{sec:thesis_outline}.
 
 
 % We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
@@ -221,13 +221,13 @@ Despite its limitation, linear analysis analysis succeeds in predicting the crit
 %%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Non-modal stability}\label{subsec:nonmodal}
-One of a major limitation of linear stability analysis considered above is that it treats each eigenmode independently, referred to as \emph{modal} analysis.
-However, the interaction between decaying eigenmodes may lead to a short-term amplification of perturbations, before eventually decaying.
-This phenonemon is referred to as \emph{transient growth}, and the method of analysis is referred to as \emph{non-modal} analysis, related to the normality of the linear Orr-Sommerfeld operator \citep{schmid_nonmodal_2007}.
+One of a major limitations of modal analysis is that it treats each eigenmode independently.
+However, the interaction between decaying eigenmodes can lead to a transient growth, where perturbations amplify temporarily before decaying asymptotically.
+% The method of analysis is referred to as \emph{non-modal} analysis, related to the normality of the linear Orr-Sommerfeld operator \citep{schmid_nonmodal_2007}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Background/Figures/PhasePotrait.pdf}
-    \caption{(a) The phase portrait of the toy model with $Re = 15$, (b) Transient growth.}
+    \caption{(a) The phase portrait of the toy model with $Re = 15$, where red lines are phase lines of the toy model. The blue trajectory lead to transient growth and the green trajectory do not (b) Time history of blue and green trajectory.}
     \label{fig:toy_model}
 \end{figure}
 To demonstrate an example of transient growth, we consider a two-dimensional toy model governing the time-evolution of $\mathbf{q}$,
@@ -235,34 +235,41 @@ To demonstrate an example of transient growth, we consider a two-dimensional toy
     \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix} v \\ \eta \end{pmatrix}  = \begin{pmatrix} -\frac{1}{Re} & -1 \\ 0 & -\frac{2}{Re} \end{pmatrix} \begin{pmatrix} v \\ \eta \end{pmatrix},
 \end{equation}
 where $Re$ refers to the Reynolds number.
-The toy model is has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, and unit eigenvectors $\mathbf{x_1} = (1, 0)$, $\mathbf{x_2} = \frac{1}{\sqrt{Re^2 + 1}}(Re, 1)$.
-Judging from the negative eigenvalues, we conclude that $\mathbf{q}(t)$ will decay exponentially.
-However, as $Re \rightarrow \infty$, they becoming increasingly non-orthogonal approaching each other such that the angle between $\mathbf{x}_1$ and $\mathbf{x}_2$ tend towards 0.
-At $Re = 15$, the eigenvector pairs, $\mathbf{x_1}$ and $\mathbf{x_2}$, are highly non-orthogonal, becoming almost linear dependent shown in figure \ref{fig:toy_model}(a).
-For a randomly selected initial condition with an energy-norm of $||\mathbf{q}_0||_2 = 15$, where $|| \cdot ||_2$ refers to the L2-norm, the trajectory in green decays exponentially for $t \in [0, 100]$ in figure \ref{fig:toy_model}(b).
-In constrast, for a specifically chosen initial condition in shown as the blue trajectory, $||\mathbf{q}||_2$ is amplified nearly four times before decaying exponentially.
-The toy model demonstrates the significance of transient growth for a specifically chosen initial condition.
+The toy model is has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, indicating asymptotic decay.
+% and unit eigenvectors $\mathbf{x_1} = (1, 0)$, $\mathbf{x_2} = \frac{1}{\sqrt{Re^2 + 1}}(Re, 1)$.
+% Judging from the negative eigenvalues, we conclude that $\mathbf{q}(t)$ will decay exponentially.
+% As $Re \rightarrow \infty$, the eigenvectors,  becoming increasingly aligned (non-orthogonal) leading to significant transient growth.
+At $Re = 15$, the eigenvectors, $\mathbf{x_1} = (1,0)$, $\mathbf{x}_2 = (\frac{1}{\sqrt{Re^2 + 1}}$, are linearly are highly non-orthogonal, becoming almost linear dependent shown in figure \ref{fig:toy_model}(a).
+Notably, we become increasingly linearly dependent as $Re \rightarrow \infty$.
+For a particular initial condition, the energy $||q||^2 = \sqrt{v^2 + \eta^2}$, is amplified four times before decaying in blue trajectory, shown in Figure \ref{fig:toy_model}(b).
+Yet for another choice of initial condition, the trajectory decays asymptotically as the green trajectory indicates.
+Despite decaying eigenmodes, the toy model highlights the significance of transient growth, which depends on the choice of initial condition.
+% For a randomly selected initial condition with an energy-norm of $||\mathbf{q}_0||_2 = 15$, where $|| \cdot ||_2$ refers to the L2-norm, the trajectory in green decays exponentially for $t \in [0, 100]$ in figure \ref{fig:toy_model}(b).
+% In constrast, for a specifically chosen initial condition in shown as the blue trajectory, $||\mathbf{q}||_2$ is amplified nearly four times before decaying exponentially.
 
-The goal of non-modal stability analysis is to searching over all initial conditions, $\mathbf{\tilde{q}}_0$, leading to the maximum amplification factor at time $t$, resulting in an optimisation problem,
+The aim of non-modal stability analysis is find the initial conditions, $\mathbf{\tilde{q}}_0$, that leads to the maximum amplification, $G(\tau)$, over a time horizon $\tau$. 
+This is posed as an optimistaion problem,
 \begin{equation}\label{eq:transient_growth}
     % G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2}, \quad \text{s.t} \quad ||\mathbf{\tilde{q}}_0||^2 = 1,
-    G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathbf{\tilde{q}}(t), \mathbf{\tilde{q}}(t) \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle }, \quad \text{s.t} \quad \langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle = 1,
+    G(\tau) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathbf{\tilde{q}}(\tau), \mathbf{\tilde{q}}(\tau) \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle }, \quad \text{s.t} \quad \langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle = 1,
 \end{equation}
-where, $\langle \cdot, \cdot \rangle$ refers to the inner-product defined as,
+where, $\langle \cdot, \cdot \rangle$ denotes the inner-product,
 \begin{equation}
     \langle \mathbf{x}, \mathbf{y} \rangle = \int_\Omega \mathbf{x}^H \mathbf{y} \; \mathrm{d}\Omega,
 \end{equation}
 and $\mathbf{x}^ H$ refers to the complex conjugate transpose of $\mathbf{x}$.
 By considering the linearised operator of \eqref{eq:OSQ}, we can define a linear time invariant operator given as,
 \begin{equation}\label{eq:linear_evolution}
-    \mathbf{\tilde{q}}(t) = \mathcal{A}(t) \mathbf{\tilde{q}}_0,
+    \mathbf{\tilde{q}}(\tau) = \mathcal{A}(\tau) \mathbf{\tilde{q}}_0,
 \end{equation}
-which takes the solution from initial conditions, $\mathbf{\tilde{q}}_0$, to $\mathbf{\tilde{q}}(t)$ at time $t$.
+which takes the solution from initial conditions, $\mathbf{\tilde{q}}_0$, to $\mathbf{\tilde{q}}(\tau)$ at time $\tau$.
 Subtituting the expression above into equation \eqref{eq:transient_growth},
 \begin{equation}\label{eq:transient_growth_adj}
-    G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathcal{A}(t)\mathbf{\tilde{q}}_0, \mathcal{A}(t)\mathbf{\tilde{q}}_0 \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle} = \langle \mathbf{\tilde{q}}_0, \mathcal{A}^\dagger(t) \mathcal{A}(t)\mathbf{\tilde{q}}_0  \rangle = \lambda_{max} (\mathcal{A}^\dagger \mathcal{A})
+    G(\tau) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathcal{A}(\tau)\mathbf{\tilde{q}}_0, \mathcal{A}(\tau)\mathbf{\tilde{q}}_0 \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle} = \langle \mathbf{\tilde{q}}_0, \mathcal{A}^\dagger(\tau) \mathcal{A}(\tau)\mathbf{\tilde{q}}_0  \rangle = \lambda_{max} (\mathcal{A}(\tau)^\dagger \mathcal{A}(\tau))
 \end{equation}
-where $\mathcal{A}^\dagger(t)$ refers to the adjoint of $\mathcal{A}(t)$. The maximum amplification factor $\max G(t)$ is the largest eigenvalue, $\lambda_{max}$, of $\mathcal{A}^\dagger \mathcal{A}$, and the eigenvalue problem is given as,
+where $\mathcal{A}^\dagger$ refers to the adjoint of $\mathcal{A}(t)$.
+The maximum amplification factor $\max G(t)$ is the largest eigenvalue of $\mathcal{A}^\dagger(\tau)\mathcal{A}(\tau)$.
+The eigenvalue problem is given as,
 \begin{equation}
     \mathcal{A}^\dagger(t)\mathcal{A}(t) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0,
 \end{equation}
@@ -270,17 +277,18 @@ where $\mathbf{\tilde{q}}_0$ refers to the eigenvector denoting the optimal init
 For a detailed derivation of the optimal initial conditions or forcing, the reader is referred to \citep{butler_three-dimensional_1992,schmid_nonmodal_2007}.
 An alternative method of computing transient growth is computing the pseudospectral of linear operators discussed in \citep{trefethen_pseudospectra_1997}, outside the scope of this thesis.
 
-Both two-dimensional, $\beta = 0$, and three-dimensional, $\beta \neq 0$, non-modal stability analysis have been studied.
+Both two-, and three-dimensional non-modal anlyses reveal mechanisms for transient growth.
+In two-dimensions, the optimal initial conditions are in the form of near wall vorticies tilted upstream, which amplifies via the Orr-mechanism \citep{orr_stability_1907, farrell_optimal_1988,reddy_pseudospectra_1993}.
+In three-dimensions, streamwise vortices are optimal, leading to the the amplification of streamwise streaks via the lift=up effect \citep{ellingsen_stability_1975,reddy_energy_1993}.
+The spacing of these streaks at higher Reynolds number has been consistently reported to occur around 100 wall units \citep{del_alamo_linear_2006,pujals_note_2009,hwang_linear_2010}, which supports experimental observations of streak spacing in turbulent boundary layers \citep{kline_structure_1967, smith_characteristics_1983}.
+The main results from non-modal analysis is that three dimensional perturbations can lead to strong transient growth at subcritical Reynolds numbers while modal analysis predicts the onset of two-dimensional instabilities via Tollmien Schlicting waves.
 
-In the two-dimensional form, the optimal initial conditions are in the form of near wall vorticies tilted upstream, transiently energised referred to as the Orr-mechanism \citep{orr_stability_1907, farrell_optimal_1988,reddy_pseudospectra_1993}.
-In the three-dimension form, streamwise vortices, acting as optimal initial conditions lead to the optimal response in the form of streamwise streaks \citep{reddy_energy_1993}.
-Contrary to linear stability analysis which confers two-dimensional perturbations as linearly unstable, the key result in this analysis is that three-dimensional initial conditions, $\alpha = 0$, confer the optimal initial conditions leading to large transient growth at subcritical Reynolds numbers.
-Figure.. shows this.
+Both modal and non-modal mechanisms highlight important developments, providing perspectives on linear mechanisms responsible for the transition from laminar to turbulence.
+% Contrary to linear stability analysis which confers two-dimensional perturbations as linearly unstable, the key result in this analysis is that three-dimensional initial conditions, $\alpha = 0$, confer the optimal initial conditions leading to large transient growth at subcritical Reynolds numbers.
+% Figure.. shows this.
+% The width of the streaks happen to be robustly occur around 100 wall units, the characteristics spacing identified in many experiments [Kline, Panton, Bandybopobi]
 
-The width of the streaks happen to be robustly occur around 100 wall units, the characteristics spacing identified in many experiments [Kline, Panton, Bandybopobi]
-
-The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{ellingsen_stability_1975,brandt_lift-up_2014}.
-These modal and nonmodal mechanisms above highlight developments based on linear methods.
+% The optimal initial conditions involve streamwise vortices which amplify streaks, related to the lift-up effect \citep{ellingsen_stability_1975,brandt_lift-up_2014}.
 
 % \begin{equation}
 %     \langle \mathcal{A}(\tau)\mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{x}, \mathcal{A}^\dagger(\tau) \mathbf{y} \rangle.
@@ -349,18 +357,41 @@ These modal and nonmodal mechanisms above highlight developments based on linear
     \label{fig:StateSpaceGraham}
 \end{figure}
 
-In the previous section, we have examined the transition process based linear mechanisms.
-Unfortunately, for canonical shear flow configurations, the transition process is subscritical where linear stability theory fails to predict the onset of turbulence.
-Furthermore, the transition to turbulence is ultimately governed fully nonlinear nature of the Navier-Stokes equations.
-Hence, we turn to a nonlinear dynamical systems point of view of this transition process, inspired from Hopf's vision of transition, where turbulence emerge as a chaotic trajectory after succeeding Hopf bifurcations.. [CHECK THIS DESCRIPTION...]
-However, this bifurcation cannot happen in the subcritical 
-In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
+In the previous section, we have examined the laminar to turbulent transition using linear frameworks.
+However, the the transition process is ultimately described by the nonlinear Navier-Stokes equations, motivating a nonlinear dynamical systems approach.
+% The transition to turbulence in shear flows, 
+% In the previous section, we have examined the transition process based linear mechanisms.
+% Unfortunately, for canonical shear flow configurations, the transition process is subscritical where linear stability theory fails to predict the onset of turbulence.
+% Furthermore, the transition to turbulence is ultimately governed fully nonlinear nature of the Navier-Stokes equations.
+% Hence, we turn to a nonlinear dynamical systems point of view of this transition process, inspired from Hopf's vision of transition, where turbulence emerge as a chaotic trajectory after succeeding Hopf bifurcations.. [CHECK THIS DESCRIPTION...]
+Turbulence can be interpreted as a chaotic trajectory evolving within a finite-dimensional state space.
+\cite{hopf_mathematical_1948} conjectured that although the function space of all velocity fields governed by the Navier-Stokes equations, viscosity confines the dynamics to a finite-dimensional manifold, known as the \textit{inertial manifold} \citep{foias_inertial_1988}.
+For large viscosities (or low Reynolds numbers), the finite dimensional space reduces to a single point, the laminar state.
+As the Reynolds number increases, the stability of this point changes, bifurcating to form new manifolds, ultimately leading to chaos.
+The set of such manifolds may be viewed as the finite-dimensional state space in which the chaotic trajectories of turbulence evolves.
+An implication of transition via successive bifurcation leading to chaos govern by a single control parameter (the Reynolds number) lead to the so called \textit{routes to chaos} scenarios.
+\cite{landau_problem_1944} proposed that the transition to turbulence may occur through a sequence of Hopf bifurcations, each introducing a new incommensurate frequency, resulting in quasi-periodic motions on a high-dimensional torus.
+However, this model did not capture the essential ingredients of turbulence, such as sensitivity of initial conditions and mixing \citep{john_routes_1993}.
+\cite{ruelle_nature_1971} later show that a \textit{strange attractor} exhibit key features of chaos can emerge after three successive Hopf bifurcations from a stationary state - the \textit{Ruelle-Takens} route to chaos.
+This scenario have been verified in Taylor-Couette flow \citep{gollub_onset_1975}, and Rayleigh-B\'{e}nard convection \cite{swinney_transition_1978}.
+Other routes to chaos such as periodic-doubling \citep{feigenbaum_universal_1979}, and intermittency \cite{manneville_intermittency_1979} scenarios have been proposed.
+For a review of these routes to chaos, the reeader is referred to \cite{john_routes_1993}.
+Nonetheless, the transition to turbulence is subcritical in shear flow configurations, meaning that the route of chaos scenarios do not necessarily apply through bifurcations from the laminar state.
+% However, this bifurcation cannot happen in the subcritical 
+% In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
 
-In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
-This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
-The lower branch refers to its proximity towards the stable laminar state in phase space.
+A major breakthrough came with the identification of a pair of non-trivial, unstable equilibrium states in plane Couette flow \citep{nagata_three-dimensional_1990}.
+This pair, often referred to the \textit{lower} and \textit{upper} branches emerge from a saddle node bifurcation which is disconnected from the stable laminar state.
+% In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
+% This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
+The \textit{lower} branch lies closer to the laminar state in state, while the \textit{upper} branch resides further away.
+% The lower branch refers to its proximity towards the stable laminar state in phase space.
 A travelling-wave solution in plane Couette flow also later found by the same author \citep{nagata_three-dimensional_1997}.
-A family of equilibrium and travelling waves solutions was found for plane Couette and plane Poiseuille flows under various boundary conditions (i.e. stress-free, slip and no-slip) where identified by \citep{waleffe_exact_2001,waleffe_homotopy_2003}.
+A family of equilibrium and travelling-wave solutions was found later for plane Couette and plane Poiseuille flows under different boundary conditions (i.e. stress-free, slip and no-slip) where identified by \citep{waleffe_exact_2001,waleffe_homotopy_2003}, referred to as \textit{exact coherent states}.
+Additional equilibria and travelling-wave solutions were identified by \cite{gibson_visualizing_2008,gibson_equilibrium_2009}, along with their heteroclinic connections between them \citep{halcrow_heteroclinic_2009}.
+In the context of pipe flow, multiple travelling-wave solutions have also been reported 
+\citep{faisst_traveling_2003,wedin_exact_2004,kerswell_recurrence_2007,wang_lower_2007,duguet_transition_2008,pringle_highly_2009}.
+These non-trivial nonlinear solutions, referred to as \textit{invariant states}, shows good agreement with the statistical quantities (e.g. mean and fluctuations) with the turbulent dynamics.
 
 While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
 Periodic orbits defined by time-dependent solutions that have been identified in plane Couette flow \citep{kawahara_periodic_2001}, describing a single regeneration cycle similar to the self-sustaining process.
