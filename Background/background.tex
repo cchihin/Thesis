@@ -380,7 +380,7 @@ Nonetheless, the transition to turbulence is subcritical in shear flow configura
 % However, this bifurcation cannot happen in the subcritical 
 % In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
 
-A major breakthrough came with the identification of a pair of non-trivial, unstable equilibrium states in plane Couette flow \citep{nagata_three-dimensional_1990}.
+A major development came with the identification of a pair of non-trivial, unstable equilibrium states in plane Couette flow \citep{nagata_three-dimensional_1990}.
 This pair, often referred to the \textit{lower} and \textit{upper} branches emerge from a saddle node bifurcation which is disconnected from the stable laminar state.
 % In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
 % This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
@@ -391,11 +391,32 @@ A family of equilibrium and travelling-wave solutions was found later for plane 
 Additional equilibria and travelling-wave solutions were identified by \cite{gibson_visualizing_2008,gibson_equilibrium_2009}, along with their heteroclinic connections between them \citep{halcrow_heteroclinic_2009}.
 In the context of pipe flow, multiple travelling-wave solutions have also been reported 
 \citep{faisst_traveling_2003,wedin_exact_2004,kerswell_recurrence_2007,wang_lower_2007,duguet_transition_2008,pringle_highly_2009}.
-These non-trivial nonlinear solutions, referred to as \textit{invariant states}, shows good agreement with the statistical quantities (e.g. mean and fluctuations) with the turbulent dynamics.
-
+These non-trivial nonlinear solutions, referred to as \textit{invariant states}, shows good agreement with the statistical quantities (e.g. mean and fluctuations) with direct numerical simulations.
+However, since they are equilibria, and travelling-waves (relative equilibria), they do no capture the temporal dynamics of turbulence such as the \textit{self-sustaining process} (SSP) \cite{hamilton_regeneration_1995}.
+\citep{kawahara_periodic_2001}.
 While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
-Periodic orbits defined by time-dependent solutions that have been identified in plane Couette flow \citep{kawahara_periodic_2001}, describing a single regeneration cycle similar to the self-sustaining process.
-The chaotic trajectories of turbulence have been found to be embedded within invariant solutions and their connections between them known as heteroclinic orbits, offering a robust view of the building-blocks of of turbulence \citep{gibson_visualizing_2008, gibson_equilibrium_2009, viswanath_recurrent_2007, halcrow_heteroclinic_2009, graham_exact_2021}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/BuildingBlocks.pdf}
+    \caption{Building blocks description of turbulence.}
+    \label{fig:BuildingBlocks}
+\end{figure}
+
+Another major development was on the idenfitification of time-dependent invariant solutions in the form of periodic orbits. 
+\cite{kawahara_periodic_2001} computed a pair of periodic orbits in plane Couette, with one exhibiting a single regeneration cycle similar to the SSP while the other exhibits mild modulation of streaks.
+These periodic orbits are connected via heteroclinic trajectories.
+
+In plane Poiseuille flow, \cite{toh_periodic-like_2003} also identified periodic orbits displaying bursting behaviour.
+Using a Newton–Krylov iteration with hook-step modification, \cite{viswanath_recurrent_2007} successfully computed multiple relative periodic orbits.
+These studies conceptualise chaotic turbulent trajectories as being embedded within a set of unstable periodic orbits, evolving along their unstable manifolds \citep{viswanath_recurrent_2007,gibson_visualizing_2008,gibson_equilibrium_2009,halcrow_heteroclinic_2009,graham_exact_2021}.
+An example is shown in figure \ref{fig:BuildingBlocks}, where the periodic orbits reside within the same state space as the chaotic trajectories depicted in figure \ref{fig:BuildingBlocks}.
+Thus, chaotic trajectories appear to be embedded within a network of unstable periodic (and relative periodic) orbits and their heteroclinic connections.
+These invariant solutions offer an alternative view of the building blocks of turbulence.
+However, they do not provide insight into the transition process, since these solutions already reside in the turbulent regime.
+Given the subcritical nature of turbulence, the laminar and turbulent states form a bistable system in phase space.
+
+% The chaotic trajectories of turbulence have been found to be embedded within invariant solutions and their connections between them known as heteroclinic orbits, offering a robust view of the building-blocks of of turbulence \citep{gibson_visualizing_2008, gibson_equilibrium_2009, viswanath_recurrent_2007, halcrow_heteroclinic_2009, graham_exact_2021}
 
 In the context of this transitional flows, the lower branch solution can be though of separating the turbulent attractor from the laminar state.
 Its an attractor that resides on the edge of turbulence, defined as an edge state.
