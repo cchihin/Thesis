@@ -1,4 +1,4 @@
-\chapter{Numerical Techniques}\label{chap:3}
+\chapter{Numerical Methods}\label{chap:2}
 We will discuss the fundamentals of numerical methods relevant to solving the Navier-Stokes equations.
 We begin the discussion of the weighted of residuals (\S \ref{sec:methodofweightedresiduals}) and the spatial discretisation using spectral/\emph{hp} element methods in one dimension (\S \ref{sec:spectralhpelementmethods}).
 This is followed by techniques for solving the Navier-Stokes equations (\S \ref{sec:numeraltechniquesforNS}), introducing the velocity-correction scheme, enforcing a constant flow rate and the quasi-3D approach for semi-homogeneous domains. 
@@ -429,7 +429,7 @@ Within the Nektar++ framework, we utilise the \emph{modified} basis, constructed
     \phi_p(\xi) \rightarrow \psi_p(\xi) = \left\{
             \begin{array}{ll}
                 \frac{1-\xi}{2} & \mbox{for } p=0\\
-                \left(\frac{1-\xi}{2}\right)\left(\frac{1+\xi}{2}\right)P_{p-1}^{1,1}(\xi)\right & \mbox{for }  0 < p < P \\
+                \left(\frac{1-\xi}{2}\right)\left(\frac{1+\xi}{2}\right)P_{p-1}^{1,1}(\xi) & \mbox{for }  0 < p < P \\
                 \frac{1+\xi}{2} & \mbox{for } p=P,
            \end{array}\right.
 \end{equation}
@@ -662,34 +662,34 @@ To include the boundary conditions, we consider the full system of linear of equ
         \mathbf{M}^0+\mathbf{L}^0 &  & \mathbf{0} \\
          & \ddots & \\
         \mathbf{0} &  & \mathbf{M}^{N_{el} - 1} + \mathbf{L}^{N_{el}-1}\\
-\end{bmatrix}}_{\mathbf{M}_l + \mathbf{L}_l}
-\underbrace{
+    \end{bmatrix}}_{\mathbf{M}_l + \mathbf{L}_l}
+    \underbrace{
     \begin{bmatrix}
         \mathbf{\hat{u}}^0 \\
         \vdots  \\
         \mathbf{\hat{u}}^{N_{el}-1}
-\end{bmatrix}}_{\mathbf{\hat{u}}_l}
+    \end{bmatrix}}_{\mathbf{\hat{u}}_l}
      = 
-    \begin{underbrace}{
+    \underbrace{
     \begin{bmatrix}
         \mathbf{\hat{f}}^0 \\
         \vdots  \\
         \mathbf{\hat{f}}^{N_{el}-1}
-\end{bmatrix}}_{\mathbf{\hat{f}}_l}
+    \end{bmatrix}}_{\mathbf{\hat{f}}_l}
     + 
     \underbrace{
     \begin{bmatrix}
         \mathbf{L}^0g_D \\
         \vdots  \\
         \mathbf{0}
-\end{bmatrix}}_{\mathbf{g}_D}
+    \end{bmatrix}}_{\mathbf{g}_D}
     +
     \underbrace{
     \begin{bmatrix}
         \mathbf{0} \\
         \vdots  \\
         g_N
-\end{bmatrix}}_{\mathbf{g}_N},
+    \end{bmatrix}}_{\mathbf{g}_N},
 \end{equation}
 where $\mathbf{M}_l \in \mathbb{R}^{N_{el}(P+1) \times N_{el}(P+1)}, \mathbf{L}_l\in \mathbb{R}^{N_{el}(P+1) \times N_{el}(P+1)}, \mathbf{\hat{u}}_l\in \mathbb{R}^{N_{el}(P+1)}$ refers to the local mass matrix, local laplacian matrix and the vector of local expansion coefficients.
 On the right hand side, $\mathbf{\hat{f}}_l \in \mathbb{R}^{N_{el}(P+1)}, \mathbf{g}_D^{N_{el}(P+1)}, \mathbf{g}_N^{N_{el}(P+1)}$ refers local forcing vector, Dirichlet and Neumann boundary conditionsin vector form.

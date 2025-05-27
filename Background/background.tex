@@ -2,73 +2,83 @@
 % Theoretical Background
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Introduction}\label{chap:2}
+\chapter{Introduction}\label{chap:1}
 
 \section{Overview}
 Fluid motions driven by buoyancy and frictional forces belongs to broad class of flows known as thermoconvective shear flows.
 These flows exhibit rich behaviour, and are of interest in both engineering and meteorology applications spanning across a broad range of length scales.
-At small scales, around $L \sim 1 cm$, the thermoconvection flows are relevant to the cooling of microprocessing chips.
-In such systems, the fluid acts medium to dissipate heat, experiences shear forces from the confining walls, and buoyancy from heating.
-One of the major innovation in this industry is in squeezing more transistors onto a single chip, resulting to a doubling of transistors on a single chip roughly every two years, according to Moore's law.
+
+\input{Background/Figures/Applications/applications.tex}
+
+At small scales, around $L \sim 10^{-2} m$, thermoconvective flows are relevant to the cooling of microprocessing chips.
+The fluid in such systems acting to dissipating heat, typically experiences shear and buoyancy forces from the confining walls, and heating.
+One of the major challenge in this industry is on increasing the density of transistors on a single chip, alluding to Moore's Law, which predicts the doubling of transistors on a single chip approximately every two years.
 % According to Moore's, the amount of transistors on a single chip will double every two years.
-However, one of the major limitations on further miniaturisation is the challenge of dissipating the excessive heat generated.
-Fluids, such as air, water or refrigerant, are often used to transport heat away from the components, thereby preventing overheating \citep{kennedy_combined_1983, ray_analysis_1992}.
+However, one of the major limitations is the challenge of dissipating the excessive heat generated from the densely packed transistors.
+Fluids, such as air, water or refrigerants, are often used to transport heat away from the components, and their fluid mechanical behaviour remains an open topic \citep{kennedy_combined_1983, ray_analysis_1992}.
+
 At intermediate length scales, $L \sim 1m$, the interaction between buoyancy and frictional forces is important in the fabrication of uniform thin films in chemical vapour deposition (CVD) \citep{evans_unsteady_1991,jensen_flow_1991}.
 The CVD process typically involves a reactive gases carried by inert gases which flows through a channel with a heated substrate.
-Upon heating, the reactant gases react chemically at substrate and deposits material, forming thin films, such as silicon layers.
+Upon heating, the reactant gases react chemically on the substrate, depositing material and forming thin films, such as silicon layers.
 A key challenge in the CVD process is achieving a uniform deposition and maintaining sharp interfaces between layers.
 The interactions between shear and buoyancy forces often gives rise to boundary layers and thermoconvective rolls, which can disrupt uniform deposition, affecting fillm quality.
-\input{Background/Figures/Applications/applications.tex}
-At large scales, $L \sim 1km$, the thermoconvective shear flows can be observed in the atmosphere such as the cloud streets over the Norwegian Sea. 
-These parallel bands of cumulus clouds can stretch over hundreds of kilometres.
-They form when relatively warm sea surfaces heat up the colder air blowing from the North \citep{norwegian_sea}.
-As the colder air is heated, it rises upwards whilst carrying water vapour.
-As it reaches a certain altitudes, $L \sim 1 - 10km$, the water vapour condenses into visible clouds, while the cooler air falls towards the sea.
-This ciruclation is organised into parallel rotating parallel columns of air, forming distinct cloud streets.
 
-The common thread among the examples discussed above is the interaction between shear and bouyancy forces driven fluid motion - the central focus of this thesis.
-By restricting our analysis to these two mechanisms, we neglect other physical mechanisms such as phase change, chemical reactions and evaporation, which may be significant in the context of cooling microproccessors, chemical vapour deposition, and atmopsheric boundary layers respectively \citep{vallis_simple_2019}.
-To consider this interaction, we consider an idealised setup without geometric complexity, known to as the Rayleigh-B\'{e}nard-Poiseuille (RBP) flow.
-This system describes the fluid motion confined between two infinitely extended parallel plates, heated from below and cooled from the top, with an additional pressure gradient driving the flow.
-The RBP configuration combines two paradigmatic flow configurations; the classical Rayleigh-B\'{e}nard convection (RBC), driven purely by buoyancy, and plane Poiseuille flow (PPF), driven purely by shear.
-While the onset of convection in RBC, and the transition to subscritical shear-driven turbulence in PPF have been both extensively studied, the transitional regime in which both forces interact remains less understood.
-Gaining insights into this regime can have implications for various applications across a range of scales mentioned previously. 
+At larger length scales, $L \sim 10^3m$, the thermoconvective shear flows can be observed in atmospheric flows such as the cloud streets over the Norwegian Sea. 
+These parallel bands of cumulus clouds can stretch over hundreds of kilometres.
+They form when the relatively warmer sea surfaces heat up the colder air arriving from the North pole.
+As the colder air is heated, it rises upwards whilst carrying water vapour, condensing into visible clouds.
+% As it reaches a certain altitudes, $L \sim 1 - 10km$, the water vapour condenses into visible clouds, while the cooler air falls towards the sea.
+This ciruclation is subsequently organised into parallel rotating parallel columns of air, forming distinct cloud streets.
+
+The central focus of this thesis is on the investigation of fluid behaviour arising from the interaction between shear and buoyancy forces, a common thread among the examples discussed above.
+% common thread among the examples discussed above is the interaction between shear and bouyancy forces driven fluid motion - the central focus of this thesis.
+We note that by isolating our analysis to the interaction between shear and buoyancy forces, we might neglect other physical mechanisms such as phase change, chemical reactions and evaporation, which may be significant in the context of cooling microproccessors, chemical vapour deposition, and atmopsheric boundary layers respectively \citep{vallis_simple_2019}.
+Nonetheless, the interaction between shear and buoyancy forces remains an open topic and will be the primary focus of this thesis, providing a foundation for future investigations that may include addition mechanisms.
 
 \input{Background/Figures/RBPFlowConfiguration.tex}
+To consider this interaction, we consider an idealised setup, known as the Rayleigh-B\'{e}nard-Poiseuille (RBP) flow.
+This RBP system describes the fluid motion confined between two infinitely extended parallel plates, heated from below and cooled from the top, with an additional pressure gradient driving the flow.
+The RBP configuration combines the two paradigmatic flow configurations; the classical Rayleigh-B\'{e}nard convection (RBC), driven purely by buoyancy, and plane Poiseuille flow (PPF), driven purely by shear.
+While the onset of convection in RBC, and the transition to subscritical shear-driven turbulence in PPF have been both extensively studied, the transitional regime in which both forces interact remains less understood.
+Understanding their transitional behaviour and their transport properties could have implications for the applications mentioned above.
 
-The RBP configuration is illustrated in figure \ref{fig:rbpconfiguration}, where $z^*, y^*, x^*, L_z, L_x, d, h$ refer to the streamwise, spanwise, wall-normal coordinates, length, span, depth and half-height of the domain respectively.
-We note that the asterisks$^*$, refer to variables in dimensional form.
-The flow is driven by a pressure gradient along the streamwise $z^*$ direction, $\Delta P^* = P^*|_{z^*=0} - P^*|_{z^*=L_z} < 0$, leading to the formation of a laminar Poiseuille flow, $w^*(y^*)$, for a sufficiently small $\Delta P$. 
-In this study, we will only consider fully-developed flow, where the boundary layer from the top and the bottom wall meets at the midplane, $y^*=0$, and entrance effects are neglected.
-The RBP configuration is also unstably stratified, such that the temperature difference between the lower, $T_L$, and upper wall, $T_U$, is always positive, $\Delta T = T_L - T_U > 0$, leading to a stable linear conduction profile along the wall-normal direction, $T(y^*)$, if $\Delta T$ is kept sufficiently small.
+The RBP configuration is illustrated in figure \ref{fig:rbpconfiguration}, where $z, y, x$ refer to the stream-, spanwise and wall normal coordinates and $L_z, L_x, d, h$ the length, span, depth and half-height of the domain respectively.
+We note that the domain is biperiodic along $z$ and $x$.
+% We note that the asterisks$^*$, refer to variables in dimensional form.
+The flow is driven by a pressure gradient along the streamwise $z$ direction, $\Delta P = P|_{z=0} - P|_{z=L_z} < 0$, leading to a laminar Poiseuille flow, $w(y) = 1 - y^2$, if $\Delta P$ is kept small such that flow remains laminar.
+We will consider a fully developed flow, where the boundary layer from the top and the bottom wall meets at the midplane $y=0$ and entrance effects are therefore neglected.
+Like the RBC system, the RBP system is unstably stratified.
+The temperature difference between the lower, $T_L$, and upper wall, $T_U$, is always positive, $\Delta T = T_L - T_U > 0$, leading to a stable linear conduction layer along the wall-normal direction, $T(y)$, if $\Delta T$ is kept sufficiently small.
 
 In the absence of a pressure gradient, the RBP configuration reduces to the classical Rayleigh-B\'{e}nard convection problem, bringing about buoyany-driven convection for a sufficiently large unstable stratification.
 In the limiting case without unstable stratification, $\Delta T = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
+We focus on the transitional regime, by investigating if buoyancy forces promote the transition to shear-driven turbulence and the effect of shear on convection in large domains.
+% For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
+% To describe the motion of the fluid in RBP configurations, we consider the non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
+% \begin{subequations}\label{eq:rbp_equations}
+% \begin{equation}
+%     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{Re^2Pr} \theta,
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla)\theta = \frac{1}{RePr}\nabla^2 \theta,
+% \end{equation}
+% \begin{equation}
+%     \nabla \cdot \mathbf{u} = 0.
+% \end{equation}
+% \end{subequations}
+% where $\mathbf{u}(\mathbf{x}), \theta(\mathbf{x}), p(\mathbf{x})$ refers to the nondimensionalised velocity, temperature and presure respectively.
+% The key control parameters for RBP flows are the Rayleigh number, $Ra$, Reynolds number, $Re$, Prandlt number $Pr$, which are defined as follows,
+% \begin{equation}
+%     Ra = \eta g d^3 \Delta T / \nu \kappa, \quad Re = W_c h / \nu, \quad Pr = \kappa / \nu, \quad \Gamma = L/2d,
+% \end{equation}
+% where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
 
-For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
-To describe the motion of the fluid in RBP configurations, we consider the non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
-\begin{subequations}\label{eq:rbp_equations}
-\begin{equation}
-    \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{Re^2Pr} \theta,
-\end{equation}
-\begin{equation}
-    \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla)\theta = \frac{1}{RePr}\nabla^2 \theta,
-\end{equation}
-\begin{equation}
-    \nabla \cdot \mathbf{u} = 0.
-\end{equation}
-\end{subequations}
-where $\mathbf{u}(\mathbf{x}), \theta(\mathbf{x}), p(\mathbf{x})$ refers to the nondimensionalised velocity, temperature and presure respectively.
-The key control parameters for RBP flows are the Rayleigh number, $Ra$, Reynolds number, $Re$, Prandlt number $Pr$, which are defined as follows,
-\begin{equation}
-    Ra = \eta g d^3 \Delta T / \nu \kappa, \quad Re = W_c h / \nu, \quad Pr = \kappa / \nu, \quad \Gamma = L/2d,
-\end{equation}
-where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
-
-We describe important historical of hydrodynamic stability of planar shear flows and their theorectical frameworks in \S \ref{sec:bkgrd_transitional}.
-Theorectical frameworks used in the study of stability of flow such as linear stability, nonlinear dynamical systems and spatiotemporal character of transitional shear flows will be outlined.
-This followed the historical developments of Rayleigh-B\'{e}nard convection (RBC), where concepts of the stability of fluid flows will be ultilised in \S \ref{sec:bkgrd_RBC}.
-After which, we describe the historical developments of RBP flows \S \ref{sec:bkgrd_RBP}, and the outline of the thesis will be provided in \S \ref{sec:thesis_outline}.
+We describe the structure of the introductory chapter as follows.
+We begin our discussion on the development of hydrodynamic stability theory of wall-bounded shear flows in \S \ref{sec:bkgrd_transitional}.
+Theoretical frameworks used in the study of stability of flow such as linear modal/non-modal stability, nonlinear dynamical systems and the spatiotemporal character of transitional shear flows will be discussed.
+Throughout this discussion, we also highlight examples of PPF which is relevant to the RBP system.
+This followed by the developments of Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}, where theoretical concepts from \S \ref{sec:bkgrd_transitional} will be ultilised.
+After which, we describe the developments of RBP flows \S \ref{sec:bkgrd_RBP}, before concluding this chapter with an outline of the thesis in \S \ref{sec:bkgrd_thesis_outline}.
 
 
 % We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
@@ -220,7 +230,7 @@ In plane Poiseuillw flow, the critical Reynolds number is $Re_{c} = 5772.2$ with
 However, experiments reveal that transition to turbulence can occur at must lower Reynolds number, around, $Re \sim 1000 - 2000$ \citep{davies_experimental_1928, patel_observations_1969,dean_reynolds_1978,iida_relaminarization_1998,tsukahara_dns_2014}, highlighting a key limitation of modal analysis.
 Similar discrepancies are observed in plane Couette and pipe flows \citep{meseguer_linearized_2003}, where the laminar state is linearly stable for all $Re$, yet transition to turbulence occurs.
 Despite these limitations, modal analysis predicts instabilities in other flows such as Rayleigh-B\'{e}nard convection and Taylor-Couette flow \citep{chandrasekhar_stability_1968}.
-Further developments, including spatial instability analysis \citep{huerre_local_1990}, and secondary instability \citep{orszag_secondary_1983} are beyond the scope of this thesis.
+Further extensions of modal stability, including spatial instability analysis \citep{huerre_local_1990}, and secondary instability \citep{orszag_secondary_1983} are well established and are beyond the scope of this thesis.
 % Likewise, the onset of turbulence appear near $Re_{x,c} \approx 5 \times 10^5$ for flat plat boundary layer.
 % The aim of linear stability analysis it to search for eigenvalues across $\alpha, \beta, Re$, such that $w_i \geq 0$, denoting an exponential growth of perturbations above a critical Reynolds number defined as $Re_c= \min(\alpha, \beta, Re)|_{\omega = 0}$.
 % Interestingly, linear stability analysis for pipe flow predicts a stable laminar flow for all Reynolds numbers \citep{romanov_stability_1973}, contradicting experiments \citep{reynolds_xxix_1883,avila_onset_2011}.
@@ -243,16 +253,16 @@ However, the interaction between decaying eigenmodes can lead to a transient gro
     \caption{(a) The phase portrait of the toy model with $Re = 15$, where red lines are phase lines of the toy model. The blue trajectory lead to transient growth and the green trajectory do not (b) Time history of blue and green trajectory.}
     \label{fig:toy_model}
 \end{figure}
-To demonstrate an example of transient growth, we consider a two-dimensional toy model governing the time-evolution of $\mathbf{q}$,
+To demonstrate an example of transient growth, we consider a two-dimensional toy model governing the time-evolution of $\mathbf{q} = (v, \eta)^T$,
 \begin{equation}
     \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix} v \\ \eta \end{pmatrix}  = \begin{pmatrix} -\frac{1}{Re} & -1 \\ 0 & -\frac{2}{Re} \end{pmatrix} \begin{pmatrix} v \\ \eta \end{pmatrix},
 \end{equation}
 where $Re$ refers to the Reynolds number.
-The toy model is has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, indicating asymptotic decay.
+The toy model has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, indicating asymptotic decay.
 % and unit eigenvectors $\mathbf{x_1} = (1, 0)$, $\mathbf{x_2} = \frac{1}{\sqrt{Re^2 + 1}}(Re, 1)$.
 % Judging from the negative eigenvalues, we conclude that $\mathbf{q}(t)$ will decay exponentially.
 % As $Re \rightarrow \infty$, the eigenvectors,  becoming increasingly aligned (non-orthogonal) leading to significant transient growth.
-At $Re = 15$, the eigenvectors, $\mathbf{x_1} = (1,0)$, $\mathbf{x}_2 = (1,\frac{1}{\sqrt{Re^2 + 1}})$, are highly non-orthogonal, becoming almost linear dependent as shown in figure \ref{fig:toy_model}(a).
+At $Re = 15$, the eigenvectors, $\mathbf{x_1} = (1,0)$, $\mathbf{x}_2 = (1,\frac{1}{\sqrt{Re^2 + 1}})$, are highly non-orthogonal, becoming almost parallel shown in figure \ref{fig:toy_model}(a).
 Notably, we become increasingly linearly dependent as $Re \rightarrow \infty$.
 For a particular initial condition, the energy $||q||^2 = \sqrt{v^2 + \eta^2}$, is amplified four times before decaying in blue trajectory, shown in Figure \ref{fig:toy_model}(b).
 Yet for another choice of initial condition, the trajectory decays asymptotically as the green trajectory indicates.
@@ -288,15 +298,13 @@ The eigenvalue problem is given as,
 \end{equation}
 where $\mathbf{\tilde{q}}_0$ refers to the eigenvector denoting the optimal initial condition.
 For a detailed derivation of the optimal initial conditions or forcing, the reader is referred to \citep{butler_three-dimensional_1992,schmid_nonmodal_2007}.
-An alternative method of computing transient growth is computing the pseudospectral of linear operators discussed in \citep{trefethen_pseudospectra_1997}, outside the scope of this thesis.
+An alternative method of computing the optimal transient growth is by analysing the pseudospectral of linear operators discussed in \citep{trefethen_pseudospectra_1997}, but is outside the scope of this thesis.
 
 Both two-, and three-dimensional non-modal anlyses reveal mechanisms for transient growth.
-In two-dimensions, the optimal initial conditions are in the form of near wall vorticies tilted upstream, which amplifies via the Orr-mechanism \citep{orr_stability_1907, farrell_optimal_1988,reddy_pseudospectra_1993}.
-In three-dimensions, streamwise vortices are optimal, leading to the the amplification of streamwise streaks via the lift=up effect \citep{ellingsen_stability_1975,reddy_energy_1993}.
-The spacing of these streaks at higher Reynolds number has been consistently reported to occur around 100 wall units \citep{del_alamo_linear_2006,pujals_note_2009,hwang_linear_2010}, which supports experimental observations of streak spacing in turbulent boundary layers \citep{kline_structure_1967, smith_characteristics_1983}.
-The main results from non-modal analysis is that three dimensional perturbations can lead to strong transient growth at subcritical Reynolds numbers while modal analysis predicts the onset of two-dimensional instabilities via Tollmien Schlicting waves.
-
-Both modal and non-modal mechanisms highlight important developments, providing perspectives on linear mechanisms responsible for the transition from laminar to turbulence.
+In two-dimensions, the optimal initial conditions are in the form of near wall vorticies tilted upstream, which amplifies transiently via the Orr-mechanism \citep{orr_stability_1907, farrell_optimal_1988,reddy_pseudospectra_1993}.
+In three-dimensions, streamwise vortices are optimal, leading to the the amplification of streamwise streaks via the lift-up effect \citep{ellingsen_stability_1975,reddy_energy_1993}.
+Notably, the spacing of these streaks analysed using non-modal analysis at higher Reynolds number has been consistently reported to occur around 100 wall units \citep{del_alamo_linear_2006,pujals_note_2009,hwang_linear_2010}, which supports experimental observations of streak spacing in turbulent boundary layers \citep{kline_structure_1967, smith_characteristics_1983}.
+The main results from non-modal analysis is that three dimensional perturbations can lead to strong transient growth at subcritical Reynolds numbers, contradicting the two dimensional TS waves from modal analysis. Both modal and non-modal mechanisms highlight important insights into the linear mechanisms which might be responsible for the transition from laminar to turbulent flows.
 % Contrary to linear stability analysis which confers two-dimensional perturbations as linearly unstable, the key result in this analysis is that three-dimensional initial conditions, $\alpha = 0$, confer the optimal initial conditions leading to large transient growth at subcritical Reynolds numbers.
 % Figure.. shows this.
 % The width of the streaks happen to be robustly occur around 100 wall units, the characteristics spacing identified in many experiments [Kline, Panton, Bandybopobi]
@@ -372,6 +380,7 @@ Both modal and non-modal mechanisms highlight important developments, providing 
 
 In the previous section, we have examined the laminar to turbulent transition using linear frameworks.
 However, the the transition process is ultimately described by the nonlinear Navier-Stokes equations, which motivates the development and adoption of mathematical frameworks beyond linear methbods. 
+
 In the context of shear flow turbulence, there has been a growing interesting in adopting techniques from nonlinear dynamical systems, interpreting turbulence as a chaotic trajectories which evolves within a finite-dimensional phase space.
 This phase space refers to a set of solutions satisfying the Navier-Stokes equations, conjectured to be infinite dimensional by \cite{hopf_mathematical_1948}.
 % The transition to turbulence in shear flows, 
@@ -384,23 +393,31 @@ This phase space refers to a set of solutions satisfying the Navier-Stokes equat
 % The properties of this finite dimenaional manifold depended on viscosity.
 For large viscosities (i.e. low $Re$), this finite dimensional space corresponds to a single point, the laminar state.
 This point may become unstable at a certain critical Reynolds number, bifurcating to form new manifolds, as viscosity is decreased (i.e. $Re$ is increased) further, potentially leading to chaos.
-The set of such manifolds is referred to \textit{inertial manifolds}, and its existence is established under certain properties \citep{foias_inertial_1988}.
+The set of such manifolds is referred to \textit{inertial manifolds}, and its existence under certain properties has been established \citep{foias_inertial_1988}.
 % The set of such manifolds may be viewed as the finite-dimensional state space in which the chaotic trajectories of turbulence evolves.
 % This existence of the known as the \textit{inertial manifold} \citep{foias_inertial_1988}.
 % One of the earliest example of an inertial manifold is obtained by considering a three mode Galerkin truncation of Navier-Stokes equations for Rayleigh-B\'{e}nard convection.
-A implication of this is the transition to turbulence could be viewed as successive bifurcations govern by a single control parameter (i.e. the Reynolds numnber), described by the so called \textit{routes to chaos} scenarios.
+A implication of this is that the transition to turbulence could be viewed as successive bifurcations from the laminar state, govern by a single control parameter (i.e. the Reynolds numnber), generalised by the so called \textit{routes to chaos} scenarios.
 % An plication of transition via successive bifurcation leading to chaos govern by a single control parameter (the Reynolds number) lead to the so called \textit{routes to chaos} scenarios.
+
 \cite{landau_problem_1944} proposed that the transition to turbulence may occur through a sequence of Hopf bifurcations, each introducing a new incommensurate frequency, resulting in quasi-periodic motions on a high-dimensional torus.
 However, this model did not capture the essential ingredients of turbulence, such as sensitivity of initial conditions and mixing \citep{john_routes_1993}.
 \cite{ruelle_nature_1971} later show that a \textit{strange attractor} exhibit key features of chaos can emerge after three successive Hopf bifurcations from a stationary state, referred to as the \textit{Ruelle-Takens} route to chaos.
-This scenario has been have been observed in Taylor-Couette flow \citep{gollub_onset_1975}, and Rayleigh-B\'{e}nard convection \cite{swinney_transition_1978}.
-Other routes to chaos such as periodic-doubling \citep{feigenbaum_universal_1979}, and intermittency \cite{manneville_intermittency_1979} scenarios have been proposed.
+This scenario has been have been observed in Taylor-Couette flow \citep{gollub_onset_1975}, and Rayleigh-B\'{e}nard convection \citep{swinney_transition_1978}.
+Other routes to chaos scenarios, such as periodic-doubling \citep{feigenbaum_universal_1979}, and intermittency \cite{manneville_intermittency_1979} scenarios have been proposed.
 For a review of these routes to chaos scenarios, the reader is referred to \cite{john_routes_1993}.
 Nonetheless, the transition to turbulence is subcritical in shear flow configurations, meaning that the route of chaos scenarios do not necessarily apply through bifurcations from the laminar state.
 % However, this bifurcation cannot happen in the subcritical 
 % In this view, turbulence is interpreted as a solution trajectory evolving through a phase space composed of a network such non-trivial nonlinear solutions, commonly referred to as exact coherent states (ECS) or invariant solutions \citep{graham_exact_2021}.
 
-In the adoption of nonlinear dynamical systems of wall-bounded shear flows, a major development came with the identification of a pair of non-trivial, unstable equilibrium states in plane Couette flow \citep{nagata_three-dimensional_1990}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Background/Figures/BuildingBlocks.pdf}
+    \caption{(a) Chaotic trajectories of turbulence of plane Couette flow at $Re = 400$, approaching the an unstable periodic orbit (red) highligted as yellow, adopted from \cite{kawahara_periodic_2001}. (b) State space organisation of turbulence trajectores (black dots) confined around equilibria (circles, dots and squares) and their unstable manifolds (solid lines), heteroclinic connections between them are shown in red. The coordinate system is centered on the laminar state, using a linear combination of the upper branch invariant state. (c) State space projection of five periodic orbits (coloured solid lines), embedded within the same space where turbulence evolves in (b), adopted from \citep{cvitanovic_geometry_2010}.}
+    \label{fig:BuildingBlocks}
+\end{figure}
+
+A major development came with the identification of a pair of non-trivial, unstable equilibrium states in plane Couette flow \citep{nagata_three-dimensional_1990}.
 This pair referred to as the \textit{lower} and \textit{upper} branches, emerging from a saddle node bifurcation which is disconnected from the stable laminar state.
 % In the context of parallel shear flows, Nagata was the first to discover a pair of unstable equilibirum solutions in plane Couette flow by smoothly following (homotopy) from a Taylor-Couette configuration \citep{nagata_three-dimensional_1990}.
 % This pair consist of an unstable upper branch and lower branch emerging as a saddle-node bifurcation near $Re \approx 500$, and is disconnected from the stable laminar solution.
@@ -415,12 +432,6 @@ The set of equilibria, and travelling waves, shows good agreement with the stati
 However, since they are equilibria, and travelling-waves (relative equilibria), they do no capture the temporal dynamics of turbulence such as the \textit{self-sustaining process} (SSP) \citep{hamilton_regeneration_1995}.
 While these unstable solutions demonstrate good agreements with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{Background/Figures/BuildingBlocks.pdf}
-    \caption{(a) Chaotic trajectories of turbulence of plane Couette flow at $Re = 400$, approaching the an unstable periodic orbit (red) highligted as yellow, adopted from \cite{kawahara_periodic_2001}. (b) State space organisation of turbulence trajectores (black dots) confined around equilibria (circles, dots and squares) and their unstable manifolds (solid lines), heteroclinic connections between them are shown in red. The coordinate system is centered on the laminar state, using a linear combination of the upper branch invariant state. (c) State space projection of five periodic orbits (coloured solid lines), embedded within the same space where turbulence evolves in (b), adopted from \citep{cvitanovic_geometry_2010}.}
-    \label{fig:BuildingBlocks}
-\end{figure}
 
 The next breakthrough was on the idenfitification of time-dependent invariant solutions in the form of periodic orbits. 
 \cite{kawahara_periodic_2001} computed a pair of periodic orbits in plane Couette, with one exhibiting a single regeneration cycle similar to the SSP while the other exhibits mild modulation of streaks.
@@ -429,24 +440,24 @@ In plane Poiseuille flow, \cite{toh_periodic-like_2003} also identified periodic
 Using a Newton–Krylov iteration with a hook-step modification, \cite{viswanath_recurrent_2007} computed multiply relative periodic orbits.
 These studies conceptualise that the chaotic trajectories of turbulence as being embedded within a set of unstable periodic orbits, evolving along their unstable manifolds \citep{viswanath_recurrent_2007,gibson_visualizing_2008,gibson_equilibrium_2009,halcrow_heteroclinic_2009,graham_exact_2021}.
 An example is shown in figure \ref{fig:BuildingBlocks}, where the chaotic trajectories in figure \ref{fig:BuildingBlocks}(b), reside within the same state space as the periodic orbits, enclosed by equilibria and their heteroclinic connections shown in figure \ref{fig:BuildingBlocks}(c),
-The set of equilibria, travelling waves and their relative counterparts, are referred to as \textit{invariant solutions} offering an alternative view of the building blocks of turbulence.
-However, they do not provide insight into the transition process, since these solutions already reside in the turbulent regime.
+The set of equilibria, travelling waves and their relative counterparts, are referred to as \textit{invariant solutions} offering a building block description of turbulence.
+However, they do not provide insight into the transition process, since these solutions already reside in the turbulent attractor.
 
-The transition to turbulence in canonical shear flow configurations are typically subcritical, emerging from the invariant solutions described above, with an underlying stable laminar state.
-A consequence of this is that the laminar and turbulent states form a bistable attractors in phase space.
-The laminar and turbulent states coexist as stable attractors, with a boundary—known as the \textit{edge}, separating their respective basins of attraction.
-Attractors that sit along this edge have been identified and found to possess a saddle-like structure, attracting trajectories within the edge and repelling them toward either the laminar or turbulent state, known as \textit{edge} states.
-The algorithm to identify such states, known as edge tracking, was first employed in pipe flow experiments \cite{schneider_turbulence_2007}, where the it chaotic.
-Time-averaging of this chaotic attractor revealed a close resemblance to the unstable lower branch travelling-wave solutions, suggesting that the edge separating basin of attraction between the laminar and turbulent states consist of the lower branch solutions and their symmetries \citep{duguet_transition_2008,pringle_highly_2009}.
-As Reynolds number increases, the edge and the turbulent attractor move apart \citep{schneider_edge_2009}.
-In the context of pipe flows, it was recognised that the edge consists of a set of unstable travelling-wave solutions connected to the lower branch. 
-A graphical representation of the edge, and edge states, separating the laminar the turbulent states is shown in figure \ref{fig:EdgeStates}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Background/Figures/EdgeStates.pdf}
     \caption{A graphical representation of the edge (grey surface) separating the basin of boundary of the laminar and turbulent attractor, consisting of attractors, known as edge states, adapted from \cite{graham_exact_2021}.}
     \label{fig:EdgeStates}
 \end{figure}
+The transition to turbulence in canonical shear flow configurations are typically subcritical, emerging from the invariant solutions described above, accompanied by an underlying stable laminar state.
+A consequence of this is that the laminar and turbulent states form a bistable attractors in phase space.
+The laminar and turbulent states coexist as stable attractors, with a boundary—known as the \textit{edge}, separating their respective basins of attraction.
+Attractors that sit along this edge have been identified and found to possess a saddle-like structure, attracting trajectories within the edge and repelling them toward either the laminar or turbulent state, known as \textit{edge} states.
+The algorithm to identify such states, known as edge tracking, was first employed in pipe flow experiments \cite{schneider_turbulence_2007}, where the it chaotic.
+Time-averaging of this chaotic attractor revealed a close resemblance to the unstable lower branch travelling-wave solutions, suggesting that the edge separating basin of attraction between the laminar and turbulent states consist of the lower branch solutions and their symmetries \citep{duguet_transition_2008,pringle_highly_2009}.
+As Reynolds number increases, the edge and the turbulent attractor moves apart \citep{schneider_edge_2009}.
+In the context of pipe flows, it was recognised that the edge consists of a set of unstable travelling-wave solutions connected to the lower branch. 
+A graphical representation of the edge, and edge states, separating the laminar the turbulent states is shown in figure \ref{fig:EdgeStates}.
 Near the onset of subcritical turbulence, turbulence appear to be transient, decaying towards the laminar solution after a finite lifetime \citep{bottin_discontinuous_1998,faisst_sensitive_2004,hof_finite_2006}
 This may be interpreted as the turbulent attractor colliding with the lower branch solution (i.e. the edge) through a \textit{boundary crisis} \citep{lai_transient_2011}, where the chaotic attractor becomes \textit{leaky}, providing an avenue for the solution trajectory towards relaminarisation \citep{kreilos_periodic_2012,zammert_crisis_2015}.
 % where solutiont trajectories could leak towards the laminar state after spending a considerable amount of time in the turbulent attractor.
@@ -477,7 +488,7 @@ This may be interpreted as the turbulent attractor colliding with the lower bran
 % Spatiotemporal transitional flows
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Spatiotemporal transitonal flows}
+\subsection{Spatiotemporal transitional flows}
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Background/Figures/Re1400.pdf}
@@ -494,12 +505,20 @@ We will focus on the plane Poiseuille flow configuration, where the spatiotempor
 The bright and dark regions highlights coexisting spatially localised turbulent and laminar regions.
 These turbulent-laminar bands occur over a range of Reynolds numbers, and its precise range is likely dependent on the domain's aspect ratio \citep{tsukahara_experimental_2014,tuckerman_turbulent-laminar_2014,paranjape_direct_2023}.
 Near the upper $Re$ threshold of this regime, the domain is fully engulfed by developed turbulent regions, referred to uniform, featureless turbulence appearing at $Re = 1800$ in figure \ref{fig:turbulent-laminar}(a).
-As $Re$ decreases towards $Re = 1050$, spatiatemporal turbulence characterised by turbulent and laminar structures known as turbulent-laminar bands persist in figures \ref{fig:turb_lam_bands}(b-f).
-In particular, these turbulent-laminar have a preferred inclined angle, between $20^\circ \sim 30^\circ$, with streamwise wavelengths of $\sim 60h$, and spanwise wavelengths of $\sim 20h-30h$ \citep{tsukahara_experimental_2014}.
+As $Re$ decreases towards $Re = 1050$, spatiotemporal turbulent and laminar structures known as turbulent-laminar bands persist in between $Re \in [1050, 1600]$ shown in figures \ref{fig:turb_lam_bands}(b-f).
+In particular, these turbulent-laminar appear to have a preferred inclined angle, between $20^\circ \sim 30^\circ$, with streamwise wavelengths of $\sim 60h$, and spanwise wavelengths of $\sim 20h-30h$ \citep{tsukahara_experimental_2014}.
 \cite{kashyap_linear_2022} considered the linear response of the fluctuating turbulent field, and showed that the preferred band angle emerges near $23.2^\circ$.
+% Inspired from previous studies of turbulent-laminar bands in plane Couette flows \citep{barkley_computational_2005, reetz_exact_2019}, the minimal band unit (MBU) was employed for plane Poiseuille flows \citep{tuckerman_turbulent-laminar_2014, paranjape_oblique_2020, paranjape_direct_2023}.
+% In MBUs of plane Poiseuille flows, the turbulent-bands convect at about $\sim1\%$ of the bulk velocity, propagating either upstream or downstream, above or below an critical $Re \sim 1000$, independent of domain sizes for $L_z \geq 100h$ \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
+In the minimal band unit (MBU) studies of plane Poiseuille flows, the turbulent-bands convect at about $\sim1\%$ of the bulk velocity, propagating either upstream or downstream, depending on $Re$ \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
 % To study the preference of angles, zzz performed linear stability analysis of bands and showed that preferred angle at .. degrees.
-Below certain $Re$ threshold, the spatially turbulent regions decay where the flow relaminarises \citep{tuckerman_turbulent-laminar_2014}.
-An example of this decay is shown in $Re = 1000$ near $t = 1600$ in figure \ref{fig:turb_lam_bands}(g). 
+Notably, the spanwise lengths of the bands are much wider than the half-heights and depends on $Re$, appearing at $\lambda_z \sim 20h$ $Re \gtrsim 1400$ and $\lambda_z \sim 40h$ for $Re \lesssim 1100$.
+Interestingly, the bands alternate between both spanwise lengths between the $Re$ range, merging and splitting continuously \citep{tuckerman_turbulent-laminar_2014}, reminiscent of a puff splitting in pipe flows \citep{avila_onset_2011}.
+An example of this could been observed in $Re = 1050$, where the band appears to alternate between different spanwise wavelengths in figure \ref{fig:turb_lam_bands}(f).
+% Below certain $Re$ threshold, the spatially turbulent regions decay where the flow relaminarises \citep{tuckerman_turbulent-laminar_2014}.
+As $Re$ falls below a certain $Re$ threshold, turbulent bands spontaneously decay and relaminarises \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
+An example is shown in figure \ref{fig:turb_lam_bands}(g).
+% An example of this decay is shown in $Re = 1000$ near $t = 1600$ in figure \ref{fig:turb_lam_bands}(g). 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Background/Figures/Ra0-BotSpaceTime.pdf}
@@ -507,19 +526,14 @@ An example of this decay is shown in $Re = 1000$ near $t = 1600$ in figure \ref{
     \label{fig:turb_lam_bands}
 \end{figure}
 
-Inspired from previous studies of turbulent-laminar bands in plane Couette flows \citep{barkley_computational_2005, reetz_exact_2019}, the minimal band unit (MBU) was employed for plane Poiseuille flows \citep{tuckerman_turbulent-laminar_2014, paranjape_oblique_2020, paranjape_direct_2023}.
-In MBUs of plane Poiseuille flows, the turbulent-bands convect at about $\sim1\%$ of the bulk velocity, propagating either upstream or downstream, above or below an critical $Re \sim 1000$, independent of domain sizes for $L_z \geq 100h$ \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{Background/Figures/gome_prob.pdf}
-    \caption{The mean decay times (red), $\tau^d$, and mean splitting times (black), $\tau^s$, as a function of Reynolds number, leading to a crossover point at $Re \approx 965$, adapted from \citep{gome_statistical_2020}.}
+    \caption{The mean decay times (red), $\tau^d$, and mean splitting times (black), $\tau^s$, as a function of Reynolds number, leading to a crossover point at $Re_{cross} \approx 965$, adapted from \citep{gome_statistical_2020}.}
     \label{fig:decay_split_probability}
 \end{figure}
-The spanwise lengths of the bands are much wider than the half-heights, appearing at $\lambda_z \sim 20h$ for $Re \geq 1400$ and $\lambda_z \sim 40h$ for $Re \leq 1100$, suggesting that the characteristic spanwise lengths are dependent on $Re$.
-Interestingly, the bands alternate between both spanwise lengths between the $Re$ range, merging and splitting continuously \citep{tuckerman_turbulent-laminar_2014}, reminiscent of a puff splitting in pipe flows \citep{avila_onset_2011}.
 
 % As $Re$ is lowered turbulent bands appear to decay at $Re = 830$ \citep{gome_statistical_2020}, and at $Re = 1100$ but surviving for $Re = 1000$ \citep{tuckerman_turbulent-laminar_2014}, suggesting that turbulent bands decay spontaneously.
-As $Re$ is lowered, turbulent bands to spontaneously decay and relaminarises \citep{tuckerman_turbulent-laminar_2014,gome_statistical_2020}.
 % However, at $Re = 1100$ but surviving for $Re = 1000$ \citep{tuckerman_turbulent-laminar_2014}, suggesting that turbulent bands decay spontaneously.
 \cite{gome_statistical_2020} computed the probabilities distributions for turbulent-laminar band decay, $P(\Delta t^d)$, where $\Delta t^d$ is the time until decay.
 A key insight is that the probability distributions of turbulent band decay mimics a memoryless Poisson process,
@@ -541,8 +555,9 @@ Both $\tau^d$ and $\tau^s$ exhibit superexponential dependence on $Re$,
 This is shown in figure \ref{fig:decay_split_probability}, with a crossover point at $Re_{cross} \approx 965$, where both decay and splitting becomes equally probably.
 This crossover point is considered as the critical Reynolds number for the onset of turbulent bands.
 % By extrapolating the estimated mean lifetimes of a splitting and decay event, the crossing point (i.e equal chance of identifying a splitting and decay event after a time-scale of $t = 3 \times 10^6$) occurs at $Re_{cross} \approx 965$, in other words, $Re_{cross}$ acts as a critical Reynolds number.
-While there has progress made towards understanding the behaviour of periodic turbulent-laminar bands MBUs, recent studies of isolated turbulent bands (ITBs) reveal different behaviour.
-Notably, ITBs persist at $Re \approx 700$ for duration exceeding $t = 10000$, far exceeding the ranges in figure \ref{fig:decay_split_probability}.
+
+While there has been progress made towards our understanding of infinitely periodic turbulent-laminar bands in MBUs, recent studies of isolated (non-periodic) turbulent bands (ITBs) reveal different behaviour.
+Notably, ITBs persist at Reynolds number below $Re_{cross}$ at $Re = 700$ for durations exceeding $t = 10000$, exceeding the mean decay lifetime in figure \ref{fig:decay_split_probability}.
 The ITBs are characterised by streak generating head and a diffusive upstream tail. \citep{xiong_turbulent_2015, tao_extended_2018, shimizu_bifurcations_2019, xiao_growth_2020}.
 We conclude our discussion  on transitional wall-bounded shear flows.
 % It is worth noting that isolated bands are not memoryless, depending on their pass history [citation]
@@ -582,21 +597,21 @@ Subsequently, \cite{rayleigh_lix_1916} carried out one of first linear stability
 However, Rayleigh's analysis assumed an idealised free-free boundary conditions, which differed from the rigid-free setup of B\'{e}nard's experiment.
 The linear stability analysis for rigid-free configuration was later performed by \cite{jeffreys_cases_1928} yielding a higher critical Rayleigh number of $Ra_c = 1058$.
 In the rigid-rigid configuration, the critical Rayleigh number increases further to $Ra_c = 1708$ \citep{pellew_maintained_1940}.
-The Rayleigh number in B\'{e}nard's original experiment was found to be 300 to 1500 smaller than $Ra_c$ for the free-free and rigid-free cases \citep{wesfreid_henri_2017}.
+The Rayleigh number in B\'{e}nard's original experiment contradicted results from linear stability analysis as it was found to be 300 to 1500 smaller than $Ra_c$ for the free-free and rigid-free cases respectively \citep{wesfreid_henri_2017}.
 % However, it is worth highlighting a key difference in B\'{e}nard's experiment and Rayleigh's analysis.
 This contradiction, not recognised by B\'{e}nard at the time, lies in the significant role of surface tension in thin fluid layers exposed to air, now known as B\'{e}nard-Maragoni (BM) convection \citep{block_surface_1956, cloot_nonlinear_1984, manneville_thirty_2006, wesfreid_henri_2017}.
 In BM convection, fluid motion is primarily driven by surface tension gradients due to variations of temperature, forming hexagonal cells, as in figure \ref{fig:benard_cells}(a).
 The preference for hexagonal cells in BM convection was later confirmed based on weakly nonlinear stability analysis \citep{cloot_nonlinear_1984}.
 % as in B\'{e}nard experiments, a thin layer of fluid exposed to the air is chiefly driven by the variation of surface tension due to temperature difference, leading to the growth of hexagonal cells, in figure \ref{fig:benard_cells}(a).
 As the fluid layer becomes thicker, surface-tension effects diminish and buoyancy-driven convection becomes dominant.
-Similarly, placing a rigid lid on top of a thin fluid layer suppresses surface-tension effects, also resulting in buoyancy-driven convection.
+Similarly, placing a rigid lid on top of a thin fluid layer suppresses surface-tension effects, resulting in buoyancy-driven convection.
 % Surface-tension effects diminish as the fluid depth increases, or removed in the presence of a top rigid lid, where buoyancy becomes the dominant mechanism.
 The preferred convection patterns based on weakly nonlinear stability analysis are the two-dimensional parallel rolls, now referred to as ideal straight rolls (ISRs) \citep{schluter_stability_1965, bodenschatz_recent_2000}.
 % This also have the same effect as placing a lid on top of thin layer of fluid where surface-tension effects are removed, leading to ISRs.
 % This key discrepancy was later identified as B\'{e}nard's experiments considered thin layers of fluid heated and cooled by the ambient air \citep{block_surface_1956}, where surface tension (Maragoni) effects were significant.
 In circular ontainers, the ISRs conform to the geometry of the boundaries, forming concentric convection rolls illustrated in figure \ref{fig:benard_cells}(b).
 Interestingly, hexgaonal cells have been observed in buoyancy-driven flows of non-Boussinesq fluids \citep{hoard_experiments_1970,bodenschatz_recent_2000}.
-In this thesis, I will consider RBC with rigid-rigid boundary conditions with for which the critical Rayleigh number is $Ra_c = 1708$.
+In this thesis, I will consider the RBP setup (and RBC in chapter 4) with rigid-rigid boundary conditions with for which the critical Rayleigh number is $Ra_c = 1708$.
 Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_c \approx  2d$), suggesting that distance separating the plates, $d$, dictates the length of a single roll, $l_{roll} = \lambda_c / 2 \approx d$.
 % 1. Bousinessq fluids (silicon oil) leads to 2D rolls or Hexagonal rolls for rigid-rigid and open-rigid B.Cs - highlighting the importance of the top B.C
 %     a. Are they buoyancy driven or surface-tension driven?
@@ -625,9 +640,9 @@ Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_
 
 As mentioned earlier, stationary ISRs near $q_c$ emerge just above $Ra_c$, based on weakly nonlinear stabity analysis. \citep{eckhaus_studies_1965, schluter_stability_1965}.
 However, this prediction contradicted by the emergence of time-dependent oscillatory ISRs in experiments \citep{rossby_study_1969,willis_oscillatory_1970} at $Ra = 9200$ (or roughly five times $Ra_c$), where weakly nonlinear stability becomes inapplicable far from threshold.
-To address this, a direct secondary stability analysis was employed to study the stability of ISRs further from $Ra_c$, based on Galerkin analysis \citep{busse_oscillatory_1972}
+To address this, a direct secondary stability analysis was employed to study the stability of ISRs further from $Ra_c$, based on Galerkin truncation \citep{busse_oscillatory_1972}.
 % \cite{busse_oscillatory_1972} performed secondary linear stability analysis of ISRs based on Galerkin truncation of orthogonal functions.
-The results from the analysis is described by the Busse balloon, which illustrates the stability boundaries of ISRs as a function of $Ra$ and $Pr$ and roll wavenumber, $\alpha$, shown figure \ref{fig:busseballon} \citep{busse_non-linear_1978}.
+One of the key results from this analysis is the Busse balloon, which describes the stability boundaries of ISRs as a function of $Ra$ and $Pr$, and roll wavenumber, $\alpha$, shown figure \ref{fig:busseballon} \citep{busse_non-linear_1978}.
 The boundaries of the Busse balloon are described by a range of secondary instabilities, each arising from different physical mechanisms \citep{busse_non-linear_1978}.
 At large Prandtl numbers, $Pr = O(10^2)$, the zig-zag (ZZ) and cross-roll (CR) instabilities delimits the balloon for small and large roll wavenumbers.
 The zig-zag instabilities cause zig-zag undulations while the CR instabilities generates rolls orthogonal to the underlying ISR structure, effectively increasing or decreasing the roll wavenumber respectively \citep{busse_instabilities_1971}.
@@ -649,9 +664,10 @@ At higher wavenumbers, the skewed varicose (SV) instability becomes relevant at 
 % In contrast, for higher $Pr$, the knot instability appears, modifying the cross-roll pattern into a spoke-like structure.
 Finally, the Eckhaus instability (not shown), related to the symmetry of the system, appears close to the $Ra_c$, leading a disturbance parallel to the underlying rolls which either creates or destroy rolls such that the resultant roll wavenumber adheres to the stability boundaries \citep{lowe_pattern_1985}.
 Near $Pr = 1$, the Eckhaus instability coincides with the crossroll instability (figure 6 from \cite{bodenschatz_recent_2000}, adapted from \cite{plapp_spiral_1997}.)
+
 In this thesis, we focus on fluids with $Pr = 1$, where secondary instabilities such as skewed-varicose, Eckhaus and cross-roll instabilities typically arise.
-While the stability boundaries of the Busse balloon have been experimentally verified \citep{busse_instabilities_1971, croquette_convective_1989, plapp_spiral_1997}, accurately predicting the wavenumber of ideal straight rolls (ISRs) remain difficult due to hysteresis.
-As $Ra$ is was continously increases, ISRs with wavenumbers outside the Busse Balloon undergo the secondary instabilities (described above) that drive their wavenumbers back to the stable boundaries.
+While the stability boundaries of the Busse balloon have been experimentally verified \citep{busse_instabilities_1971, croquette_convective_1989, plapp_spiral_1997}, accurately predicting the wavenumber of ideal straight rolls (ISRs) remain difficult due to hysteresis and the existence of multiple stable ISRs of different roll wavenumbers.
+As $Ra$ continously increases, ISRs with wavenumbers outside the Busse Balloon undergo the secondary instabilities (described above) that drive their wavenumbers back to the stable boundaries.
 % These instabilities either increase or decrease the roll wavenumber, adhering to the the stability boundaries of the Busse balloon.
 The hysteretic behaviour highlights that the roll wavenumber of the ISRs is strongly dependent on the system's history \citep{bodenschatz_recent_2000}.
 
@@ -670,6 +686,12 @@ Experimental and numerical studies of RBC with varying sidewall boundary conditi
 In inclined RBC, \cite{reetz_invariant_2020, reetz_invariant_2020-1} identified up to sixteen stable and unstable invariant states, along with heteroclinic orbits connecting them.
 These findings indicate that RBC support a rich variety of coexisting stables states beyond ISRs, resulting to a system with multiple stable states above the critical Rayleigh number.
 To complicate matters further, RBC also exhibits spatiotemporal chaotic states.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Background/Figures/bistability.png}
+    \caption{The coexistence of spiral defect chaos (SDC, top row) and ideal straight rolls (ISRs, bottom row) at (a,b) $Ra = 3279$, (c,d) $Ra = 6832$ and (e,f) $Ra = 10384$. The domain size is $\Gamma = 50$ and $Pr = 1$, adapted from \cite{cakmur_bistability_1997}.}
+    \label{fig:sdc_isr}
+\end{figure}
 % The existence of multiple stable states apart from ISRs suggest that RBC forms a multiple bistable systate above $Ra_c$.
 % To compliate matter further, an instrinsic chaotic state of convection was discovered.
 
@@ -677,12 +699,6 @@ To complicate matters further, RBC also exhibits spatiotemporal chaotic states.
 In the late 1990s, convection rolls exhibiting spatio-temporal chaotic behaviour known as spiral defect chaos (SDC) were observed within the same stability boundaries where ISRs were expected \citep{morris_spiral_1993, hu_convection_1993,decker_spiral_1994,hu_convection_1995,morris_spatio-temporal_1996,cakmur_bistability_1997,ahlers_experiments_nodate,egolf_importance_1998,egolf_mechanisms_2000,chiam_mean_2003,vitral_spiral_2020}
 Notably, ISRs emerge with carefully prepared initial conditions while uncontrolled initial conditions lead to SDC.
 It is now well established that SDC exists as intrinsic attractor of RBC, independent of sidewall conditions \cite{morris_spatio-temporal_1996}, forming a bistable system with ISRs \citep{cakmur_bistability_1997} across a range of $Ra$ at $Pr = 1$ illustrated in figure \ref{fig:sdc_isr}.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{Background/Figures/bistability.png}
-    \caption{The coexistence of spiral defect chaos (SDC, top row) and ideal straight rolls (ISRs, bottom row) at (a,b) $Ra = 3279$, (c,d) $Ra = 6832$ and (e,f) $Ra = 10384$. The domain size is $\Gamma = 50$ and $Pr = 1$, adapted from \cite{cakmur_bistability_1997}.}
-    \label{fig:sdc_isr}
-\end{figure}
 However, this bistability appears to be Prandtl number dependent. 
 At $Pr = 4$, the SDC appears to be transient decaying towards ISRs over long periods \citep{bajaj_competition_1997}.
 SDC has also been replicated in numerical simulations using two-dimensional Swift-Hohenberg equations \citep{swift_hydrodynamic_1977,xi_spiral_1993,xi_spatiotemporal_1995,schmitz_spiral-defect_2002,karimi_exploring_2011}.
@@ -774,9 +790,10 @@ Similar spatiotemporal chaotic behaviour has been observed in other pattern-form
     \caption{(a) Neutral stability curves of longitudinal rolls (LR), oblique rolls (OR), transverse rolls (LR) and Tollmien-Schlicting (TS) waves, adapted from \cite{john_soundar_jerome_transient_2012}. The shaded area refers to damped perturbations. Sketch of (b) longitudinal and (c) transverse rolls, adapted from \cite{kelly_onset_1994}.}
     \label{fig:primary_instabilities}
 \end{figure}
-This section describes the development of Rayleigh-B\'{e}nard Poiseuille (RBP) flows, integrating key findings from both Rayleigh-B\'{e}nard convection (RBC) and plane Poiseuille flow (PPF) systems discussed earlier.
+This section describes the development of Rayleigh-B\'{e}nard Poiseuille (RBP) flows, integrating key findings from both plane Poiseuille flow (PPF) and Rayleigh-B\'{e}nard convection (RBC) systems discussed in \S \ref{sec:bkgrd_transitional} and \S \ref{sec:bkgrd_RBC} respectively.
 The neutral stability curves in the Rayleigh-B\'{e}nard Poiseuille (RBP) comprising of both plane Poisueuille flow (PPF) and Rayleigh-B\'{e}anrd convection (RBC) systems, are bounded by the onset of Tollmien-Schlicting waves at $Re_{c} = 5772.22$ \citep{orszag_accurate_1971}, and by the onset of convection rolls at $Ra_c = 1708$ \citep{pellew_maintained_1940}, respectively.
-In RBP systems, the imposed mean Poiseuille flow in the RBP system breaks the rotational symmetry of the convection rolls, categorising them based on their orientation to the mean flow direction, namely: longitudinal ($\alpha= 0, \beta \neq 0$), transverse ($\alpha \neq 0, \beta = 0$) and oblique rolls ($\alpha \neq 0, \beta \neq 0$).
+% In RBP systems, the imposed mean Poiseuille flow in the RBP system breaks the rotational symmetry of the convection rolls, categorising them based on their orientation to the mean flow direction, namely: longitudinal ($\alpha= 0, \beta \neq 0$), transverse ($\alpha \neq 0, \beta = 0$) and oblique rolls ($\alpha \neq 0, \beta \neq 0$).
+In RBP systems, the imposed mean Poiseuille flow in the RBP system breaks the rotational symmetry of the convection rolls, categorising them based on their orientation to the mean flow direction, namely: longitudinal, transverse and oblique rolls.
 % Due to the imposed mean flow, the convection rolls are not rotationally invariant, and their orientation with respect to the mean matters.
 % Generally, convection rolls that are aligned, diagonal and perpendicular to the mean flow are referred to longitudinal, oblique and transverse rolls.
 These primary instabilities were first investigated by \cite{gage_stability_1968} in an infinitely extended layer.
@@ -808,11 +825,12 @@ The maximum amplifcation factor, $G_{max}$ increases modestly with $Ra$, and the
 % The wavenumber of the optimal initial conditions, $\beta_{max}$, resembles that observed in shear flows \citep{reddy_energy_1993}, and gradually approaches the critical wavenumber of convection rolls, $\alpha_{\parallel}$, as $Ra$ increases \citep{john_soundar_jerome_transient_2012}.
 % For $Re > 0$, the longitudinal rolls appear as the dominant primary instability \citep{gage_stability_1968}.
 % Since longitudinal rolls are the dominant primary instability for $Re > 0$ in infinite domains, their secondary stability have been analysed by \cite{clever_instabilities_1991}.
-For $Re > 0$ in infinite domains, longitudinal rolls emerge as the dominant primary instability \citep{gage_stability_1968}.
-Their secondary stability was analysed by \citep{clever_instabilities_1991}, who identified a time-dependent, wavy instability near $Re \sim 100$, giving rise to tertiary solutions in the form of wavy rolls.
+
+For $Re > 0$ in infinite domains, the longitudinal rolls emerge as the dominant primary instability \citep{gage_stability_1968}, and their secondary stability was analysed by \citep{clever_instabilities_1991}.
+They identified a time-dependent, wavy instability near $Re \sim 100$, giving rise to tertiary solutions in the form of wavy rolls.
 These wavy rolls have been observed experimentally and were found to be convectively unstable \citep{pabiou_observations_2003, pabiou_wavy_2005, nicolas_characterisation_2010}.
 \cite{clever_instabilities_1991} also hypothesised that the wavy rolls are less efficient at transporting heating than longitudinal rolls for the same $Ra$, which was later confirmed numerically \citep{nicolas_influence_2012}.
-The influence of finite transverse aspect ratios on the onset of wavy rolls have also been studied \citep{xin_stability_2006, nicolas_characterisation_2010}, where the critical $Ra$ was found to be approximatgely 1.5 times higher than in infinite domains \cite{clever_instabilities_1991}.
+The influence of finite transverse aspect ratios on the onset of wavy rolls have also been studied \citep{xin_stability_2006, nicolas_characterisation_2010}, where the critical $Ra$ was found to be approximately 1.5 times higher than in infinite domains \cite{clever_instabilities_1991}.
 Furthermore, the effect of external excitation has been explored, showing that increased excitation amplitude can reduce the development length required for wavy roll formation \citep{nicolas_characterisation_2010,nicolas_influence_2012}.
 In the turbulent regime, shear driven turbulence has been shown to enhance heat transport in RBP flows \citep{scagliarini_heat_2014, scagliarini_law_2015, pirozzoli_mixed_2017}.
 % In finite streamwise extensions of RBP flows, the onset of convection rolls and the heat flux variations due to entrance effects have been investigated \citep{mahaney_effect_1988,lee_effect_1991,nonino_laminar_1991}.
@@ -824,7 +842,7 @@ For a comprehensive overview of RBP flows, the reader is referred to the reviews
 % THESIS OUTLINE
 %%%%%%%%%%%%%%%%
 
-\subsection{Thesis Outline}\label{sec:thesis_outline}
+\section{Thesis Outline}\label{sec:bkgrd_thesis_outline}
 
 % The governing equations of the fluid motion in given by the Navier-Stokes equations with Boussinessq approximations,
 % \begin{equation}
@@ -855,22 +873,32 @@ For a comprehensive overview of RBP flows, the reader is referred to the reviews
 %     \nabla \cdot \mathbf{u} = 0.
 % \end{equation}
 % where $\mathbf{u}, \theta, p$ refers to the nondimensionalised velocity, temperature and presure.
-In this thesis, I am particularly focused on the transition behaviour of fluid flow driven by shear and bouyancy, addressing questions related to the onset of instabilities due to shear and buoyancy, and the (possible) competitive between shear and buoyancy driven instabilities.
-I would like to preface that while this thesis is dealing with onset of instabilities, it does not clearly indicate that the onset of such instabilities necessarily lead to turbulence, hence, for terminology sake, we shall be looking into transitional regimes where the fluid neither laminar nor turbulent.
-The main motivations are two-folds, both from an academic and applied point-of-view. 
-Within academia, the onset and transition to turbulence in Rayleigh-B\'{e}nard Poiseuille flows remains poorly understand.
-Whilst there had been significant progress in our understand of transition to turbulence in independent setups, Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
-The thesis is structured into the follow, Chapter 1 is the introduction with literature review, chapter 2 methodology assosicated with the spectral/\emph{hp}-element method, chapter 3 with results related to the the Rayleigh and Reynolds number sweep, chapter 4 with a specific focus on the bistability between spiral defect chaos and ideal straight rolls and finally chapter 5 with concluding remarks.
+In this thesis, I am particularly focused on the transition behaviour of fluid flow in RBP systems by conducting direct numerical simulations and linear stability analysis.
+% addressing questions related to the onset of instabilities due to shear and buoyancy, and the (possible) competitive between shear and buoyancy driven instabilities.
+In particular, the onset of instabilities does not necessarily lead to turbulence, and are neither laminar nor turbulent, as we shall see later.
+For the sake of terminology, the transitional regimes can be loosely referred to as regimes that are is neither laminar nor turbulent.
+% I would like to preface that while this thesis is dealing with onset of instabilities, it does not clearly indicate that the onset of such instabilities necessarily lead to turbulence, hence, for terminology sake, we shall be looking into transitional regimes where the fluid neither laminar nor turbulent.
+There had been significant progress in our understanding of the instabilities of Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
+The motivation of this thesis is primarily academic, which explores the bridge between between RBC and PPF.
+% \begin{enumerate}
+% \item From an academia point of view, the 
+% Within academia, the onset and transition to turbulence in Rayleigh-B\'{e}nard Poiseuille flows remains poorly understand.
+% 
+% \end{enumerate}
 
-\begin{enumerate}
-   \item Academic motivation - flow structures, statistics, transition.
-   \item Application motivation - shear, heat transfer. Chip cooling, thin-film fabrication and atmospheric boundary layer.
-\end{enumerate}
-We seek to investigate the influence of unstable stratification quantified by Rayleigh number $Ra$, on the behaviour tuburlent-laminar bands. 
-The onset of convection occurs at a critical Rayleigh number of $Ra_c > 1708$, in the form of a pair of convection rolls.
-When aligned in the streamwise direction, the convection rolls are seemingly analogous to a pair of counter-rotating vortices, an optimal initial condition for transient growth. 
-Our investigation naturally answers a few questions related to turbulent-laminar bands.
-For example, does the onset of turbulent-laminar bands, $Re_{cr}$ decrease with increasing $Ra$?
-Do $Ra$-effects influence the structure of turbulent-laminar bands i.e band angle/width? 
+The thesis is structured into the follows: \S \ref{chap:1} provides the background of this thesis, with relevant literature review. \S \ref{chap:2} presents the numerical methods, which includes the spectral/\textit{hp} element method, algorithms for solving the Navier-Stokes equations, linear stability analysis and and edge tracking. \S \ref{chap:3} first presents a $Ra-Re$ phase space of the flow structures in RBP flows with a particular focus on the role of longitudinal rolls in sustaining turbulence as we introduce the \textit{thermally-assisted sustaining process}.
+\S \ref{chap:4} presents the state space organisation of the bistability between spiral defect chaos and ideal straight rolls at $Ra = 2903$.
+We finally conclude this thesis, and present possible avenues of future work in \S \ref{chap:5}.
 
-The answers to our research will have important implications Rayleigh-B\'{e}nard Poiseuille flows, ubiquitous in atmospheric, geophysical and engineering flows.
+% \begin{enumerate}
+%    \item Academic motivation - flow structures, statistics, transition.
+%    \item Application motivation - shear, heat transfer. Chip cooling, thin-film fabrication and atmospheric boundary layer.
+% \end{enumerate}
+% We seek to investigate the influence of unstable stratification quantified by Rayleigh number $Ra$, on the behaviour tuburlent-laminar bands. 
+% The onset of convection occurs at a critical Rayleigh number of $Ra_c > 1708$, in the form of a pair of convection rolls.
+% When aligned in the streamwise direction, the convection rolls are seemingly analogous to a pair of counter-rotating vortices, an optimal initial condition for transient growth. 
+% Our investigation naturally answers a few questions related to turbulent-laminar bands.
+% For example, does the onset of turbulent-laminar bands, $Re_{cr}$ decrease with increasing $Ra$?
+% Do $Ra$-effects influence the structure of turbulent-laminar bands i.e band angle/width? 
+% 
+% The answers to our research will have important implications Rayleigh-B\'{e}nard Poiseuille flows, ubiquitous in atmospheric, geophysical and engineering flows.
