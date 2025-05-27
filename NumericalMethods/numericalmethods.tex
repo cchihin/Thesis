@@ -705,7 +705,7 @@ and obtain the solution for $\mathbf{\hat{u}}_g$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Numerical techniques for solving the Navier-Stokes equations}\label{sec:numeraltechniquesforNS}
-\subsection{Velocity Correction Scheme}
+\subsection{Velocity Correction Scheme}\label{sec:nm_vcs}
 The spatial discretisation of the Helmholtz operator and its numerical solution procedure has been discussed using the spectral/\emph{hp} element methods.
 Here, we describe the numerical methods that is used to solve the Navier-Stokes equations given as,
 \begin{subequations}
@@ -857,7 +857,7 @@ evolving the velocity fields at time step $n$ to $n+1$.
 % FOURIER SPECTRAL/HP ELEMENT METHODS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Fourier spectral/\emph{hp} modes}
+\subsection{Fourier spectral/\emph{hp} modes}\label{sec:nm_quasi3d}
 Fourier-Chebyshev-Fourier type discretisation have been recognised as preferred method for performing direct numerical simulations (DNS) of transitional or turbulent channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions respectively.
 
 The Fourier spectral/\emph{hp} element method draws on this approach, where the homogeneous and the inhomogeneous directions are represented by the Fourier expansions and spectral/\emph{hp} elements respectively.
@@ -912,7 +912,7 @@ Substituting equation \ref{eq:fourierSpectral} into the Navier-Stokes equations 
 
 where, $\tilde{\nabla}_k = (\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, ik\beta)$, $\nabla_{x,y}^2 = (\frac{\partial^2}{\partial x^2}, \frac{\partial^2}{\partial y^2})$ and $\widehat{\left[(\mathbf{u} \cdot \nabla) \mathbf{u} \right]_k}$ refers to the Fourier-transformed of the $k^{th}$ nonlinear term.
 
-\subsection{Maintaining fluid flow through a channel}
+\subsection{Maintaining fluid flow through a channel}\label{sec:nm_constantflux}
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{NumericalMethods/Figures/flowrate.pdf}
@@ -1071,7 +1071,7 @@ The process of adding the correction velocity at the end of velocity correction 
 % For more details on the numerical method, the reader is referred to.
 
 \section{Stability analysis of the Navier-Stokes equations}\label{sec:stabilityanalysisofNS}
-\subsection{Algorithms for linear stability analysis}
+\subsection{Algorithms for linear stability analysis}\label{sec:nm_arnoldi}
 % This section concerns the stability analysis of a base flow, $\mathbf{U}$, describe by the behaviour of infinitisimal disturbances.
 In this section, we present a general overview of the numerical procedure for linear stability analysis.
 % The section describes the solution procedure in conducting linear stability analysis.

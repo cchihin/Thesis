@@ -4,7 +4,7 @@
 
 \chapter{Introduction}\label{chap:1}
 
-\section{Overview}
+\section{Overview}\label{sec:bkgrd_overview}
 Fluid motions driven by buoyancy and frictional forces belongs to broad class of flows known as thermoconvective shear flows.
 These flows exhibit rich behaviour, and are of interest in both engineering and meteorology applications spanning across a broad range of length scales.
 
@@ -42,16 +42,23 @@ The RBP configuration combines the two paradigmatic flow configurations; the cla
 While the onset of convection in RBC, and the transition to subscritical shear-driven turbulence in PPF have been both extensively studied, the transitional regime in which both forces interact remains less understood.
 Understanding their transitional behaviour and their transport properties could have implications for the applications mentioned above.
 
-The RBP configuration is illustrated in figure \ref{fig:rbpconfiguration}, where $z, y, x$ refer to the stream-, spanwise and wall normal coordinates and $L_z, L_x, d, h$ the length, span, depth and half-height of the domain respectively.
-We note that the domain is biperiodic along $z$ and $x$.
+The RBP configuration is illustrated in figure \ref{fig:rbpconfiguration}, where $z,y,x$ refer to spatial coordinates denoting the streamwise, spanwise and wall normal directions.
+$L_z, L_x, d$ and $h$ corresponds to the length, span, depth and half-height of the domain respectively.
+We note that the RBP syytem is biperiodic along $z$ and $x$, and are of equal size, $L = L_x = L_z$.
 % We note that the asterisks$^*$, refer to variables in dimensional form.
-The flow is driven by a pressure gradient along the streamwise $z$ direction, $\Delta P = P|_{z=0} - P|_{z=L_z} < 0$, leading to a laminar Poiseuille flow, $w(y) = 1 - y^2$, if $\Delta P$ is kept small such that flow remains laminar.
-We will consider a fully developed flow, where the boundary layer from the top and the bottom wall meets at the midplane $y=0$ and entrance effects are therefore neglected.
+The flow is driven by a pressure gradient along the streamwise $z$ direction, $\Delta P = P|_{z=0} - P|_{z=L_z} < 0$, leading to a laminar Poiseuille flow, $w(y) = W_c(1 - y^2)$, where $W_c$ is the laminar centerline velocity.
+We consider a fully developed flow, where the boundary layer from the top and the bottom wall meets at the midplane $y=0$ and entrance effects are therefore neglected.
 Like the RBC system, the RBP system is unstably stratified.
 The temperature difference between the lower, $T_L$, and upper wall, $T_U$, is always positive, $\Delta T = T_L - T_U > 0$, leading to a stable linear conduction layer along the wall-normal direction, $T(y)$, if $\Delta T$ is kept sufficiently small.
+The behaviour of RBP flows is govern by four dimensionless parameters,
+\begin{equation}\label{eq:nondim_def}
+    Re = W_c h / \nu, \quad Ra = \frac{\eta g d^3 \Delta T}{\nu \kappa}, \quad Pr = \frac{\kappa}{\nu}, \quad \Gamma = L/2d,
+\end{equation}
+where $Ra, Re, Pr, \Gamma$ refers to Reynolds, Rayleigh, Prandtl numbers and aspect ratio and 
+$\eta, g, \nu, \kappa,$ are the thermal expansion coefficient, acceleration due to gravity, kinematic viscosity, thermal diffusivity, respectively.
 
-In the absence of a pressure gradient, the RBP configuration reduces to the classical Rayleigh-B\'{e}nard convection problem, bringing about buoyany-driven convection for a sufficiently large unstable stratification.
-In the limiting case without unstable stratification, $\Delta T = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
+In the absence of shear, $Re = 0$, the RBP configuration reduces to the classical Rayleigh-B\'{e}nard convection problem, bringing about buoyany-driven convection for a sufficiently large unstable stratification.
+In the limiting case without unstable stratification, $Ra = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
 We focus on the transitional regime, by investigating if buoyancy forces promote the transition to shear-driven turbulence and the effect of shear on convection in large domains.
 % For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
 % To describe the motion of the fluid in RBP configurations, we consider the non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
