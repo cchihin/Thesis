@@ -882,22 +882,38 @@ For a comprehensive overview of RBP flows, the reader is referred to the reviews
 %     \nabla \cdot \mathbf{u} = 0.
 % \end{equation}
 % where $\mathbf{u}, \theta, p$ refers to the nondimensionalised velocity, temperature and presure.
-In this thesis, I am particularly focused on the transition behaviour of fluid flow in RBP systems by conducting direct numerical simulations and linear stability analysis.
+In this thesis, I focus on the transitional behaviour of fluid flow in Rayleigh-B\'{e}nard Poiseuille systems by conducting direct numerical simulations and linear stability analysis.
 % addressing questions related to the onset of instabilities due to shear and buoyancy, and the (possible) competitive between shear and buoyancy driven instabilities.
-In particular, the onset of instabilities does not necessarily lead to turbulence, and are neither laminar nor turbulent, as we shall see later.
-For the sake of terminology, the transitional regimes can be loosely referred to as regimes that are is neither laminar nor turbulent.
+Notably, the onset of instabilities does not necessarily lead to turbulence and may give rise to flow regimes that are neither fully laminar nor fully turbulent.
+For clarity, we refer to these as transitional regimes.
 % I would like to preface that while this thesis is dealing with onset of instabilities, it does not clearly indicate that the onset of such instabilities necessarily lead to turbulence, hence, for terminology sake, we shall be looking into transitional regimes where the fluid neither laminar nor turbulent.
-There had been significant progress in our understanding of the instabilities of Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
-The motivation of this thesis is primarily academic, which explores the bridge between between RBC and PPF.
+
+While significant progress has been made in understanding the transition process of Rayleigh-B\'{e}nard convection and plane Poiseuille flows separately, their combined effects remains largely unexplored.
+% There had been significant progress in our understanding of the instabilities of Rayleigh-B\'{e}nard convection and plane Poiseuille flows, their combined effects are not known.
+For instance, do convection rolls promote the transition to shear driven turbulence?
+And conversely, how does shear affect the bistable dynamics between ideal straight rolls (ISRs) and spiral defect chaos (SDC)?.
+These questions are explore in \S \ref{chap:3}.
+
+Although the co-existence of ISRs and SDC as bistable states in Rayleigh-B\'{e}nard convection is well established, the existence of multiple states raises further questions about the notion of bistability.
+In \S \ref{chap:4}, we investigate the state-space structure underlying ISRs and SDC, identifying several stable invariant solutions referred to as \textit{elementary} states that underpin the pattern formation of SDC. 
+% We explore the state space structure of ideal straight rolls (ISRs) and spiral defect chaos (SDC) in \S \ref{chap:4}, identifying several stable invariant states referred to as \textit{elementary} states, underpinning the pattern formation of SDC.
+% Subsequently, we explore the state space structure of the bistable system between ISRs and SDC in \S \ref{chap:4}.
 % \begin{enumerate}
 % \item From an academia point of view, the 
 % Within academia, the onset and transition to turbulence in Rayleigh-B\'{e}nard Poiseuille flows remains poorly understand.
 % 
 % \end{enumerate}
 
-The thesis is structured into the follows: \S \ref{chap:1} provides the background of this thesis, with relevant literature review. \S \ref{chap:2} presents the numerical methods, which includes the spectral/\textit{hp} element method, algorithms for solving the Navier-Stokes equations, linear stability analysis and and edge tracking. \S \ref{chap:3} first presents a $Ra-Re$ phase space of the flow structures in RBP flows with a particular focus on the role of longitudinal rolls in sustaining turbulence as we introduce the \textit{thermally-assisted sustaining process}.
-\S \ref{chap:4} presents the state space organisation of the bistability between spiral defect chaos and ideal straight rolls at $Ra = 2903$.
-We finally conclude this thesis, and present possible avenues of future work in \S \ref{chap:5}.
+The thesis is structured into the follows: 
+\begin{enumerate}
+
+    \item \S \ref{chap:1} provides the introduction and a review of relevant literature.
+    \item \S \ref{chap:2} presents the numerical methods, including the spectral/\textit{hp} element method, algorithms for solving the Navier-Stokes equations, linear stability analysis and edge tracking.
+    \item \S \ref{chap:3} introduces the $Ra-Re$ phase space of RBP flows, with a particular focus on the role of longitudinal rolls in sustaining turbulence. We introduce the \textit{thermally-assisted sustaining process} - an alternative route towards turbulence via linearly unstable longitudinal rolls
+    \item \S \ref{chap:4} explores the organisation of the state space of spiral defect chaos and ideal straight rolls $Ra = 2903$, accompanied by \textit{elementary} states, edge states and highlight some pathways towards SDC
+    \item Finally, \S \ref{chap:5} conludes this thesis and suggests possible avenues of future research.
+\end{enumerate}
+.
 
 % \begin{enumerate}
 %    \item Academic motivation - flow structures, statistics, transition.
