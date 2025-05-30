@@ -111,7 +111,8 @@ We note that the rescaled $Ra/8$ term in the momentum forcing terms is equivalen
 The Rayleigh number, $Ra$, Reynolds number $Re$ and Prandtl number, $Pr$ are defined in \S \ref{sec:bkgrd_overview}. 
 We set $Pr = 1$ in this study.
 For $Re=0$, the Rayleigh-B\'{e}nard convection problem, we note that the equation \eqref{eq:rbp_RBP} becomes singular.
-In such cases, we solve the non-dimensionalised incompressible Navier-Stokes equations based on thermal length, velocity and temporal scales given in \S \ref{sec:chap4}.
+In such cases, we solve the non-dimensionalised incompressible Navier-Stokes equations based on thermal length, velocity and temporal scales given in \S \ref{sec:rbc_2}.
+\
 
 \subsection{Numerical Methods}
 The governing equations are solved numerically using Nektar++, an open-source spectral/\emph{hp}-element package \citep{cantwell_nektar_2015,moxey_nektar_2020}. 
@@ -324,7 +325,7 @@ The turbulent dynamics mentioned here refer to chaotic trajectories (see \S \ref
 
 Starting from a longitudinal roll state of spanwise wavenumber of $\alpha d = 4$ at $t = 1291.5$ in figure \ref{fig:Ra10k-Re1050-small}(b), the solution erupts into a highly disorganised turbulent state at $t = 1480.5$, marked by a disordered temperature field in figure \ref{fig:Ra10k-Re1050-small}(c).
 During this breakdown, the near-wall snapshots of streamwise perturbation velocity, $w'|_{y^+ = 15}$, and wall-normal perturbation velocity, $v'|_{y^+ = 15}$, illustrated in the bottom panels of figures \ref{fig:Ra10k-Re1050-small}(c), reveal three pairs of high- and low-speed streaks, each with an average spanwise wavelength of $\Lambda_x^+ \approx 339/3 = 113$ (where $\Lambda_x^+ = u_\tau \Lambda_x / \nu$ refers to non-dimensionalised wavelength), close to the mean streak spacing ($\Lambda^+ \sim 100$) commonly reported in shear flow turbulence \citep{kline_structure_1967, smith_characteristics_1983, kim_turbulence_1987, hamilton_regeneration_1995}.
-These streaks appear to be meandering, negatively correlated with wall-normal perturbation velocities, reminiscent of a streak breakdown process \citep{hamilton_regeneration_1995}, or a bursting event \citep{Kim_Kline_Reynolds_1971}, where high- and low-speed streaks are brought close to and away from the wall, respectively, enhancing near-wall transport quantities.
+These streaks appear to be meandering, negatively correlated with wall-normal perturbation velocities, reminiscent of a streak breakdown process \citep{hamilton_regeneration_1995}, or a bursting event \citep{kim_production_1971}, where high- and low-speed streaks are brought close to and away from the wall, respectively, enhancing near-wall transport quantities.
 Indeed, this is reflected in large increments in the Nusselt number and wall shear rate of roughly $40\%$ at $t = 1480.5$ in figure \ref{fig:Ra10k-Re1050-small}(a).
 Subsequently, the solution trajectory returns to a longitudinal roll state at $t=1564.5$, before erupting into turbulence at $t = 1711.5$ (see figures \ref{fig:Ra10k-Re1050-small}(d,e) respectively).
 This suggests that the turbulence has a finite lifetime, occurring transiently before decaying towards the laminar state at $Re = 1050$ \citep{hof_finite_2006,schneider_turbulence_2007}, which is linearly unstable, leading to the onset of longitudinal rolls where transient turbulence could be re-excited again.
@@ -512,7 +513,7 @@ When $Ra$ is lowered to $Ra = 4000$, the periodic orbit disappears and the traje
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/statespace-cartoon-full.pdf}
-    \caption{A state space sketch of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{Paranjape_2023}.}
+    \caption{A state space sketch of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{paranjape_direct_2023}.}
     \label{fig:statespacesketch}
 \end{figure}
 
@@ -525,7 +526,7 @@ Future bifurcation studies are required to establish this, providing an avenue f
 % The key difference between $Re = 600$ and $ Re = 700$ may lie in the proximity of the periodic orbit with the laminar state as highlighted between figure \ref{fig:dynamical-process}(a) and \ref{fig:dynamical-process}(b).
 % As $Re$ increases, the solution trajectory moves further away from the laminar state, becoming more strongly attracted towards the longitudinal roll state.
 As $Ra$ is lowered to $Ra = 4000$, the laminar state stabilises into the longitudinal rolls in figure \ref{fig:statespacesketch}(e).
-However, the flow in this regime may contain some invariant solutions \citep{Paranjape_2023}, denoted as saddle points here.
+However, the flow in this regime may contain some invariant solutions \citep{paranjape_direct_2023}, denoted as saddle points here.
 Integrating along the unstable manifold of longitudinal roll states at $Ra= 8000, Re = 1000$ leads to transient turbulence, which eventually decays to the laminar state before regenerating the longitudinal rolls again, forming the \emph{TASP} in figure \ref{fig:statespacesketch}(c).
 In contrast, at $Ra = 4000, Re = 1000$, the longitudinal rolls become linearly stable, eliminating the intermediate (orange) pathway towards turbulence.
 Therefore, the transient turbulence stabilises into longitudinal rolls, as shown with the black-dashed trajectory in figure \ref{fig:statespacesketch}(f).
@@ -597,12 +598,13 @@ The increase in turbulent events is reflected by the PDFs, where a `D'-shaped PD
 The lack of prolonged laminar spots, previously identified for $Ra = 0$ (figure \ref{fig:spacetime-Ra0k-Re1.05k}, highlights the role of longitudinal rolls in providing an intermediate pathway from laminar to turbulent state, identified in a confied domain (figure \ref{fig:dynamical-process}(d)).
 % suggests that the longitudinal rolls provide an intermediate pathway towards turbulence in a small domain (figure \ref{fig:dynamical-process}(d)).
 
-\section{Conclusions}\label{sec:rbp_5}
+\section{Summary}\label{sec:rbp_5}
+
 We conclude by summarising the key findings of transitional RBP flow from figure \ref{fig:rarephase}, where we have identified five different regimes and their rough transition boundaries.
 First, we have examined the bistability between SDC and ISRs in RBP flows, which persists up to $Re = 1$, beyond which only ISR solutions are observed.
 The critical $Re_{s}$ at which SDC disappears appears to depends on $Re$ and remains an avenue for future study.
 At $Re = 10$, the wavenumber of the stable ISRs adheres to the stability boundaries of the Busse balloon, and we observe longitudinal rolls as well as oscillatory longitudinal rolls, expected from the secondary instabilities of RBC \citep{clever_transition_1974}.
-The wavy rolls appear at $Re = 100$ and $Ra \geq 5000$ \citep{clever_instabilities_1991, pabiou_wavy_2005,nicolas_2010}, but disappear for $Re \geq 500$, where a new regime referred to as intermittent rolls emerges.
+The wavy rolls appear at $Re = 100$ and $Ra \geq 5000$ \citep{clever_instabilities_1991, pabiou_wavy_2005, nicolas_characterisation_2010}, but disappear for $Re \geq 500$, where a new regime referred to as intermittent rolls emerges.
 This regime is characterised by the spatio-temporal intermittent breakdown of longitudinal rolls towards the laminar state, before being regenerated again.
 Similarly to the wavy rolls regime, intermittent rolls only appear above a $Ra$-threshold, $Ra \geq 5000$ (see figure \ref{fig:rarephase}), below which longitudinal rolls persist.
 % Notably, the wavenumber of these longitudinal rolls lies outside of the stability boundaries of the Busse balloon for RBC ($Re = 0$), suggesting the stability boundaries are modified as $Re$ increases, a potential avenue for future work. 

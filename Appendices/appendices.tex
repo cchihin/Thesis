@@ -1,111 +1,111 @@
 \appendix
 \chapter{Appendices}\label{chap:appendices}
-\section{Non-dimensionalisation}
-The non-dimensionalised incompressible Navier-Stokes equations with Boussinesq approximations for buoyancy describe the motion of a fluid of RBP. 
-% \begin{subequations}\label{eq:rbpdimensional}
+% \section{Non-dimensionalisation}
+% The non-dimensionalised incompressible Navier-Stokes equations with Boussinesq approximations for buoyancy describe the motion of a fluid of RBP. 
+% % \begin{subequations}\label{eq:rbpdimensional}
+% % \begin{equation}
+% %     \frac{\partial \mathbf{u^*}}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)\mathbf{u^*} = -\frac{1}{\rho}\nabla^* p^* + \nu \nabla^*^2 \mathbf{u^*} + g\gamma(T-T_0)+ \mathbf{f}_b,
+% % \end{equation}
+% % \begin{equation}
+% %     \frac{\partial T}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)T= \kappa \nabla^*^2 T,
+% % \end{equation}
+% % \begin{equation}
+% %     \nabla^* \cdot \mathbf{u^*} = 0,
+% % \end{equation}
+% % with Dirichlet and Neumann boundary conditions.
+% % \begin{equation}
+% %     \mathbf{u^*}_d, p^*_d, T_d \in \Omega_d, \quad \nabla^*\mathbf{u^*}_N, \nabla^*p^*_N, \nabla^*T_N \in \partial\Omega_N.
+% % \end{equation}
+% where $\nabla^*=(\partial/\partial x^*, \partial/\partial y^*, \partial/\partial z^*)$ and $t^*$ refer to the differential operators and time with dimensions in per unit space, $m^{-1}$, and time, $s$. $\mathbf{u^*}(\mathbf{x^*}), T(\mathbf{x^*}), p^*(\mathbf{x}^*)$ refers to the three-dimensional fluid velocity, temperature, pressure fields, in dimensional form, while $T_0, \mathbf{f_b}$ refers to a reference temperature and body-forcing terms.
+% % For a given set of fluid properties $\rho, \nu, \kappa$ and geometric properties $L^*, t^*, u^*$ referring to an arbitrary length-, time- and velocity-scale, we are primarily interested in the behaviour of the fluid i.e if its laminar or turbulent.
+% To reduce the number of control parameters, we can suitably nondimensionalise the primitive variables by a velocity scale $u_c$, length scale, $L_x$, and time scale $u_c/L_x$, where $u_c$ refers to the centreline velocity of a laminar flow and $L_x$ refers to the streamwise length of the domain.
+% 
+% $\rho, \nu, \kappa, g, \gamma$ refers the fluid's density, kinematic viscosity and thermal diffusivity, gravity, thermal expansion coefficient, properties specific to a given a fluid.
+% We note that that for a given pressure gradient, $\Delta P^*$, a laminar centerline velocity forms as $w^*(y^*) = W_{lam}^*(1 - y^2/h^2)$.
+% Here, we have a total of nine dimensional quantities $W^*_{lam}, \Delta T, h, \kappa, \nu, \rho, \gamma, g$ that describes the behaviour of the fluid motion.
+% However, ultilise the buckingham pi theorem where we can reduce the equations to less dependenc
+% \section{Governing equations for Rayleigh-B\'{e}nard convection}\label{app:eqrbc}
+% The governing equations for Rayleigh-B\'{e}nard convection are the non-dimensionalised equations with the Boussinesq approximation for buoyancy-driven flow, given by
+% \begin{subequations}\label{eq:rbc}
 % \begin{equation}
-%     \frac{\partial \mathbf{u^*}}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)\mathbf{u^*} = -\frac{1}{\rho}\nabla^* p^* + \nu \nabla^*^2 \mathbf{u^*} + g\gamma(T-T_0)+ \mathbf{f}_b,
+%     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + Pr\nabla^2 \mathbf{u} + \frac{RaPr}{8}\theta \mathbf{{j}},
 % \end{equation}
 % \begin{equation}
-%     \frac{\partial T}{\partial t^*} + (\mathbf{u^*} \cdot \nabla^*)T= \kappa \nabla^*^2 T,
+%     \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla) \theta = \nabla^2 \theta,
 % \end{equation}
 % \begin{equation}
-%     \nabla^* \cdot \mathbf{u^*} = 0,
+%     \nabla \cdot \mathbf{u} = 0,
 % \end{equation}
-% with Dirichlet and Neumann boundary conditions.
+% \end{subequations}
+% subjected to the following boundary conditions at the walls,
+% \begin{subequations}\label{eq:bc}
 % \begin{equation}
-%     \mathbf{u^*}_d, p^*_d, T_d \in \Omega_d, \quad \nabla^*\mathbf{u^*}_N, \nabla^*p^*_N, \nabla^*T_N \in \partial\Omega_N.
+%     \mathbf{u}|_{y=\pm h} = 0, \quad \theta|_{y=-h} = 1, \quad \theta|_{y=h} = 0, 
 % \end{equation}
-where $\nabla^*=(\partial/\partial x^*, \partial/\partial y^*, \partial/\partial z^*)$ and $t^*$ refer to the differential operators and time with dimensions in per unit space, $m^{-1}$, and time, $s$. $\mathbf{u^*}(\mathbf{x^*}), T(\mathbf{x^*}), p^*(\mathbf{x}^*)$ refers to the three-dimensional fluid velocity, temperature, pressure fields, in dimensional form, while $T_0, \mathbf{f_b}$ refers to a reference temperature and body-forcing terms.
-% For a given set of fluid properties $\rho, \nu, \kappa$ and geometric properties $L^*, t^*, u^*$ referring to an arbitrary length-, time- and velocity-scale, we are primarily interested in the behaviour of the fluid i.e if its laminar or turbulent.
-To reduce the number of control parameters, we can suitably nondimensionalise the primitive variables by a velocity scale $u_c$, length scale, $L_x$, and time scale $u_c/L_x$, where $u_c$ refers to the centreline velocity of a laminar flow and $L_x$ refers to the streamwise length of the domain.
-
-$\rho, \nu, \kappa, g, \gamma$ refers the fluid's density, kinematic viscosity and thermal diffusivity, gravity, thermal expansion coefficient, properties specific to a given a fluid.
-We note that that for a given pressure gradient, $\Delta P^*$, a laminar centerline velocity forms as $w^*(y^*) = W_{lam}^*(1 - y^2/h^2)$.
-Here, we have a total of nine dimensional quantities $W^*_{lam}, \Delta T, h, \kappa, \nu, \rho, \gamma, g$ that describes the behaviour of the fluid motion.
-However, ultilise the buckingham pi theorem where we can reduce the equations to less dependenc
-\section{Governing equations for Rayleigh-B\'{e}nard convection}\label{app:eqrbc}
-The governing equations for Rayleigh-B\'{e}nard convection are the non-dimensionalised equations with the Boussinesq approximation for buoyancy-driven flow, given by
-\begin{subequations}\label{eq:rbc}
-\begin{equation}
-    \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + Pr\nabla^2 \mathbf{u} + \frac{RaPr}{8}\theta \mathbf{{j}},
-\end{equation}
-\begin{equation}
-    \frac{\partial \theta}{\partial t} + (\mathbf{u} \cdot \nabla) \theta = \nabla^2 \theta,
-\end{equation}
-\begin{equation}
-    \nabla \cdot \mathbf{u} = 0,
-\end{equation}
-\end{subequations}
-subjected to the following boundary conditions at the walls,
-\begin{subequations}\label{eq:bc}
-\begin{equation}
-    \mathbf{u}|_{y=\pm h} = 0, \quad \theta|_{y=-h} = 1, \quad \theta|_{y=h} = 0, 
-\end{equation}
-\end{subequations}
-and the periodic boundary conditions imposed in the planar $x$ and $z$ directions.
-Here, $t$ denotes the time scaled by the vertical thermal diffusion time, $d^2/\kappa$, and $\mathbf{x}(=(x,y,z))$ represents the spatial coordinates non-dimensionalised by depth, $d$.
-The horizontal directions are $x$ and $z$, while $y$ is the vertical direction. 
-The velocity vector is given by $\mathbf{u}(=(u,v,w))$ and is scaled by thermal velocity, $\kappa/d$, $p$.
-The pressure is scaled by $ \rho \kappa^2 / d^2 $, while $\theta(\equiv(T-T_U)/\Delta T)$ refers to the non-dimensional temperature with $T$ being the absolute temperature, and $\mathbf{j}$ denotes the unit vector in $y$-direction. 
-The Rayleigh number $Ra$, and the Prandtl number, $Pr$, are defined as in \S\ref{sec:1}.
-In this study, we set $Pr = 1$.
-
-\section{Projection methods for Navier-Stokes equations}
-In this section, we describe the projection methods for solving the incompressible Navier Stokes equations.
-The projection methods belong to a general class of splitting methods, where the solution step for obtaining the velocity and pressure from the incompressible Navier Stokes are uncoupled.
-The premise for being able to do this is because the pressure terms act as a Lagrange multiplier which enforces the incompressibility constraint.
-Suppose we want to find the function $u$ that minimises the functional,
-\begin{equation}
-\min_{\mathbf{u} \neq \mathbf{0}} \frac{\nu}{2} (\nabla \mathbf{u}, \nabla \mathbf{u}) - (f, \mathbf{u}), \quad \text{s.t} \quad \nabla \cdot \mathbf{u} = 0
-\end{equation}
-where $(\mathbf{x}, \mathbf{y}) = \int_\Omega \mathbf{x}^T \mathbf{y} \, \mathrm{d}\Omega$ refers to a suitable inner product.
-To solve this optimisation problem, we use the method of Lagrange multipliers which handles the constrain, by converting the equation above into an unconstrained optimisation problem defined by the Lagrangian
-\begin{equation}
-\mathcal{L} = \frac{\nu}{2} (\nabla \mathbf{u}, \nabla, \mathbf{u}) - (f, \mathbf{u}) - (p, \nabla \cdot \mathbf{u})
-\end{equation}
-Taking the variation $\delta \mathcal{L}$, with respect $\delta \mathbf{u}$, we get
-\begin{align}
-    \frac{\delta \mathcal{L}}{\delta \mathbf{u}} &= \nu (\nabla \mathbf{u}, \nabla \delta \mathbf{u}) - (f, \delta \mathbf{u}) - (p, \nabla \cdot \delta\mathbf{u}), \\
-                                                 &= - \nu (\nabla^2 \mathbf{u}, \delta \mathbf{u}) - (f, \delta \mathbf{u}) + (\nabla p, \delta \mathbf{u}) \\
-                                                 & = (-\nu \nabla^2 \mathbf{u} - f + \nabla p , \delta \mathbf{u}).
-\end{align}
-and with respect to $\delta p$, we get,
-\begin{equation}
-    -\frac{\delta \mathcal{L}}{\delta p} = (\delta p, \nabla \cdot \mathbf{u}).
-\end{equation}
-The optimal condition is defined by vanishing variations, hence, we recover the Stokes equations,
-\begin{subequations}
-    \begin{equation}
-        \nu \nabla^2 \mathbf{u} + \nabla p = -f
-    \end{equation}
-    \begin{equation}
-        \nabla \cdot \mathbf{u} = 0        
-    \end{equation}
-\end{subequations}
-In other words, the role of pressure is to serve as a constrain to enforce incompressibility, where we can consider a velocity field that is not divergence fre, which is then corrected by pressure later - the splitting method.
-To witness this is action, we consider the basic approach of Chorin's projection which is a two step method,
-\begin{subequations}
-\begin{equation}
-    \frac{\mathbf{u}^* - \mathbf{u}^n}{\Delta t} = - (\mathbf{u}^n \cdot \nabla) \mathbf{u}^n + \nu \nabla^2 \mathbf{u}^n
-\end{equation}
-\text{then,}
-\begin{equation}
-    \mathbf{u}^{n+1} =  \mathbf{u}^* + {\Delta t} \nabla p^{n+1}.
-\end{equation}
-\end{subequations}
-The idea of projection stems of taking the weak formulation of the second equation with $v \in \mathbf{V} := { \mathbf{v} \in H_0^1(\Omega) \, : \, \nabla \cdot \mathbf{v} = 0 }$,
-\begin{equation}
-    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) + (\nabla p^{n+1}, \mathbf{v})
-\end{equation}
-Taking integration by parts we get,
-\begin{equation}
-    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) - \underbrace{ (p^{n+1}, \nabla \cdot \mathbf{v})}_ {=0},
-\end{equation}
-Hence,
-\begin{equation}
-    (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v})
-\end{equation}
+% \end{subequations}
+% and the periodic boundary conditions imposed in the planar $x$ and $z$ directions.
+% Here, $t$ denotes the time scaled by the vertical thermal diffusion time, $d^2/\kappa$, and $\mathbf{x}(=(x,y,z))$ represents the spatial coordinates non-dimensionalised by depth, $d$.
+% The horizontal directions are $x$ and $z$, while $y$ is the vertical direction. 
+% The velocity vector is given by $\mathbf{u}(=(u,v,w))$ and is scaled by thermal velocity, $\kappa/d$, $p$.
+% The pressure is scaled by $ \rho \kappa^2 / d^2 $, while $\theta(\equiv(T-T_U)/\Delta T)$ refers to the non-dimensional temperature with $T$ being the absolute temperature, and $\mathbf{j}$ denotes the unit vector in $y$-direction. 
+% The Rayleigh number $Ra$, and the Prandtl number, $Pr$, are defined as in \S\ref{sec:1}.
+% In this study, we set $Pr = 1$.
+% 
+% \section{Projection methods for Navier-Stokes equations}
+% In this section, we describe the projection methods for solving the incompressible Navier Stokes equations.
+% The projection methods belong to a general class of splitting methods, where the solution step for obtaining the velocity and pressure from the incompressible Navier Stokes are uncoupled.
+% The premise for being able to do this is because the pressure terms act as a Lagrange multiplier which enforces the incompressibility constraint.
+% Suppose we want to find the function $u$ that minimises the functional,
+% \begin{equation}
+% \min_{\mathbf{u} \neq \mathbf{0}} \frac{\nu}{2} (\nabla \mathbf{u}, \nabla \mathbf{u}) - (f, \mathbf{u}), \quad \text{s.t} \quad \nabla \cdot \mathbf{u} = 0
+% \end{equation}
+% where $(\mathbf{x}, \mathbf{y}) = \int_\Omega \mathbf{x}^T \mathbf{y} \, \mathrm{d}\Omega$ refers to a suitable inner product.
+% To solve this optimisation problem, we use the method of Lagrange multipliers which handles the constrain, by converting the equation above into an unconstrained optimisation problem defined by the Lagrangian
+% \begin{equation}
+% \mathcal{L} = \frac{\nu}{2} (\nabla \mathbf{u}, \nabla, \mathbf{u}) - (f, \mathbf{u}) - (p, \nabla \cdot \mathbf{u})
+% \end{equation}
+% Taking the variation $\delta \mathcal{L}$, with respect $\delta \mathbf{u}$, we get
+% \begin{align}
+%     \frac{\delta \mathcal{L}}{\delta \mathbf{u}} &= \nu (\nabla \mathbf{u}, \nabla \delta \mathbf{u}) - (f, \delta \mathbf{u}) - (p, \nabla \cdot \delta\mathbf{u}), \\
+%                                                  &= - \nu (\nabla^2 \mathbf{u}, \delta \mathbf{u}) - (f, \delta \mathbf{u}) + (\nabla p, \delta \mathbf{u}) \\
+%                                                  & = (-\nu \nabla^2 \mathbf{u} - f + \nabla p , \delta \mathbf{u}).
+% \end{align}
+% and with respect to $\delta p$, we get,
+% \begin{equation}
+%     -\frac{\delta \mathcal{L}}{\delta p} = (\delta p, \nabla \cdot \mathbf{u}).
+% \end{equation}
+% The optimal condition is defined by vanishing variations, hence, we recover the Stokes equations,
+% \begin{subequations}
+%     \begin{equation}
+%         \nu \nabla^2 \mathbf{u} + \nabla p = -f
+%     \end{equation}
+%     \begin{equation}
+%         \nabla \cdot \mathbf{u} = 0        
+%     \end{equation}
+% \end{subequations}
+% In other words, the role of pressure is to serve as a constrain to enforce incompressibility, where we can consider a velocity field that is not divergence fre, which is then corrected by pressure later - the splitting method.
+% To witness this is action, we consider the basic approach of Chorin's projection which is a two step method,
+% \begin{subequations}
+% \begin{equation}
+%     \frac{\mathbf{u}^* - \mathbf{u}^n}{\Delta t} = - (\mathbf{u}^n \cdot \nabla) \mathbf{u}^n + \nu \nabla^2 \mathbf{u}^n
+% \end{equation}
+% \text{then,}
+% \begin{equation}
+%     \mathbf{u}^{n+1} =  \mathbf{u}^* + {\Delta t} \nabla p^{n+1}.
+% \end{equation}
+% \end{subequations}
+% The idea of projection stems of taking the weak formulation of the second equation with $v \in \mathbf{V} := { \mathbf{v} \in H_0^1(\Omega) \, : \, \nabla \cdot \mathbf{v} = 0 }$,
+% \begin{equation}
+%     (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) + (\nabla p^{n+1}, \mathbf{v})
+% \end{equation}
+% Taking integration by parts we get,
+% \begin{equation}
+%     (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v}) - \underbrace{ (p^{n+1}, \nabla \cdot \mathbf{v})}_ {=0},
+% \end{equation}
+% Hence,
+% \begin{equation}
+%     (\mathbf{u}^*, \mathbf{v}) = (\mathbf{u}^{n+1}, \mathbf{v})
+% \end{equation}
 
 \section{Simulation parameters for $Ra$-$Re$ sweep}\label{app:params}
 \begin{table}\scriptsize
@@ -177,7 +177,7 @@ Hence,
 \end{table}
 The spectral/\emph{hp} quadrilateral element width, heights and polynomial order are kept constant for all simulations, $(\Delta x, \Delta y|_{y=\pm h}, \Delta y|_{y=0}, P) = (0.1\pi,0.0549,0.367,4)$.
 To resolve the high gradients, the quadrilateral element heights are bunched near the wall, $\Delta y|_{y=\pm h}$, and expanded in the channel center, $\Delta y|_{y=0}$.
-The basis type employed here consists of the modified Jacobi polynomials, known as the \emph{modified} basis \citep{karniadakis_2005_book}.
+The basis type employed here consists of the modified Jacobi polynomials, known as the \emph{modified} basis (see \S \ref{sec:nm_modalexpansions}).
 Table \ref{tab:simulations} describes the number of Fourier expansions, $N_z$, and temporal resolution of 52 numerical experiments at $Re = 0, 0.1, 1, 10, 100, 500, 750, 1000, 1050$, $2000$, and $Ra = 0, 2000, 3000, 5000, 8000, 10000$ with $Pr = 1$ and a large aspect ratio, $\Gamma = 4\pi$. 
 The initial conditions of all numerical experiments were sampled from a statistically stationary solution based on the time history of the Nusselt number and shear.
 The laminar solution obtained for  $Ra = 0$ , $Re \leq 1000$ has been omitted in table \ref{tab:simulations}.
@@ -211,7 +211,7 @@ In this regime, the strength of the convection is primarily controlled by $Ra$, 
 
 As $Re$ falls within the range of $1050 \leq Re \leq 2000$, shear-driven turbulence dominates, where the impact of $Ra$ on the first- and second-order statistics is weakly dependent on $Ra$ in figure \ref{fig:sheardrivenstatistics}.
 Figure \ref{fig:sheardrivenstatistics} describes the temporal and plane-averaged streamwise velocity, $\langle w \rangle_{x,z,t}$, temperature, $\langle \theta \rangle_{x,z,t}$, fluctuating streamwise velocity squared, $\langle \tilde{w}\tilde{w} \rangle_{x,z,t}$, fluctuating wall-normal velocity squared, $\langle \tilde{v} \tilde{v} \rangle_{x,z,t}$, fluctuating spanwise velocities squared, $\langle \tilde{u}\tilde{u} \rangle_{x,z,t}$, fluctuating Reynolds stresses $\langle \tilde{v}\tilde{w} \rangle_{x,z,t}$, and fluctuating temperature squared, $\langle \tilde{\theta}\tilde{\theta} \rangle_{x,z,t}$ at $Re = 2000, 1050$ for $Ra \in [0, 10000]$.
-The flow structures appear as uniform, featureless turbulence \citep{tuckerman_2014} at $Re = 2000$, independent of $Ra$.
+The flow structures appear as uniform, featureless turbulence \citep{tuckerman_turbulent-laminar_2014} at $Re = 2000$, independent of $Ra$.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/Appendix/Re2000-BotSpaceTimeCompiled.pdf}
@@ -223,8 +223,8 @@ In other words, the dominant physical mechanism is shear-driven turbulence at $R
 
 As $Re$ approaches $Re = 1050$, the midplane temperature in figure \ref{fig:rarephase} shows regions of spatially localised structures, indicating the presence of turbulent-laminar bands, described in figure \ref{fig:spacetime-Ra0k-Re1.05k} and \ref{fig:spacetime-Ra10k-Re1.05k} later.
 The mean streamwise velocity and temperature gradients at both ends of the wall, and second-order statistics, are enhanced slightly from $Ra = 0$ to $Ra = 10000$.
-This enhancement could be due to the coexistence of longitudinal rolls with turbulent bands at $Ra = 10000$, discussed in \S \ref{sec:3.3}.
-Notably, we have also included the statistics for a subcritical case ($Ra < Ra_{\parallel}$) at $Ra = 1000$, indicating the presence of subcritical effects as the statistics are slightly enhanced from $Ra = 0$ to $Ra = 1000$, reported by \cite{jerome_2012}.
+This enhancement could be due to the coexistence of longitudinal rolls with turbulent bands at $Ra = 10000$, discussed in \S \ref{sec:rbp_3.3}.
+Notably, we have also included the statistics for a subcritical case ($Ra < Ra_{\parallel}$) at $Ra = 1000$, indicating the presence of subcritical effects as the statistics are slightly enhanced from $Ra = 0$ to $Ra = 1000$, reported by \cite{john_soundar_jerome_transient_2012}.
 Nonetheless, there is a distinct change of state between $Re = 1000$ to $1050$ (see figure \ref{fig:rarephase}), marked by the transition from the longitudinal/intermittent roll regime to shear-driven turbulence at $Re \geq 1050$, thus, shaded in blue in figure \ref{fig:rarephase}.
 
 % 
@@ -260,7 +260,7 @@ Nonetheless, there is a distinct change of state between $Re = 1000$ to $1050$ (
     \label{fig:long-pri-instab}
 \end{figure}
 
-Figure \ref{fig:long-pri-instab} shows the eigenvalues of the primary instabilities as a function of its spanwise wavenumber $\alpha d$, leading to the onset of longitudinal rolls at $Re = 1050$. The results are obtained using a Chebyshev-collocation method discretised by 51 Chebyshev polynomials \citep{driscoll2014}. The crosses denote the spanwise wavenumbers admissible within the domain $\Gamma = \pi/2$, where $\alpha d = 4$ corresponds to the dominant eigenmode.
+Figure \ref{fig:long-pri-instab} shows the eigenvalues of the primary instabilities as a function of its spanwise wavenumber $\alpha d$, leading to the onset of longitudinal rolls at $Re = 1050$. The results are obtained using a Chebyshev-collocation method discretised by 51 Chebyshev polynomials \citep{driscoll_chebfun_2014}. The crosses denote the spanwise wavenumbers admissible within the domain $\Gamma = \pi/2$, where $\alpha d = 4$ corresponds to the dominant eigenmode.
 \section{Verification of linear stability analysis}\label{app:sdc_appA}
 \begin{figure}
     \centering
@@ -269,7 +269,7 @@ Figure \ref{fig:long-pri-instab} shows the eigenvalues of the primary instabilit
     \label{fig:evvalidation}
 \end{figure}
 
-Figure \ref{fig:evvalidation} shows the eigenvalues as a function of spanwise wavenumber $\beta$ of RBC at $\varepsilon = 0.7$. The results are obtained using Nektar++ and compared against a Chebyshev-collocation method discretised by 101 Chebyshev polynomials \cite{driscoll2014}.
+Figure \ref{fig:evvalidation} shows the eigenvalues as a function of spanwise wavenumber $\beta$ of RBC at $\varepsilon = 0.7$. The results are obtained using Nektar++ and compared against a Chebyshev-collocation method discretised by 101 Chebyshev polynomials \cite{driscoll_chebfun_2014}.
 
 \section{Other elementary states and ISRs}\label{app:sdc_appB}
 Figure \ref{fig:10elementaries} presents snapshots of temperature slices ($\theta(x,z)|_{d/2}$), depicting ten distinct elementary states. These states are obtained within a minimal domain $\Gamma = 2\pi$, consisting of eight stationary states (figures \ref{fig:10elementaries}(a-h)) and two travelling-wave states (figures \ref{fig:10elementaries}(i,j)).

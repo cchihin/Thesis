@@ -56,10 +56,14 @@ The behaviour of RBP flows is govern by four dimensionless parameters,
 \end{equation}
 where $Ra, Re, Pr, \Gamma$ refers to Reynolds, Rayleigh, Prandtl numbers and aspect ratio and 
 $\eta, g, \nu, \kappa,$ are the thermal expansion coefficient, acceleration due to gravity, kinematic viscosity, thermal diffusivity, respectively.
+The Reynolds number, $Re$, and the Rayleigh number, $Ra$, are dimensionless parameters that characterise the relative influence of shear and buoyancy respectively.
+For sufficiently large values of $Re$ and $Ra$, RBP flows may undergo a transition to shear-driven turbulence or convection-driven convection.
+However, the combined effects of shear and buoyancy in the transitional regime remains largely unexplored.
 
-In the absence of shear, $Re = 0$, the RBP configuration reduces to the classical Rayleigh-B\'{e}nard convection problem, bringing about buoyany-driven convection for a sufficiently large unstable stratification.
-In the limiting case without unstable stratification, $Ra = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
-We focus on the transitional regime, by investigating if buoyancy forces promote the transition to shear-driven turbulence and the effect of shear on convection in large domains.
+In the first part of this thesis, we focus on the transitional regime by investigating whether buoyancy forces promote the transition to shear-driven turbulence and examing the effect of shear on convection in large domains. 
+In the absence of shear, $Re = 0$, the RBP configuration reduces to the classical buoyancy driven Rayleigh-B\'{e}nard convection.
+The second part of this thesis explore the state space structure of a bistable system between a chaotic convection roll state and a stationary convection roll state (see spiral defect chaos and ideal straight rolls in \S \ref{sec:bkgrd_RBC}) of Rayleigh-B\'{e}nard convection.
+% In the limiting case without unstable stratification, $Ra = 0$, the system reduces to the wall-bounded plane Poiseuille flow (PPF), where the transition towards subscritical shear-driven turbulence may be expected for a sufficiently large pressure gradient.
 % For instance, do buoyancy forces promote the transition to shear-driven turbulence and how does shear influence the convection? 
 % To describe the motion of the fluid in RBP configurations, we consider the non-dimensionalised Navier-Stokes equations with Boussinessq approximations,
 % \begin{subequations}\label{eq:rbp_equations}
@@ -80,12 +84,12 @@ We focus on the transitional regime, by investigating if buoyancy forces promote
 % \end{equation}
 % where $\eta, g, \Delta T, \nu, \kappa, W_c, h, d, L$ are the thermal expansion coefficient, acceleration due to gravity, temperature difference between the bottom and top wall, kinematic viscosity, thermal diffusivity, laminar centreline velocity, domain's half-depth, full-depth, length or span respectively.
 
-We describe the structure of the introductory chapter as follows.
-We begin our discussion on the development of hydrodynamic stability theory of wall-bounded shear flows in \S \ref{sec:bkgrd_transitional}.
-Theoretical frameworks used in the study of stability of flow such as linear modal/non-modal stability, nonlinear dynamical systems and the spatiotemporal character of transitional shear flows will be discussed.
-Throughout this discussion, we also highlight examples of PPF which is relevant to the RBP system.
-This followed by the developments of Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}, where theoretical concepts from \S \ref{sec:bkgrd_transitional} will be ultilised.
-After which, we describe the developments of RBP flows \S \ref{sec:bkgrd_RBP}, before concluding this chapter with an outline of the thesis in \S \ref{sec:bkgrd_thesis_outline}.
+The structure of this introductory chapter is as follows:
+we begin our discussion on the development of hydrodynamic stability theory of wall-bounded shear flows in \S \ref{sec:bkgrd_transitional}.
+Theoretical frameworks used in the study of the stability of fluid flow, including linear modal/non-modal stability, nonlinear dynamical systems and the spatiotemporal character of transitional shear flows will be discussed.
+Throughout \S \ref{sec:bkgrd_transitional}, we apply these concepts in the context of plane Poiseuille flows (PPF), which are relevant to the RBP system.
+This followed by the developments of Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
+Finally, we review the developments in RBP flows \S \ref{sec:bkgrd_RBP}, before concluding this chapter with an outline of the thesis in \S \ref{sec:bkgrd_thesis_outline}.
 
 
 % We first discuss the key developments of plane Poiseuille flow (PPF) outlining the key theoretical framework for analysing the stability of fluid flows. This is then followed by Rayleigh-B\'{e}nard convection (RBC) in \S \ref{sec:bkgrd_RBC}.
@@ -378,7 +382,7 @@ The main results from non-modal analysis is that three dimensional perturbations
 % NONLINEAR DYNAMICAL SYSTEMS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Nonlinear dynamical systems}
+\subsection{Nonlinear dynamical systems}\label{sec:bkgrd_nondysys}
 
 % \begin{figure}[h]
 %     \centering
@@ -608,7 +612,7 @@ The linear stability analysis for rigid-free configuration was later performed b
 In the rigid-rigid configuration, the critical Rayleigh number increases further to $Ra_c = 1708$ \citep{pellew_maintained_1940}.
 The Rayleigh number in B\'{e}nard's original experiment contradicted results from linear stability analysis as it was found to be 300 to 1500 smaller than $Ra_c$ for the free-free and rigid-free cases respectively \citep{wesfreid_henri_2017}.
 % However, it is worth highlighting a key difference in B\'{e}nard's experiment and Rayleigh's analysis.
-This contradiction, not recognised by B\'{e}nard at the time, lies in the significant role of surface tension in thin fluid layers exposed to air, now known as B\'{e}nard-Maragoni (BM) convection \citep{block_surface_1956, cloot_nonlinear_1984, manneville_thirty_2006, wesfreid_henri_2017}.
+This contradiction, not recognised by B\'{e}nard at the time, lies in the significant role of surface tension in thin fluid layers exposed to air, now known as B\'{e}nard-Maragoni (BM) convection \citep{block_surface_1956, cloot_nonlinear_1984, hohler_rayleigh-benard_2006, wesfreid_henri_2017}.
 In BM convection, fluid motion is primarily driven by surface tension gradients due to variations of temperature, forming hexagonal cells, as in figure \ref{fig:benard_cells}(a).
 The preference for hexagonal cells in BM convection was later confirmed based on weakly nonlinear stability analysis \citep{cloot_nonlinear_1984}.
 % as in B\'{e}nard experiments, a thin layer of fluid exposed to the air is chiefly driven by the variation of surface tension due to temperature difference, leading to the growth of hexagonal cells, in figure \ref{fig:benard_cells}(a).
