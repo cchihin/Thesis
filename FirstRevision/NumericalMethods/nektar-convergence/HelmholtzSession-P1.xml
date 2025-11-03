@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NEKTAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.nektar.info/schema/nektar.xsd">
+
+    <EXPANSIONS>
+        <E COMPOSITE="C[0]" NUMMODES="2" FIELDS="u" TYPE="MODIFIED" />
+    </EXPANSIONS>
+
+    <CONDITIONS>
+
+        <PARAMETERS>
+            <P> Lambda    = 1 </P>
+        </PARAMETERS>
+
+        <SOLVERINFO>
+            <I PROPERTY="EQTYPE" VALUE="Helmholtz" />
+            <I PROPERTY="Projection" VALUE="Continuous" />
+        </SOLVERINFO>
+
+        <VARIABLES>
+            <V ID="0"> u </V>
+        </VARIABLES>
+
+        <BOUNDARYREGIONS>
+            <B ID="0"> C[1] </B>
+            <B ID="1"> C[2] </B>
+        </BOUNDARYREGIONS>
+
+        <BOUNDARYCONDITIONS>
+            <REGION REF="0">
+                <D VAR="u" VALUE="sin(PI*x)" />
+            </REGION>
+            <REGION REF="1">
+                <D VAR="u" VALUE="sin(PI*x)" />
+            </REGION>
+        </BOUNDARYCONDITIONS>
+
+        <FUNCTION NAME="Forcing">
+            <E VAR="u" VALUE="-(Lambda + PI*PI)*sin(PI*x)" />
+        </FUNCTION>
+
+        <FUNCTION NAME="ExactSolution">
+            <E VAR="u" VALUE="sin(PI*x)" />
+        </FUNCTION>
+    </CONDITIONS>
+
+    <FILTERS>
+        <FILTER TYPE="Error"> 
+            <PARAM NAME="OutputFile">ErrorFile</PARAM> 
+            <PARAM NAME="OutputFrequency">1</PARAM> 
+            <PARAM NAME="ConsoleOutput">1</PARAM> 
+        </FILTER>
+    </FILTERS>
+
+</NEKTAR>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NEKTAR>
+    <Metadata>
+        <Provenance>
+            <GitBranch>refs/heads/master</GitBranch>
+            <GitSHA1>2d928224b7252460224ea10828efdbbe59507022</GitSHA1>
+            <Hostname>chanbuntu</Hostname>
+            <NektarVersion>5.9.0</NektarVersion>
+            <Timestamp>18-Oct-2025 16:18:55</Timestamp>
+        </Provenance>
+        <ChkFileNum>0</ChkFileNum>
+        <SessionName0>HelmholtzMesh_Nel62.xml</SessionName0>
+        <SessionName1>HelmholtzSession-P1.xml</SessionName1>
+    </Metadata>
+    <ELEMENTS FIELDS="u" SHAPE="Segment" BASIS="Modified_A" NUMMODESPERDIR="UNIORDER:2" ID="0-61" COMPRESSED="B64Z-LittleEndian" BITSIZE="64">eJx10z1IQmEUBmBo0RrSoUGJoiGyROxviERwFAolgpqCcmmpKQiCoJYIXMrAJQmkhloaop/BEG5QauoSGaUgFBJepFICqSCQ4J7zHiFweuBy+b5z3pdPN9M23HO4Hw0lu73uSkSBL636s5brpGiLF8wL1oxYTRVP2p05UTUMLrmMz6LPfnNlcxfE4+jKyHT2VbTcjtp3h1TxPDDXP+Atif6O7JTa+yZOfNQc1ct38dGeuzhtKosmb6o2/1s3E9HPdh5UxGI6tmf9qlv6Z57/g318DizzPXCR54BHPCd84D3gGO8J7zkH6OecoNNIOcLxNOUMN7gHGDRQT9CYph6hYtl2ZO9+ovA7oX13QT31LCox7Vxxk3oWV6ln0Upzi8u0l/iZ0PYW1ygXcZJyE02Uqxii3MUnj9aLuEW9iWHqtaEB/g/m+RwY5ntgF88BfTwn3OE9YDP1LAY5B+jhnGCSc4R5zhmaqWcxzj3BdXq3oo7etfMPM/oSxQAA</ELEMENTS>
+</NEKTAR>

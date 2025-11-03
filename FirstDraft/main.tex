@@ -1,0 +1,123 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{lscape}
+\usepackage{pgfgantt}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{natbib}
+\usepackage[margin=2cm]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=red]{hyperref}
+\usepackage{blindtext}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim} 
+\usepackage[outdir=./Figures/]{epstopdf}
+\usepackage{pifont}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{newtxtext}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% Used for definitions
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}
+
+% \includeonly{Background/background,NumericalMethods/numericalmethods,TransitionalRBP/transitionalrbp,StateSpaceStructureOfSDC/statespacestructureofsdc,Conclusions/conclusions,Appendices/appendices}
+% \includeonly{NumericalMethods/numericalmethods}
+% \includeonly{Appendices/appendices}
+% \includeonly{Cover/cover}
+
+\begin{document}
+\include{Cover/cover}
+
+\chapter*{Abstract}
+The transitional regimes of Rayleigh-B\'{e}nard Poiseuille (RBP) flows and Rayleigh-B\'{e}nard convection (RBC) are investigated using direct numerical simulations and linear stability analysis.
+RBP flows serve as a paradigmatic configuration that describes fluid motion driven by shear and buoyancy forces, a combination of the classical buoyancy-driven RBC and shear-driven plane Poiseuille flow (PPF).
+While the transitional regime of RBC and PPF have been well studied over the past century, the transitional regime where both forces interact remains largely unexplored beyond linear instability, investigated in the first part of this thesis.
+
+Following a review of the relevant literature and numerical methods, we conduct direct numerical simulations using Nektar++, a spectral/\textit{hp} element package.
+The simulations span over a range of Rayleigh numbers, $Ra \in [0, 10000]$ and Reynolds number $Re \in[0, 2000]$, with unit Prandtl number in a large computational domain.
+Within this parametric space, we identify five distinct regimes: (1) bistable SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
+The intermittent rolls regimes represent a newly identified state characterised by the spatio-temporal breakdown and regeneration of longitudinal rolls.
+In the transitional shear-driven turbulent regime, we also observe that longitudinal rolls may coexist with turbulent-laminar bands.
+The spatio-temporal dynamics of longitudinal rolls highlight its dominant role in transitional RBP flows.
+We examine the unstable manifolds of the longitudinal rolls in a confined domain, integrating along which leads to turbulence.
+Depending on $Re$, this turbulence may occur transiently, decaying towards the unstable laminar base state where the longitudinal rolls can be excited again, forming a cyclic process referred to as the \textit{thermally-assisted sustaining process (TASP)}.
+We present a state space sketch of the dynamical process, and discuss the relevance of the \textit{TASP} to larger domains.
+% Finally, we discuss the relevance of the \textit{TASP} to the large domain.
+% The newly identified intermittent rolls state, features longitudinal rolls that spontaneously decay towards the laminar state.V
+
+In the second part of the thesis, we explore the state space structure of the bistable system between spiral defect chaos (SDC) and ideal straight rolls (ISRs) of Rayleigh-B\'{e}nard convection within large domains.
+By systematically reducing the domain size, we observe that SDC occurs transiently, eventually stabilising into multiple stable invariant solutions, referred to as \textit{elementary} states.
+These \textit{elementary} states are visually and statistically similar to the localised features of SDC.
+We also examined the edge between the basin of attractions of ISRs and the elementary states, revealing multiple edge states.
+The unstable invariant manifolds of ISRs exhibit two distinct behaviours: unstable ISRs near the Busse balloon connect to stable ISRs and base state via heteroclinic connections, while unstable ISRs further from the Busse balloon lead to SDC, indicating such ISRs lie on boundary between ISRs and SDC.
+% these manifolds are connect to stable ISRs and the base state via heteroclinic connections; whereas for ISRs located further from the Busse balloon, trajectories along their unstable manifolds evolve toward sustained SDC, suggesting that these ISRs lie on the boundary between the basins of attraction of stable ISRs and SDC.
+% The unstable invariant manifolds of ISRs reveal two distinct connections: near the Busse balloon, the unstable ISRs are connected with stable ISRs and the base state via heteroclinic connections, while further from it, trajectories evolve towards SDC, suggesting that such ISRs lie on the boundary between ISRs and SDC.
+We conclude by presenting a state space sketch highlighting the organisation of SDC, ISRs, elementary and edge states.
+% Some manifolds exhibit heteroclinic connections between the stable and unstable ISRs and the base state.
+% Along other manifolds, we identify a pathway towards transient SDC before stabilising into an elementary state, and SDC in a larger domain
+% providing a pathway towards transient SDC before stabilising into an elementary state.
+% Along this same unstable manifold, it leads to SDC that is sustained in a larger domain.
+% Finally, we conclude by presenting a state space sketch of SDC, ISRs, elementary states and edge states.
+% The role of longitudinal rolls in transitional RBP flows is apparent, and we examine the unstable manifold of longitudinal rolls in a confined domain, integrating along which led to transient turbulence, decaying towards the laminar state before regenerating into longitudinal rolls again, sustaining transient turbulence.
+% Near the intermittent roll regime, a periodic orbit emerges between the longitudinal rolls and the laminar state within a confined domain.
+% Above a certain $Re$ threshold, the unstable longitudinal rolls provide an intermediate pathway for the transition from the laminar state to turbulence.
+% Finally, we provide a state space sketch of the dynamical processes, emphasising the role of longitudinal rolls in transitional RBP in confined domains, and discuss connections to the large domains.
+% The co-existence of ideal straight rolls (ISRs) and spiral-defect chaos (SDC) as bistable states in Rayleigh-B\'{e}nard convection above the onset of the linear instability is well established in extended spatial domains ($\Gamma \ge 40$ where $\Gamma$ is the aspect ratio of the domain). However, multiple stable states have also been found independently, raising questions about the precise understanding of this observed bistability in extended domains. In this study, we isolate the localised structures of SDC by gradually reducing the spatial domain. By minimising the domain systematically to $\Gamma = 2\pi$, SDC appears transiently and eventually stabilises into new stable states referred to as elementary states. These elementary states are visibly and statistically similar to the spatially local patterns of SDC, indicative of invariant solutions underpinning the pattern formation in SDC.
+
+% To understand the state space structure further, we have examined the edge between ISRs and the elementary states, revealing multiple edge states, and conducted a series of numerical simulations along the unstable manifolds of unstable ISRs. The unstable ISRs near the Busse balloon are connected to stable ISRs and the base state through networks of heteroclinic orbits, forming a basin of attraction for each stable ISR. In contrast, the unstable ISRs further from the Busse balloon contain some unstable manifolds, along which the solution trajectory leads to SDC, suggesting that these unstable ISRs sit on the boundary between stable ISRs and SDC. Finally, we propose a state-space structure around the basic heat conduction state, stable/unstable ISRs, elementary states and transient SDC.
+
+\chapter*{Acknowledgements}
+There are many people who have shaped my experience as a PhD student whom I would like to express my gratitude for.
+First and foremost, I want to express my deepest gratitude to my supervisors, Spencer and Yongyun.
+I have learned and grown a lot under their extremely kind and patient supervision, for allowing me to explore research ideas in shark skins and hydrodynamic instabilities to contributing to the large codebase of Nektar++, and at times canning ideas that did not work! (Hint: the topic that did not make it to this thesis)
+I will definitely miss the our constant weekly catch-ups and engaging deep-dives, satisfying my curiousity.
+I want to also emphasise that they cared deeply and supported development opportunities beyond the PhD as well, allowing me to pursue and development interests that does no necessarily contribute to the PhD thesis such as being involved in the Nektar++ redesign project, engaging in graduate teaching assistant roles, pursuing a summer research exchange at LadHyX and internship at IBM Research, significantly enhancing the PhD student experience.
+
+I would also like to specially thank Yongyun, who also happens to be my MSc thesis supervisor, for introducing the topic of reduced-order modelling of turbulent Couette flows as part of my MSc thesis. 
+Perhaps more importantly, for also giving me the confidence I need to pursue a PhD program at Imperial.
+
+I would also like to thank Lutz, for his kind hospitality, ensuring that I was comfortable at LadHyX in the summer of 2024. Despite being a short three months stint, I learned about advanced modal decompisition techniques and was exposed to the broad fluid mechanics research activities at LadHyX.
+
+I would also like to thank Basman, my Bachelor's thesis supervisor at Nanyang Technological University (NTU), during which we worked on humpback whale leading-edge turbercles. 
+I believe it is fair to say that he was partly responsible for planting the "seed" for my fascination for computational fluid dynamics.
+
+I would like to also thank Eloisa and Geeth, my project supervisor and manager at IBM Research, for giving the opportunity to learn and contribute to AI research activities within a corporate company.
+I am excited at the prospects of working at IBM Research.
+
+I would also like to thank the Nektar++ community, particularly Chris, Jacques and Dave for their patient guidance on how to do contribute to Nektar++ properly.
+
+I would also like to thank my collaborators, Mohammad and Raj, for providing guidance and advice during the PhD and also providing the opportunity to work on physical informed neural networks. 
+I look forward keenly to maintaining our future collaborations.
+
+The PhD experience isn't complete without the shared memories with friends which include, unwinding over a cheeky pint on Friday evenings, Mario karting in the common room, going to Sagar and exploiting its 50\% discount, honest burgers student discounts, going to Wasabi at South Kensington at closing to get half-priced bentos, countless muffin and coffee breaks, peaceful walks around campus, Hyde park runs, booking the swimming pool sessions just to use the sauna, many gym/swim/badminton/climbing sessions, appearing decently surprise to bump into each other in the office on the weekends, and bantering over the weather, reviewers and PhD life. 
+In no particular order, Henrik, Parv, Alex, Kaloyan, Ganlin, Jing Tian, Steffi, Lidia, Christian, Kazuki, Priyam, Sid, Elise, Yu Han, Francisco, Cheng Wei, Filippo, Bo Han,Grace,Benita,Zhao, Zilin, Victor, Mohsen, Guglielmo, Joaa, Yacine were all responsible and I will forever cherish our shared memories.
+
+The person who probably desrves the most credit would be my future wife, Angelica, who have been there atthe beginning, ready to lend a listening ear to my monologue on how cool CFD is.
+The distance between Singapore and London over the years have been tough, and I am happy that we will be closing the gap and I am looking forward to our future life.
+Last but not least, I am forever grateful to my loving parents and family, for supproting my academic interests aboard despite the distance. 
+
+This thesis is dedicated to everyone above.
+\tableofcontents
+
+% \include{Introduction/introduction}
+% \include{Background/background}
+% \include{NumericalMethods/numericalmethods}
+% \include{TransitionalRBP/transitionalrbp}
+% \include{StateSpaceStructureOfSDC/statespacestructureofsdc}
+% \include{Conclusions/conclusions}
+% \include{Appendices/appendices}
+
+\bibliographystyle{plainnat}
+\bibliography{References/nektar.bib,References/RBC.bib,References/RBP.bib,References/NumericalMethods.bib,References/RBP_applications.bib,References/HydrodynamicStability.bib,References/shearflowturb_trans.bib,References/shearflowturb_developed.bib,References/generic.bib,References/PhDTheses.bib}
+
+\end{document}
