@@ -12,3 +12,5 @@
 *.blg
 *.synctex.gz
 */*.pdf
+*/*.lof
+*/*.lot
