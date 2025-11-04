@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{subfigure}
-\usepackage{natbib}
+\usepackage[english]{babel}
 \usepackage[margin=2cm]{geometry}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue]{hyperref}
 \usepackage{blindtext}
@@ -23,9 +23,24 @@
 \usepackage{newtxtext}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE,RO]{\nouppercase{\rightmark}}
+\fancyhead[LO,RE]{\nouppercase{\leftmark}}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
+
+% The plain style is used in the opening page of a chapter
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0pt} % remove top line
+}
+
 
 % Used for definitions
-\usepackage[english]{babel}
 \usepackage{amsthm}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -37,15 +52,28 @@
 \usepackage{xcolor}
 \setstcolor{red}
 
+% References
+\usepackage[english]{babel}
+\usepackage[round, sort]{natbib}
+% \usepackage{apacite} 
+
+
 \begin{document}
 
+    \frontmatter
+
     \include{Cover/cover}
+    % \include{StatementOfOriginality/statementoforiginality}
+    % \include{CopyrightDeclaration/copyrightdeclaration}
+    \include{Declarations/declarations}
     \include{Abstract/abstract}
     \include{Acknowledgements/acknowledgements}
 
     \tableofcontents
     \listoffigures
     \listoftables
+
+    \mainmatter
 
     \include{Background/background}
     \include{NumericalMethods/numericalmethods}
@@ -54,7 +82,8 @@
     \include{Conclusions/conclusions}
     \include{Appendices/appendices}
 
+    \backmatter
     \bibliographystyle{plainnat}
-    \bibliography{References/nektar.bib,References/RBC.bib,References/RBP.bib,References/NumericalMethods.bib,References/RBP_applications.bib,References/HydrodynamicStability.bib,References/shearflowturb_trans.bib,References/shearflowturb_developed.bib,References/generic.bib,References/PhDTheses.bib}
+    \bibliography{References/nektar,References/RBC,References/RBP,References/NumericalMethods,References/RBP_applications,References/HydrodynamicStability,References/shearflowturb_trans,References/shearflowturb_developed,References/generic,References/PhDTheses}
 
 \end{document}
