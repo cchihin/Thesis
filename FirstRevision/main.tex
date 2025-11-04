@@ -54,8 +54,7 @@
 
 % References
 \usepackage[english]{babel}
-\usepackage[round, sort]{natbib}
-% \usepackage{apacite} 
+\usepackage[natbibapa]{apacite} 
 
 
 \begin{document}
@@ -63,8 +62,6 @@
     \frontmatter
 
     \include{Cover/cover}
-    % \include{StatementOfOriginality/statementoforiginality}
-    % \include{CopyrightDeclaration/copyrightdeclaration}
     \include{Declarations/declarations}
     \include{Abstract/abstract}
     \include{Acknowledgements/acknowledgements}
@@ -83,7 +80,7 @@
     \include{Appendices/appendices}
 
     \backmatter
-    \bibliographystyle{plainnat}
+    \bibliographystyle{apacite}
     \bibliography{References/nektar,References/RBC,References/RBP,References/NumericalMethods,References/RBP_applications,References/HydrodynamicStability,References/shearflowturb_trans,References/shearflowturb_developed,References/generic,References/PhDTheses}
 
 \end{document}
