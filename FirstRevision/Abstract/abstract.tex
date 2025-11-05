@@ -1,21 +1,22 @@
 \chapter*{Abstract}
 The transitional regimes of Rayleigh-B\'{e}nard Poiseuille (RBP) flows and Rayleigh-B\'{e}nard convection (RBC) are investigated using direct numerical simulations and linear stability analysis.
 RBP flows serve as a paradigmatic configuration that describes fluid motion driven by shear and buoyancy forces, a combination of the classical buoyancy-driven RBC and shear-driven plane Poiseuille flow (PPF).
-While the transitional regime of RBC and PPF have been well studied over the past century, the transitional regime where both forces interact remains largely unexplored beyond linear instability, investigated in the first part of this thesis.
+While the transitional regime of RBC and PPF have been well studied over the past century, the transitional regime where both forces interact remains largely unexplored beyond linear instability.
 
-Following a review of the relevant literature and numerical methods, we conduct direct numerical simulations using Nektar++, a spectral/\textit{hp} element package.
+Following a review of the relevant literature and numerical methods, we conduct direct numerical simulations of transitional RBP flows using Nektar++, a spectral/\textit{hp} element package.
 The simulations span over a range of Rayleigh numbers, $Ra \in [0, 10000]$ and Reynolds number $Re \in[0, 2000]$, with unit Prandtl number in a large computational domain.
 Within this parametric space, we identify five distinct regimes: (1) bistable SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
-The intermittent rolls regimes represent a newly identified state characterised by the spatio-temporal breakdown and regeneration of longitudinal rolls.
-In the transitional shear-driven turbulent regime, we also observe that longitudinal rolls may coexist with turbulent-laminar bands.
-The spatio-temporal dynamics of longitudinal rolls highlight its dominant role in transitional RBP flows.
-We examine the unstable manifolds of the longitudinal rolls in a confined domain, integrating along which leads to turbulence.
-Depending on $Re$, this turbulence may occur transiently, decaying towards the unstable laminar base state where the longitudinal rolls can be excited again, forming a cyclic process referred to as the \textit{thermally-assisted sustaining process (TASP)}.
-We present a state space sketch of the dynamical process, and discuss the relevance of the \textit{TASP} to larger domains.
+The (4) intermittent rolls regime represent a newly identified state characterised by the spatio-temporal intermittent breakdown and regeneration of longitudinal rolls.
+In the (5) shear-driven turbulent regime, we also observe that intermittent rolls may coexist with turbulent-laminar bands.
+The spatio-temporal intermittent dynamics of longitudinal rolls highlight its dominant role in transitional RBP flows.
+To suppress spatial intermittency, we examine the unstable manifolds of the longitudinal rolls in a confined domain, integrating along which leads to turbulence.
+Depending on $Re$, this turbulence may occur transiently, decaying towards the unstable laminar base state where the longitudinal rolls can be excited again, forming a quasi-cyclic process referred to as the \textit{thermally-assisted sustaining process (TASP)}.
+We furnish a state space sketch of the dynamical process, and discuss the relevance of the \textit{TASP} to larger domains, concluding the first part of the thesis.
 
-In the second part of the thesis, we explore the state space structure of the bistable system between spiral defect chaos (SDC) and ideal straight rolls (ISRs) of Rayleigh-B\'{e}nard convection within large domains.
-By systematically reducing the domain size, we observe that SDC occurs transiently, eventually stabilising into multiple stable invariant solutions, referred to as \textit{elementary} states.
-These \textit{elementary} states are visually and statistically similar to the localised features of SDC.
+In the second part, we explore the state space structure of the bistable system between spiral defect chaos (SDC) and ideal straight rolls (ISRs) of Rayleigh-B\'{e}nard convection within large domains.
+By systematically reducing the domain size, we observe that SDC occurs transiently, eventually stabilising into multiple stable invariant solutions, referred to as \textit{elementary states}.
+These \textit{elementary states} are visually and statistically similar to the localised features of SDC, underpinning the pattern formation of SDC.
 We also examined the edge between the basin of attractions of ISRs and the elementary states, revealing multiple edge states.
-The unstable invariant manifolds of ISRs exhibit two distinct behaviours: unstable ISRs near the Busse balloon connect to stable ISRs and base state via heteroclinic connections, while unstable ISRs further from the Busse balloon lead to SDC, indicating such ISRs lie on boundary between ISRs and SDC.
-We conclude by presenting a state space sketch highlighting the organisation of SDC, ISRs, elementary and edge states.
+Investigating the unstable manifolds of ISRs exhibit two distinct behaviours: (1) unstable ISRs near the Busse balloon connect to stable ISRs and base state via heteroclinic connections, and (2) unstable ISRs further from the Busse balloon lead to SDC, indicating such ISRs lie on boundary between ISRs and SDC.
+% We conclude by presenting a state space sketch highlighting the organisation of SDC, ISRs, elementary and edge states.
+Finally, we present a state space sketch of the \textit{elementary states} organised around SDC, highlighting its `building-block' description of SDC.
