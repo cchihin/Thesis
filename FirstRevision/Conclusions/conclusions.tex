@@ -1,8 +1,8 @@
 \chapter{Conclusions}\label{chap:5}
 
 In our concluding  chapter, we emphasise the main contributions of this thesis and provide recommendations for possible avenues of future work.
-We explored the transitional regimes of RBP flows arising from the combination of shear and buoyancy forces in \S \ref{chap:3}.
-Our findings in decreasing order of significance is summarise as follows,
+We explored the transitional regimes of Rayleigh-B\'{e}nard Poiseuille (RBP) flows arising from the combination of shear and buoyancy forces in \S \ref{chap:3}.
+The main findings can be summarised in the following,
 \begin{enumerate}
     \item The existence of the \textit{thermally-assisted sustaining process}, providing an alternative pathway towards turbulence via linearly unstable longitudinal rolls in confined domains.
     \item At moderate Reynolds number, a new spatio-temporal regime referred to as intermittent rolls was identified. It is characterised by the quasi-cyclic breakdown and regeneration of longitudinal rolls for moderate Reynolds number in large spatial domains.
@@ -17,28 +17,28 @@ Our findings in decreasing order of significance is summarise as follows,
 % These wavy rolls vanishes as $Re$ increases, giving rise to a newly identified spatio-temporal regime referred to as intermittent rolls, characterised by the repeated breakdown and regeneration of longitudinal rolls.
 % By considering a confined domain, we identified the \textit{thermally-assisted sustaining process (TASP)}, providing an alternative pathway towards turbulence via linearly unstable longitudinal rolls.
 % Furthermore, we also establish the relevance of the \textit{TASP} to the large domain.
-Now, we provide possible avenues of future work for transitional RBP which may include,
+Next, we provide possible avenues of future work for transitional RBP which may include,
 \begin{enumerate}
     \item Performing a detailed bifurcation analysis of invariant states arising around the thermally-assisted sustaining process (see figure \ref{fig:compiled-full}) in confined domains and minimal band units \citep{tuckerman_patterns_2020}, possibly identifying complex global bifurcations.
-    \item Conducting bifurcation analysis necessitates the implementation of the Jacobian-free Newton-Krylov (JFNK) methods in Nektar++ \citep{knoll_jacobian-free_2004}. Variants of the JFNK method includes a hook-step iteration \citep{viswanath_recurrent_2007} or the utilisation of preconditioners \citep{yan_nektar_2021} may accelerate convergence. Apart from JFNK method and its variants, a recent adjoint-based variation method may offer better convergence properties for computing periodic orbits \citep{parker_variational_2022}.
-    \item The extension of the thermally-assisted sustaing process to other shear-and-bouyancy driven systems such as the Rayleigh-B\'{e}nard Coutte (RBC) flow, which may offer of the ease of experimental verification in the absence of a mean convective flow.
+    \item Conducting bifurcation analysis necessitates the implementation of the Jacobian-free Newton-Krylov (JFNK) methods in Nektar++ \citep{knoll_jacobian-free_2004}. Variants of the JFNK method includes a hook-step modification \citep{viswanath_recurrent_2007} or the utilisation of preconditioners \citep{yan_nektar_2021} may accelerate convergence. Apart from JFNK method and its variants, a recent adjoint-based variation method may offer better convergence properties for computing periodic orbits \citep{parker_variational_2022}.
+    \item The extension of the \textit{thermally-assisted sustaining process} to other buoyancy and shear driven systems such as the Rayleigh-B\'{e}nard Coutte (RBC) flow, which may offer of the ease of experimental verification in the absence of a mean flow.
     \item It may be worth exploring the influence of Reynolds number on the bistable system between spiral-defect chaos (SDC) and ideal straight rolls (ISRs) in detail, and the secondary linear stability of longitudinal rolls. However, we caution that there may be numerous invariant states in the buoyancy driven regime as witness in \S \ref{chap:4}.
 \end{enumerate}
 
 In \S \ref{chap:4}, we examined the state space structure of the bistable system between SDC and ISRs in Rayleigh-B\'{e}nard convection in various domain sizes. 
 The main contributions of the study is as follows,
 \begin{enumerate}
-    \item By systematically minimising the spatial domain to a minimal domain, we have identified stable invariant solutions referred to as \textit{elementary} states. These elementary states are visibly (see figure \ref{fig:fig1}) and statistically (see figure \ref{fig:averagedProfile}) similar to the spatially localised patterns of SDC.
-    \item The identification of multiple edge states, forming local attractors along the edge between the basin of attraction of ISRs and elementary states.
-    \item Multiple networks of hetereoclinic orbits between stable and unstable ISRs.
+    \item By systematically minimising the spatial domain to a minimal domain, we have identified stable invariant solutions referred to as \textit{elementary} states. These elementary states are visibly (see figure \ref{fig:fig1}) and statistically (see figure \ref{fig:averagedProfile}) similar to the spatially localised patterns of SDC, underpinning the pattern formation of SDC.
+    \item The identification of multiple edge states (and likely a plenty more), forming local attractors along the edge between the basin of attraction of ISRs and elementary states.
+    \item Multiple networks of hetereoclinic orbits (and likely a plenty more) between stable and unstable ISRs.
     \item The identification of an unstable ISRs far from the boundaries of the Busse balloon which sit on the boundary between stable ISRs and SDC.
 \end{enumerate}
-While the newly identified elementary states resembles the localised features of SDC, they remain stable and do not capture the dynamics of SDC. 
-We propose possible avenues of future work as follows,
+While the newly identified elementary states resembles the localised features of SDC, they remain stable and time independent and therefore do no necessarily capture the temporal dynamics of SDC. 
+As such, possible avenues of future may be dedicated to the following,
 \begin{enumerate}
-    \item Computing the unstable invariant solutions of Rayleigh-B\'{e}nard convection, such as their equilibria, periodic orbits and heteroclinic connections between them, possibly offering descriptions of the temporal dynamics of SDC (necessitating the implementation of bifurcation tools in Nektar++ mentioned above).
-    \item The onset of sustained chaos (SDC) appears to be linked to the domain size, a bifurcation analysis of elementary states with respect to the spatial domain size as the primary control variable could be performed.
-    \item Connecting the ideas from transient turbulence (see \ref{sec:bkgrd_nondysys}) to transient SDC, perhaps revealing a leaky attractors or homoclinic tangles in Rayleigh-B\'{e}nard convection.
+    \item Computing the unstable invariant solutions of Rayleigh-B\'{e}nard convection, such as their equilibria, periodic orbits and heteroclinic connections between them, potential offering descriptions of the temporal dynamics of SDC (necessitating the implementation of bifurcation tools in Nektar++ mentioned above).
+    \item The onset of sustained spiral defect chaos appears to be linked to a critical domain size, below which, SDC remains transient. Therefore, a bifurcation analysis of elementary states with respect to the spatial domain size could be performed to determine the critical domain size for the onset of sustained chaos.
+    \item By performing bifurcation analysis in the regime of transient SDC, we may draw similar ideas from transient turbulence (see \ref{sec:bkgrd_nondysys}), perhaps revealing global bifurcations such as crisis bifurcations where the a chaotic attractor becomes leaky or homoclinic tangles in Rayleigh-B\'{e}nard convection.
 \end{enumerate}
 
 % \section{State space structure of Spiral Defect Chaos}
