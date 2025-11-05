@@ -1,6 +1,6 @@
 \chapter[Transitional RBP flows]{Transitional Rayleigh-B\'{e}nard Poiseuille flows}\label{chap:3}
 
-In this chapter, we \red{will} investigate the transitional flow regimes arising from the interaction between buoyancy and shear in Rayleigh-B\'{e}nard Poiseuille (RBP) flows within large and small domains.
+In this chapter, we will investigate the transitional flow regimes arising from the interaction between buoyancy and shear in Rayleigh-B\'{e}nard Poiseuille (RBP) flows within large and small domains.
 In particular, the transition boundaries between the bistable system consisting of spiral defect chaos (SDC) and ideal straight rolls (ISRs) in Rayleigh-B\'{e}nard convection (see \S \ref{sec:bkgrd_RBC}), and subcritical turbulence in plane Poiseuille flows (see \S \ref{sec:bkgrd_transitional}) under the influence of $Re$ and $Ra$ are not known.
 
 Using Nektar++, a spectral/\textit{hp} element package, we conduct direct numerical simulations over a range of Rayleigh numbers, $Ra \in [0, 10000]$, Reynolds numbers, $Re \in [0, 2000]$ and unit Prandtl number, we identify five distinct regimes: (1) bistable SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
@@ -51,21 +51,21 @@ $\mathbf{x} = (x,y,z)$ and $t$ denote the non-dimensionalised spatial and tempor
 $p$ refers to the non-dimensionalised pressure scaled by $\rho W_c^2$, and $\theta(\equiv(T-T_U)/\Delta T)$ refers to the non-dimensionalised temperature with $T$ being the absolute temperature.
 $\mathbf{j}$ denotes the unit vector in the $y$-direction. 
 
-We note that the rescaled $Ra/8$ term in the momentum forcing terms is equivalent to the Rayleigh number scaled based on the half-depth, $h$, \red{since $Ra$ is scaled based on depth, $d$, in classical RBC.}
+We note that the rescaled $Ra/8$ term in the momentum forcing terms is equivalent to the Rayleigh number scaled based on the half-depth, $h$, since $Ra$ is scaled based on depth, $d$, in classical RBC.
 The Rayleigh number, $Ra$, Reynolds number $Re$ and Prandtl number, $Pr$ are defined in \S \ref{sec:bkgrd_overview}. 
 We set $Pr = 1$ in this study.
-\red{For the Rayleigh-B\'{e}nard convection problem, we note that the equation \eqref{eq:rbp_RBP} becomes singular at $Re = 0$.}
+For the Rayleigh-B\'{e}nard convection problem, we note that the equation \eqref{eq:rbp_RBP} becomes singular at $Re = 0$.
 In such cases, we solve the non-dimensionalised incompressible Navier-Stokes equations based on thermal length, velocity and temporal scales given in \S \ref{sec:rbc_2}.
 \
 
 \subsection{Numerical Methods}
 The governing equations are solved numerically using Nektar++, an open-source spectral/\emph{hp}-element package \citep{cantwell_nektar_2015,moxey_nektar_2020}. 
 The computational mesh consists of 2D quadrilateral elements in the $x-y$ plane generated using Gmsh \citep{geuzaine_gmsh_2009} and then imported into Nektar++ using Nekmesh \citep{green_nekmesh_2024}.
-\red{We discretise the spatial domain based on the quasi-3D approach, employing spectral/\emph{hp} elements in the $x-y$ plane and Fourier expansions in the $z$ (see \S \ref{sec:nm_quasi3d}).}
+We discretise the spatial domain based on the quasi-3D approach, employing spectral/\emph{hp} elements in the $x-y$ plane and Fourier expansions in the $z$ (see \S \ref{sec:nm_quasi3d}).
 We emphasise that the streamwise direction is in $z$.
 The discretised equations are solved using a velocity correction scheme, based on a second-order stiffly splitting scheme, where the nonlinear advection and forcing terms are treated explicitly, while the pressure and diffusion terms are treated implicitly (see \S \ref{sec:nm_vcs}).
-The $3/2$ and polynomial \red{dealiasing} rule for the Fourier expansions and spectral/\emph{hp} elements are applied during the evaluation of the nonlinear advection terms.
-To \red{sustain the flow for $Re > 0$}, we use a Green's function approach to impose a constant volumetric flux (see \S \ref{sec:nm_constantflux}).
+The $3/2$ and polynomial dealiasing rule for the Fourier expansions and spectral/\emph{hp} elements are applied during the evaluation of the nonlinear advection terms.
+To sustain the flow for $Re > 0$, we use a Green's function approach to impose a constant volumetric flux (see \S \ref{sec:nm_constantflux}).
 
 \subsection{Parametric sweep of $Ra$-$Re$ space}\label{sec:Raresweep}
 We consider fifty-two numerical simulations at $Re = 0, 0.1, 1, 10, 100, 500, 750, 1000, 1050$, $2000$, and $Ra = 0, 2000, 3000, 5000, 8000, 10000$ at $Pr = 1$ with a large aspect ratio of $\Gamma = 4\pi$.
@@ -129,24 +129,24 @@ Substituting equation \eqref{eq:rbp_simAnsatz} into (\ref{eq:rbp_linearised}) re
 \begin{figure}
     \centering
     \includegraphics[width=1.3\textwidth, angle=90]{TransitionalRBP/Figures/PhaseSpace/RaRePhaseSpace.pdf}
-    \caption{A conceptual diagram of he $Ra-Re$ phase space illustrates the midplane temperature snapshots, $\theta(x,z)|_{y=0}$ for $Re \in [0,2000]$ and $Ra \in [0, 10000]$, classified into five distinct regimes: (1) SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls and (5) shear-driven turbulence. The blue solid curves refer to primary neutral curves of the longitudinal and transverse rolls $Ra_\parallel, Ra_\perp$. The red curve indicates the secondary oscillatory instability of ISRs at $Re = 0$ \citep{bodenschatz_recent_2000}. Shades of red, green and blue indicate their dominant mechanism, whether driven by buoyancy or shear (or mixed). \red{For $Re > 0$, the mean flow is along the $z$ direction.}}
+    \caption{A conceptual diagram of he $Ra-Re$ phase space illustrates the midplane temperature snapshots, $\theta(x,z)|_{y=0}$ for $Re \in [0,2000]$ and $Ra \in [0, 10000]$, classified into five distinct regimes: (1) SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls and (5) shear-driven turbulence. The blue solid curves refer to primary neutral curves of the longitudinal and transverse rolls $Ra_\parallel, Ra_\perp$. The red curve indicates the secondary oscillatory instability of ISRs at $Re = 0$ \citep{bodenschatz_recent_2000}. Shades of red, green and blue indicate their dominant mechanism, whether driven by buoyancy or shear (or mixed). For $Re > 0$, the mean flow is along the $z$ direction.}
     \label{fig:rarephase}
 \end{figure}
 
 We present the results obtained from the DNS of transitional RBP flows, focusing on the parameter space defined by Rayleigh numbers in the range $Ra \in [0, 10000]$, and Reynolds numbers in the range of $Re \in [0, 2000]$ (see Appendix \ref{app:params} for the full details).
 
-\red{For all numerical simulations, an initial condition, consists of a Gaussian white noise with zero mean and unit variance, superimposed onto the laminar base state (i.e. conduction state at $Re = 0$).}
-\red{The RBP system is then time-integrated untila statistically stationary state is reached, which typically requires a time of $t = O(10)$ to $O(10^2)$.}
+For all numerical simulations, an initial condition, consists of a Gaussian white noise with zero mean and unit variance, superimposed onto the laminar base state (i.e. conduction state at $Re = 0$).
+The RBP system is then time-integrated untila statistically stationary state is reached, which typically requires a time of $t = O(10)$ to $O(10^2)$.
 At the two end points of the $Re$-spectrum considered (i.e. $Re = 0, 2000$), SDC and subcritical shear-driven turbulence appear.
 Figure \ref{fig:rarephase} shows the snapshots of the midplane temperature, $\theta(x,z)|_{y=0}$, of different flow regimes on the $Ra$-$Re$ phase space.
 The solid blue curves represents to the neutral stability boundaries for the longitudinal and transverse rolls as $Ra_\parallel = 1708$ and $Ra_\perp = f(Re)$, respectively \citep{gage_stability_1968}.
 In the absence of shear at $Re=0$, these curves merge into the classical critical RBC instability at $Ra_{c} = 1708$, as ISRs become rotationally invariant about the wall-normal axis.
-\red{ISRs may undergo secondary instability for $Ra > Ra_{\parallel}$, and an approximate boundary of this is indicated by a red arrow roughly indicates the secondary neutral stability boundary, marking the onset of oscillatory instabilities of ISRs within $Ra \gtrsim 5000$} \citep{clever_transition_1974}.
-We note that the phase diagram in figure \ref{fig:rarephase} is \red{not-to-scale plotted serving as a conceptual reference to distinugish between different flow states and their coarse-grained transition boundaries.}
+ISRs may undergo secondary instability for $Ra > Ra_{\parallel}$, and an approximate boundary of this is indicated by a red arrow roughly indicates the secondary neutral stability boundary, marking the onset of oscillatory instabilities of ISRs within $Ra \gtrsim 5000$ \citep{clever_transition_1974}.
+We note that the phase diagram in figure \ref{fig:rarephase} is not-to-scale plotted serving as a conceptual reference to distinugish between different flow states and their coarse-grained transition boundaries.
 
 In this $Ra$-$Re$ phase space, we categorise the flow behaviour into five distinct regimes: (1) bistability between SDC and ISRs (SDC \& ISRs), (2) ideal straight rolls (ISRs), (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
 The categories are defined based on common flow structures (patterns), and/or dynamical characteristics, ranging from equilibrium solutions to intermittent and chaotic dynamics.
-Furthermore, we \red{sort out} these states based on their first and second-order statistical properties, where they appear independent of $Re$ in the buoyancy-dominated regime (shaded in red), and $Ra$ in the shear-dominated regime (shaded in blue), discussed in detail in  Appendix \ref{app:statistics}.
+Furthermore, we sort out these states based on their first and second-order statistical properties, where they appear independent of $Re$ in the buoyancy-dominated regime (shaded in red), and $Ra$ in the shear-dominated regime (shaded in blue), discussed in detail in  Appendix \ref{app:statistics}.
 In the mixed regime shaded in green, both $Ra$ and $Re$ are important.
 
 \begin{figure}[h]
@@ -281,7 +281,7 @@ Comparing the results between $Ra = 0$ and $Ra = 10000$, we propose that the lon
 \end{figure}
 
 Next, we investigate the impact of longitudinal rolls on this proposed mechanism at different $Ra$.
-We capture the flow quantities for {\color{blue}$Ra=10000$} and $Re=1050$ at $t=850.5$ (just before the onset of longitudinal rolls, see figure \ref{fig:Ra10k-Re1050-small}), and use as an initial condition to perform four numerical simulations by lowering $Ra$ instantly to $Ra=8000,5000,3000,2000$, respectively and time-integrated further to $t \in [850.5, 5000]$.
+We capture the flow quantities for $Ra=10000$ and $Re=1050$ at $t=850.5$ (just before the onset of longitudinal rolls, see figure \ref{fig:Ra10k-Re1050-small}), and use as an initial condition to perform four numerical simulations by lowering $Ra$ instantly to $Ra=8000,5000,3000,2000$, respectively and time-integrated further to $t \in [850.5, 5000]$.
 The time history of the wall shear rate, $\langle \tau_w\rangle_{x,z}$, and the temperature snapshots, $\theta(\mathbf{x})$, of these experiments of `$Ra$-quenching' are presented in figure \ref{fig:RaQuench}.
 The time history of shear is visibly intermittent for $Ra = 8000, 5000$, depicted as the orange and green trajectories in figure \ref{fig:RaQuench}(a), similar to $Ra = 10000$.
 At $Ra= 8000, 5000$, the longitudinal rolls emerge approximately at $t = 1312.5$ (see figures \ref{fig:RaQuench}(c,e)), before erupting into turbulence at $t = 1743$ and $t = 3570$ in figures \ref{fig:RaQuench}(d,f), respectively.
@@ -294,7 +294,7 @@ We note that the longitudinal rolls in figure \ref{fig:RaQuench} have a spanwise
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/ev-compiled.pdf}
-    \caption{The growth rates of infinitesimal perturbations linearised about longitudinal rolls, $\mathbf{q}_{LR}$, of spanwise wavenumber of $\alpha d = 4$, against (a) streamwise wavenumber $\beta d$, and (b) $Ra$ for {\color{blue}$\beta d =2$}. The hatches in (a) refer to wavenumbers smaller than those admissible in $\Gamma = \pi/2$. The dash-dotted line in (b) is a standard quadratic regression yielding $Ra_{s}\approx 4720$.}
+    \caption{The growth rates of infinitesimal perturbations linearised about longitudinal rolls, $\mathbf{q}_{LR}$, of spanwise wavenumber of $\alpha d = 4$, against (a) streamwise wavenumber $\beta d$, and (b) $Ra$ for $\beta d =2$. The hatches in (a) refer to wavenumbers smaller than those admissible in $\Gamma = \pi/2$. The dash-dotted line in (b) is a standard quadratic regression yielding $Ra_{s}\approx 4720$.}
     \label{fig:SecStabLongRolls}
 \end{figure}
 
@@ -311,7 +311,7 @@ Using a standard quadratic regression, the critical Rayleigh number for disturba
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra5000-Re1050-MidBotTimeHist-PEig-minimal-labelled.pdf}
-    \caption{Time integration along the dominant unstable manifold, $\beta d =2$, of the longitudinal rolls at $Ra = 5000, Re = 1050, \Gamma = \pi/2$ for $t\in[0,8000]$. Time history of the (a) Nusselt number and wall shear rate, and (b) midplane temperature space-time plot. This system oscillates between the longitudinal rolls ($LR1-4$) and turbulence ($T1-4$) over four intervals. Snapshots of temperature at {\color{blue}(c) $t = 105$, (d) $t = 1512$, (e) $t = 2446.5$, (f) $t = 2992.5$, (g) $t = 3727.5$, (h) $t = 5103$, (i) $t = 6300$, (j) $t = 6993$.}}
+    \caption{Time integration along the dominant unstable manifold, $\beta d =2$, of the longitudinal rolls at $Ra = 5000, Re = 1050, \Gamma = \pi/2$ for $t\in[0,8000]$. Time history of the (a) Nusselt number and wall shear rate, and (b) midplane temperature space-time plot. This system oscillates between the longitudinal rolls ($LR1-4$) and turbulence ($T1-4$) over four intervals. Snapshots of temperature at (c) $t = 105$, (d) $t = 1512$, (e) $t = 2446.5$, (f) $t = 2992.5$, (g) $t = 3727.5$, (h) $t = 5103$, (i) $t = 6300$, (j) $t = 6993$.}
     \label{fig:intermittent-dynamics}
 \end{figure}
 
@@ -352,7 +352,7 @@ Subsequently, the solution trajectory could depart along an unstable manifold of
 To see if this cycle could be sustained indefinitely, we consider a longer time horizon, $t \in [0, 68750]$, illustrated in figure \ref{fig:intermittent-state-space}(b).
 The solution trajectory wanders between the `cloud' of transient turbulence at the top left corner (in red), and longitudinal roll and laminar states (in blue) in the bottom right, forming a basin of attraction between the unstable longitudinal rolls, transient turbulence, and the unstable laminar base state.
 This basin of attraction is likely established above a critical $Ra$ as the longitudinal rolls become linearly unstable (i.e. $Ra \gtrsim Ra_{s} \approx 4720$, see figure \ref{fig:SecStabLongRolls}(b)), and the instability of the longitudinal rolls provides an intermediate pathway towards transient turbulence, which could be regenerated again - a `self-sustaining' dynamical process.
-We refer to this process as the \emph{thermally-assisted sustaining process (TASP)}, inspired by the self-sustaining process (SSP) from turbulent shear flows \citep{hamilton_regeneration_1995}.
+We refer to this process as the \emph{thermally-assisted sustaining process (TASP)}, inspired by the self-sustaining process (SSP) from turbulent shear flows (see \S \ref{subsec:SSP}).
 A schematic of the \textit{TASP} is illustrated in figure \ref{fig:tasp}.
 
 \begin{figure}
@@ -367,7 +367,7 @@ A schematic of the \textit{TASP} is illustrated in figure \ref{fig:tasp}.
 \begin{figure}
 \centering
 \includegraphics[width=1.35\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/ConsolidatedPlot-temporal-landscape.pdf}
-\caption{The behaviour of the unstable and stable longitudinal rolls at $Ra = 8000, 4000$ for (a,e) $Re = 600$, (b,f) $Re = 700$, (c,g) $Re = 1000$ and (d,h) $Re = 1400$ within $\Gamma = \pi/2$. Each parameter regime consist of three panels from the top to bottom, depicting the midplane temperature space-time plot, $\theta|_{(y,z) = (0, \pi)}$, time history of the Nusselt number and shear, and state space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy.}
+\caption{The behaviour of the unstable and stable longitudinal rolls at $Ra = 8000, 4000$ for (a,e) $Re = 600$, (b,f) $Re = 700$, (c,g) $Re = 1000$ and (d,h) $Re = 1400$ within $\Gamma = \pi/2$. Each parameter combination consist of three panels, depicting the (top) midplane temperature space-time plot, (mid) time history of the Nusselt number and shear, and (bottom) state space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy.}
 \label{fig:dynamical-process}
 \end{figure}
 In this section, we further explore the behaviour of the \emph{TASP} as $Re$ and $Ra$ are varied.
