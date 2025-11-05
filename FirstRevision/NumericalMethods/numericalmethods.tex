@@ -1,8 +1,8 @@
 \chapter{Numerical Methods}\label{chap:2}
-\red{In this chapter}, we will discuss the fundamentals of numerical methods relevant for solving the Navier-Stokes equations.
+In this chapter, we will discuss the fundamentals of numerical methods relevant for solving the Navier-Stokes equations.
 We begin the discussion of the method weighted of residuals (\S \ref{sec:methodofweightedresiduals}) and the spatial discretisation using spectral/\emph{hp} element methods in one dimension (\S \ref{sec:spectralhpelementmethods}).
-This is followed by techniques for solving the Navier-Stokes equations (\S \ref{sec:numeraltechniquesforNS}), such as \red{the} velocity-correction scheme, enforcing a constant flow rate and the quasi-3D approach for semi-homogeneous domains. 
-This chapter \red{concludes} with numerical techniques for performing stability analysis of the Navier-Stokes equations (\S \ref{sec:stabilityanalysisofNS}), including eigenvalue computation and edge tracking.
+This is followed by techniques for solving the Navier-Stokes equations (\S \ref{sec:numeraltechniquesforNS}), such as the velocity-correction scheme, enforcing a constant flow rate and the quasi-3D approach for semi-homogeneous domains. 
+This chapter concludes with numerical techniques for performing stability analysis of the Navier-Stokes equations (\S \ref{sec:stabilityanalysisofNS}), including eigenvalue computation and edge tracking.
 % In this chapter, I will present the numerical methods ultilised in this thesis.
 % The premise of numerical methods is to solve for the the partial differential equations, the Navier-Stokes equations.
 % The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field.
@@ -13,7 +13,7 @@ This chapter \red{concludes} with numerical techniques for performing stability 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method of weighted residuals}\label{sec:methodofweightedresiduals}
-Spatial discretisation errors, or residuals, arises as one seeks an approximate solution to some partial differential equation (PDE).
+Spatial discretisation errors, or residuals, arise as one seeks an approximate solution to some partial differential equation (PDE).
 The method of weighted residuals provides a generic mathematical framework in which constraints on the residual could be applied flexibly, defining the spatial discretisation scheme and its convergence properties.
 We approximate the solution of PDE by considering a finite expansion of a suitable basis, to which its coefficients are sought after by minimising the inner product between the PDE and a test (or weight) function.
 To demonstrate this, we consider a linear partial differential equation as,
@@ -31,10 +31,10 @@ Since $u^\delta(x)$ is an approximate solution of equation \eqref{eq:helmholtz},
 \begin{equation}\label{eq:residual}
     \mathbf{L}[u^\delta(x)] = R[u^\delta(x)],
 \end{equation}
-where $R[u^\delta(x)]$ refers to the residual which depends on the approximate solution $u^\delta(x)$ and \red{varies} within $\Omega$.
-In other words, equation \red{\eqref{eq:residual}} might not be satisfied everywhere in $\Omega$. 
-\red{Next}, we need to place restrictions on the residual, such that it the residual approaches zero, $R \rightarrow 0$, and the approximate solution approaches the exact solution, $u^\delta(x) \rightarrow u(x)$.
-The method of \red{weighted} residuals places a restriction on the residual by applying an inner product between the governing equation, and $N$ test (or weight) functions, $v_j(x)$, and setting it to zero,
+where $R[u^\delta(x)]$ refers to the residual which depends on the approximate solution $u^\delta(x)$ and varies within $\Omega$.
+In other words, equation \eqref{eq:residual} might not be satisfied everywhere in $\Omega$. 
+Next, we need to place restrictions on the residual, such that it the residual approaches zero, $R \rightarrow 0$, and the approximate solution approaches the exact solution, $u^\delta(x) \rightarrow u(x)$.
+The method of weighted residuals places a restriction on the residual by applying an inner product between the governing equation, and $N$ test (or weight) functions, $v_j(x)$, and setting it to zero,
 \begin{equation}\label{eq:weightinnerresidual}
     (v_j(x), R[u^\delta(x)]) = 0, \quad j = 0, ..., N-1.
 \end{equation}
@@ -48,12 +48,12 @@ The inner product between two functions $f(x)$ and $g(x)$ is,
 % \begin{equation}\label{eq:inner-product}
 %        (f, g) = \int_\Omega f(x) g(x) dx.
 % \end{equation}
-By \red{enforcing} equation \eqref{eq:weightinnerresidual}, \red{the discrete problem} becomes a system of $N$ ordinary differential equations to solve for the $N$ basis coefficients, $\hat{u}_i$.
-The choice of test function defines the projection methods, and examples of \red{different} projection methods are shown in table \ref{tab:weightFunction}.
+By enforcing equation \eqref{eq:weightinnerresidual}, the discrete problem becomes a system of $N$ ordinary differential equations to solve for the $N$ basis coefficients, $\hat{u}_i$.
+The choice of test function defines the projection methods, and examples of different projection methods are shown in table \ref{tab:weightFunction}.
 We emphasise that the method of weighted residuals only describes the projection method, but does not specify the type of basis expansions, as we will discuss later in \S \ref{sec:spectralhpelementmethods}.
 The choice of projection method coupled with suitable basis expansions will have different solution convergence properties.
-\red{Of} particular interest is on how quickly the residual vanishes as the number of basis expansions increases.
-For instance, by considering the Galerkin method coupled with Fourier expansions, one can expect exponential convergence \red{for a sufficiently smooth problem which is} desirable for an efficient representation of turbulent dynamics.
+Of particular interest is on how quickly the residual vanishes as the number of basis expansions increases.
+For instance, by considering the Galerkin method coupled with Fourier expansions, one can expect exponential convergence for a sufficiently smooth problem which is desirable for an efficient representation of turbulent dynamics.
 % Certain mathematical properties such as spectral convergence as desired in the case of Galerkin projection using Fourier expansions, 
 % The choice of \emph{trial} functions used in \emph{nektar++} will be elaborated in Section \ref{sec:modifiedBasis}.
 % the method of weighted residuals is only restrictive to the weight
@@ -79,7 +79,7 @@ For instance, by considering the Galerkin method coupled with Fourier expansions
 % For instance, for $v_j = \delta(x-x_j)$, the numerical method becomes the \emph{collocation} method where the differential equation is satisfied on discrete points $x_j$.
 % The type of restriction on the residual is implemented through the choice of \emph{test} function, $v_j$.
 \section{Galerkin Projection}\label{sec:galerkinprojection}
-Galerkin projection remains \red{as} a standard projection method in the context of the finite element methods, where the test functions, $v(x)$, are chosen to be lie in the same functional space as the global basis functions, $\Phi(x)$.
+Galerkin projection remains as a standard projection method in the context of the finite element methods, where the test functions, $v(x)$, are chosen to be lie in the same functional space as the global basis functions, $\Phi(x)$.
 To demostrate the Galerkin projection method, we consider that the differential operator earlier in equation \eqref{eq:linear_operator} as a 1D Helmholtz equation,
 \begin{subequations}\label{eq:helmholtz}
     \begin{equation}
@@ -97,7 +97,7 @@ Equation \ref{eq:helmholtz} is commonly referred to as the strong or classical f
 
 The subsequent step is to take the inner product of the equation \eqref{eq:helmholtz} with a test function, $v(x)$, that satisfies the homogeneous Dirichlet boundary conditions by definition, i.e. $v(0) = 0$, and setting the inner product to zero,
 \begin{equation}\label{eq:helmholtz_inner}
-    (v(x), \, \mathbf{L}[u(x)]) = \int_0^l \red{v(x)} \left[\frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) + f(x)\right] \mathrm{d}x =  0,
+    (v(x), \, \mathbf{L}[u(x)]) = \int_0^l v(x) \left[\frac{\partial^2 u(x)}{\partial x^2} - \lambda u(x) + f(x)\right] \mathrm{d}x =  0,
 \end{equation}
 akin to applying the method of weighted residuals (\S \ref{sec:methodofweightedresiduals}). Next, we perform integration by parts,
 \begin{subequations}
@@ -108,7 +108,7 @@ akin to applying the method of weighted residuals (\S \ref{sec:methodofweightedr
         a(v,u) = f(v).
     \end{equation}
 \end{subequations}
-Equation \eqref{eq:weak_form} is typically referred to as the weak \footnote{The notions of the \emph{weak} and \emph{strong} \red{forms} refer to the smoothness (regularity) required of admissible solutions. In the weak formulation, the highest derivative involved is up to first-order, so the solution space is $H^1$. This space is generally larger than that of the strong formulation, which required $u \in \mathcal{H}^2(\Omega)$. Since $H^2(\Omega) \subset H^1(\Omega)$ the weak formulation imposesd a `less stringent' constraint of the solution space of admissible functions.} form of equation \eqref{eq:helmholtz}.
+Equation \eqref{eq:weak_form} is typically referred to as the weak \footnote{The notions of the \emph{weak} and \emph{strong} forms refer to the smoothness (regularity) required of admissible solutions. In the weak formulation, the highest derivative involved is up to first-order, so the solution space is $H^1$. This space is generally larger than that of the strong formulation, which required $u \in \mathcal{H}^2(\Omega)$. Since $H^2(\Omega) \subset H^1(\Omega)$ the weak formulation imposesd a `less stringent' constraint of the solution space of admissible functions.} form of equation \eqref{eq:helmholtz}.
 The weak form can be represented in compact notation in equation \eqref{eq:compact}, where $a(v,u)$ is bilinear and symmetric. In structural mechanics, $a(u,u)$ is commonly referred to as the \textit{strain} energy.
 To ensure that the \textit{strain} energy is finite, we restrict the choice of solutions $u(x)$ to lie in the solution space,
 \begin{equation}\label{eq:solution_space}
@@ -158,8 +158,9 @@ Finally, the standard Galerkin projection method is to solve for $u^\mathcal{H} 
 \end{equation}
 This concludes the classical Galerkin formulation, where we have converted a continuous PDE into a discrete problem amenable to standard direct or iterative linear solvers.
 Under certain assumptions of $a$, a solution is guaranteed under the Lax-Milgram theorem \citep{bers_ix_1955}.
-\red{The order in which we perform integration by parts followed by defining the finite solution space is crucial.
-Reversing this order can introduce jumps in the solution derivatives between the element boundaries.}
+The order in which we perform integration by parts followed by defining the finite solution space is crucial.
+Reversing this order can introduce jumps in the solution derivatives between the element boundaries.
+
 %%%%%%%%%%%%%%%%%%%%%%
 % SPECTRAL/HP ELEMENTS
 %%%%%%%%%%%%%%%%%%%%%%
@@ -226,7 +227,7 @@ We can map the standard element into any arbitrary global coordinates based on a
 \begin{equation}
     x = \chi^e(\xi) = \frac{1-\xi}{2} x_e + \frac{1 + \xi}{2}x_{e+1}, \quad \xi \in \Omega_{st}
 \end{equation}
-which \red{for this case} has an analytical inverse, $(\chi^e)^{-1}(x)$,
+which for this case has an analytical inverse, $(\chi^e)^{-1}(x)$,
 \begin{equation}
     \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega^{e}.
 \end{equation}
@@ -249,8 +250,8 @@ The approximate solution, $u^\delta(x)$, now lie within the solution space $\mat
 \begin{equation}
     \mathcal{U}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \phi_i^e(\xi), \forall i : 0 \leq i \leq P, \forall e : 1 \leq e \leq N_{el} \right\}
 \end{equation}
-\red{We note that the local basis expansion shown here are not strictly orthogonal polynomials.}
-\red{By modifying them with Jacobi polynomials, they may become orthogonal with increasing $P$ as we see later.}
+We note that the local basis expansion shown here are not strictly orthogonal polynomials.
+By modifying them with Jacobi polynomials, they may become orthogonal with increasing $P$ as we see later.
 % Figure \ref{fig:standard_element} presents the sketch of representing a continous function using spectral/\textit{hp} element methods for $P = 2$ and $N_{el} = 3$.
 
 %%%%%%%%%%%%%%%%%%%%
@@ -442,9 +443,9 @@ We note that $\phi_p(\xi)$ refers to a general local expansion basis while $\psi
 The one-dimensional expansion modes of the modified basis of up to $P=5$ is shown in figure \ref{fig:modified_basis}.
 The linear modes, corresponding to $p = 0$ and $p = P$, are the only expansions which has a magnitude of at the boundaries, referred to as boundary modes.
 The modified basis for $0 < p < P$, are hierarchical, and have non-zero values except at the boundaries, referred to as interior/bubble modes.
-\red{Decomposing the local expasions into interior and boundary mode essentially via a partition of unity, ensures that the linear modes, $P=1$, supports the $C^0$ continuity across element boundaries.}
+Decomposing the local expasions into interior and boundary mode essentially via a partition of unity, ensures that the linear modes, $P=1$, supports the $C^0$ continuity across element boundaries.
 % \red{The interior modes, are local expansion basis that are zero on the boundaries ($P > 1$), while the boundary modes, such as the linear modes ($P=1$), are expansions at are non-zero at either end, supporting the $C^0$ continuity.}
-\red{So strictly speaking, the modified basis is only modal for $P>1$.}
+So strictly speaking, the modified basis is only modal for $P>1$.
 
 % Nodal expansions
 \subsubsection{Nodal expansions}
@@ -459,7 +460,7 @@ The Lagrange polynomials, $h_p(\xi)$, are particular attractive as it has a unit
 \end{equation}
 where the Lagrange coefficient $\hat{u}_q$ is the same as the value evaluated at the node $\xi_q$.
 The nodal values, $\xi_q$, are based on the Gauss-Lobatto-Legendre (GLL) points which will be defined later in \S \ref{sec:Gaussian_quadrature}.
-\red{The nodal distribution based on GLL points is crucial for obtaining well-behaved Lagrange polynomials, as the use of equispaced nodal points leads to oscillations between nodes.}
+The nodal distribution based on GLL points is crucial for obtaining well-behaved Lagrange polynomials, as the use of equispaced nodal points leads to oscillations between nodes.
 Figure \ref{fig:Lagrange_basis} presents Lagrange expansions evaluated along the GLL points.
 \begin{figure}[h]
     \centering
@@ -508,7 +509,7 @@ The reader is referred to \cite{karniadakis_spectralhp_2005} for more details ab
 % NUMERICAL Integration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gaussian quadrature}\label{sec:Gaussian_quadrature}
-In the Galerkin formulation, we perform integration between basis functions rountinely, and an efficient numerical technique is \red{therefore} sought.
+In the Galerkin formulation, we perform integration between basis functions rountinely, and an efficient numerical technique is therefore sought.
 Suppose we want to approximate the integral of a function, $u(\xi)$, in a standard element numerically given as,
 \begin{equation}\label{eq:discrete_integral}
     \int_{-1}^1 u(\xi) \; \mathrm{d}\xi = \sum_{i=0}^{Q-1} w_i u(\xi_i) + R(u).
@@ -522,7 +523,7 @@ Using Gaussian quadrature rules, we can approximate an integral of a function of
 In general, Gaussian quadrature rules can be grouped into three catergories: Gauss, Gauss-Radau and Gunderauss-Lobatto quadrature.
 The main difference between the three categories are on the inclusion of the end points.
 Gauss quadrature rule evaluates the integral without the end points $\xi = \pm 1$.
-Gauss-Radau quadrature rule either select one of the end points, \red{often} at $\xi = -1$.
+Gauss-Radau quadrature rule either select one of the end points, often at $\xi = -1$.
 Gauss-Lobatto quadrature rule consider both end points.
 We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials known as the Gauss-Lobatto-Jacobi quadrature rules given as,
 \begin{subequations}\label{eq:weightsnzeros}
@@ -545,7 +546,7 @@ We will only focus on describing the Gauss-Lobatto quadrature rules and the zero
     \end{equation}
 \end{subequations}
 where $w_i^{\alpha,\beta}, \xi_i^{\alpha,\beta}$ are the zeros (or sometimes referred to as quadrature points) and weights of the Gauss-Lobatto-Jacobi quadrature rules, and $\Gamma$ refers to the Gamma function.
-For $\alpha = \beta = 0$, the quadrature points is known as the Gauss-Lobatto-Legendre (GLL) points, typically employed for Lagrange polynomials to \red{ensure stability}.
+For $\alpha = \beta = 0$, the quadrature points is known as the Gauss-Lobatto-Legendre (GLL) points, typically employed for Lagrange polynomials to ensure stability.
 By evaluating the discrete integral (equation \eqref{eq:discrete_integral}) using the zeros and integrations weights (equation \eqref{eq:weightsnzeros}),  we can obtain an exact integral of the function $u(\xi)$, of polynomial order $P$, with at least $Q \geq (P+3)/2$ quadrature points.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -560,17 +561,16 @@ Suppose that we want to differentiate in $x$ using local coordinates given as,
 \end{equation}
 where $\mathrm{d}\xi/\mathrm{d}x$ is the jacobian.
 The primary step involves evaluating the derivative of the local expansion bases, $\mathrm{d} \phi_p(\xi) / \mathrm{d} \xi$.
-\red{By exploiting the Kronecker delta property of Lagrange polynomials, any polynomials can be conveninently represented by a sum of Lagrange polynomials.
+By exploiting the Kronecker delta property of Lagrange polynomials, any polynomials can be conveninently represented by a sum of Lagrange polynomials.
 Suppose that the solution has polynomial order $P$, we can represent exactly it with $P+1$ Lagrange polynomials, $\phi_p(\xi) \rightarrow h_p(\xi)$.
-Its derivative through $Q \geq P + 1$ discrete nodal points, $\xi_i$ for all $i = 0, 1, \ldots, Q-1$, is expressed as,}
-\red{
+Its derivative through $Q \geq P + 1$ discrete nodal points, $\xi_i$ for all $i = 0, 1, \ldots, Q-1$, is expressed as,
 \begin{equation}
     \frac{\mathrm{d} u ^\delta (\xi)}{\mathrm{d} \xi}\Big |_{\xi = \xi_i} = \sum_{j=0}^{P} \hat{u}_j \frac{\mathrm{d} h_j(\xi)}{\mathrm{d} \xi} \Big|_{\xi = \xi_i} = \sum_{j = 0}^{P} d_{ij}\hat{u}_j,
-\end{equation}}
-\red{where $\mathbf{D} = [d_{ij}] \in \mathbb{R}^{Q \times Q}$ refers to the differential matrix containing values of the derivative of the Lagrange polynomials at the quadrature points. 
+\end{equation}
+where $\mathbf{D} = [d_{ij}] \in \mathbb{R}^{Q \times Q}$ refers to the differential matrix containing values of the derivative of the Lagrange polynomials at the quadrature points. 
 Since we are evaluating the derivative along nodal (collocated) points, it is referred to as \textit{collocation} differentiation.
-The general form for collocation differentiation based on Lagrange polynomials can be expressed as,}
-\red{\begin{equation}\label{eq:differential_matrices}
+The general form for collocation differentiation based on Lagrange polynomials can be expressed as,
+\begin{equation}\label{eq:differential_matrices}
     d_{ij} = \frac{\mathrm{d} h_j (\xi)}{\mathrm{d} \xi}\Big|_{\xi = \xi_i} = 
     \begin{cases} 
     \frac{g'_Q(\xi_i)}{g'_Q(\xi_j)} \frac{1}{\xi_i - \xi_j}, \quad & i \neq j, \\
@@ -578,13 +578,13 @@ The general form for collocation differentiation based on Lagrange polynomials c
     \end{cases}
     \quad\quad
     g_Q(\xi) = \prod_{j=0}^{Q-1}(\xi - \xi_j).
-\end{equation}}
-\red{Since  $d_{ij}$ only depends on the choice of zeros, alternative forms of $g_q'(\xi_j)$ and $g_q''(\xi_j)$ for the a choice of zeros can be found in Appendix C of \cite{karniadakis_spectralhp_2005}.
+\end{equation}
+Since  $d_{ij}$ only depends on the choice of zeros, alternative forms of $g_q'(\xi_j)$ and $g_q''(\xi_j)$ for the a choice of zeros can be found in Appendix C of \cite{karniadakis_spectralhp_2005}.
 To perform collocation differentiation using modal basis such as the modified basis, $u^\delta(\xi)= \sum_{j = 0} ^ P \hat{u}_i \psi_i(\xi)$, we need to represent the solution in nodal coordinates,
 \begin{equation}
     \frac{\mathrm{d} u^\delta(\xi)}{\mathrm{d} \xi}\Big|_{\xi = \xi_i} = \frac{\mathrm{d}}{\mathrm{d} \xi}\sum_{j = 0}^P \hat{u}_j \psi_j(\xi) \Big|_{\xi = \xi_i} = \mathbf{D}\mathbf{B}\mathbf{\hat{u}},
 \end{equation}
-where $\mathbf{B} \in \mathbb{R}^{Q \times (P+1)}$ refers to the standard matrix which transforms the solution from coefficient space, $\mathbf{\hat{u}} \in \mathbb{R}^{P+1}$, to nodal space, $\mathbf{u} \in \mathbb{R}^{Q}$, known as the backwards transform operation, $\mathbf{u} = \mathbf{B}\mathbf{\hat{u}}$.}
+where $\mathbf{B} \in \mathbb{R}^{Q \times (P+1)}$ refers to the standard matrix which transforms the solution from coefficient space, $\mathbf{\hat{u}} \in \mathbb{R}^{P+1}$, to nodal space, $\mathbf{u} \in \mathbb{R}^{Q}$, known as the backwards transform operation, $\mathbf{u} = \mathbf{B}\mathbf{\hat{u}}$.
 
 % To differentiate a function, $u(\xi)$, we typically need to construct the differential matrices, and
 % the general representation of the differential matrix is,
@@ -603,7 +603,7 @@ where $\mathbf{B} \in \mathbb{R}^{Q \times (P+1)}$ refers to the standard matrix
 %%%%%%%%%%%%%%%
 
 \subsection{Example in 1D}
-\red{We have outlined the basic formulation of spectral/\emph{hp} element methods in a single dimension.
+We have outlined the basic formulation of spectral/\emph{hp} element methods in a single dimension.
 To conclude the section on spectral/\textit{hp} element methods, we will describe its solution procedure, converting the weak form of the Helmholtz equation into a system of linear equations, and introduce the mass and laplacian matrices.
 Starting from the weak form,
 % \subsubsection{1. Performing numerical differentiation and integration in the standard region}
@@ -624,7 +624,7 @@ with boundary conditions,
 % \end{equation}
 We wish to seek the approximate solution $u(x) \approx u^\delta(x)$.
 % Recall that the solution space of $u^\mathcal{H}(x)$ and $v^\delta(x)$ are the same, following the standard Galerkin projection procedure.
-Suppose they can be discretised by spectral/\textit{hp} elements with \red{$N_{el}$} elements and $P+1$ local expansion basis,
+Suppose they can be discretised by spectral/\textit{hp} elements with $N_{el}$ elements and $P+1$ local expansion basis,
 \begin{subequations}
 \begin{equation}
     u^\delta(x) = \sum_{i=0}^N \hat{u}_i\Phi_i(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{u}_i^e\phi_i^e(\xi),
@@ -726,7 +726,7 @@ Finally, we consider the boundary conditions by lifting $u^\delta(x) = u^\mathca
 \begin{equation}
     \mathbf{A}^T[\lambda \mathbf{M}_l + \mathbf{L}_l]\mathbf{A} \mathbf{\hat{u}^\mathcal{H}}_g = \mathbf{A}^T \mathbf{\hat{f}} + \mathbf{A}^T[\lambda \mathbf{M}_l - \mathbf{L}_l]\mathbf{A} \mathbf{\hat{u}^\mathcal{D}}_g.
 \end{equation}
-We then solve this system for the homogeneous coefficients $\mathbf{\hat{u}}_g^\mathcal{H}$.}
+We then solve this system for the homogeneous coefficients $\mathbf{\hat{u}}_g^\mathcal{H}$.
 % On the right hand side, $\mathbf{\hat{f}}_l \in \mathbb{R}^{N_{el}(P+1)}, \mathbf{g}_D^{N_{el}(P+1)}, \mathbf{g}_N^{N_{el}(P+1)}$ refers local forcing vector, Dirichlet and Neumann boundary conditionsin vector form.
 % Lastly, to ensure that the solution remains $C^0$ continuous across the elemental boundaries, we perform the assembly process by using the assemble matrices (see \S \ref{sec:global_assembly}),
 % \begin{equation}
@@ -735,22 +735,22 @@ We then solve this system for the homogeneous coefficients $\mathbf{\hat{u}}_g^\
 % and obtain the solution for $\mathbf{\hat{u}}_g$.
 % We note that we have did not show the formulation for 2D spectral/\textit{hp} elements as it has been abstracted away within nektar++.
 \subsection{Error properties}
-\red{Suppose we consider $P+1$ orthogonal polynomials spanning the polynomial space of $\mathcal{P}_P$, the energy norm of the error, $||\varepsilon||_E = ||u(x) - u^\delta (x)||_E$\footnote{The energy norm is defined as $||u||_E = \sqrt{a(u,u)}$, where $a(u,u)$ is the bilinear operator introduced in equation \eqref{eq:compact}. It is a measure of functions belonging to the \textit{energy} space which are $H^1$ functions.} for element size of $h$ and polynomial order $P$, satisfies the convergence property \citep{babuska_p_1994},}
-\red{ \begin{equation}\label{eq:error_convergence}
+Suppose we consider $P+1$ orthogonal polynomials spanning the polynomial space of $\mathcal{P}_P$, the energy norm of the error, $||\varepsilon||_E = ||u(x) - u^\delta (x)||_E$\footnote{The energy norm is defined as $||u||_E = \sqrt{a(u,u)}$, where $a(u,u)$ is the bilinear operator introduced in equation \eqref{eq:compact}. It is a measure of functions belonging to the \textit{energy} space which are $H^1$ functions.} for element size of $h$ and polynomial order $P$, satisfies the convergence property \citep{babuska_p_1994},
+\begin{equation}\label{eq:error_convergence}
     ||\varepsilon||_E \leq C h^{\mu - 1}P^{-(k-1)}||u||_k,
-\end{equation}}
-\red{where $\mu = \min (k, P+1)$, and $C$ is independent of $h, P$ and $u$.}
-\red{To illustrate this convergence property, we consider the exact solution, $u = \sin(\pi x)$, to the 1D Helmholtz problem (equation \eqref{eq:helmholtz}) on the domain $x \in [-1, 1]$ with Dirichlet boundary conditions on both ends and $\lambda = 1$.}
+\end{equation}
+where $\mu = \min (k, P+1)$, and $C$ is independent of $h, P$ and $u$.
+To illustrate this convergence property, we consider the exact solution, $u = \sin(\pi x)$, to the 1D Helmholtz problem (equation \eqref{eq:helmholtz}) on the domain $x \in [-1, 1]$ with Dirichlet boundary conditions on both ends and $\lambda = 1$.
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{NumericalMethods/nektar-convergence/hp-convergence.pdf}
-    \caption{\red{Convergence properties of an exact solution $u = \sin (\pi x)$ to a 1D Helmholtz equation with $\lambda = 1$ and Dirichet boundary conditions at $x \in [-1, 1]$. $h$-type refinement is performed on a mesh with fixed $P=1$ and decreasing $h$ (increasing elements), demonstrating algebraic convergence in a \textit{log-log} plot of (a). $p$-type refinement is performed on a mesh with equipspaced two elements and increasing $P$, demonstrating exponential convergence on a \textit{semi-log} plot of (b).}}
+    \caption{Convergence properties of an exact solution $u = \sin (\pi x)$ to a 1D Helmholtz equation with $\lambda = 1$ and Dirichet boundary conditions at $x \in [-1, 1]$. $h$-type refinement is performed on a mesh with fixed $P=1$ and decreasing $h$ (increasing elements), demonstrating algebraic convergence in a \textit{log-log} plot of (a). $p$-type refinement is performed on a mesh with equipspaced two elements and increasing $P$, demonstrating exponential convergence on a \textit{semi-log} plot of (b).}
     \label{fig:hp-convergence}
 \end{figure}
-\red{This convergence property arising from the $h$- and $p$-type refinements is shown in figure \ref{fig:hp-convergence}.
+This convergence property arising from the $h$- and $p$-type refinements is shown in figure \ref{fig:hp-convergence}.
     To ensure consistency between two types of refinement, the number of degrees of freedom, $N_{dof}$, is shown on the absicca, which scales as $\mathcal{O}(h) \sim \mathcal{O}(N_{dof}^{-1})$ and $\mathcal{O}(p) \sim \mathcal{O}(N_{dof})$.
 For $h$-refinement, the number of elements is doubled on a mesh with fixed polynomial order $P=1$, demonstrating algebraic convergence, $||\varepsilon||_E \sim \mathcal{O}(h)$ in figure \ref{fig:hp-convergence}(a).
-For $p$-refinement, the polynomial order $P$ is increased on a mesh with two equispaced elements, showing exponential convergence, $||\varepsilon||_E \sim \mathcal{O}(c^p)$ where $c$ is a constant, in figure \ref{fig:hp-convergence}(b).}
+For $p$-refinement, the polynomial order $P$ is increased on a mesh with two equispaced elements, showing exponential convergence, $||\varepsilon||_E \sim \mathcal{O}(c^p)$ where $c$ is a constant, in figure \ref{fig:hp-convergence}(b).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TECHNIQUES FOR SOLVING NS EQUATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -771,7 +771,7 @@ Here, we describe the numerical methods that is used to solve the Navier-Stokes 
     \mathbf{u} = 0, \quad \text{on} \; \partial \Omega.
 \end{equation}
 \end{subequations}
-\red{In the above}, the primitive variables are velocity and pressure $(\mathbf{u}, p)$ and we assumed unit density, $\rho = 1$, with the kinematic viscosity appearing as the control parameter.
+In the above, the primitive variables are velocity and pressure $(\mathbf{u}, p)$ and we assumed unit density, $\rho = 1$, with the kinematic viscosity appearing as the control parameter.
 The time evolution of velocity is explicit expressed in equation \eqref{eq:velocity_explicit}, but does not appear for the pressure, which is coupled to the velocity field, enforcing the incompressibility condition.
 %  THe pressure field is coupled to the velocity field, where algorithms designed were challenged
 Several strategies exist for addressing the coupled velocity-pressure fields by
@@ -783,7 +783,7 @@ Several strategies exist for addressing the coupled velocity-pressure fields by
 We adopt splitting methods, which solves the of the Navier-Stokes equation by splitting them into `subequations', and solving them sequentially.
 % In this thesis we tdophe splitting methods, where the time-evolution of the Navier-Stokes equations are split into different substeps.
 These methods, belonging to the broader family of projection methods introduced by \cite{chorin_numerical_1967} and \cite{temam_sur_1969}, and can be further classified into pressure-correction or velocity-correction schemes.
-This thesis employs the use of the high-order velocity-correction scheme introduced by \cite{karniadakis_high-order_1991} \red{and further explained by \cite{guermond_velocity-correction_2003}.}
+This thesis employs the use of the high-order velocity-correction scheme introduced by \cite{karniadakis_high-order_1991} and further explained by \cite{guermond_velocity-correction_2003}.
 % The splitting methods belong to a family of methods, known as projection methods, were first introduced by Chorin and Teman.
 % In general, the splitting scheme can be further classified into pressure-correction or velocity-correction schemes.
 % Our focus of this thesis is on a higher-order velocity-correction scheme.
@@ -809,12 +809,12 @@ The nonlinear and linear operators are defined as,
 \end{equation}
 % while the body-forcing operator may or may not depend on the solution $\mathbf{f}$.
 % We note that the nonlinear terms are written in the skew-symmetric to minimise aliasing errors \citep{karniadakis_high-order_1991}. 
-\red{To minimise aliasing errors in the quadratic nonlinear terms, we performing numerical integration by increasing the number of quadrature points to $Q \geq (P + 3)/2$.}
+To minimise aliasing errors in the quadratic nonlinear terms, we performing numerical integration by increasing the number of quadrature points to $Q \geq (P + 3)/2$.
 To advance the velocity at time step, $\mathbf{u}^{n}$, to the next time step, $\mathbf{u}^{n+1}$, we integrate equation \eqref{eq:semidiscreteNS} over a time step $\Delta t$,
 \begin{equation}\label{eq:split}
 \mathbf{u}^{n+1} - \mathbf{u}^n = \underbrace{\int_{t_n}^{t_{n+1}} \mathbf{N}(\mathbf{u}) \, \mathrm{d}t}_{\Delta t \sum_{q=0}^{J_e - 1} \beta_q \mathbf{N}(\mathbf{u}^{n-q})} \; - \; \underbrace{\int_{t_n}^{t_{n+1}} \nabla p \, \mathrm{d} t}_{\Delta t \nabla \bar{p}^{n+1}} \; + \; \nu\underbrace{\int_{t_n}^{t_{n+1}} \mathbf{L}(\mathbf{u})\, \mathrm{d}t}_{\Delta t \sum_{q = 0}^{J_i - 1} \gamma_q \mathbf{L}(\mathbf{u}^{n+1-q})}.
 \end{equation}
-\red{The velocity correction scheme `splits' equation \eqref{eq:semidiscreteNS} into three steps shown as underbraces, which are evaluated successively from left to right.}
+The velocity correction scheme `splits' equation \eqref{eq:semidiscreteNS} into three steps shown as underbraces, which are evaluated successively from left to right.
 The first step we perform is to extrapolate the advection velocities, by approximating the nonlinear terms using an explicit scheme such as the Adams-Bashforth family of $J_e$ order,
 \begin{equation}\label{eq:firstStep}
     \frac{\mathbf{\hat{u}} - \sum_{q=0}^{J_e-1} \alpha_{q} \mathbf{u}^{n-q}}{\Delta t} = \sum_{q=0}^{J_e-1} \beta_q \mathrm{\mathbf{N}}(\mathbf{u}^{n-q}),
@@ -838,11 +838,11 @@ By considering the assumptions above and the divergence of equation \eqref{eq:se
     \end{equation}
 \end{subequations}
 While the pressure boundary condition \eqref{eq:pressureBC} is straightforward to evalute, it is sensitive to large splitting errors \citep{karniadakis_high-order_1991}.
-To overcome this, we consider a high-order boundary condition of pressure, obtained by taking the \red{dot product with respect to the normal} of equation \eqref{eq:semidiscreteNS},
+To overcome this, we consider a high-order boundary condition of pressure, obtained by taking the dot product with respect to the normal of equation \eqref{eq:semidiscreteNS},
 \begin{equation}\label{eq:modifiedpressureBC}
     \frac{\partial p^{n+1}}{\partial t} = -\sum_{q=0}^{J_e-1} \beta_q \left[ \frac{1}{\Delta t} \mathbf{u}^{n-q} + \nu [\nabla \times (\nabla \times \mathbf{u}^{n-q})] + (\mathbf{u}^{n-q} \cdot \nabla)\mathbf{u}^{n-q} \right] \cdot \mathbf{n}.
 \end{equation}
-Notably, the linear operator is expressed as $\mathbf{L}(\mathbf{u}) = \nabla(\nabla \cdot \mathbf{u}) - \nabla \times (\nabla \times \mathbf{u})$, \red{where the divergence is set to zero}, favouring numerical stability \citep{orszag_boundary_1986,karniadakis_high-order_1991}.
+Notably, the linear operator is expressed as $\mathbf{L}(\mathbf{u}) = \nabla(\nabla \cdot \mathbf{u}) - \nabla \times (\nabla \times \mathbf{u})$, where the divergence is set to zero, favouring numerical stability \citep{orszag_boundary_1986,karniadakis_high-order_1991}.
 % Next, the second intermediate velocity field $\hat{\hat{\mathbf{u}}}$ is obtained from the gradient of the pressure field at $n+1$,
 % However, the pressure field at time-step $n+1$ is not known. Taking the divergence of equation \ref{eq:secondStep}, and assuming that $\hat{\hat{\mathbf{u}}}$ is divergence-free, the Poisson equation for pressure is given as,
 $J_e$ is the order the explicit scheme as in equation \eqref{eq:firstStep}.
@@ -909,7 +909,7 @@ evolving the velocity fields at time step $n$ to $n+1$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Fourier spectral/\emph{hp} modes}\label{sec:nm_quasi3d}
-Fourier-Chebyshev-Fourier type discretisation have been recognised as preferred method for performing direct numerical simulations (DNS) of transitional or turbulent \red{incompressible} channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions respectively.
+Fourier-Chebyshev-Fourier type discretisation have been recognised as preferred method for performing direct numerical simulations (DNS) of transitional or turbulent incompressible channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions respectively.
 
 The Fourier spectral/\emph{hp} element method draws on this approach, where the homogeneous and the inhomogeneous directions are represented by the Fourier expansions and spectral/\emph{hp} elements respectively.
 This approach has been commonly referred to as the Quasi-3D or (2.5D) approach, allowing for the representation of two inhomogeneous directions.
@@ -973,9 +973,9 @@ where, $\tilde{\nabla}_k = (\frac{\partial}{\partial x}, \frac{\partial}{\partia
 In general, there are two approaches to drive a fluid flow through a channel, either by maintaining a constant pressure drop, or a constant volumetric flux (flow rate).
 This difference is illustrated in figure \ref{fig:flowrate}, whereby the flow through the channel is driven by a constant pressure drop from an elevated reservoir of constant height $h$ in figure \ref{fig:flowrate}(a), while a piston moves at a constant speed rightwards, drawing fluid through the channel at a constant volumetric flux in figure \ref{fig:flowrate}(b).
 \subsubsection{Constant pressure via body-forcing}
-\red{If we were to assign the homogeneous direction (i.e. discretised based on Fourier expansions) as the streamwise direction, a pressure difference cannot be prescribe directly due to the enforced periodicity.
+If we were to assign the homogeneous direction (i.e. discretised based on Fourier expansions) as the streamwise direction, a pressure difference cannot be prescribe directly due to the enforced periodicity.
 % As a prescribe the homogeneous direction along the streamwise directions, a pressure drop cannot be prescribe directly.
-Instead, we replace the constant pressure drop with a constant body force $\mathbf{f} = f_x \mathbf{\hat{e}}_x$ in the streamwise direction, }
+Instead, we replace the constant pressure drop with a constant body force $\mathbf{f} = f_x \mathbf{\hat{e}}_x$ in the streamwise direction, 
 \begin{equation}\label{eq:streamwise_equation}
     \frac{\partial u}{\partial t} + (u \cdot \nabla) u = -\nabla p + \nu \nabla^2 u + f_x,
 \end{equation}
@@ -987,7 +987,7 @@ Instead, we replace the constant pressure drop with a constant body force $\math
 %         \nabla \cdot \mathbf{u} = 0.
 %     \end{equation}
 % \end{subequations}
-The central question now becomes what is the magnitude of body force required \red{to maintain} a laminar or turbulent flow.
+The central question now becomes what is the magnitude of body force required to maintain a laminar or turbulent flow.
 To begin this discussion, we assume that we can decompose our flow variables into a mean and a fluctuating component, 
 \begin{equation}
     u(x,y,t) = U(y) + u'(x,y,t),
@@ -1058,7 +1058,7 @@ The volumetric flux is defined as,
 \begin{equation}
     Q(\mathbf{u})=\frac{1}{A_{s}}\int_{R} \mathbf{u} \cdot \mathrm{d}\mathbf{R},
 \end{equation}
-where $Q(\cdot)$ refer to the flow rate operator through the surface $R$ with surface area of \red{$A_s$.}
+where $Q(\cdot)$ refer to the flow rate operator through the surface $R$ with surface area of $A_s$.}
 The idea is to append a correction velocity, $\mathbf{u}_{corr}$, to the velocity field at time step $n$, $\mathbf{u}^{n}$, such that the corrected solution, $\mathbf{\bar{u}}^{n} = \mathbf{u}^{n} + \mathbf{u}_{corr}$, has the desired volumetric flux $\bar{Q}= Q(\mathbf{\bar{u}}^{n})$.
 While adding two solutions together is straightforward, the resultant velocity field may not directly satisfy the Navier-Stokes equations.
 Fortunately, we can leverage the velocity correction scheme which (in general) evaluates the nonlinear advection terms followed by a linear terms (pressure and dissipation).
@@ -1231,7 +1231,7 @@ A simple method in computing the dominant eigenpair is the power iteration metho
 \end{definition}
 \subsubsection{Arnoldi Method}
 % We typically require two to four eigenpairs with the largest real parts.
-\red{A generalisation of the power method is the Arnoldi method \citep{arnoldi_principle_1951}, belonging to a class of Krylov subspace iterative methods, for performing a Hessenberg reduction.}
+A generalisation of the power method is the Arnoldi method \citep{arnoldi_principle_1951}, belonging to a class of Krylov subspace iterative methods, for performing a Hessenberg reduction.
 % To compute more than one eigenpair, we ultilise the Arnoldi method \citep{arnoldi_principle_1951}, belonging to a class of Krylov subspace iterative methods, for performing a Hessenberg reduction.
 \begin{definition}[Krylov Subspaces]
     Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0 \in \mathbb{R}^n$, the $k^{th}$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$ is defined by,
@@ -1399,14 +1399,14 @@ The modified Arnoldi algorithm has been verified against using a separate implem
 
 \subsection{Edge tracking}\label{sec:nm_edgetrack}
 % In the section, we consider the dynamical system interpretation of transition, where the laminar state is separated by the turbulent state by an edge, referred to the edge of chaos.
-\red{In this section, we consider the dynamical system perspective on the subscritial transitional shear flows where the linearly stable laminar co-exist with the chaoctic attractor of the turbulent dynamics.
+In this section, we consider the dynamical system perspective on the subscritial transitional shear flows where the linearly stable laminar co-exist with the chaoctic attractor of the turbulent dynamics.
 The edge is defined as the region that separates the basin of attraction between the laminar and turbulent state.
 Along this edge, sit local attractors, referred to as edge states which could could manifest as travelling-waves, tori, and high-order invariant sets.
-A common technique employed for edge tracking is often based on the bisection method \citep{skufca_edge_2006, schneider_turbulence_2007, khapko_edge_2016}, which is performed by repeatedly bisecting the initial conditions given as,}
+A common technique employed for edge tracking is often based on the bisection method \citep{skufca_edge_2006, schneider_turbulence_2007, khapko_edge_2016}, which is performed by repeatedly bisecting the initial conditions given as,
 \begin{equation}\label{eq:bisection}
     \mathbf{q}_0(\mathbf{x}, 0; \chi) = \chi\mathbf{q}_L(\mathbf{x})  + (1 - \chi)\mathbf{q}_T(\mathbf{x})
 \end{equation}
-\red{where $\mathbf{q}_0$ refers to an initial condition consisting of a weighted sum of the bisection parameter, $\chi \in [0,1] $, between a laminar state, \red{$\mathbf{q}_{L}$,} and a turbulent state, $\mathbf{q}_{T}$.
+where $\mathbf{q}_0$ refers to an initial condition consisting of a weighted sum of the bisection parameter, $\chi \in [0,1] $, between a laminar state, $\mathbf{q}_{L}$, and a turbulent state, $\mathbf{q}_{T}$.
 For an initial condition given by $\mathbf{q}_0(\mathbf{x}, 0; \chi=0) = \mathbf{q}_T$, or $\mathbf{q}_0(\mathbf{x}, 0; \chi=1) = \mathbf{q}_L$  the solution trajectory will continue along the turbulent attractor or relaminarise respectively.
 % Since the laminar and turbulent state forms a bistable system, there could be (at least) one critical value of $\chi \in [0, 1]$, where the trajectory walks along the `edge' between the turbulent and laminar state without decaying to either states.
 Hence, there could be (at least) one intermediate value of the bisection parameter, $\chi^* \in [0, 1]$, where the solution trajectory evolves along the edge, neither falling towards the turbulent nor laminar attractor.
@@ -1426,7 +1426,7 @@ After we have determine $\chi^*$ and $T$, the bisection method can be restarted 
 After a certain number of $r$ restarted bisections, the solution trajectory may convergence towards an attractor along the edge - an edge state, acting as a separatrtix betweent he turbulent and laminar attractor.
 % After we have determined the critical $\chi^*$, we repeat the bisections step by replacing the laminar state, $\mathbf{x}_L$, and the turbulent state $\mathbf{x}_T$, which the solution trajectory  with $\chi_L$ and $\chi_T$, that has been terminated after exceeded the threshold.
 We describe the algorithm of edge tracking in algorithm \ref{alg:edge-tracking}.
-To disambiguate between the iterative processes, we perform $r$ number of restarted bisections in an `outer-loop' which contains $n$ number of bisections within an `inner-loop'.}
+To disambiguate between the iterative processes, we perform $r$ number of restarted bisections in an `outer-loop' which contains $n$ number of bisections within an `inner-loop'.
 
 % We refer this repetition as the number of `outer' bisections, while the bisection for $\chi^n$ is referred to `inner bisections'
 % After a certain number of `outer' bisections, the trajectory may converge towards an attractor, which may exist in a from of travelling-waves, periodic orbits or a chaotic attractor.
