@@ -1058,7 +1058,7 @@ The volumetric flux is defined as,
 \begin{equation}
     Q(\mathbf{u})=\frac{1}{A_{s}}\int_{R} \mathbf{u} \cdot \mathrm{d}\mathbf{R},
 \end{equation}
-where $Q(\cdot)$ refer to the flow rate operator through the surface $R$ with surface area of $A_s$.}
+where $Q(\cdot)$ refer to the flow rate operator through the surface $R$ with surface area of $A_s$.
 The idea is to append a correction velocity, $\mathbf{u}_{corr}$, to the velocity field at time step $n$, $\mathbf{u}^{n}$, such that the corrected solution, $\mathbf{\bar{u}}^{n} = \mathbf{u}^{n} + \mathbf{u}_{corr}$, has the desired volumetric flux $\bar{Q}= Q(\mathbf{\bar{u}}^{n})$.
 While adding two solutions together is straightforward, the resultant velocity field may not directly satisfy the Navier-Stokes equations.
 Fortunately, we can leverage the velocity correction scheme which (in general) evaluates the nonlinear advection terms followed by a linear terms (pressure and dissipation).
