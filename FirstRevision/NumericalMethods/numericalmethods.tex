@@ -1,8 +1,8 @@
 \chapter{Numerical Methods}\label{chap:2}
-In this chapter, we will discuss the fundamentals of numerical methods relevant for solving the Navier-Stokes equations.
+In this chapter, we will discuss the fundamentals of \textcolor{red}{the} numerical methods \textcolor{red}{for} solving the Navier-Stokes equations.
 We begin the discussion of the method weighted of residuals (\S \ref{sec:methodofweightedresiduals}) and the spatial discretisation using spectral/\emph{hp} element methods in one dimension (\S \ref{sec:spectralhpelementmethods}).
 This is followed by techniques for solving the Navier-Stokes equations (\S \ref{sec:numeraltechniquesforNS}), such as the velocity-correction scheme, enforcing a constant flow rate and the quasi-3D approach for semi-homogeneous domains. 
-This chapter concludes with numerical techniques for performing stability analysis of the Navier-Stokes equations (\S \ref{sec:stabilityanalysisofNS}), including eigenvalue computation and edge tracking.
+This chapter concludes with \textcolor{red}{introducing the} numerical techniques for performing stability analysis of the Navier-Stokes equations (\S \ref{sec:stabilityanalysisofNS}), including eigenvalue computation and edge tracking.
 % In this chapter, I will present the numerical methods ultilised in this thesis.
 % The premise of numerical methods is to solve for the the partial differential equations, the Navier-Stokes equations.
 % The incompressible Navier-Stokes equations describe the time- and spatial-varying velocity field and pressure field.
@@ -13,7 +13,7 @@ This chapter concludes with numerical techniques for performing stability analys
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Method of weighted residuals}\label{sec:methodofweightedresiduals}
-Spatial discretisation errors, or residuals, arise as one seeks an approximate solution to some partial differential equation (PDE).
+Spatial discretisation errors, or residuals, arise as one seeks an approximate solution to \textcolor{red}{a partial} differential equation (PDE).
 The method of weighted residuals provides a generic mathematical framework in which constraints on the residual could be applied flexibly, defining the spatial discretisation scheme and its convergence properties.
 We approximate the solution of PDE by considering a finite expansion of a suitable basis, to which its coefficients are sought after by minimising the inner product between the PDE and a test (or weight) function.
 To demonstrate this, we consider a linear partial differential equation as,
@@ -22,7 +22,7 @@ To demonstrate this, we consider a linear partial differential equation as,
 \end{equation}
 where $\mathbf{L}$ refers to a linear spatial differential operator subjected to some boundary conditions within the domain, $\Omega$, while $u(x)$ refers to the exact solution of $\mathbf{L}$.
 Examples of PDEs with linear spatial differential operators include the Laplace equation, $\nabla^2 u = 0 $, Poisson equation, $\nabla^2 u - f = 0$, and the Helmholtz equation, $\nabla^2 u - \lambda u  + f = 0$.
-We suppose that the exact solution $u(x)$ can be approximated (discretised) by $N$ finite number of global basis (or expansion) functions, $\Phi(x)$.
+We \textcolor{red}{assume} that the exact solution $u(x)$ can be approximated (discretised) by $N$ finite number of global basis (or expansion) functions, $\Phi_i(x)$.
 \begin{equation}\label{eq:approximate}
     u(x) \approx u^\delta(x) = \sum_{i=0}^{N-1} \hat{u}_i \Phi_i(x),
 \end{equation}
@@ -134,7 +134,7 @@ Similarly, the space of test functions, $\mathcal{V}$, is defined as,
 \begin{equation}\label{eq:test_space}
     \mathcal{V} := \{ v \, | \, v \in H^1, v(0) = 0 \},
 \end{equation}
-where $v \in H^1$ \st{are} refer to test functions belonging to the Sobolev space of order 1, and is defined to be zero, $v(0) = 0$ on Dirichlet boundary condition, $x = 0$.
+where $v \in H^1$ \textcolor{red}{refer} to test functions belonging to the Sobolev space of order 1, and is defined to be zero, $v(0) = 0$ on Dirichlet boundary condition, $x = 0$.
 The generalised weak form is finding $u(x) \in \mathcal{U}$, such that
 \begin{equation}\label{eq:bilinear_infinite}
     a(v,u) = f(v), \quad \forall v \in \mathcal{V}.
@@ -173,14 +173,14 @@ While the procedure for approximating a solution of a PDE using the classical Ga
 % Other popular methods of spatial discretisation found in literature are the finite-difference methods, and finite-volume methods.
 % The spectral/{hp} element method (SEM) is related to the Galerkin method in which the type of \emph{trial} function used. The spectral/\emph{hp} element method combines 2 traditional numerical methods, namely, 
 
-In this section, we introduce the spectral/\emph{hp} element method \citep{patera_spectral_1984}, a spatial discretisation scheme in which the solution domain is partitioned into a set of non-overlapping finite elements of size $h$, within which the solution represented as a linear combination of continuous orthogonal polynomial functions up to order $P$.
+In this section, we introduce the spectral/\emph{hp} element method \citep{patera_spectral_1984}, a spatial discretisation scheme in which the solution domain is partitioned into a set of non-overlapping finite elements of size $h$, within which the solution \textcolor{red}{is} represented as a linear combination of continuous orthogonal polynomial functions up to order $P$.
 % The spectral/\emph{hp} element method pioneered by \citep{patera_spectral_1984} is a spatial discretisation technique in which the solution domain is partitioned into a set of non-overlapping (finite) elements with size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $P$. 
 % represented by a polynomial of up to order $p$.
 % which leverages the advantages of offering geometric flexibility by decomposing the global domain into a set of non-overlapping (finite) elements of size $h$, each consisting of a linear combination of continuous polynomial functions of up to order $p$.
-This approach combines the geometric flexibility of classical finite-element methods \citep{strang_analysis_2008}, which allow complex geometries to be represented, with the exponential convergence properties of spectral methods \citep{gottlieb_numerical_1977}.
+This approach combines the geometric flexibility of classical finite-element methods \citep{strang_analysis_2008}, \textcolor{red}{allowing for} complex geometries to be represented, \textcolor{red}{and} the exponential convergence properties of spectral methods \citep{gottlieb_numerical_1977}.
 For the reasons above, the spectral/\textit{hp} element method provides an attractive framework for approximating PDE solutions at a given cost, as we shall see later.
 % This concludes the preamble of the spectral/\textit{hp} element method, we now proceed to the details of the method.
-This section is organised as follows: domain partition, standard elements, assembly process, modal and nodal expansion functions, numerical integration and differentiation, a 1D example before concluding with error properties of the spectral/\textit{hp} element method.
+This section is organised as follows: domain partition, standard elements, assembly process, modal and nodal expansion functions, numerical integration and differentiation, a 1D example before concluding with \textcolor{red}{the} error properties of the spectral/\textit{hp} element method.
 % % It offers the flexibility of offering refinements in either $h$ or $p$, or both.
 % \begin{enumerate}
 %     \item Finite elements:
@@ -250,7 +250,7 @@ The approximate solution, $u^\delta(x)$, now lie within the solution space $\mat
 \begin{equation}
     \mathcal{U}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \phi_i^e(\xi), \forall i : 0 \leq i \leq P, \forall e : 1 \leq e \leq N_{el} \right\}
 \end{equation}
-We note that the local basis expansion shown here are not strictly orthogonal polynomials.
+We note that the local basis expansion shown here are not strictly orthogonal polynomials \textcolor{red}{(i.e. the inner product between polynomials is zero).}
 By modifying them with Jacobi polynomials, they may become orthogonal with increasing $P$ as we see later.
 % Figure \ref{fig:standard_element} presents the sketch of representing a continous function using spectral/\textit{hp} element methods for $P = 2$ and $N_{el} = 3$.
 
@@ -279,7 +279,7 @@ In general, we can represent the global and local basis coefficients each as a c
      \mathbf{\hat{u}}^{N_{el}-1}
  \end{pmatrix},
 \end{equation}
-where $\mathbf{\hat{u}}^{e} = (\hat{u}_0^e, ..., \hat{u}_P^e)^T$, $\mathbf{\hat{u}}_g \in \mathbb{R}^N$, $\mathbf{\hat{u}}_l \in \mathbb{R}^{N_{loc}}$ and $N_{loc} = N_{el}(P+1)$.
+where $\mathbf{\hat{u}}^{e} = [\hat{u}_0^e, ..., \hat{u}_P^e]^T$, $\mathbf{\hat{u}}_g \in \mathbb{R}^N$, $\mathbf{\hat{u}}_l \in \mathbb{R}^{N_{loc}}$ and $N_{loc} = N_{el}(P+1)$.
 As there can be more local degrees of freedom than global degrees of freedom, $ N_{loc} > N$, we need to impose some conditions on the local expansion coefficients.
 One of the common approach is to enforce $C^0$ continuity across elemental boundaries, referred to as the continous Galerkin projection.
 Following the definition of local basis expansions in equation \eqref{eq:def_local_expansions}, we can enforce the solution to be equivalent at the elemental boundary using the condition,
@@ -420,8 +420,7 @@ Special cases of ultraspheric polynomials are the Legendre polynomials, $\alpha 
 % The \emph{trial} functions $\phi_p$ (or basis expansions) used in spectral/\emph{hp} method consist of \emph{boundary} and \emph{interior} modes.
 % \emph{Interior} modes are defined to be zero on all boundaries, and non-zero within the boundary, satisfying homogeneous boundary conditions.
 % \emph{Boundary} modes take on non-zero values on the boundary, satisfying non-homogeneous boundary conditions and providing $C^0$ continuity between elements (\cite{karniadakis_2005spectral}).
-O
-Within the Nektar++ framework, we utilise the \emph{modified} basis, based on Jacobi polynomials that are modified (hence the name),
+\textcolor{red}{Within} the Nektar++ framework, we utilise the \emph{modified} basis, based on Jacobi polynomials that are modified \textcolor{red}{with linear polynomials},
 % are used as the \emph{trial} functions. Using $\alpha=1$, $\beta=1$, and linear basis functions as \emph{boundary} modes, the modified Jacobi polynomials are,
 \renewcommand{\arraystretch}{1.5} % Default value: 1
 \begin{equation}\label{eq:modifiedJacobi}
@@ -460,7 +459,7 @@ The Lagrange polynomials, $h_p(\xi)$, are particular attractive as it has a unit
 \end{equation}
 where the Lagrange coefficient $\hat{u}_q$ is the same as the value evaluated at the node $\xi_q$.
 The nodal values, $\xi_q$, are based on the Gauss-Lobatto-Legendre (GLL) points which will be defined later in \S \ref{sec:Gaussian_quadrature}.
-The nodal distribution based on GLL points is crucial for obtaining well-behaved Lagrange polynomials, as the use of equispaced nodal points leads to oscillations between nodes.
+The nodal distribution based on GLL points is crucial for obtaining well-behaved Lagrange polynomials, as the use of equispaced nodal points \textcolor{red}{can lead} to oscillations between nodes.
 Figure \ref{fig:Lagrange_basis} presents Lagrange expansions evaluated along the GLL points.
 \begin{figure}[h]
     \centering
@@ -515,7 +514,7 @@ Suppose we want to approximate the integral of a function, $u(\xi)$, in a standa
     \int_{-1}^1 u(\xi) \; \mathrm{d}\xi = \sum_{i=0}^{Q-1} w_i u(\xi_i) + R(u).
 \end{equation}
 % where $Q, w_i, \xi_i, R(u)$ refers to the quadrature points, integration weights and zeros (or abscissae) and the integral of the error.
-The premise is determine the optimal number of quadrature points, $Q$, integration weights, $w_i$, and zeros, $\xi_i$, in which the integral error, $R(u)$, can be minimised.
+The \textcolor{red}{goal is to} determine the optimal number of quadrature points, $Q$, integration weights, $w_i$, and zeros, $\xi_i$, in which the integral error, $R(u)$, can be minimised.
 % By evaluating the integral, how are we able to minimise the integral error, $R(u)$, with the least number of quadrature points, $Q$, at some weights and zeros.
 % If $u(\xi)$ is of polynomial order $P$, we may expect that we require $P+1$ equipspaced points to accurately represent the function and evalute its integral.
 If $u(\xi)$ is of polynomial order of $P$, we may expect that we require at least $P+1$ equipspaced points to represent $u(\xi)$ sufficiently.
@@ -525,7 +524,7 @@ The main difference between the three categories are on the inclusion of the end
 Gauss quadrature rule evaluates the integral without the end points $\xi = \pm 1$.
 Gauss-Radau quadrature rule either select one of the end points, often at $\xi = -1$.
 Gauss-Lobatto quadrature rule consider both end points.
-We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials known as the Gauss-Lobatto-Jacobi quadrature rules given as,
+We will only focus on describing the Gauss-Lobatto quadrature rules \textcolor{red}{using} the zeros of Jacobi polynomials known as the Gauss-Lobatto-Jacobi quadrature rules given as,
 \begin{subequations}\label{eq:weightsnzeros}
     \begin{equation}
         \xi_i^{\alpha,\beta} = \begin{cases}
@@ -612,7 +611,7 @@ Starting from the weak form,
 % \end{equation}
 \begin{subequations}
 \begin{equation}\label{eq:example_weak_form}
-    \lambda \int v u \, \mathrm{d}x + \int \frac{\partial v}{\partial x}\frac{\partial u}{\partial x} \, \mathrm{d}x = \int v f \, \mathrm{d} x + \left[v \frac{\mathrm{d} u}{\mathrm{d} x} \right]_0^l, \quad x \in [0, l],
+    \lambda \int_0^l v u \, \mathrm{d}x + \int_0^l \frac{\partial v}{\partial x}\frac{\partial u}{\partial x} \, \mathrm{d}x = \int_0^l v f \, \mathrm{d} x + \left[v \frac{\mathrm{d} u}{\mathrm{d} x} \right]_0^l, \quad x \in [0, l],
 \end{equation}
 with boundary conditions,
 \begin{equation}\label{eq:example_weak_form_bc}
@@ -647,7 +646,7 @@ the $e^{th}$ elemental contribution becomes,
 \end{align}
 where the elemental mass matrix is defined as 
 \begin{equation}
-    \mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W} \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)}.
+    \mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W}^e \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)}.
 \end{equation}
 Here, $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental basis matrix, and $\mathbf{W}^e\in \mathbb{R}^{Q \times Q}$, the elemental weight matrix, a diagonal matrix consisting of the product between integration weights, $w_q^e$, and the element's jacobian, $J^e = \frac{\mathrm{d} \chi^e}{\mathrm{d} \xi}$.
 \begin{equation}
@@ -655,7 +654,7 @@ Here, $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental bas
     \begin{bmatrix}
         \phi_0^e(\xi_0) & \cdots & \phi_P^e(\xi_0) \\
         \vdots & \ddots & \vdots \\
-        \phi_0^e(\xi_Q) & \cdots & \phi_P^e(\xi_Q) \\
+        \phi_0^e(\xi_{Q-1}) & \cdots & \phi_P^e(\xi_{Q-1}) \\
     \end{bmatrix}
     ,
     \quad
@@ -674,7 +673,7 @@ Next, we evaluate the $e^{th}$ elemental contribution of the second term on the 
 \end{align}
 where the elemental Laplacian matrix is defined as 
 \begin{equation}
-    \mathbf{L}^e = (J^e)^{-1}(\mathbf{B}^e)^T(\mathbf{D}^e)^T  \mathbf{W} \mathbf{D}^e \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)},
+    \mathbf{L}^e = (J^e)^{-1}(\mathbf{B}^e)^T(\mathbf{D}^e)^T  \mathbf{W}^e \mathbf{D}^e \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)},
 \end{equation}
 and $\mathbf{D}^e \in \mathbb{R}^{Q \times Q}$ refers to the differential matrix defined in equation \eqref{eq:differential_matrices}.
 Moving onto the first term on the right hand side,
@@ -799,7 +798,7 @@ We rewrite the incompressible Navier-Stokes equations in semi-discrete form with
     \end{equation}
     \text{with boundary conditions,}
     \begin{equation}
-        \mathbf{u}|_\Omega = 0, \quad \mathbf{u}(t=0) = \mathbf{u}_0.
+        \mathbf{u}|_{\partial \Omega} = 0, \quad \mathbf{u}(t=0) = \mathbf{u}_0.
     \end{equation}
 \end{subequations}
 The nonlinear, $\mathbf{N}$, linear, $\mathbf{L}$, operators are obtained from a suitable spatial-discretisation method such as the spectral/\emph{hp} element method.
@@ -819,7 +818,7 @@ The first step we perform is to extrapolate the advection velocities, by approxi
 \begin{equation}\label{eq:firstStep}
     \frac{\mathbf{\hat{u}} - \sum_{q=0}^{J_e-1} \alpha_{q} \mathbf{u}^{n-q}}{\Delta t} = \sum_{q=0}^{J_e-1} \beta_q \mathrm{\mathbf{N}}(\mathbf{u}^{n-q}),
 \end{equation}
-where $\mathbf{\hat{u}}$ is denotes the primary intermediate velocity field desired and $\alpha_e,\beta_e$ refers to the time integration coefficients for a prescribe $J_e$-th order, described later.
+where $\mathbf{\hat{u}}$ is denotes the primary intermediate velocity field desired and $\alpha_e,\beta_e$ refers to the time integration coefficients \textcolor{red}{described} later.
 After evaluting $\mathbf{\hat{u}}$, we move onto the second term in equation \eqref{eq:split}, which defines the pressure at time step $n+1$ as,
 \begin{equation}\label{eq:secondStep}
     \frac{\mathbf{\hat{\hat{u}}} - \mathbf{\hat{u}}}{\Delta t} = -\nabla p^{n+1}.
@@ -875,7 +874,7 @@ The high order velocity correction scheme and be summarised in a three step proc
 \begin{equation}
     \mathbf{u}^n \xrightarrow{\quad \mathbf{N}(\mathbf{u}^n) \quad} \mathbf{\hat{u}} \xrightarrow{\quad \nabla^2 p \quad} \mathbf{\hat{\hat{u}}} \xrightarrow{\quad \mathbf{L}(\mathbf{\hat{\hat{u}}}) \quad} \mathbf{u}^{n+1}, \nonumber
 \end{equation}
-evolving the velocity fields at time step $n$ to $n+1$.
+evolving the velocity fields \textcolor{red}{from} time step $n$ to $n+1$.
 % Before we do so, we have to define the test functional spaces of velocity, $\mathcal{W}$, and pressure $\mathcal{Q}$, defined as,
 % \begin{subequations}
 %     \begin{equation}
@@ -1007,7 +1006,7 @@ For a statistically stationary turbulent (or laminar) channel flow with periodic
     \item stationary flow $\frac{\partial U}{\partial t} =  0$,
     \item fully-developed in $x$, $\frac{\partial}{\partial x} \rightarrow 0$, 
     \item $\frac{\partial V}{\partial y} = 0$, as a consequence of continuity and the no-slip boundary condition.
-    \item $\langle u',v',w',p' \rangle  = 0$, based on the definition of fluctuations,
+    \item $\langle u',v',\textcolor{red}{p'} \rangle  = 0$, based on the definition of fluctuations,
     \item $\frac{\partial p}{\partial x} = 0 $ due to the enforced periodicity in $x$.
 \end{enumerate}
 Applying the assumptions above, the mean momentum equations simplify into,
@@ -1022,7 +1021,7 @@ Next, we integrate the expression from $y \in [-1, 1]$,
 \begin{equation}
     2F_x = [\left\langle u'v'\right\rangle]_{y=-1}^{y=1} + \nu \left [\frac{\partial U}{\partial y}\biggr|_{y=1} - \frac{\partial U}{\partial y}\biggr|_{y=-1} \right].
 \end{equation}
-The wall shear stress is defined by $\tau_w = \nu \frac{\partial U}{\partial y}|_{y=1}$ ($\rho$ is assumed to be 1), and it is antisymmetric about the channel centreline, $\nu \frac{\partial U}{\partial y}|_{y=1} = - \nu \frac{\partial U}{\partial y}|_{y=-1}$.
+The wall shear stress is defined by $\tau_w = \nu \frac{\partial U}{\partial y}|_{y=1}$ ($\rho$ is assumed to be 1), and it is antisymmetric about the channel centreline, $\nu \frac{\partial U}{\partial y}|_{y=1} = - \nu \frac{\partial U}{\partial y}|_{y=-1}$ \textcolor{red}{for a laminar profile.}
 Due to the no-slip condition, the Reynolds shear stresses is zero, i.e. $[u'v']|_{y=-1,1} = 0$.
 % Recall that $\tau_w = \nu\frac{\partial u}{\partial y}|_{y=-1} = -\nu\frac{\partial u}{\partial y}|_{y=1}$ (due to symmetry and note that $\rho = 1$) is referred to as the wall-shear stress.
 Hence, the expression above simplifies to,
@@ -1047,7 +1046,7 @@ where $Re_c$ is the Reynolds number based on the laminar centerline velocity.
 Similarly, the skin friction coefficient for the case of laminar flow is $c_f = 4/Re_c$ \citep{dean_reynolds_1978}.
 % where $c_f = \tau_w / (\frac{1}{2}\rho U_c^2)$ refers to the skin friction coefficient of a turbulent channel flow.
 Figure \ref{fig:tauw_rec} illustrates the relationship between $\tau_w$ and $Re_c$ of channel flow using empirical relationship from \cite{dean_reynolds_1978} (here $\rho = U_c = 1$) and experimental data from \cite{patel_observations_1969,kim_turbulence_1987, iida_relaminarization_1998, tsukahara_dns_2014}.
-While the empirial relation for laminar flow, $Re_c \lesssim 1000$ and turbulent flow $Re_c \gtrsim 2000$ appears reasonably robust, the wall shear stress in the transitional region is lacking therefore, the body forcing approach is not preferred.
+While the \textcolor{red}{empirical relation for laminar flow, $Re_c \lesssim 1000$ and turbulent flow $Re_c \gtrsim 2000$ appears reasonably robust, the transitional region remains challenging, therefore, we do not know the amount of body forcing required in the transitional regime, and the body-forcing approach is not preferred.}
 % In other words, the body-forcing term, $f$, balances the wall shear stresses, i.e. the drag on the channel walls.
 % The next step is to determine the amount of wall-shear stresses, and therefore $f$, so that laminar or turbulent flow can be sustained in the channel.
 
@@ -1127,7 +1126,7 @@ The process of adding the correction velocity at the end of velocity correction 
 % This section concerns the stability analysis of a base flow, $\mathbf{U}$, describe by the behaviour of infinitisimal disturbances.
 In this section, we present a general overview of the numerical procedure for linear stability analysis.
 % The section describes the solution procedure in conducting linear stability analysis.
-Linear stability analysis examines the stability of a base flow by considering the evolution of infinitesimal perturbations.
+Linear stability analysis examines the stability of a base flow by considering the \textcolor{red}{behaviour} of infinitesimal perturbations.
 % Linear stability analysis concerns the study of the stability of the base flow, by considering the evolution of infinitisimal perturbations about it.
 These perturbations in general, may either grow or decay exponentially, indicating whether the base flow is linearly unstable or stable respectively.
 % In general, perturbations could either grow or decay exponentially, leading to a linear unstable or stable base flow.
@@ -1242,7 +1241,7 @@ A generalisation of the power method is the Arnoldi method \citep{arnoldi_princi
 % To compute more than one eigenpair, we ultilise the Arnoldi method, belonging to a broader class of algorithms referred to as the Krylov subspace projection methods.
 \begin{definition}[Hessenberg reduction]
     The Hessenberg reduction is a matrix decomposition technique commonly used for the computing eigenpairs of matrices. 
-    Given a unsymmetric matrix $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real for simplicity), we seek a decomposition of the form,
+    Given a \textcolor{red}{matrix} $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real for simplicity), we seek a decomposition of the form,
     \begin{equation}\label{eq:hessenberg_reduction}
         \mathbf{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T,
     \end{equation}
@@ -1321,14 +1320,14 @@ The error in approximating the $j^{th}$ eigenpair is given by,
 where $\mathbf{v}_j[k-1]$ is the last component of the eigenvector $\mathbf{v}_j$.
 
 Lastly, we are generally interested in obtaining the eigenpairs with the the largest real part.
-We introduce exponential power method \citep{tuckerman_bifurcation_2000}, which is naturally considered by time stepping an initial perturbation $\mathbf{q}'_0$ from $t = 0$ to $T$,
+We introduce \textcolor{red}{the} exponential power method \citep{tuckerman_bifurcation_2000}, which is naturally considered by time stepping an initial perturbation $\mathbf{q}'_0$ from $t = 0$ to $T$,
 \begin{equation}
     \mathbf{q}'(T) = \exp({\mathcal{L} T}) \mathbf{q}'_0 = \mathcal{A}(T)\mathbf{q}_0'.
 \end{equation}
 The dominant eigenvalues, $\mu$, of $\mathcal{A}$ obtained from the Arnoldi method described above, which correspond to the eigenvalue of the largest real part $\lambda$, of $\mathcal{L}$ by $\mu = \exp(\lambda  T)$, where $T$ is typically set to 1.
 For further details on this algorithm, the reader is referred to \cite{tuckerman_bifurcation_2000} and \cite{barkley_direct_2008} for more details.
 
-In summary, the algorithm described above have been implemented in Nektar++, referred to as the `modified' Arnoldi algorithm, which modifies the existing time-stepper code with a wrapper function that generates Arnoldi vectors and solves the Hessenberg matrix using the subroutine \texttt{dgeev} from LAPACK (Linear Algebra PACKage, \citep{anderson_lapack_1999}).
+In summary, the algorithm described above have been implemented in Nektar++, referred to as the `modified' Arnoldi algorithm, which modifies the existing time-stepper code with a \textcolor{red}{driver} that generates Arnoldi vectors and solves the Hessenberg matrix using the subroutine \texttt{dgeev} from LAPACK (Linear Algebra PACKage, \citep{anderson_lapack_1999}).
 The modified Arnoldi algorithm has been verified against using a separate implementation based on the third-party package ARPACK (ARnoldi PACKage \citep{lehoucq_arpack_1998}) \citep{rocco_advanced_nodate}.
 
 % Lastly, we note that Arnoldi method extracts the eigenpairs with the largest magnitude.
@@ -1423,7 +1422,7 @@ A stopping criteria based on turbulent kinetic energy and wall shear stress is o
 % \st{In practice, we consider $n = 10, 20$ and for $n = 10$, the solution along the edge is converged.}
 This edge is often unstable and we often require $\chi^*$ to be considerably accurate to remain such that the initial condition could evolve along the edge for sufficient time, $T$.
 After we have determine $\chi^*$ and $T$, the bisection method can be restarted between by replacing the $\mathbf{q}_L(\mathbf{x}) = \mathbf{q}_0(\mathbf{x}, T, \chi_L)$ and $\mathbf{q}_T(\mathbf{x}) = \mathbf{q}_0(\mathbf{x}, T; \chi_T)$, which are close to each other in state space but diverge to the laminar and turbulent states after a long time $t > T$.
-After a certain number of $r$ restarted bisections, the solution trajectory may convergence towards an attractor along the edge - an edge state, acting as a separatrtix betweent he turbulent and laminar attractor.
+After a certain number of $r$ restarted bisections, the solution trajectory may convergence towards an attractor along the edge - an edge state, acting as a \textcolor{red}{separatrix between the} turbulent and laminar attractor.
 % After we have determined the critical $\chi^*$, we repeat the bisections step by replacing the laminar state, $\mathbf{x}_L$, and the turbulent state $\mathbf{x}_T$, which the solution trajectory  with $\chi_L$ and $\chi_T$, that has been terminated after exceeded the threshold.
 We describe the algorithm of edge tracking in algorithm \ref{alg:edge-tracking}.
 To disambiguate between the iterative processes, we perform $r$ number of restarted bisections in an `outer-loop' which contains $n$ number of bisections within an `inner-loop'.
@@ -1479,7 +1478,7 @@ To disambiguate between the iterative processes, we perform $r$ number of restar
     \EndWhile
     \end{algorithmic}
     \label{alg:edge-tracking}
-    \caption{Algorithm for edge tracking between a turbulent and laminar state}
+    \caption{Algorithm for edge tracking between \textcolor{red}{the turbulent and laminar attractor.}}
 \end{algorithm}
 % The choice of \emph{test} function is also commonly known as projection methods, i.e projecting (taking the inner product) the residual onto the \emph{test} functions.
 % Usually, the weight functions are selected 
