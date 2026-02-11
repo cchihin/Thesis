@@ -1,0 +1,86 @@
+\documentclass[12pt, a4paper]{book}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+\usepackage{lscape}
+\usepackage{pgfgantt}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage[english]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage{blindtext}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim} 
+\usepackage[outdir=./Figures/]{epstopdf}
+\usepackage{pifont}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{newtxtext}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE,RO]{\nouppercase{\rightmark}}
+\fancyhead[LO,RE]{\nouppercase{\leftmark}}
+\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+\renewcommand{\headrulewidth}{0.4pt}% default is 0pt
+
+% The plain style is used in the opening page of a chapter
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0pt} % remove top line
+}
+
+
+% Used for definitions
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}
+
+% Macros for corrections
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\usepackage{soul}
+\usepackage{xcolor}
+\setstcolor{red}
+
+% References
+\usepackage[english]{babel}
+\usepackage[natbibapa]{apacite} 
+
+
+\begin{document}
+
+    \frontmatter
+
+    \include{Cover/cover}
+    \include{Declarations/declarations}
+    \include{Abstract/abstract}
+    \include{Acknowledgements/acknowledgements}
+
+    \tableofcontents
+    \listoffigures
+    \listoftables
+
+    \mainmatter
+
+    \include{Background/background}
+    \include{NumericalMethods/numericalmethods}
+    \include{TransitionalRBP/transitionalrbp}
+    \include{StateSpaceStructureOfSDC/statespacestructureofsdc}
+    \include{Conclusions/conclusions}
+    \include{Appendices/appendices}
+
+    \backmatter
+    \bibliographystyle{apacite}
+    \bibliography{References/nektar,References/RBC,References/RBP,References/NumericalMethods,References/RBP_applications,References/HydrodynamicStability,References/shearflowturb_trans,References/shearflowturb_developed,References/generic,References/PhDTheses}
+
+\end{document}

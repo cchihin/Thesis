@@ -1,0 +1,47 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{lscape}
+\usepackage{pgfgantt}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{natbib}
+\usepackage[margin=2cm]{geometry}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=red]{hyperref}
+\usepackage{blindtext}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim} 
+% \usepackage[dvipsnames,svgnames]{xcolor} % Compilation error
+\usepackage[outdir=./Figures/]{epstopdf}
+\usepackage{pifont}
+\usepackage{makecell}
+
+
+% \includeonly{Introduction/introduction}
+
+\begin{document}
+
+\include{Cover/cover}
+
+\chapter*{Abstract}
+TODO
+
+\tableofcontents
+
+\include{Introduction/introduction}
+
+\include{Methodology/methodology}
+\include{ResultsDiscussion/rarephasespace}
+\include{ResultsDiscussion/bistable}
+\include{ResultsDiscussion/lowre}
+\include{ResultsDiscussion/highre}
+
+\include{Conclusions/conclusions}
+\include{Appendices/appendices}
+
+\bibliographystyle{plainnat}
+\bibliography{References/references}
+\end{document}

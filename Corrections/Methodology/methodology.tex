@@ -1,0 +1,55 @@
+\chapter{Methodology (1 Feb - 1 Mar)}\label{chap:methods}
+In this chapter, I will present the numerical methods relevant to this thesis.
+\section{Spectral-\emph{h/p} element method}
+
+\subsection{Spatial discretisation}
+\subsubsection{1D Spectral-\emph{h/p} elements}
+\subsubsection{2D Spectral-\emph{h/p} elements}
+\subsubsection{Quasi-3D Fourier-spectral-\emph{hp} elements}
+\subsection{Temporal discretisation}
+\subsection{Velocity correction scheme for incompressible Navier Stokes equations}
+
+\section{Hydrodynamic stability analysis}
+\subsection{Linear stability analysis}
+\subsubsection{Fourier-Chebyshev methods}
+\subsubsection{Timestepping methods: Arnoldi Iteration}
+\subsubsection{Transient growth}
+To study the dynamics of infinitetisimal perturbations about a base flow, the time evolution equation for the perturbations dynamics typically reduces to,
+\begin{equation}
+    \frac{\partial}{\partial t} \mathbf{u} = \mathcal{L}\mathbf{u},
+\end{equation}
+where $\mathcal{L}, \mathbf{u}$ refers to the linearised operator and a vector of perturbations. Suppose the that linear operator is diagonlisable,
+\begin{equation}
+    \mathcal{L} = 
+     \begin{bmatrix}
+     | & & | \\
+     \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
+     | & & |
+     \end{bmatrix}
+     \begin{bmatrix}
+     \lambda_1 &  & 0 \\
+      & \ddots &  \\
+     0 &  & \lambda_n
+     \end{bmatrix}
+     \begin{bmatrix}
+     | & & | \\
+     \mathbf{s}_1 & \cdots & \mathbf{s}_n \\
+     | & & |
+     \end{bmatrix}^{-1}
+     = \mathcal{S}\Lambda\mathcal{S}^{-1}.
+\end{equation}
+
+Suppose we can decompose our initial conditions into a superposition of eigenmodes,
+\begin{equation}
+    \mathbf{u}_0 = \alpha_{1,0}\mathbf{s}_1 + \alpha_{2,0}\mathbf{s}_2 + ... + \alpha_{N,0} \mathbf{s}_n = \sum_{i=1}^{n} \alpha_{i,0}\mathbf{s}_i,
+\end{equation}
+and w
+
+\subsection{Nonlinear stability tools}
+\subsubsection{Edge state tracking}
+\subsubsection{Computing Invariant solutions}
+
+\section{Fluid flow decomposition}
+\subsection{Spectral proper orthogonal decomposition (SPOD)}
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NEKTAR>
+    <Metadata>
+        <Provenance>
+            <GitBranch>refs/heads/master</GitBranch>
+            <GitSHA1>2d928224b7252460224ea10828efdbbe59507022</GitSHA1>
+            <Hostname>chanbuntu</Hostname>
+            <NektarVersion>5.9.0</NektarVersion>
+            <Timestamp>18-Oct-2025 16:19:29</Timestamp>
+        </Provenance>
+        <ChkFileNum>0</ChkFileNum>
+        <SessionName0>HelmholtzMesh_Nel118.xml</SessionName0>
+        <SessionName1>HelmholtzSession-P1.xml</SessionName1>
+    </Metadata>
+    <ELEMENTS FIELDS="u" SHAPE="Segment" BASIS="Modified_A" NUMMODESPERDIR="UNIORDER:2" ID="0-117" COMPRESSED="B64Z-LittleEndian" BITSIZE="64">eJx11W9MzHEcB/BplE2mXEf6J5nIPYjC/GlLD/JnZQuZ/BkPrGz9GXc8qi2htqJHSLWYruxmsuWBCEXpUAq1LllkXbhynTPK2dIf2/fz+bxva/PotbW7332/n8/73c/rsF90uMnY4L0nNntAV/NUzL05lFK84THscAyey9lvhjpDcadmQTtcPtqVnGvphMfMP/VrAywwcHFTfmZiL2xfNVJYaOiD6/M67pjz+mGVJeqqJnYA1vs3V7TUWmFBmMfvZu1neOHRuvR3GV/g9corRzR1X+EpT4ezxmGDk6UX0zO1w7AkzRg5S/cNRtSZDg1H2mFQ17bA5NAR+ErvvTRryq25zDfD9cIBi3bcnm7I+Q7jplYEhwQ4oat5b19BtdvQu34HRrU/oOVNgSnL4PZjYn9JxQO3lZsMkUE2t4OtIda4Sbf2Gdbz58TZu+g54ry39DtiKp9DjH9G5xTL+B7iMN9TXF1OcxCjDTQnsYjnKJbznMW5x2kPor6M9iTaeI+ij5H2LI5zDkQX50TULaEcif49lDMx/CzlUHwSQTkVF/pTjsWjzynnYtgY9UCMOk09ET84qUfi5VvUMzHxIPVQjHGZen0/+TSKWTvV32PFsEr1PWi0q+fCPyfU70KPX+pccEuLOje0a9W94KWV6t5wLFfNBU50q7nB+dRT2L1MzR1aHqq9QNsNtTd4f47aK9xMPYUdqSoXMOWeyg2M71S5gs6TKnfQWqpyCa9tV7mFCZMq13C8SeUehtSqXsC216o3sDVB9Qqe36h6Bxtfql7+13z+nNjGz4Ezfi+YzyFO8DnFJL6HWMX3FId4DuJvnpOYxHMU03nOopX3IO7jPYk9vEfRk/4vw7+cA3GacyLGcI7ENfRegGlnKIeiht4rMHsR5Vh8zzkXa7kHol5PPRG30nsPtlRTz8Sk3dRD0YveqzH/ALw9BwsA</ELEMENTS>
+</NEKTAR>

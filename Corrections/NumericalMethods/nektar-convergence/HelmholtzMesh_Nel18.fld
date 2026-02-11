@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NEKTAR>
+    <Metadata>
+        <Provenance>
+            <GitBranch>refs/heads/master</GitBranch>
+            <GitSHA1>2d928224b7252460224ea10828efdbbe59507022</GitSHA1>
+            <Hostname>chanbuntu</Hostname>
+            <NektarVersion>5.9.0</NektarVersion>
+            <Timestamp>18-Oct-2025 16:18:30</Timestamp>
+        </Provenance>
+        <ChkFileNum>0</ChkFileNum>
+        <SessionName0>HelmholtzMesh_Nel18.xml</SessionName0>
+        <SessionName1>HelmholtzSession-P1.xml</SessionName1>
+    </Metadata>
+    <ELEMENTS FIELDS="u" SHAPE="Segment" BASIS="Modified_A" NUMMODESPERDIR="UNIORDER:2" ID="0-17" COMPRESSED="B64Z-LittleEndian" BITSIZE="64">eJxjjxExVlu2cM9+/zUbbV9c3Q+jX19S/Ck27Qmcvl6y/kLHntdw2qH9u+OOrvdw2g6NvgJVB6NfQM2B0Tuh9sDorlfzzZru7rCB0Uch4vYw+j1EH5y+AzEXTrtB7MVJ34aqg9FvoObA6ANQe2A0OyRcbACtXK4N</ELEMENTS>
+</NEKTAR>

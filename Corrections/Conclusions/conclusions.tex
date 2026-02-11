@@ -1,0 +1,111 @@
+\chapter{Conclusions}\label{chap:5}
+
+In our concluding  chapter, we emphasise the main contributions of this thesis and provide recommendations for possible avenues of future work.
+We explored the transitional regimes of Rayleigh-B\'{e}nard Poiseuille (RBP) flows arising from the combination of shear and buoyancy forces in \S \ref{chap:3}.
+The main findings can be summarised in the following,
+\begin{enumerate}
+    \item The existence of the \textit{thermally-assisted sustaining process}, providing an alternative pathway towards turbulence via linearly unstable longitudinal rolls in confined domains.
+    \item At moderate Reynolds number, a new spatio-temporal regime referred to as intermittent rolls was identified. It is characterised by the quasi-cyclic breakdown and regeneration of longitudinal rolls for moderate Reynolds number in large spatial domains.
+    \item At low Reynolds number, a buoyancy dominant regime primarily influenced by the magnitude of Rayleigh number and is independent of Reynolds number. In this regime, the convection structures are consistent regimes in Rayleigh-B\'{e}nard convection, such as the bistable system between spiral-defect chaos (SDC) and ideal-straight rolls (ISRs), and the pressence of oscillatory instabilities. These structures appear to be simply convected along the mean flow.
+\end{enumerate}
+% Our findings at low Reynolds number indicate a buoyancy dominated regime primarily influenced by the magnitude of Rayleigh number and is independent of the Reynolds number.
+% They are consistent with typical regimes in Rayleigh-B\'{e}nard convection, including the bistability between SDC and ISRs, and the presence of the oscillatory instabilities.
+% It appears that the effect of the Reynolds numbers simply convects the convection structures along the mean flow direction.
+% As $Re$ approaches $Re = 10$, SDC disappears, and solutions in the form ISRs appear to be the preferred attractors, suggesting a critical $Re$ in which SDC disappears, e.g. $Re_s$, which remains to be explored, providing a possible avenue for future work.
+% 
+% At intermediate $Re$, we observed the onset of wavy rolls, corroborating with prior studies \citep{clever_instabilities_1991,pabiou_wavy_2005}.
+% These wavy rolls vanishes as $Re$ increases, giving rise to a newly identified spatio-temporal regime referred to as intermittent rolls, characterised by the repeated breakdown and regeneration of longitudinal rolls.
+% By considering a confined domain, we identified the \textit{thermally-assisted sustaining process (TASP)}, providing an alternative pathway towards turbulence via linearly unstable longitudinal rolls.
+% Furthermore, we also establish the relevance of the \textit{TASP} to the large domain.
+Next, we provide possible avenues of future work for transitional RBP which may include,
+\begin{enumerate}
+    \item Performing a detailed bifurcation analysis of invariant states arising around the thermally-assisted sustaining process (see figure \ref{fig:compiled-full}) in confined domains and minimal band units \citep{tuckerman_patterns_2020}, possibly identifying complex global bifurcations.
+    \item Conducting bifurcation analysis necessitates the implementation of the Jacobian-free Newton-Krylov (JFNK) methods in Nektar++ \citep{knoll_jacobian-free_2004}. Variants of the JFNK method includes a hook-step modification \citep{viswanath_recurrent_2007} or the utilisation of preconditioners \citep{yan_nektar_2021} may accelerate convergence. Apart from JFNK method and its variants, a recent adjoint-based variation method may offer better convergence properties for computing periodic orbits \citep{parker_variational_2022}.
+    \item The extension of the \textit{thermally-assisted sustaining process} to other buoyancy and shear driven systems such as the Rayleigh-B\'{e}nard Coutte (RBC) flow, which may offer of the ease of experimental verification in the absence of a mean flow.
+    \item It may be worth exploring the influence of Reynolds number on the bistable system between spiral-defect chaos (SDC) and ideal straight rolls (ISRs) in detail, and the secondary linear stability of longitudinal rolls. However, we caution that there may be numerous invariant states in the buoyancy driven regime as witness in \S \ref{chap:4}.
+\end{enumerate}
+
+In \S \ref{chap:4}, we examined the state space structure of the bistable system between SDC and ISRs in Rayleigh-B\'{e}nard convection in various domain sizes. 
+The main contributions of the study is as follows,
+\begin{enumerate}
+    \item By systematically minimising the spatial domain to a minimal domain, we have identified stable invariant solutions referred to as \textit{elementary} states. These elementary states are visibly (see figure \ref{fig:fig1}) and statistically (see figure \ref{fig:averagedProfile}) similar to the spatially localised patterns of SDC, underpinning the pattern formation of SDC.
+    \item The identification of multiple edge states (and likely a plenty more), forming local attractors along the edge between the basin of attraction of ISRs and elementary states.
+    \item Multiple networks of hetereoclinic orbits (and likely a plenty more) between stable and unstable ISRs.
+    \item The identification of an unstable ISRs far from the boundaries of the Busse balloon which sit on the boundary between stable ISRs and SDC.
+\end{enumerate}
+While the newly identified elementary states resembles the localised features of SDC, they remain stable and time independent and therefore do no necessarily capture the temporal dynamics of SDC. 
+As such, possible avenues of future may be dedicated to the following,
+\begin{enumerate}
+    \item Computing the unstable invariant solutions of Rayleigh-B\'{e}nard convection, such as their equilibria, periodic orbits and heteroclinic connections between them, potential offering descriptions of the temporal dynamics of SDC (necessitating the implementation of bifurcation tools in Nektar++ mentioned above).
+    \item The onset of sustained spiral defect chaos appears to be linked to a critical domain size, below which, SDC remains transient. Therefore, a bifurcation analysis of elementary states with respect to the spatial domain size could be performed to determine the critical domain size for the onset of sustained chaos.
+    \item By performing bifurcation analysis in the regime of transient SDC, we may draw similar ideas from transient turbulence (see \ref{sec:bkgrd_nondysys}), perhaps revealing global bifurcations such as crisis bifurcations where the a chaotic attractor becomes leaky or homoclinic tangles in Rayleigh-B\'{e}nard convection.
+\end{enumerate}
+
+% \section{State space structure of Spiral Defect Chaos}
+% In chapter \S \ref{chap:4}, we have examined the bistable system between SDC and ISRs in Rayleigh-B\'{e}nard convection.
+% Using a minimal domain, we identified stable invariant solutions known as \textit{elementary} states, which forms a building block description of SDC.
+% Along the unstable invariant manifolds of ISRs, we identified a pathway leading towards SDC.
+% We concluded this chapter with a sketch of the state space organisation between SDC, ISRs, elementary states, and edge states (separating the basin of attraction between ISRs and SDC).
+% Finally, we present a sketch of the state space organisation between SDC, ISRs, elementary states accompanied by edge states.
+% While the elementary states resembles the localised features of SDC, they are stable and do not capture the full dynamics of SDC.
+% A potential next setp is to compute the unstable invariant solutions of Rayleigh-B\'{e}nard convection, such as their equilibria, periodic orbits, and heteroclinic connections between them, in hopes of describing the temporal dynamics of SDC.
+% However, we caution that the solution trajectories emerging from unstable invariant solutions may stablise into invariant states within the minimal domain, where SDC may be transient.
+% Therefore bifurcation studies in larger computational domains may be necessary to capture a fully sustained SDC.
+
+% We conclude by summarising the key findings of transitional RBP flow from figure \ref{fig:rarephase}, where we have identified five different regimes and their rough transition boundaries.
+% First, we have examined the bistability between SDC and ISRs in RBP flows, which persists up to $Re = 1$, beyond which only ISR solutions are observed.
+% The critical $Re_{s}$ at which SDC disappears appears to depends on $Re$ and remains an avenue for future study.
+% At $Re = 10$, the wavenumber of the stable ISRs adheres to the stability boundaries of the Busse balloon, and we observe longitudinal rolls as well as oscillatory longitudinal rolls, expected from the secondary instabilities of RBC \citep{clever_transition_1974}.
+% The wavy rolls appear at $Re = 100$ and $Ra \geq 5000$ \citep{clever_instabilities_1991, pabiou_wavy_2005,nicolas_2010}, but disappear for $Re \geq 500$, where a new regime referred to as intermittent rolls emerges.
+% This regime is characterised by the spatio-temporal intermittent breakdown of longitudinal rolls towards the laminar state, before being regenerated again.
+% Similarly to the wavy rolls regime, intermittent rolls only appear above a $Ra$-threshold, $Ra \geq 5000$ (see figure \ref{fig:rarephase}), below which longitudinal rolls persist.
+% % Notably, the wavenumber of these longitudinal rolls lies outside of the stability boundaries of the Busse balloon for RBC ($Re = 0$), suggesting the stability boundaries are modified as $Re$ increases, a potential avenue for future work. 
+% As $Re$ approaches the shear-driven turbulent regime ($Re \gtrsim 1000$), we observe the coexistence of longitudinal rolls with neighbouring turbulent bands at $Ra = 10000$, indicating a role played by the longitudinal rolls in transitional RBP flow.
+% 
+% To investigate the role of longitudinal rolls in transitional RBP flow around $Re = 1000$, we have considered a confined domain, $\Gamma = \pi/2$, where spatial intermittency can be artificially suppressed.
+% Integrating along the unstable manifold of longitudinal rolls in the confined domain leads to transient turbulence, which eventually decays towards the laminar state before longitudinal rolls reemerge again.
+% This process is repetitive, forming a cyclic process, which we refer to as the \emph{thermally-assisted sustaining process (TASP).}
+% The \textit{TASP} is subsequently further examined by varying $Re$ and $Ra$.
+% % To understand \emph{TASP} further, we explore its behaviour as $Re$ and $Ra$ are varied.
+% As $Re$ decreases from $Re \approx 1000$ towards the intermittent roll regime (see figure \ref{fig:rarephase}), a simpler form of solutions emerges emerges, such as stable periodic orbits, oscillating between the longitudinal roll and a laminar state.
+% In contrast, as $Re$ increases from it, shear-driven turbulence seems to become sustained indefinitely (or for a very long time), with the longitudinal rolls providing an intermediate route in the transition to turbulence from the laminar state.
+% Our investigation of the role of unstable longitudinal rolls within confined domain have revealed three dynamical processes: the onset of (1)periodic orbits, (2) the \emph{TASP}, and (3) providing an intermediate route towards turbulence.
+% It was also shown that the stability of longitudinal rolls largely depends on $Re$ and $Ra$, below which only stable longitudinal rolls are observed.
+% Furthermore, the connection between the dynamical process identified here to the onset of wavy rolls warrants further investigation.
+% We also acknowledge that more spatially subharmonic instabilities may arise as the domain size increases.
+% 
+% Finally, we assess the relevance of our findings in the confined domain and their connection to the large domain.
+% We suggest that the breakdown towards the laminar state in the intermittent roll regime bears qualitative similarities to the periodic orbit between them in the confined domain.
+% Furthermore, transient turbulence that is sustained by longitudinal rolls is also evident in the large domain, where the flow transitions between transient turbulence, longitudinal rolls and the laminar state in figures \ref{fig:Ra10k-PDFs}(g,h).
+% At $Re = 1050$, the turbulent-laminar bands dominate, weakly dependent on $Ra$, as suggested by figure \ref{fig:sheardrivenstatistics}.
+% It may be possible that these turbulent-laminar bands decay spontaneously towards the laminar state \citep{tuckerman_turbulent-laminar_2014, gome_statistical_2020}, and their lifetime statistics may depend on $Ra$, which warrants further investigation.
+% However, if the \emph{TASP} persists above a critical $Ra$ providing a pathway to turbulence, then the turbulent-laminar bands could be sustained indefinitely.
+% As $Re$ approaches $2000$, featureless turbulence emerges, with the first- and second-order statistics becoming independent of $Re$, indicating fully developed turbulence. 
+% It is likely that the range of $Ra \in [0, 10000]$ considered here is too low to significantly influence shear-driven turbulence at $Re = 2000$, suggested by the studies of turbulent RBP \citep{pirozzoli_mixed_2017}.
+
+
+% A possible next step is to compute the unstable invariant solutions of Rayleigh-B\'{e}nard convection, such as equilibria, periodic orbits and their possible heteroclinic connections, hoping that it may elucidate the temporal dynamics of SDC.
+% We caution that the solution trajectories may stabilise into a stable invariant state within the minimal domain.
+% Therefore, bifurcation studies extended to larger boxes may be required.
+
+% SDC has been considered one of the bistable states within a large spatial domain in Rayleigh-B\'{e}nard convection. However, existing studies have also shown the presence of multiple stable states in small and large domains, puzzling one's understanding of the bistable system in an extended spatial domain. 
+% Starting with numerical simulation in an extended domain ($\Gamma=8\pi$), we have systematically reduced the computational domain, such that the fundamental patterns of SDC can be isolated. 
+% Through numerical experiments confined within a minimal domain of $\Gamma = 2\pi$, we have identified transient SDC before stabilising into a stable elementary states of SDC, and 14 different elementary states have been found in this way.
+% From the conventional view of turbulence in shear flow, chaotic trajectories (representing turbulence) are expected to visit a set of unstable invariant solutions before eventually decaying to the base (laminar) state. However, in contrast to this expectation, the solution trajectory, once tangled into SDC stabilises into an non-trivial elementary state instead of returning to the base (ISR) state.
+% This finding is new and challenges the understanding of transition from a dynamical system viewpoint.
+% Despite this, the elementary states are still situated around the chaotic trajectories of SDC in the state space (figure \ref{fig:statespace-sdc-isr-elems}), and their statistical properties (figure \ref{fig:averagedProfile}) are remarkably similar to those of SDC.
+% This suggests that the computed elementary states may serve as `building block' structures of SDC that interact with each other to form SDC in an extended domain.
+
+% To further understand the state space structure of SDC, ISRs and possible gateways toward SDC, we furnish a state space sketch of the solution trajectories connecting the base, stable and unstable ISRs, edge, elementary states and SDC, shown in figure \ref{fig:statespacesketch}.
+% Starting from the base state, time-integrating along the unstable manifold guided by primary instabilities leads to either stable or unstable ISRs, denoted by solid trajectories.
+% Notably, the most unstable primary instability leads to a 7 roll ISR ($q = 3.5/d$), before saturating into a stable 5 roll ISR ($q = 2.5/d$), following the most unstable secondary instability, depicted by dashed trajectories.
+% These solution trajectories form a network of heteroclinic orbits, connecting the base state with stable ($q = 2.5/d$) and unstable ($q = 3.5/d, 5/d$) ISRs, represented in blue.
+% Further from the boundaries of the Busse balloon, we have identified two more heteroclinic orbits that form a basin of attractor between the base state, and stable, unstable ISRs, labelled as a group of orange and green trajectories.
+% These heteroclinic orbits are expected in experimental settings where initial conditions and background noise can be controlled precisely.
+% In practice, where precise controls are inaccessible, it is more likely to observe SDC ($\Gamma = 4\pi ,8\pi$) or stable elementary states ($\Gamma = 2\pi$), which are embedded in the chaotic trajectories of SDC (see coloured $\blacksquare$), supporting the notion that SDC is underpinned by elementary states presumably interacting with each other.
+% By examining the edge states between stable ISRs and elementary states, we have identified 4 edge states that lie on the boundary between stable ISRs and transient SDC, where the upper and lower trajectories emerging from their unstable manifold are represented by dash-dotted trajectories.
+% Further from the Busse balloon, we have identified an unstable manifold of a 9 roll ($q=4.5/d$) ISR, leading to the onset of SDC. 
+% Consequently, the unstable base state is also expected to lie on the boundary, as a controlled initial condition could guide the system toward the unstable 9-roll ISR, and subsequently the onset of SDC.
+% Finally, the dotted line represents the boundary between ISRs and SDC, consisting of the base state, edge states and unstable 9 roll ISR ($q=4.5/d$), illustrating four possible routes toward SDC.
+% Although we have considered the unstable manifolds of ISRs for $\Gamma = 2\pi$, we acknowledge that the dimension of such manifolds depends on the domain size and that the presence of spatially subharmonic instabilities may arise as the domain size increases.
+% Additionally, there may well be other unstable ISRs and edge states along the boundary. However, the investigation into the existence of such states is challenging due to the daunting computational efforts required. Recent advances, such as the framework proposed in \citep{schmid_stability_2017}, may help to accelerate linear stability analysis and facilitate further investigations.
