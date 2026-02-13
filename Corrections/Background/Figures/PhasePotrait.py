@@ -112,9 +112,9 @@ for i in range(len(sol_trunc)):
 
 init_energy = np.sqrt(sol[0,0]**2 + sol[0,1]**2)
 ax2.plot([t_arr[0], t_arr[-1]], [init_energy, init_energy], 'k--')
-ax2.text(t_arr[-1]-10, init_energy+0.5, fr'$||\mathbf{{q}}_0||^2 = {init_energy:.0f}$', ha = 'right', va='bottom')
+ax2.text(t_arr[-1]-10, init_energy+0.5, fr'$||\mathbf{{q}}_0||_2 = {init_energy:.0f}$', ha = 'right', va='bottom')
 ax2.set_xlabel(r'$t$')
-ax2.set_ylabel(r'$||\mathbf{q}||^2$')
+ax2.set_ylabel(r'$||\mathbf{q}||_2$')
 ax2.grid()
 ax2.set_xlim([t_arr[0], t_arr[-1]])
 ax2.set_ylim([0, 60])
