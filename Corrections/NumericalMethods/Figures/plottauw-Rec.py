@@ -52,17 +52,16 @@ h = 1
 # tau_w = U_c*h/Re_c * getdudy(U_c)
 # 
 Re_ct = np.arange(2000, 5600, 5)
-tauw_t = Dean78_getturb(Re_ct,U_c)
+tauw_t = Dean78_getturb(Re_ct,U_c) * 2 / U_c / U_c
 
 Re_cl = np.arange(400, 5600, 5)
-tauw_l = Dean78_getlam(Re_cl,U_c)
+tauw_l = Dean78_getlam(Re_cl,U_c) * 2 / U_c / U_c
 
 fig, ax = plt.subplots()
 
 # ax.plot(Re_c, tau_w, lw=3, label=r'Laminar flow')
 ax.plot(Re_cl, tauw_l, lw=3, label=r'Laminar flow: $c_{f} = 4/Re_c$')
 ax.plot(Re_ct, tauw_t, lw=3, label=r'Dean 1978: $c_{f} = 0.00302Re_c^{-1/4}$')
-
 
 filelist = ['csvs/PatelHead1969.csv', 'csvs/Kim87.csv', 'csvs/IidaNagano1998.csv', 'csvs/Tsukahara2014.csv']
 lbllist = ['Patel & Head 1969', 'Kim et. al. 1987', 'Iida & Nagano 1998', 'Tsukahara et. al. 2014']
@@ -72,7 +71,7 @@ for fname, ms, c, lbl in zip(filelist, msstyle, collist, lbllist):
     
     x, y = readdata(fname,U_c)
     # lbl = fname.split('.')[0].split('/')[1]
-    ax.scatter(x, y, color=c, marker=ms, label=lbl, zorder=10)
+    ax.scatter(x, y*2, color=c, marker=ms, label=lbl, zorder=10)
     # ax[1].scatter(x, getretau(y, U_c*h/x, h), color=c, marker=ms, label=lbl, zorder=10)
 
     # if lbl == 'Kim87':
@@ -81,10 +80,10 @@ for fname, ms, c, lbl in zip(filelist, msstyle, collist, lbllist):
 
 ax.grid()
 # ax.set_ylabel(r'$f = \tau_w = \nu \frac{dU}{dy} \frac{h}{U_c}$')
-ax.set_ylabel(r'$\tau_w$')
+ax.set_ylabel(r'$c_f$')
 ax.set_xlabel(r'$Re_c$')
 # ax.set_title(r'$(a)$')
-ax.set_ylim([0.0003, 0.003])
+ax.set_ylim([0.0003*2, 0.003*1.9])
 ax.set_xlim([500, 5500])
 ax.legend(fontsize=9, loc=3)
 # ax[1].grid()
@@ -100,4 +99,4 @@ ax.legend(fontsize=9, loc=3)
 # ax.plot([4200, 4200], [0, bf], 'C3-.')
 
 fig.set_size_inches(8,4)
-fig.savefig('tauw-Rec.pdf', bbox_inches='tight', dpi=300)
+fig.savefig('cf-Rec.pdf', bbox_inches='tight', dpi=300)
