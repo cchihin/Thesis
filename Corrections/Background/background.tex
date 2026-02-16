@@ -79,8 +79,8 @@ Wall-bounded shear flows concern the motion of the fluid flowing parallel to wal
 At the wall, the fluid comes to rest due to the no-slip boundary condition, resulting in a velocity gradient perpendicular to the wall, giving rise to shear within the fluid, commonly known as \textit{wall-bounded shear flows}.
 Examples include the pressure-driven plane Poiseuille flow (channel flow), Hagen-Poiseuille flow (pipe flow), plane Couette flow and flat plate boundary layers.
 These geometrically simple configurations provide a convenient framework amenable to the mathematical analysis of fluid motion under shear.
-Depending on the degree of shear, the fluid motion can be either laminar, where the fluid layers move in smooth parallel 'laminates', or turbulent, characterised by chaotic eddying motions.
-We also note a transitional regime in which both states coexist.
+Depending on the degree of shear, the fluid motion can be either laminar, where the fluid layers move in smooth parallel laminates, or turbulent, characterised by chaotic eddying motions.
+We also note a transitional regime in which both states can coexist.
 A central question is the prediction of the transition from the laminar regime to turbulence.
 
 The first investigation into this transition was conducted by \citet{reynolds_xxix_1883}.
@@ -235,7 +235,7 @@ where $\mathcal{A}^\dagger(\tau)$ is the adjoint of $\mathcal{A}(\tau)$.
 The maximum amplification factor, $G(\tau)$, is the largest eigenvalue of $\mathcal{A}^\dagger(\tau)\mathcal{A}(\tau)$ and the corresponding eigenvector, $\mathbf{\tilde{q}}_0$, denotes the eigenvector.
 The eigenvalue problem is given as,
 \begin{equation}
-    \mathcal{A}^\dagger(t)\mathcal{A}(t) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0,
+    \mathcal{A}^\dagger(\tau)\mathcal{A}(\tau) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0,
 \end{equation}
 % where $\mathbf{\tilde{q}}_0$ refers to the eigenvector denoting the optimal initial condition.
 For a detailed derivation of the optimal initial conditions or forcing, the reader is referred to \citet{butler_three-dimensional_1992} and \citet{schmid_nonmodal_2007}.
@@ -268,7 +268,7 @@ However, this model did not capture the essential ingredients of turbulence, suc
 This scenario has been observed in Taylor-Couette flow \citep{gollub_onset_1975}, and Rayleigh-B\'{e}nard convection \citep{swinney_transition_1978}.
 Other routes-to-chaos scenarios, such as period-doubling \citep{feigenbaum_universal_1979} and intermittency \citep{manneville_intermittency_1979}, have been proposed.
 For a review of these routes-to-chaos scenarios, the reader is referred to \citet{john_routes_1993}.
-Nonetheless, the transition to turbulence is subcritical in shear flow configurations, meaning that the route-of-chaos scenarios do not always occur via bifurcations from the laminar state.
+Nonetheless, the transition to turbulence is subcritical in shear flow configurations, meaning that the route-to-chaos scenarios do not always occur via bifurcations from the laminar state.
 
 \begin{figure}[h]
     \centering
@@ -450,7 +450,7 @@ Notably, the corresponding critical wavelength is $q_c = 3.12 / d$ (or $\lambda_
 As mentioned earlier, stationary ISRs near $q_c$ emerge just above $Ra_c$, based on weakly nonlinear stability analysis \citep{eckhaus_studies_1965, schluter_stability_1965}.
 However, this prediction is contradicted by the emergence of time-dependent oscillatory convection rolls in experiments \citep{rossby_study_1969,willis_oscillatory_1970} at $Ra = 9200$ (or roughly five times $Ra_c$), where weakly nonlinear stability analysis becomes inapplicable far from threshold.
 To address this, secondary stability analysis was performed to study the stability of ISRs further from $Ra_c$ \citep{busse_oscillatory_1972}.
-One of the key results from this analysis is the Busse balloon, which describes the stability boundaries of ISRs as a function of $Ra$ and $Pr$, and roll wavenumber, $q$, shown in figure \ref{fig:busseballon} \citep{busse1985}.
+One of the key results from this analysis is the Busse balloon, which describes the stability boundaries of ISRs as a function of $Ra$ and $Pr$, and roll wavenumber, $q$, shown in figure \ref{fig:busseballon} \citep{swinney_transition_1981}.
 The boundaries of the Busse balloon are described by a range of secondary instabilities, each arising from different physical mechanisms \citep{busse_non-linear_1978}.
 At large Prandtl numbers, $Pr = O(10^2)$, the zig-zag (ZZ) and cross-roll (CR) instabilities delimit the balloon for small and large roll wavenumbers.
 The zig-zag instabilities cause zig-zag undulations while the CR instabilities generate rolls orthogonal to the underlying ISR structure, effectively increasing or decreasing the roll wavenumber, respectively \citep{busse_instabilities_1971}.
