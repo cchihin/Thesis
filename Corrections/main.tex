@@ -8,7 +8,6 @@
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{subfigure}
-\usepackage[english]{babel}
 \usepackage[margin=2cm]{geometry}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue]{hyperref}
 \usepackage{blindtext}
@@ -53,8 +52,68 @@
 \setstcolor{red}
 
 % References
-\usepackage[english]{babel}
-\usepackage[natbibapa]{apacite} 
+% \usepackage[english]{babel}
+% \usepackage[natbibapa]{apacite} 
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    date=year,
+    sorting=nyt,
+    sortcites=false,
+    natbib=true,
+    uniquename=false,
+    isbn=false,
+    url=false,
+    dashed=false
+]{biblatex}
+
+% Removing the awkward "in" before every journal
+\DefineBibliographyStrings{english}{%
+  in = {}
+}
+\addbibresource{References/nektar.bib}
+\addbibresource{References/RBC.bib}
+\addbibresource{References/RBP.bib}
+\addbibresource{References/NumericalMethods.bib}
+\addbibresource{References/RBP_applications.bib}
+\addbibresource{References/HydrodynamicStability.bib}
+\addbibresource{References/shearflowturb_trans.bib}
+\addbibresource{References/shearflowturb_developed.bib}
+\addbibresource{References/generic.bib}
+\addbibresource{References/PhDTheses.bib}
+
+\renewcommand*{\mkbibnamefamily}[1]{#1}
+\renewbibmacro*{language}{}
+\renewbibmacro*{langid}{}
+
+% Extend hyperref to author and year
+\DeclareCiteCommand{\citep}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\bibhyperref{\printnames{labelname}\nameyeardelim\printfield{year}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% Extend hyperref to author and year
+\DeclareCiteCommand{\citet}
+  {}
+  {\bibhyperref{\printnames{labelname}}\space(\bibhyperref{\printfield{year}})}
+  {\multicitedelim}
+  {}
+
+% Final named delimiter: & instead of "and", no comma
+\AtEveryCite{%
+  \renewcommand*{\finalnamedelim}{\space\&\space}%
+}
+
+% Ensure comma between last author and year
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+
+% Clear month
+\AtEveryBibitem{%
+  \clearfield{month}%
+  \clearfield{note}%
+}
+
 
 % Used for numbering subsubsection
 \setcounter{secnumdepth}{3}
@@ -82,7 +141,9 @@
     \include{Appendices/appendices}
 
     \backmatter
-    \bibliographystyle{apacite}
-    \bibliography{References/nektar,References/RBC,References/RBP,References/NumericalMethods,References/RBP_applications,References/HydrodynamicStability,References/shearflowturb_trans,References/shearflowturb_developed,References/generic,References/PhDTheses}
+    \printbibliography
+
+    % \bibliographystyle{apacite}
+    % \bibliography{References/nektar,References/RBC,References/RBP,References/NumericalMethods,References/RBP_applications,References/HydrodynamicStability,References/shearflowturb_trans,References/shearflowturb_developed,References/generic,References/PhDTheses}
 
 \end{document}

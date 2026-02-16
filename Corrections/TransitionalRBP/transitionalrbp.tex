@@ -5,33 +5,33 @@ In particular, the transition boundaries between the bistable system consisting 
 
 Using Nektar++, a spectral/\textit{hp} element package, we conduct direct numerical simulations over a range of Rayleigh numbers, $Ra \in [0, 10000]$, Reynolds numbers, $Re \in [0, 2000]$ and unit Prandtl number.
 We identify five distinct regimes: (1) bistable SDC \& ISRs, (2) ISRs, (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
-The newly identified intermittent roll state, features longitudinal rolls that spontaneously decay towards the laminar state.
+The newly identified intermittent roll state features longitudinal rolls that spontaneously decay towards the laminar state.
 In the turbulent regime, longitudinal rolls may coexist with turbulent-laminar bands, highlighting the role of longitudinal rolls in transitional RBP.
-To this end, we examine the unstable manifold of longitudinal rolls in a confined domain, integrating along which lead to turbulence.
-This turbulence occur transiently, decaying towards the unstable laminar state where longitudinal rolls can be excited again, forming a quasi-cyclic process referred to as the \textit{thermally-assisted sustaining process (TASP)}.
+To this end, we examine the unstable manifold of longitudinal rolls in a confined domain, integrating along which leads to turbulence.
+This turbulence occurs transiently, decaying towards the unstable laminar state where longitudinal rolls can be excited again, forming a quasi-cyclic process referred to as the \textit{thermally-assisted sustaining process (TASP)}.
 Near the intermittent roll regime, a periodic orbit emerges between the longitudinal rolls and the laminar state within a confined domain.
 Above a certain $Re$ threshold, the unstable longitudinal rolls provide an intermediate pathway for the transition from the laminar state to turbulence.
-Finally, we provide a state space sketch of the dynamical processes, emphasising the role of longitudinal rolls in transitional RBP in confined domains, and discuss connections to the large domains.
+Finally, we provide a state-space sketch of the dynamical processes, emphasising the role of longitudinal rolls in transitional RBP in confined domains, and discuss connections to large domains.
 
 \section{Objectives}
-While the linear stability characteristics of laminar RBP flows have been well studied (see \S \ref{sec:bkgrd_RBP}), the transition to shear-driven turbulence remains and the related nonlinear dynamics remain largely unexplored.
+While the linear stability characteristics of laminar RBP flows have been well studied (see \S \ref{sec:bkgrd_RBP}), the transition to shear-driven turbulence remains, and the related nonlinear dynamics remain largely unexplored.
 
-As the first step towards understanding the transition in RBP flows, the main objective of this chapter is to perform exploratory direct numerical simulations (DNS) of transitional RBP flows while investigating the impact of $Re$ on the bistability between SDC and ISRs in RBC as well as the influence of $Ra$ on turbulent-laminar bands in PPF.
+As the first step towards understanding the transition in RBP flows, the main objective of this chapter is to perform exploratory direct numerical simulations (DNS) of transitional RBP flows while investigating the impact of $Re$ on the bistability between SDC and ISRs in RBC, as well as the influence of $Ra$ on turbulent-laminar bands in PPF.
 For this purpose, we consider a relatively wide range of parameter space given by $Ra \in [0, 10000]$ and $Re \in [0, 2000]$ at $Pr = 1$ in both large and confined domains ($\Gamma = 4\pi$, $\pi/2$, in particular).
 Given that this study is largely exploratory, we will focus on identifying different flow regimes and providing key insights into their dynamical processes.
-Due to the large parameter space, we do not intend to perform an extensive bifurcation analysis that involves the computation and analysis of the invariant solutions, which could be computationally very costly, especially in a large domains.
+Due to the large parameter space, we do not intend to perform an extensive bifurcation analysis that involves the computation and analysis of the invariant solutions, which could be computationally very costly, especially in large domains.
 
 The chapter is organised as follows: in \S \ref{sec:rbp_2}, we describe the problem formulation, governing equations, the numerical methods and setup.
 In \S \ref{sec:rbp_3}, we present the $Ra$-$Re$ phase space, identifying five distinct regimes and their coarse-grained transition boundaries.
 We also show a new `intermittent roll' regime and discuss the coexistence of longitudinal rolls with turbulent-laminar bands, highlighting the role of longitudinal rolls in transitional RBP flows.
-In \S \ref{sec:rbp_4}, we perform a numerical experiment, in which simulations are performed along the unstable manifolds of longitudinal rolls in a confined domain, $\Gamma = \pi/2$.
+In \S \ref{sec:rbp_4}, we perform a numerical experiment, in which simulations are performed along the unstable eigenmodes of longitudinal rolls in a confined domain, $\Gamma = \pi/2$.
 We will see that this reveals a quasi-cyclic process between shear-driven turbulence, longitudinal rolls, and the laminar state referred as the \textit{thermally-assisted sustaining process (TASP)} in \S \ref{sec:TASP}, and subsequently discuss the relevance of the \textit{TASP} to larger domains in \S \ref{sec:IntConfined}.
 Finally, we provide a summary in \S \ref{sec:rbp_5} containing some perspectives for future work.
 
 
 \section{Problem formulation}\label{sec:rbp_2}
 \subsection{Governing equations}
-The motion of fluid flow in an RBP system (see \S \ref{sec:bkgrd_overview}), is governed by the non-dimensionalised Navier-Stokes equations with the Boussinesq approximation,
+The motion of fluid flow in an RBP system (see \S \ref{sec:bkgrd_overview}) is governed by the non-dimensionalised Navier-Stokes equations with the Boussinesq approximation,
 \begin{subequations}\label{eq:rbp_RBP}
 \begin{equation}
     \frac{\partial \mathbf{u}}{\partial t}  + (\mathbf{u}\cdot \nabla)\mathbf{u} = -\nabla p + \frac{1}{Re}\nabla^2 \mathbf{u} + \frac{Ra}{8PrRe^2}\theta \mathbf{{j}} + f_z \mathbf{k},
@@ -49,7 +49,7 @@ with the following boundary conditions at the wall,
 \end{equation}
 and periodic boundary conditions in the planar $x$ and $z$ directions.
 $\mathbf{u}(\mathbf{x},t)$ denotes the non-dimensionalised velocity scaled by the laminar centreline velocity, $W_c$, i.e. $W_{lam}(y)= W_c(1-y^2)$.
-$\mathbf{x} = (x,y,z)$ and $t$ denote the non-dimensionalised spatial and temporal coordinates scaled by the half-height, $h$ and the advective time scale, $W_c/h$, where $x, y, z$ refers to the spanwise, wall-normal and streamwise directions, respectively.
+$\mathbf{x} = (x,y,z)$ and $t$ denote the non-dimensionalised spatial and temporal coordinates scaled by the half-height, $h$ and the advective time scale, $W_c/h$, where $x, y, z$ refer to the spanwise, wall-normal and streamwise directions, respectively.
 $p$ refers to the non-dimensionalised pressure scaled by $\rho W_c^2$, and $\theta(\equiv(T-T_U)/\Delta T$, see \ref{chap:1}), refers to the non-dimensionalised temperature with $T$ being the absolute temperature.
 $\mathbf{j}, \mathbf{k}$ denote the unit vector in the $y$- and $z$-direction respectively.
 
@@ -74,13 +74,13 @@ We consider fifty-two numerical simulations at $Re = 0, 0.1, 1, 10, 100, 500, 75
 Their spatial and temporal numerical resolutions and time-integration horizon, $T$, are described in the Appendix \ref{app:params}.
 The initial conditions of all cases are sampled from a statistically stationary solution.
 Laminar solutions are obtained for $Ra = 0$, $Re \leq 1000$, with the given set of parameters and are omitted from the analysis.
-For all the cases considered here, we maintain the same spatial resolution except $Re = 2000$, where the number of Fourier expansions was doubled.
+For all the cases considered here, we maintain the same spatial resolution except for $Re = 2000$, where the number of Fourier expansions was doubled.
 The temporal resolution between the numerical simulations differs due to time scales arising from the different flow physics, as we shall see later.
 We have also considered a mesh independence study for the end case of $Ra = 10000$, $Re = 2000$, where doubling the number of Fourier modes or increasing the polynomial order by 1 led to a $<1\%$ change in near-wall transport properties defined by the Nusselt number, $Nu = -\langle \mathrm{d}\theta/\mathrm{d}y_{y=-1}\rangle_{x,z} d/\Delta T$, and shear, $\langle \mathrm{d}w/\mathrm{d}y|_{y=-1} \rangle_{x,z} $, on the lower wall, where $\langle \cdot \rangle_{x,z} = 1 / (L_xL_z) \int_{z,x} \; \cdot \; \mathrm{d}x\mathrm{d}z$ refer to the plane-averaged operator.
 \subsection{Linear Stability Analysis}\label{sec:linearstab}
-In \S \ref{sec:rbp_4}, we will perform numerical experiments where small disturbances are added along the unstable manifolds of longitudinal rolls.
+In \S \ref{sec:rbp_4}, we will perform numerical experiments where small disturbances are added along the unstable manifold of longitudinal rolls.
 This is rooted in linear stability methods discussed earlier in \S \ref{sec:bkgrd_transitional}, and its numerical technique is presented in \S \ref{sec:nm_arnoldi}.
-To determine the unstable manifolds, we consider a small disturbance about the longitudinal roll state,
+To determine the unstable eigenmodes, we consider a small disturbance about the longitudinal roll state,
 \begin{subequations}\label{eq:rbp_basepert}
 \begin{equation}
     \mathbf{u}(\mathbf{x}, t) = \mathbf{u}_{LR}(\mathbf{x}) + \mathbf{\hat{u}}(\mathbf{x}, t),
@@ -110,18 +110,12 @@ where
     \right).
 \end{equation}
 \end{subequations}
-Consider that the longitudinal rolls are invariant along the $z$-direction, which are also assumed to be periodic in $x$-direction, and the following form of normal-mode solution can be considered,
+Consider that the longitudinal rolls are invariant along the $z$-direction, the following form of normal-mode solution can be considered,
 \begin{equation}\label{eq:rbp_ansatz}
     \mathbf{\hat{q}} (\mathbf{x},t) = \mathbf{\breve{q}}(x,y)e^{i\beta z + \lambda t} + \text{c.c},
 \end{equation}
-where $\lambda, \beta$ are the growth rate and spanwise wavenumber.
+where $\lambda$ and $ \beta$ denote the growth rate and spanwise wavenumber respectively.
 Substituting equation \eqref{eq:rbp_ansatz} into \eqref{eq:rbp_linearised} results in a discretised eigenvalue problem with the eigenvalue $\lambda$. The wavenumber $\beta$ is restricted to discrete values of $\beta=2 \pi m/L_z$, and $m$ is a positive integer. The resulting eigenvalue problems are solved using an iterative Arnoldi algorithm based on time-stepping schemes implemented in Nektar++ (see \S \ref{sec:nm_arnoldi}).
-% \begin{equation}\label{eq:rbp_simAnsatz}
-%     \mathbf{\hat{q}} (\mathbf{x},t) = \left[\sum_{n=-\infty}^{\infty}\mathbf{\breve{\breve{q}}}_n(y)e^{i \frac{2\pi}{L_x}(n+\sigma) x} \right] e^{i\beta z+\lambda t} + \text{c.c},
-% \end{equation}
-% where $\sigma(=\alpha L_x/(2\pi))$ is the Floquet detuning parameter with $0 \leq \sigma \leq 1/2$.
-% In this study, we will only consider the identification of the unstable manifolds of longitudinal rolls in a fixed computational domain; therefore, the fundamental mode, $\sigma = 0$, is of sole interest.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Ra-Re Phase Space Summary
@@ -141,10 +135,10 @@ For all numerical simulations, the initial condition consists of a Gaussian whit
 The RBP system is then time-integrated untila statistically stationary state is reached, which typically requires a time of $t = O(10)$ to $O(10^2)$.
 At the two endpoints of the $Re$-spectrum considered (i.e. $Re = 0, 2000$), SDC and subcritical shear-driven turbulence appear.
 Figure \ref{fig:rarephase} shows snapshots of the midplane temperature, $\theta(x,z)|_{y=0}$, of different flow regimes in the $Ra$-$Re$ phase space.
-The solid blue curves represents the neutral stability boundaries for the longitudinal and transverse rolls as $Ra_\parallel = 1708$ and $Ra_\perp = f(Re)$, respectively \citep{gage_stability_1968}.
+The solid blue curves represent the neutral stability boundaries for the longitudinal and transverse rolls as $Ra_\parallel = 1708$ and $Ra_\perp = f(Re)$, respectively \citep{gage_stability_1968}.
 In the absence of shear at $Re=0$, these curves merge into the classical critical RBC instability at $Ra_{c} = 1708$, as ISRs become rotationally invariant about the wall-normal axis.
-ISRs may undergo secondary instability for $Ra > Ra_{\parallel}$, and an approximate boundary of this is indicated by a red arrow roughly indicates the secondary neutral stability boundary, marking the onset of oscillatory instabilities of ISRs within $Ra \gtrsim 5000$ \citep{clever_transition_1974}.
-We note that the phase diagram in figure \ref{fig:rarephase} is not-to-scale plotted serving as a conceptual reference to distinugish between different flow states and their coarse-grained transition boundaries.
+ISRs may undergo secondary instability for $Ra > Ra_{\parallel}$, and an approximate boundary of this is indicated by a red arrow, roughly indicating the secondary neutral stability boundary, marking the onset of oscillatory instabilities of ISRs within $Ra \gtrsim 5000$ \citep{clever_transition_1974}.
+We note that the phase diagram in figure \ref{fig:rarephase} is not-to-scale plotted, serving as a conceptual reference to distinguish between different flow states and their coarse-grained transition boundaries.
 
 In this $Ra$-$Re$ phase space, we categorise the flow behaviour into five distinct regimes: (1) bistability between SDC and ISRs (SDC \& ISRs), (2) ideal straight rolls (ISRs), (3) wavy rolls, (4) intermittent rolls, and (5) shear-driven turbulence.
 The categories are defined based on common flow structures (patterns), and/or dynamical characteristics, ranging from equilibrium solutions to intermittent and chaotic dynamics.
@@ -154,19 +148,20 @@ In the mixed regime shaded in green, both $Ra$ and $Re$ are important.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{TransitionalRBP/Figures/PhaseSpace/Ra3kplots.pdf}
-    \caption{Midplane temperature snapshots at $Ra = 3000$, (a) $Re = 0.1$, (b) $Re = 1$, (c) $Re = 10$, (d) $Re = 100$, (e) $Re = 500$, (f) $Re = 1000$.}
+    \caption{Midplane temperature snapshots at $Ra = 3000$, (a) $Re = 0.1$, (b) $Re = 1$, (c) $Re = 10$, (d) $Re = 100$, (e) $Re = 1000$, (f) $Re = 2000$.}
     \label{fig:Ra3k}
 \end{figure}
 Given that the buoyancy-dominated regime is relatively well studied (RBC flow, in particular), we will only provide a brief description of the simulation results in this regime, with further magnified flow fields shown in figure \ref{fig:Ra3k}.
 In the buoyancy-dominated regime, the flow structures are predominantly organised with convection rolls, such as SDC, transverse, oblique, longitudinal rolls (and ISRs with no mean flow), or oscillatory rolls.
 The bistability between SDC and ISRs (refer to figure \ref{fig:Ra3k}(a)) is preserved for $Ra \geq 3000$ at $Re = 0.1$  and $Re = 1$ for $Ra \geq 5000$ (see also figure \ref{fig:buoyancy_wavy_regime}(a,d,g)). There exists a maximum $Re$, beyond which SDC disappears, we denote this as $Re_s$, and its dependence on $Ra$ is demarcated by the black dashed lines on the left side of figure \ref{fig:rarephase}.
-Notably, an oblique roll with a hook-like defect is observed at $Re = 1$, $Ra = 3000$ shown in figure \ref{fig:Ra3k}(b), reminiscent of the multiple non-ISR states in RBC (see references in \S\ref{sec:bkgrd_RBC}).
+Notably, an oblique roll with a hook-like defect is observed at $Re = 1$, $Ra = 3000$, shown in figure \ref{fig:Ra3k}(b), reminiscent of the multiple non-ISR states in RBC (see references in \S\ref{sec:bkgrd_RBC}).
 At $Re = 10$, the SDC disappears and longitudinal rolls with a spanwise wavenumber of $\alpha d = 2.5$ emerge, illustrated in figure \ref{fig:Ra3k}(c), suggesting that the roll wavenumber is within the stability boundaries of the Busse balloon \cite[see also figure~6 in][]{bodenschatz_recent_2000}.
 As $Re$ is increased further to $1000$, the longitudinal rolls emerge as the preferred solution at $Ra = 2000, 3000$.
-The non-dimensionalised spanwise wavenumber of the longitudinal rolls observed at $Ra = 3000$ and $Re = 100, 500, 10000$, shown in figure \ref{fig:Ra3k}(d-f) respectively, is approximately $\alpha d \approx 3.3$, which lies outside of the stability boundaries of the Busse balloon in RBC \cite[figure 6 in][]{bodenschatz_recent_2000}.
-This suggests that the stability boundaries of the longitudinal rolls may change as $Re$ increases.
-Interestingly, a stable pinched longitudinal roll pattern emerges at $Re = 100$ $Ra = 3000$, reminiscent of a skew-varicos instability shown in figure \ref{fig:Ra3k}(d).
-Unlike the secondary skew-varicose instability observed in RBC (which reduces the wavenumber of an unstable ISR by pinching adjacent rolls together  \cite[see figure 7]{bodenschatz_recent_2000}), a stable pinched tertiary state emerges here.
+The non-dimensionalised spanwise wavenumber of the longitudinal rolls observed at $Ra = 3000$ and $Re = 100, 500$ (not shown) and  $Re=1000$, shown in figure \ref{fig:Ra3k}(d-e) respectively, is approximately $\alpha d \approx 3.3$, which lies outside of the stability boundaries of the Busse balloon in RBC \cite[figure 6 in][]{bodenschatz_recent_2000}.
+This suggests that the stability boundaries of the longitudinal rolls may vary with increasing $Re$.
+Interestingly, a stable pinched longitudinal roll pattern emerges at $Re = 100$ $Ra = 3000$, reminiscent of a skew-varicose instability shown in figure \ref{fig:Ra3k}(d).
+Unlike the secondary skew-varicose instability observed in RBC (which reduces the wavenumber of an unstable ISR by pinching adjacent rolls together, see figure 7 of \citet{bodenschatz_recent_2000}), a stable pinched tertiary state emerges here.
+As $Re$ increases to $2000$, shear-driven turbulence emerges, depicted as a featureless temperature field driven by the underlying turbulent fluctuations in figure \ref{fig:Ra3k}(f).
 
 Figure \ref{fig:buoyancy_wavy_regime} presents a detailed analysis of the coarse-grained transition boundaries between SDC and ISRs in the range $Re \in [1, 10]$, and from ISRs to wavy rolls for $Re \in [10, 100]$ across high Rayleigh numbers considered, $Ra \in [5000, 10000]$.
 As $Re$ increases from $1$ to $10$, the SDC regime (see figure \ref{fig:buoyancy_wavy_regime}(a,d,g)) vanishes and longitudinal rolls emerge, as shown in figure \ref{fig:buoyancy_wavy_regime}(b,e,h) for $Ra = 10000, 8000, 5000$, respectively.
@@ -176,14 +171,14 @@ This results in the development of oscillatory longitudinal rolls described by a
 The footprint of oscillatory convection rolls is also evident in the SDC regime at $Ra = 10000$, $Re = 1$, shown in figure \ref{fig:buoyancy_wavy_regime}(a).
 As $Re$ increases from $10$ to $100$, the longitudinal rolls exhibit longer wavelength modulations, indicative of the wavy instability \citep{clever_instabilities_1991, pabiou_wavy_2005}.
 This gives rise to wavy longitudinal rolls, appearing as a travelling wave, quasi-periodic tori, and a chaotic state at $Ra = 5000, 8000, 10000$, shown in figure \ref{fig:buoyancy_wavy_regime}(i,f,c) respectively.
-The wavelengths of the streamwise waviness and the spanwise periodic longitudinal roll appear to be approximately $1/3$ of streamwise length, and $1/12$ of spanwise length, respectively.
-Hence, the ratio between the streamwise waviness wavelength and the spanwise roll is about $4$, consistent with the ratio observed by \cite{clever_instabilities_1991}.
+The wavelengths of the streamwise waviness and the spanwise periodic longitudinal roll appear to be approximately $1/3$ of the streamwise length, and $1/12$ of the spanwise length, respectively.
+Hence, the ratio between the streamwise waviness wavelength and the spanwise roll is about $4$, consistent with the ratio observed by \citet{clever_instabilities_1991}.
 
 
 \begin{figure}
     \centering
     \includegraphics[width=1.2\linewidth, angle=90]{TransitionalRBP/Figures/PhaseSpace/BuoyancyRegime-minimal.pdf}
-    \caption{The space-time plots of midplane temperature field, temperature snapshot and phase space trajectories of the Nusselt number against wall shear rate at  (a,b,c) $Ra = 10000$ for $Re = 1, 10, 100$; (d,e,f) $Ra = 8000$ for $Re = 1,10,100$; and (g,h,i) $Ra = 5000$ for $Re = 1, 10, 100$. The flow patterns are primarily organised into spiral defect chaos, longitudinal rolls, and wavy rolls occuring at $Re = 1, 10, 100$, respectively.}
+    \caption{The space-time plots of midplane temperature field, temperature snapshot and phase space trajectories of the Nusselt number against wall shear rate at  (a,b,c) $Ra = 10000$ for $Re = 1, 10, 100$; (d,e,f) $Ra = 8000$ for $Re = 1,10,100$; and (g,h,i) $Ra = 5000$ for $Re = 1, 10, 100$. The flow patterns are primarily organised into spiral defect chaos, longitudinal rolls, and wavy rolls occurring at $Re = 1, 10, 100$, respectively.}
     \label{fig:buoyancy_wavy_regime}
 \end{figure}
 
@@ -191,20 +186,20 @@ Hence, the ratio between the streamwise waviness wavelength and the spanwise rol
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{TransitionalRBP/Figures/PhaseSpace/Ra8000-Re500-BotSpaceTime-TimeHist.pdf}
-    \caption{The intermittent rolls regime at $Ra = 8000, Re = 500$, $t \in [0, 10000]$. (a) The time history of shear on the lower wall and Nusselt number. Space-time ($x$-$t$) plots of (b) near-wall wall-normal and spanwise perturbation kinetic energy and (c) midplane temperature space-time plot, with the corresponding near-wall and midplane temporal planar snapshots at (d,e) $t = 3736$, (f,g) $t = 6189$, and (h,i) $t = 8680$.}
+    \caption{The intermittent rolls regime at $Ra = 8000, Re = 500$, $t \in [0, 10000]$. (a) The time history of shear on the lower wall and the Nusselt number. Space-time ($x$-$t$) plots of (b) near-wall wall-normal and spanwise perturbation kinetic energy and (c) midplane temperature space-time plot, with the corresponding near-wall and midplane temporal planar snapshots at (d,e) $t = 3736$, (f,g) $t = 6189$, and (h,i) $t = 8680$.}
     \label{fig:Ra8k-Re500-IntRolls}
 \end{figure}
 
 As $Re$ approaches $Re = 500$, the wavy rolls disappear.
 Instead, a new regime, referred to as intermittent rolls, is observed.
 In this regime, the longitudinal rolls remain as the dominant convection structure, interspersed with a spatio-temporal intermittent breakdown towards the laminar state.
-This behaviour is illustrated for $(Ra,Re) = (8000,500$) in figure \ref{fig:Ra8k-Re500-IntRolls}(a) using the temporal oscillations of the plane-averaged shear rate on the lower wall, $\langle \tau_w \rangle_{x,z}$, and the Nusselt number, $Nu$ . 
+This behaviour is illustrated for $(Ra, Re) = (8000,500$) in figure \ref{fig:Ra8k-Re500-IntRolls}(a) using the temporal oscillations of the plane-averaged shear rate on the lower wall, $\langle \tau_w \rangle_{x,z}$, and the Nusselt number, $Nu$. 
 We note that $\tau_w = 2$ and $Nu = 1$ for the laminar solution.
 
 The spatio-temporal intermittent breakdown of the longitudinal rolls towards the laminar state is observed in figure \ref{fig:Ra8k-Re500-IntRolls}(b), where the bright and dark regions in the space-time plot of near-wall spanwise and wall-normal perturbation kinetic energy ($\mathcal{E}_{u'+v'} = 1/2(u'^2+ v'^2)$) at $(y^+,z)=(15,8\pi)$, highlight the co-existence of longitudinal rolls and spatially localised laminar states; here, $\mathbf{u}' = \mathbf{u} - W_{lam}(y)$ and $y^+ \equiv (y+1)/Re_\tau$ with $Re_\tau \equiv u_\tau h/\nu$, where $u_\tau$ is the friction velocity.
 A similar observation is made with the space-time plot of midplane temperature, $\theta|_{(y,z)=(0,8\pi)}$, in figure \ref{fig:Ra8k-Re500-IntRolls}(c), where the elongated red/blue contours correspond to up-/down-welling regions of longitudinal rolls, and the green regions indicate spatially-localised laminar states.
 The two near-wall transport properties, the wall shear rate and the Nusselt number, exhibit strong correlations.
-For example, at $t = 3736$, both peaks  reveal a spatially coherent longitudinal roll structure in figure \ref{fig:Ra8k-Re500-IntRolls}(d,e). There are also dips observed at $t = 6189$ and $t=8680$, indicative of the spatially local breakdown towards the laminar state, as shown in figures \ref{fig:Ra8k-Re500-IntRolls}(f,g) and \ref{fig:Ra8k-Re500-IntRolls}(h,i), respectively.
+For example, at $t = 3736$, both peaks reveal a spatially coherent longitudinal roll structure in figure \ref{fig:Ra8k-Re500-IntRolls}(d,e). There are also dips observed at $t = 6189$ and $t=8680$, indicative of the spatially local breakdown towards the laminar state, as shown in figures \ref{fig:Ra8k-Re500-IntRolls}(f,g) and \ref{fig:Ra8k-Re500-IntRolls}(h,i), respectively.
 In summary, the longitudinal rolls enhance heat and momentum transfer towards the walls, but they appear to be intermittently disrupted by the breakdown towards the laminar state.
 To better understand this behaviour, we later consider the temporal dynamics in a confined domain, $\Gamma = \pi / 2$, where the spatial intermittency is artificially suppressed (see \S \ref{sec:TASP}).
 
@@ -253,7 +248,7 @@ we consider simulations confined to a domain defined by $\Gamma = \pi/2$, where 
 We start from a numerical simulation at $Ra = 10000$ and $Re=1050$ in $\Gamma = \pi/2$, integrated in time for $t \in [0, 3000]$. 
 The initial condition has been sampled from a statistically stationary turbulent field at $Re = 2000$ for $Ra=10000$, and the $Re$ is then slowly lowered to $Re = 1050$.
 The time history for $t \in [0, 3000]$ of the two near-wall transport properties, the Nusselt number and the shear rate on the lower wall, is presented in figure \ref{fig:Ra10k-Re1050-small}, together with snapshots of the temperature, $\theta(\mathbf{x})$, and the near-wall streamwise and spanwise perturbation velocities, $w'|_{y^+= 15}, v'|_{y^+=15}$ at selected times.
-In this confined domain, the dynamics of the system exhibits temporal intermittency, where the solution trajectory appears to wander between longitudinal rolls and highly disorganised chaotic flow fields, characterised by low- and high-near-wall transport properties, respectively.
+In this confined domain, the dynamics of the system exhibit temporal intermittency, where the solution trajectory appears to wander between longitudinal rolls and highly disorganised chaotic flow fields, characterised by low- and high-near-wall transport properties, respectively.
 
 Starting from a longitudinal roll state of spanwise wavenumber of $\alpha d = 4$ at $t = 1291.5$ in figure \ref{fig:Ra10k-Re1050-small}(b), the solution erupts into a highly disorganised turbulent state at $t = 1480.5$, marked by a disordered temperature field in figure \ref{fig:Ra10k-Re1050-small}(c).
 During this breakdown, the near-wall snapshots of streamwise perturbation velocity, $w'|_{y^+ = 15}$, and wall-normal perturbation velocity, $v'|_{y^+ = 15}$, illustrated in the bottom panels of figures \ref{fig:Ra10k-Re1050-small}(c), reveal three pairs of high- and low-speed streaks, each with an average spanwise wavelength of $\Lambda_x^+ \approx 339/3 = 113$ (where $\Lambda_x^+ = u_\tau \Lambda_x / \nu$ is the non-dimensionalised wavelength by wall units), close to the mean streak spacing ($\Lambda^+_x \sim 100$) commonly reported in shear flow turbulence \citep{kline_structure_1967, kim_turbulence_1987, hamilton_regeneration_1995}.
@@ -329,10 +324,10 @@ We have also considered $\delta = 10^{-2}, 10^{-4}$, but $\delta = 10^{-3}$  was
 
 The initial condition is time-integrated for $t \in [0, 8000]$, and the time history of the near-wall transport properties, the space-time plot of the mid-plane temperature, $\theta|_{(y,z)=(0,\pi)}$, are presented in figure \ref{fig:intermittent-dynamics}, with snapshots of temperature, $\theta(\mathbf{x})$, and near-wall streamwise and spanwise perturbation velocities, $w'|_{y^+= 15}, v'|_{y^+=15}$ at some selected times. 
 The intermittent trajectory is visually apparent, oscillating between longitudinal rolls and transient turbulence over four cycles for $t \in [0, 8000]$: for example, the regions of low and high near-wall transport quantities in figure \ref{fig:intermittent-dynamics}(a) correspond well to the organised and disorganised longitudinal rolls in figure \ref{fig:intermittent-dynamics}(b), respectively.
-As the solution emerges from the unstable manifold of the longitudinal roll state, $(LR1)$ in figure \ref{fig:intermittent-dynamics}(c), the trajectory erupts into turbulence at $t = 1512$, marked by a disordered volumetric temperature field in snapshot $(T1)$ in figure \ref{fig:intermittent-dynamics}{\color{blue}(d)}.
+As the solution emerges from the unstable eigenmode of the longitudinal roll state, $(LR1)$ in figure \ref{fig:intermittent-dynamics}(c), the trajectory erupts into turbulence at $t = 1512$, marked by a disordered volumetric temperature field in snapshot $(T1)$ in figure \ref{fig:intermittent-dynamics}{\color{blue}(d)}.
 Turbulence occurs transiently, and the solution decays towards a longitudinal roll-like state at $t = 2446.5$, shown by snapshot $(LR2)$ in figure \ref{fig:intermittent-dynamics}(e), forming a single cycle.
 The intermittent cycle repeats over three subsequent intervals, where the transient turbulent state and longitudinal rolls emerge at $t = 2992.5, 5103, 6993$, and $t = 3727.5, 6300$, as shown in the snapshots $(T2,3,4)$ and $(LR3,4)$ in figures \ref{fig:intermittent-dynamics}(f,h,j) and \ref{fig:intermittent-dynamics}(g,i), respectively.
-Lastly, we show that the dominant unstable manifold of the longitudinal rolls is connected to a transient turbulent state.
+Lastly, we show that the dominant unstable eigenmode of the longitudinal rolls is connected to a transient turbulent state.
 Interestingly, a longitudinal roll with $\alpha d = 2$ sometimes emerges after turbulence decays, shown as the snapshot $(LR3)$.
 This suggests that other unstable eigenmodes may well be linked to the transition to transient turbulence.
 
@@ -349,7 +344,7 @@ These observables are chosen because they are found to distinguish well the regi
 The solution trajectory emerges from the unstable manifold of the longitudinal roll state, $\mathbf{q}_{LR_{\alpha d = 4}}$, evolving towards turbulent states around $(0.85,3.2)$, characterised by a high wall shear rate.
 At this $Re$, the turbulence is transient in the confined domain, occurring with a finite lifetime, eventually decaying towards the laminar state \citep{zammert_streamwise_2014, tuckerman_patterns_2020, paranjape_direct_2023}.
 As the solution trajectory approaches the laminar solution at $(1,2)$, it abruptly reverses towards the longitudinal roll state near $(0.95, 2.15)$, $(LR3)$ due to the buoyancy-driven linear instability of the laminar base state in the RBP flow. 
-Subsequently, the solution trajectory departs along an unstable eigenmode of the longitudinal rolls again, forming a cyclic process.
+Subsequently, the solution trajectory again departs along an unstable eigenmode of the longitudinal rolls, forming a cyclic process.
 
 To see if this cycle could be sustained indefinitely, we consider a longer time horizon, $t \in [0, 68750]$, illustrated in figure \ref{fig:intermittent-state-space}(b).
 The solution trajectory wanders between the `cloud' of transient turbulence at the top left corner (in red), and longitudinal roll and laminar states (in blue) in the bottom right, forming a cycle between the unstable longitudinal rolls, transient turbulence, and the unstable laminar base state.
@@ -369,7 +364,7 @@ A schematic of the \textit{TASP} is illustrated in figure \ref{fig:tasp}.
 \begin{figure}
 \centering
 \includegraphics[width=1.35\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/ConsolidatedPlot-temporal-landscape.pdf}
-\caption{The behaviour of the unstable and stable longitudinal rolls at $Ra = 8000, 4000$ for (a,e) $Re = 600$, (b,f) $Re = 700$, (c,g) $Re = 1000$ and (d,h) $Re = 1400$ within $\Gamma = \pi/2$. Each parameter combination consist of three panels, depicting the (top) midplane temperature space-time plot, (mid) time history of the Nusselt number and shear, and (bottom) state space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy.}
+\caption{The behaviour of the unstable and stable longitudinal rolls at $Ra = 8000, 4000$ for (a,e) $Re = 600$, (b,f) $Re = 700$, (c,g) $Re = 1000$ and (d,h) $Re = 1400$ within $\Gamma = \pi/2$. Each parameter combination consists of three panels, depicting the (top) midplane temperature space-time plot, (mid) time history of the Nusselt number and shear, and (bottom) state space projection based on the planar averaged centerline velocity and shear, coloured by the volume normalised perturbation kinetic energy.}
 \label{fig:dynamical-process}
 \end{figure}
 In this section, we further explore the behaviour of the \emph{TASP} as $Re$ and $Ra$ are varied.
@@ -379,13 +374,15 @@ For all cases, except $Ra = 4000$, $Re = 1000$ and $Re = 1400$, their initial co
 For the exceptional cases at $Ra = 4000$, $Re = 1000$ and $Re = 1400$, where subcritical turbulence and stable longitudinal rolls are expected, their initial conditions are obtained by gradually lowering $Re$ from a statistically stationary turbulent solution at $Ra = 4000, Re = 2000$.
 
 We first consider $Re=1000$ (figures \ref{fig:dynamical-process}(c,g)). At $Ra = 8000$ (figure \ref{fig:dynamical-process}(c)), the trajectory becomes turbulent near $t=7200$, marked by large near-wall transport properties such as $Nu$ and $\langle \tau_w \rangle_{x,z}$.
-The solution trajectory subsequently decay towards the longitudinal roll state, $\mathbf{q}_{LR}$ with roll wavenumber $\alpha d =4$, at $t = 7400$, before regenerating again, consistent with the \emph{TASP} in \S \ref{sec:TASP}.
+The solution trajectory subsequently decays towards the longitudinal roll state, $\mathbf{q}_{LR}$ with roll wavenumber $\alpha d =4$, at $t = 7400$, before regenerating again, consistent with the \emph{TASP} in \S \ref{sec:TASP}.
 As $Ra$ is lowered to $4000$ (figure \ref{fig:dynamical-process}(g)), the solution trajectory decays towards the longitudinal roll state, $\mathbf{q}_{LR}$.
-In this case, the longitudinal rolls are linearly stable, confirming our hypothesis earlier that the \emph{TASP} is only established when longitudinal rolls become linearly unstable above a certain $Ra$-threshold (i.e. $Ra \gtrsim Ra_{s} \approx 4720$).
+In both cases, turbulence appear to be transient.
+Sustained turbulence occurs only when the longitudinal rolls are linearly unstable (i.e. $Ra = 8000$), which guide the trajectory back toward turbulence. Otherwise (i.e. $Ra = 4000$), the solution ultimately relaminarises.
+% In this case, the longitudinal rolls are linearly stable, confirming our hypothesis earlier that the \emph{TASP} is only established when longitudinal rolls become linearly unstable above a certain $Ra$-threshold (i.e. $Ra \gtrsim Ra_{s} \approx 4720$).
 
 At $Re = 1400$, $Ra = 4000$, the solution trajectory remains within the turbulent `cloud' near $(0.8, 3.8)$ for $t \in [0,10000]$, as illustrated in figure \ref{fig:dynamical-process}(h).
 This suggests that turbulence in this case might be an attractor sustaining indefinitely, although we have not investigated whether the turbulent chaotic saddle at $Re = 1000$ truly transitioned into an attractor at $Re = 1400$.
-As $Ra$ is increased to $8000$, the solution trajectory originating from the laminar state, evolves towards the unstable longitudinal roll state, $\mathbf{q}_{LR}$ at $t = 1550$, transitioning into turbulence at $t= 1800$.
+As $Ra$ is increased to $8000$, the solution trajectory originating from the laminar state evolves towards the unstable longitudinal roll state, $\mathbf{q}_{LR}$ at $t = 1550$, transitioning into turbulence at $t= 1800$.
 Therefore, in this case, the linearly unstable longitudinal rolls serve as an intermediate transitional pathway between the laminar base state and subcritical turbulence, whereas at $Ra = 4000$, a bistability between stable longitudinal rolls (not shown) and turbulence is expected.
 
 Next, we examine the behaviour of \emph{TASP} as $Re$ decreases towards the intermittent regime at $Re = 600, 700$, where a periodic orbit emerges between the longitudinal roll and the laminar state (figure \ref{fig:dynamical-process}(a,b,e,f)).
@@ -444,7 +441,7 @@ In this case, a bistable system forms between longitudinal rolls and turbulence 
     \label{fig:Ra10k-PDFs}
 \end{figure}
 
-In this section, we return to the simulation results in the large domain $\Gamma = 4\pi$ and try to establish the relevance of the local dynamical processes identified in the confined domain $\Gamma=\pi/2$. It should be mentioned that, by doing so, the discussion in this section does not fully account for the spatial interactions between the flow structures. However, we will see that many important flow features can be well explained based on the simulation results from the confined domain. The understanding of the full spatio-temporal dynamics is deemed to be a formidable task at this point and is beyond the scope of this study. 
+In this section, we return to the simulation results in the large domain $\Gamma = 4\pi$ and show that many important flow features can be well explained by the confined domain $\Gamma=\pi/2$. It should be mentioned that, by doing so, the discussion in this section does not fully account for the spatial interactions between the flow structures. However, we will see that many important flow features can be well explained based on the simulation results from the confined domain. The understanding of the full spatio-temporal dynamics is deemed to be a formidable task at this point and is beyond the scope of this study. 
 
 Here, we will focus on $Re = 500, 750, 1000, 1050$ for $Ra = 10000$ presented in figure \ref{fig:Ra10k-PDFs}, illustrating their space-time plots of the midplane temperature, $\theta|_{(y,z)=(0,8\pi)}$, and the near-wall wall-normal and spanwise perturbation kinetic energy, $\mathcal{E}_{u'+v'}$, at $y^+=15$. 
 Furthermore, to statistically characterise the flow structures, we calculate the joint probability distribution function (PDF) using the velocity and temperature in the midplane, $f(w|_{y=0}, \theta|_{y=0})$.
@@ -454,12 +451,12 @@ As $Re$ increases from $500$ to $750$, the breakdown towards the laminar state r
 The spatio-temporal dynamics between longitudinal rolls and the laminar state observed in the large domain in this regime are reminiscent of the stable periodic orbits identified between them in a confined domain, although the dynamics in the large domain is much more complex due to the spatial interactions between different flow structures.
 There is a noticeable decrease in the number of green and dark regions between the space-time figures \ref{fig:Ra10k-PDFs}(a) and (b), suggesting fewer laminar events at $Re = 750$.
 Indeed, this difference is further reflected in their PDFs, where the probability of laminar events, at $(w|_{y=0}, \theta|_{y=0}) = (1,0)$, depicted as the head of the arc-shaped PDF, decreasing in intensity from $Re = 500$ (figure \ref{fig:Ra10k-PDFs}(a)) to $Re = 750$ (figure \ref{fig:Ra10k-PDFs}(b)).
-This suggests fewer laminar state events and more occurrences of the longitudinal roll state. It is also consistent with the result from the confined domain case, where the solution trajectory becomes increasingly attracted towards the longitudinal roll state from $Re = 600$ and $Re = 700$ at $Ra= 8000$ (figures \ref{fig:dynamical-process}(a,b)).
+This suggests fewer laminar-state events and more occurrences of the longitudinal roll state. It is also consistent with the result from the confined domain case, where the solution trajectory becomes increasingly attracted towards the longitudinal roll state from $Re = 600$ and $Re = 700$ at $Ra= 8000$ (figures \ref{fig:dynamical-process}(a,b)).
 
 At $Re = 1000$, we observe the coexistence of the laminar state, the longitudinal rolls, and turbulence, as can be seen from the dark, bright and very bright regions in the near-wall wall-normal and spanwise perturbation velocities in figure \ref{fig:Ra10k-PDFs}(c). 
 Starting at $t = 2000$, the longitudinal rolls that appear as elongated red/blue contour strips in figure \ref{fig:Ra10k-PDFs}{\color{blue}(c)} erupt into turbulence at $t = 2500$, appearing as very bright spots in the space-time plot of near-wall perturbation kinetic energy $\mathcal{E}_{u'+v'}$ of figure \ref{fig:Ra10k-PDFs}(c).
 Turbulence is transient, decaying towards the laminar state at $t = 3000$, as indicated by the dark patches.
-By $t = 4000$, longitudinal rolls are regenerated, appearing as red/blue elongated contour strips the space-time midplane temperature plot, $\theta|_{(y,z) = (0,8\pi)}$ of figure \ref{fig:Ra10k-PDFs}(c).
+By $t = 4000$, longitudinal rolls are regenerated, appearing as red/blue elongated contour strips in the space-time midplane temperature plot, $\theta|_{(y,z) = (0,8\pi)}$ of figure \ref{fig:Ra10k-PDFs}(c).
 This process resembles \emph{TASP} in a confined domain (figure \ref{fig:statespacesketch}(c)), suggesting that a similar process may be present in the large domain.
 
 As $Re$ approaches $Re = 1050$, turbulence appears more uniformly in space and time, as seen in figure \ref{fig:Ra10k-PDFs}(d).
@@ -473,8 +470,8 @@ We have shown that SDC disappears between $0.1 < Re < 1$, and the critical $Re$ 
 At intermediate $Re$, we identify a new regime known as intermittent rolls, marked by the breakdown and regeneration of longitudinal rolls. As $Re$ approaches the onset of shear-driven turbulence, we observe the co-existence of longitudinal rolls with turbulent-laminar bands.
 This highlights the importance of longitudinal rolls in spatially extended RBP flows.
 Due to the enforced periodic boundary condition in our simulations, the longitudinal rolls are continuously excited, rather than convected out as in the case of impulsive disturbances \citep{carriere_convective_1999, pabiou_wavy_2005}.
-In finite length experiments, careful control of system noise will likely facilitate the occurrence of this intermittent regime.
+In finite-length experiments, careful control of system noise will likely facilitate the occurrence of this intermittent regime.
 
 By considering a confined domain, we showed that the linearly unstable longitudinal rolls could provide a transition mechanism towards turbulence, referred to as the \textit{thermally-assisted sustaining process (TASP)}.
-Finally, we examined how the \textit{TASP} mechanism evolves as $Ra$ and $Re$ are varied, and discuss its implications for spatially extended domains.
+Finally, we examined how the \textit{TASP} mechanism evolves as $Ra$ and $Re$ vary and discussed its implications for spatially extended domains.
 Further work may include a bifurcation analysis study of the \textit{TASP} within confined domains and minimal band unit, establishing dynamical connections between invariant solutions where large spatial intermittency structures are expected to be important in the transitional regime \citep{tuckerman_patterns_2020}.
