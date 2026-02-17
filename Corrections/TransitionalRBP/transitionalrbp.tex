@@ -50,7 +50,7 @@ with the following boundary conditions at the wall,
 and periodic boundary conditions in the planar $x$ and $z$ directions.
 $\mathbf{u}(\mathbf{x},t)$ denotes the non-dimensionalised velocity scaled by the laminar centreline velocity, $W_c$, i.e. $W_{lam}(y)= W_c(1-y^2)$.
 $\mathbf{x} = (x,y,z)$ and $t$ denote the non-dimensionalised spatial and temporal coordinates scaled by the half-height, $h$ and the advective time scale, $W_c/h$, where $x, y, z$ refer to the spanwise, wall-normal and streamwise directions, respectively.
-$p$ refers to the non-dimensionalised pressure scaled by $\rho W_c^2$, and $\theta(\equiv(T-T_U)/\Delta T$, see \ref{chap:1}), refers to the non-dimensionalised temperature with $T$ being the absolute temperature.
+$p$ refers to the non-dimensionalised pressure scaled by $\rho W_c^2$, and $\theta(\equiv(T-T_U)/\Delta T$, see \S\ref{sec:bkgrd_overview} for definitions), refers to the non-dimensionalised temperature with $T$ being the absolute temperature.
 $\mathbf{j}, \mathbf{k}$ denote the unit vector in the $y$- and $z$-direction respectively.
 
 We note that the rescaled $Ra/8$ term in the momentum forcing terms is equivalent to the Rayleigh number scaled based on the half-depth, $h$, since $Ra$ is scaled based on depth, $d$, in classical RBC.
@@ -348,7 +348,7 @@ Subsequently, the solution trajectory again departs along an unstable eigenmode 
 
 To see if this cycle could be sustained indefinitely, we consider a longer time horizon, $t \in [0, 68750]$, illustrated in figure \ref{fig:intermittent-state-space}(b).
 The solution trajectory wanders between the `cloud' of transient turbulence at the top left corner (in red), and longitudinal roll and laminar states (in blue) in the bottom right, forming a cycle between the unstable longitudinal rolls, transient turbulence, and the unstable laminar base state.
-This cycle is likely established above a critical $Ra$ as the longitudinal rolls become linearly unstable (i.e. $Ra \gtrsim Ra_{s} \approx 4720$, see figure \ref{fig:SecStabLongRolls}(b)), and the instability of the longitudinal rolls provides an intermediate pathway towards transient turbulence, which could be regenerated again - a `self-sustaining' dynamical process.
+This cycle is likely established above a critical $Ra$ as the longitudinal rolls become linearly unstable (i.e. $Ra \gtrsim Ra_{s} \approx 4720$, see figure \ref{fig:SecStabLongRolls}(b)), and the instability of the longitudinal rolls provides an intermediate pathway towards transient turbulence, which could be regenerated again - a self-sustaining dynamical process.
 We refer to this process as the \emph{thermally-assisted sustaining process (TASP)}, inspired by the self-sustaining process (SSP) from turbulent shear flows (see \S \ref{subsec:SSP}).
 A schematic of the \textit{TASP} is illustrated in figure \ref{fig:tasp}.
 
@@ -397,7 +397,7 @@ When $Ra$ is lowered to $Ra = 4000$, the periodic orbit disappears and the traje
 \begin{figure}
 \centering
 \includegraphics[width=1.2\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/statespace-cartoon-full.pdf}
-\caption{A schematic versionn of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{paranjape_direct_2023}.}
+\caption{A schematic version of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{paranjape_direct_2023}.}
 \label{fig:statespacesketch}
 \end{figure}
 

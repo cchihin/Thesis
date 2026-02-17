@@ -761,7 +761,7 @@ evolving the velocity fields at time step $n$ to $n+1$.
 Fourier-Chebyshev-Fourier type discretisation has been recognised as the preferred method for performing direct numerical simulations (DNS) of transitional or turbulent incompressible channel flows \citep{kim_turbulence_1987} owing to its efficient representation of the inhomogeneous wall-normal directions and the homogeneous streamwise and spanwise directions, using Chebyshev and Fourier expansions, respectively.
 
 The Fourier spectral/\emph{hp} element method is related to this approach, where the homogeneous and the inhomogeneous directions are represented by Fourier expansions and spectral/\emph{hp} elements, respectively.
-This approach is commonly referred to as the Quasi-3D (2.5D) approach, which allows the representation of a single homogeneous direction.
+This approach is commonly referred to as the Quasi-3D (2.5D) approach, which allows the representation of a single homogeneous direction with two inhomogeneous directions.
 For example, in turbulent channel flows with riblets, Fourier expansions are used to represent the periodic streamwise direction, while the spectral/\emph{hp} elements are used to discretise the spanwise and wall-normal directions.
 In the analysis of three-dimensional wakes of cylinders, the span is treated via Fourier expansions.
 In this thesis, we routinely use the Quasi-3D approach, consisting of 2D spectral/\emph{hp} elements with 1D Fourier expansions, which discretise the cross-stream plane and the streamwise flow, respectively. 
@@ -868,8 +868,8 @@ where $Re_c$ is the Reynolds number based on the laminar centerline velocity.
 \label{fig:tauw_rec}
 \end{figure}
 Similarly, the skin friction coefficient for the case of laminar flow is $c_f = 4/Re_c$ \citet{dean_reynolds_1978}.
-Figure \ref{fig:tauw_rec} illustrates the relationship between $\tau_w$ and $Re_c$ of channel flow using empirical relationship from \citet{dean_reynolds_1978} (here $\rho = U_c = 1$) and experimental data from \citet{patel_observations_1969,kim_turbulence_1987, iida_relaminarization_1998, tsukahara_dns_2014}.
-While the empirical relations for laminar flow, $Re_c \lesssim 1000$, and turbulent flow, $Re_c \gtrsim 2000$, appear reasonably robust, the wall shear stress in the transitional region is lacking.
+Figure \ref{fig:tauw_rec} illustrates the relationship between $\tau_w$ and $Re_c$ of channel flow using the empirical relationships from \citet{dean_reynolds_1978} (here $\rho = U_c = 1$) and experimental data from \citet{patel_observations_1969,kim_turbulence_1987, iida_relaminarization_1998, tsukahara_dns_2014}.
+While the empirical relationships for laminar flow, $Re_c \lesssim 1000$, and turbulent flow, $Re_c \gtrsim 2000$, appear reasonably robust, the wall shear stress in the transitional region is lacking.
 Since we are investigating flow regimes in the transitional region, we will not adopt the body forcing approach.
 
 
