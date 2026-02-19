@@ -1,6 +1,6 @@
 \chapter[The state space structure of SDC]{The state space structure of Spiral Defect Chaos}\label{chap:4}
 
-The co-existence of ideal straight rolls (ISRs) and spiral-defect chaos (SDC) as bistable states in Rayleigh-B\'{e}nard convection above the onset of the linear instability is well established in extended spatial domains ($\Gamma \ge 40$ where $\Gamma$ is the aspect ratio of the domain). However, multiple stable states have also been found independently, raising questions about the precise understanding of this observed bistability in extended domains. In this study, we isolate the localised structures of SDC by gradually reducing the spatial domain. By minimising the domain systematically to $\Gamma = 2\pi$, SDC appears transiently and eventually stabilises into new stable states referred to as elementary states. These elementary states are visibly and statistically similar to the spatially local patterns of SDC, indicating that they are invariant solutions underpinning pattern formation in SDC.
+The co-existence of ideal straight rolls (ISRs) and spiral-defect chaos (SDC) as bistable states in Rayleigh-B\'{e}nard convection above the onset of the linear instability is well established in extended spatial domains ($\Gamma \ge 40$ where $\Gamma$ is the aspect ratio of the domain). However, multiple stable states have also been found independently, raising questions about the precise understanding of this observed bistability in extended domains. In this study, we isolate the localised structures of SDC by gradually reducing the spatial domain. By minimising the domain systematically to $\Gamma = 4\pi$, SDC appears transiently and eventually stabilises into new stable states referred to as elementary states. These elementary states are visibly and statistically similar to the spatially local patterns of SDC, indicating that they are invariant solutions underpinning pattern formation in SDC.
 
 To further understand the state-space structure, we examined the edge between ISRs and the elementary states, identified multiple edge states, and conducted numerical simulations along the unstable eigenmodes of the ISRs. The unstable ISRs near the Busse balloon are connected to stable ISRs and the base state through networks of heteroclinic connections, forming a basin of attraction for each stable ISR. In contrast, the unstable ISRs further from the Busse balloon contain some unstable eigenmodes, along which the solution trajectory leads to SDC, suggesting that these unstable ISRs sit on the boundary between stable ISRs and SDC. Finally, we propose a state-space structure centered on the basic heat-conduction state, stable/unstable ISRs, elementary states, and transient SDC.
 
@@ -30,7 +30,7 @@ The main contributions of the present chapter can be briefly summarised as follo
 
 \section{Problem formulation}\label{sec:rbc_2}
 \subsection{Rayleigh-Benard convection (RBC)}
-The motion of fluid flow in an RBC system (see \S \ref{sec:bkgrd_overview}) is governed by the non-dimensionalised Navier-Stokes equations with Boussinesq approximation,
+The motion of fluid flow in an RBC system (see \S \ref{sec:bkgrd_overview}) is governed by the non-dimensionalised Navier-Stokes equations with the Boussinesq approximation,
 
 \begin{subequations}\label{eq:rbc_rbc}
 \begin{equation}
@@ -81,12 +81,12 @@ To obtain the direction of the unstable eigenmodes, we consider a small perturba
 \end{subequations}
 where $\mathbf{s}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{s}_{ISR,q}=[\mathbf{u}_{ISR,q}, \theta_{ISR,q}, p_{ISR,q}]^T$ and $\mathbf{s}'=[\mathbf{u}', \theta', p']^T$ refer to the solution vector, the ISR (base) state of a given wavenumber, $q$, and the perturbation respectively.
 The theoretical background of this section is discussed earlier in \S \ref{sec:bkgrd_transitional}, and its numerical techniques are presented in \S \ref{sec:nm_arnoldi}.
-Substitution of (\ref{eq:rbc_basepert}) into (\ref{eq:rbc_rbc}) leads to the following linearised equations:
+Substitution of (\ref{eq:rbc_basepert}) into (\ref{eq:rbc_rbc}) leads to the following linearised equations,
 \begin{subequations}\label{eq:rbc_linearised}
 \begin{equation}
     \frac{\partial \mathbf{s'}}{\partial t} = \mathcal{A}(\mathbf{s}_{ISR,q}; Ra, Pr) \mathbf{s'}, 
 \end{equation}
-where
+where the operator $\mathcal{A}$ is given as
 \begin{equation}
 \mathcal{A}(\mathbf{s}_{ISR,q}; Ra, Pr) =
     \left(
@@ -146,12 +146,12 @@ This method follows the well-established approach of the minimal flow unit of pl
 In total, we have identified 28 states with $\Gamma = 4\pi$.
 Decreasing the domain further to $\Gamma = 2\pi$ only led to stable ISRs at least for the random initial conditions we have examined in this study.
 We therefore consider $\Gamma = 4\pi$ as the minimal domain, in which both transient SDC and elementary states exist.
-It is worth mentioning that multiple states were obtained in smaller domains with $\Gamma = 4$, but in a cylindrical domain \citep{ma_multiplicity_2006, boronska_extreme_2010-1}.
+It is worth mentioning that multiple states were obtained in smaller domains with $\Gamma = 4$, but in a cylindrical domain \citep{ma_multiplicity_2006, boronska_extreme_2010_A}.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{StateSpaceStructureOfSDC/Figures/PhaseSpace-ISR-Trans-SDC-arrows.pdf}
-\caption{(a) State-space projection using $||\frac{1}{\overline{V}}\mathbf{\tilde{u}}||_2$ and $||\frac{1}{\overline{V}}RaPr\tilde{\theta}||_2$ for SDC from $\Gamma = 16\pi, 8\pi$ (figures \ref{fig:fig1}(a,b)), four transient SDC state proceeding to stable elementary states (figures \ref{fig:fig1}(c-f)), \ref{fig:10elementaries}), and fourteen stable stationary ISRs of wavenumbers $2.0 \leq qd \leq 3.35$. Here, the magnitude of $q$ is denoted by the opacity of the filled symbol ($\color{Green}{\bullet}$), increasing from the bottom left and turning toward the top left shown as arrows; (b) Zoomed-in view of (a). The legend lists the figures for the respective trajectories preceding the snapshots in figure \ref{fig:fig1}. Note that $\varepsilon = 0.7$ and $Pr = 1$.}
+\caption{(a) State-space projection using $||\frac{1}{\overline{V}}\mathbf{\tilde{u}}||_2$ and $||\frac{1}{\overline{V}}RaPr\tilde{\theta}||_2$ for SDC from $\Gamma = 16\pi, 8\pi$ (figures \ref{fig:fig1}(a,b)), four transient SDC state proceeding to stable elementary states at $\Gamma = 4\pi$ (figures \ref{fig:fig1}(c-f)), \ref{fig:10elementaries}), and fourteen stable stationary ISRs of wavenumbers $2.0 \leq qd \leq 3.35$ at $\Gamma = 4\pi$. Here, the magnitude of $q$ is denoted by the opacity of the filled symbol ($\color{Green}{\bullet}$), increasing from the bottom left and turning toward the top left shown as arrows; (b) Zoomed-in view of (a). The legend lists the figures for the respective trajectories preceding the snapshots in figure \ref{fig:fig1}. Note that $\varepsilon = 0.7$ and $Pr = 1$.}
 \label{fig:statespace-sdc-isr-transient}
 \end{figure}
 To show whether SDC and elementary states are related, we compare their solution trajectories projected onto a suitable state space and the averaged wall-normal temperature profiles.
@@ -327,7 +327,7 @@ The unstable ISR solutions of $\mathbf{s}_{\rm{ISR,q}}(x,y)$ (required for linea
 \label{tab:asymptotics}
 \end{table}
 
-To consider the long-term behaviour in the direction of the unstable eigenmodes, an initial condition,
+To consider the long-term behaviour in the direction of the unstable eigenmodes, an initial condition
 \begin{equation}\label{eq:rbc_SecInstab}
     \mathbf{s}_0(\mathbf{x},t=0) = \mathbf{s}_{\rm{ISR,q}}(\mathbf{x}) + \mathbf{\hat{s}}_\beta(x,y)e^{i\beta z},
 \end{equation}
@@ -350,7 +350,8 @@ In this section, the long-term evolution of the most unstable linear modes of IS
 A number of \textit{heteroclinic connections}, connecting the base state ($\bullet$), stable ($\color{Green}{\bullet}$) and unstable ($\color{red}{\bullet}$) ISRs, is shown in figure \ref{fig:heteroclinics}.
 A solution trajectory from one steady state to another that does not return to the original state is referred to as a \textit{heteroclinic connection}.
 Figure \ref{fig:heteroclinics}(a) exhibits several solution trajectories linking the base state, stable and unstable ISRs: three connections from the base state to all the stable and unstable ISRs shown, one from the ISR of $q = 3.5/d$ to that of $q = 2.5/d$, and one from the ISR of $q = 5.0/d$ to that of $q = 3.5/d$.
-Here, caution will need to be taken in interpreting each of the connections as a heteroclinic connections, because there appears to be an invariant state at which the speed of the solution trajectory nearly vanishes (a sign of the existence of unstable invariant states or ghost states \citep{strogatz_nonlinear_2018}): for example, see the solution trajectory between the ISR of $q = 3.5/d$ to that of $q = 2.5/d$ (in the inset of figure \ref{fig:heteroclinics}(a)), which will be discussed below with figure \ref{fig:7RollsBeta0.50}.
+Here, caution will need to be taken in interpreting each of the connections as a heteroclinic connections, because there appears to be an invariant state at which the speed of the solution trajectory nearly vanishes (a sign of the existence of unstable invariant states or \textit{ghost states} \citep{strogatz_nonlinear_2018}): for example, see the solution trajectory between the ISR of $q = 3.5/d$ to that of $q = 2.5/d$ (in the inset of figure \ref{fig:heteroclinics}(a)), which will be discussed below with figure \ref{fig:7RollsBeta0.50}.
+\textit{Ghost states} are not unstable steady states, but a region of space in which there exist steady states at a nearby but different parameter value, most frequently on the side of a saddle-node bifurcation at which there exist no steady states.
 Starting from the primary base state, the system evolves into an ISR of wavenumber $q = 5.0/d$. Since this ISR is linearly unstable, it evolves into another unstable ISR of $q = 3.5/d$, before ultimately stabilising into an ISR of $q = 2.5/d$.
 Next, figure \ref{fig:heteroclinics}(b) shows three solution trajectories connecting the base state, an unstable and stable ISR.
 Starting from the base state, the system evolves into an unstable ISR of $q = 4/d$ before converging into an ISR of wavenumber $q = 3.16/d$. 
@@ -374,8 +375,7 @@ Figure \ref{fig:7RollsBeta0.50} describes the long-term evolution of the most un
 where $\mathbf{\hat{u}}_k$ refers to the $k$-th Fourier coefficient in $z$-direction. Initially, the simulation starts from the ISR state of a 7-roll pair ($t = 33$), corresponding to a roll wavenumber of $q = 3.5/d$. The unstable eigenmode $\mathbf{\hat{s}}_{\beta = 0.50}$ grows exponentially before peaking at $t=48.50$, forming an `S'-like symmetric state (figure \ref{fig:7RollsBeta0.50}(c)). Note that, at this point, the time derivative of $E_k(t)$ nearly vanishes, indicating that the snapshot taken at $t=48.50$ is potentially close to an unstable invariant state. Finally, the modal energy of $k = 2$ decays and the system settles into an ISR state of $q = 2.5/d$ (5 rolls aligned in the x-direction), which is within the Busse balloon.
 The long-term behaviour along the dominant unstable eigenmode for $q = 4.0/d$ and $q=4.5/d$ is qualitatively similar to figure \ref{fig:7RollsBeta0.50}, where an unstable ISR stabilises into a stable ISR.
 
-    All three cases examined here show that the transition from an unstable ISR to a stable ISR involves an intermediate state, at which $d E_k(t)/dt$ is seen to be relatively small. In the transition pathway from the unstable to the stable ISR, it is presumed that there exists an unstable equilibrium (i.e. fixed point/travelling-waves etc.) in the form of the original unstable ISR with its nonlinearly saturated instability, or \textit{ghost states} \citep{strogatz_nonlinear_2018}.
-\textit{Ghost states} are not unstable steady states, but a region of space in which there exist steady states at a nearby but different parameter value, most frequently on the side of a saddle-node bifurcation at which there exist no steady states.
+    All three cases examined here show that the transition from an unstable ISR to a stable ISR involves an intermediate state, at which $d E_k(t)/dt$ is seen to be relatively small. In the transition pathway from the unstable to the stable ISR, it is presumed that there exists an unstable equilibrium (i.e. fixed point/travelling-waves etc.) in the form of the original unstable ISR with its nonlinearly saturated instability, or ghost states \citep{strogatz_nonlinear_2018}.
 The existence of such a stationary solution can probably be computed with a typical Newton iteration or variational methods \citep{viswanath_recurrent_2007, parker_variational_2022}, but this is beyond the scope of the present study. In any case, the numerical experiments here suggest that each of the stable ISRs compose of a network of heteroclinic connections involving connections between the base state and unstable ISRs. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -449,7 +449,7 @@ This finding is novel and challenges the understanding of the transition between
 Despite this, the elementary states are still situated around the chaotic trajectories of SDC in the state space (figure \ref{fig:statespace-sdc-isr-elems}), and their mean, mean-squared deviation (figure \ref{fig:averagedProfile}), and localised spatial structures (figure \ref{fig:fig1}) are similar to those of SDC.
 This suggests that the computed elementary states may serve as spatially local building blocks of SDC to form SDC across an extended domain.
 Within the minimal domain $\Gamma = 4\pi$, we have identified 14 stable elementary states, with a possibility of additional states yet to be found.
-Notably, the large number of invariant states seems to be a characteristic feature of Rayleigh-B\'{e}nard fluid systems such as cylindrical RBC \citep{boronska_extreme_2010_A,boronska_extreme_2010_B} and inclined RBC \citep{zheng_natural_2024-1,zheng_natural_2024}.
+Notably, the large number of invariant states seems to be a characteristic feature of Rayleigh-B\'{e}nard fluid systems such as cylindrical RBC \citep{boronska_extreme_2010_A,boronska_extreme_2010_B} and inclined RBC \citep{zheng_natural_2024_A,zheng_natural_2024_B}.
 
 To further understand the state space structure of SDC, ISRs and possible gateways toward SDC, we provide a state space sketch of the solution trajectories connecting the base, stable and unstable ISRs, edge, elementary states and SDC, shown in figure \ref{fig:sdc_statespacesketch}.
 Starting from the base state and integrating along unstable eigenmodes guided by primary instabilities yields either stable or unstable ISRs, denoted by solid trajectories.
@@ -465,4 +465,4 @@ Consequently, the unstable base state is also expected to lie on the boundary, a
 Finally, the dotted line represents the boundary between ISRs and SDC, consisting of the base state, edge states and unstable 9-roll-pair ISR ($q=4.5/d$), illustrating four possible routes toward SDC.
 Although we have considered the unstable eigenmodes of ISRs for $\Gamma = 4\pi$, we acknowledge that the number of eigenmodes depends on the domain size and that spatially subharmonic instabilities may arise as the domain size increases.
 Additionally, there may well be other unstable ISRs and edge states along the boundary. However, investigating the existence of such states is challenging due to the substantial computational efforts required.
-Other techniques, such as Floquet analysis or the framework proposed by \cite{schmid_stability_2017}, may help to accelerate linear stability analysis of large-scale instabilities.
+Other techniques, such as Floquet analysis or the framework proposed by \citet{schmid_stability_2017}, may help to accelerate linear stability analysis of large-scale instabilities.

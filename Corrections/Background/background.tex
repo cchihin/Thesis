@@ -47,7 +47,7 @@ The flow is driven by a pressure difference along the streamwise $z$ direction, 
 We consider a fully developed flow, where the boundary layer developing from the top and the bottom wall meets at the midplane $y=0$ and entrance effects are therefore neglected.
 Like the RBC system, the RBP system is unstably stratified.
 The temperature difference between the lower, $T_L$, and upper wall, $T_U$, is always positive, $\Delta T = T_L - T_U > 0$, leading to a stable linear conduction layer along the wall-normal direction, $T(y)$, if $\Delta T$ is kept sufficiently small.
-The behaviour of RBP flows is governed by four dimensionless parameters,
+The behaviour of RBP flows is governed by four dimensionless parameters:
 \begin{equation}\label{eq:nondim_def}
     Re = W_c h / \nu, \quad Ra = \frac{\eta g d^3 \Delta T}{\nu \kappa}, \quad Pr = \frac{\nu}{\kappa}, \quad \Gamma = L/2d,
 \end{equation}
@@ -111,11 +111,11 @@ He observed that flow through the pipe remained \textit{stable} and laminar for 
 
 \subsection{Linear Stability Analysis}
 Following the experiment, interest towards the mathematical analysis of the stability of laminar flows grew in the early $20^{th}$ century.
-The mathematical approach typically begins by decomposing the velocity field, $\mathbf{u}(\mathbf{x},t)$, into a laminar (base) state, $\mathbf{U}(\mathbf{x}) = U(y)\mathbf{e_x}$, and the velocity perturbations, $\mathbf{u}'(\mathbf{x},t)$, with pressure similarly decomposed as,
+The mathematical approach typically begins by decomposing the velocity field, $\mathbf{u}(\mathbf{x},t)$, into a laminar (base) state, $\mathbf{U}(\mathbf{x}) = U(y)\mathbf{e_x}$, and the velocity perturbations, $\mathbf{u}'(\mathbf{x},t)$, with pressure similarly decomposed as
 \begin{equation}
 \mathbf{u}(\mathbf{x}) = \mathbf{U}(\mathbf{x}) + \mathbf{u}'(\mathbf{x},t), \quad \text{and} \quad p(\mathbf{x},t) = P(x) + p'(\mathbf{x},t).
 \end{equation}
-Substituting into the Navier-Stokes equations and linearising (neglecting nonlinear terms), we get,
+Substituting the decomposition into the Navier-Stokes equations and linearising (neglecting nonlinear terms), we get
 \begin{subequations}\label{eq:shear_linearised}
 \begin{equation}
     \frac{\partial \mathbf{u'}}{\partial t} + (\mathbf{U} \cdot\nabla)\mathbf{u'} + (\mathbf{u'}\cdot\nabla)\mathbf{U} = -\nabla p' + \frac{1}{Re}\nabla^2 \mathbf{u'},
@@ -133,15 +133,12 @@ This is commonly followed by introducing a wavelike ansatz (mode) for the pertur
 
 \subsubsection{Modal analysis}\label{subsec:modal}
 It is convenient to eliminate the pressure term by reformulating equation \eqref{eq:shear_linearised} using the wall-normal perturbation velocity, $v'$, and wall-normal vorticity, $\eta' = \partial u'/ \partial z - \partial w' / \partial x$, variables.
-Using $(v, \eta)$, we introduce a modal ansatz for them,
+Using $(v, \eta)$, we introduce a modal ansatz:
 \begin{equation}\label{eq:shear_ansatz}
     v'(\mathbf{x},t ) = \tilde{v}(y)e^{i(\alpha x + \beta z - \omega t)} + \text{c.c}, \quad \text{and} \quad \eta'(\mathbf{x}, t) = \tilde{\eta}(y)e^{i(\alpha x + \beta z - \omega t)} + \text{c.c},
 \end{equation}
 where $\alpha, \beta, \omega$ and c.c denote the streamwise and spanwise wavenumbers, complex frequency (i.e. $\omega = \omega_r + i\omega_i$) and complex conjugate, respectively.
 Substituting this ansatz into the linearised equations leads to the classical Orr-Sommerfeld and Squire equations \citep{orr_stability_1907,sommerfeld_beitrag_1909,squire_stability_1933, schmid_stability_2001},
-% \begin{equation}
-%     \mathbf{L}\mathbf{\tilde{q}} = i\omega\mathbf{M}\mathbf{\tilde{q}}
-% \end{equation}
 \begin{subequations}
 \begin{equation}\label{eq:OSQ}
     \begin{pmatrix}
@@ -199,7 +196,7 @@ However, the interaction between decaying eigenmodes can lead to transient growt
     \caption{(a) The phase portrait of the toy model with $Re = 15$, where red lines are phase lines of the toy model. The blue trajectory leads to transient growth and the green trajectory does not (b) Time history of blue and green trajectories.}
     \label{fig:toy_model}
 \end{figure}
-To demonstrate an example of transient growth, we consider a two-dimensional toy model governing the time-evolution of $\mathbf{q} = (v, \eta)^T$,
+To demonstrate an example of transient growth, we consider a two-dimensional toy model governing the time-evolution of $\mathbf{q} = (v, \eta)^T$ as 
 \begin{equation}
     \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix} v \\ \eta \end{pmatrix}  = \begin{pmatrix} -\frac{1}{Re} & -1 \\ 0 & -\frac{2}{Re} \end{pmatrix} \begin{pmatrix} v \\ \eta \end{pmatrix},
 \end{equation}
@@ -212,9 +209,8 @@ Yet for another choice of initial condition, the trajectory decays asymptoticall
 Despite the presence of decaying eigenmodes, the toy model highlights the importance of transient growth, which depends on the choice of initial conditions.
 
 The aim of non-modal stability analysis is to search for optimal initial conditions, $\mathbf{\tilde{q}}_0$, that lead to the maximum amplification, $G(\tau)$, over a time horizon $\tau$. 
-This is posed as an optimisation problem,
+This is posed as an optimisation problem:
 \begin{equation}\label{eq:transient_growth}
-    % G(t) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{||\mathbf{\tilde{q}}(t)||^2}{||\mathbf{\tilde{q}}_0||^2}, \quad \text{s.t} \quad ||\mathbf{\tilde{q}}_0||^2 = 1,
     G(\tau) = \max_{\mathbf{\tilde{q}}_0 \neq 0 } \frac{\langle \mathbf{\tilde{q}}(\tau), \mathbf{\tilde{q}}(\tau) \rangle }{\langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle }, \quad \text{s.t} \quad \langle \mathbf{\tilde{q}}_0, \mathbf{\tilde{q}}_0 \rangle = 1,
 \end{equation}
 where, $\langle \cdot, \cdot \rangle$ denotes the inner-product,
@@ -222,7 +218,7 @@ where, $\langle \cdot, \cdot \rangle$ denotes the inner-product,
     \langle \mathbf{\tilde{q}}, \mathbf{\tilde{q}} \rangle = \int_\Omega \mathbf{\tilde{q}}^H \mathbf{\tilde{q}} \; \mathrm{d}\Omega,
 \end{equation}
 and $\mathbf{\tilde{q}}^ H$ refers to the complex conjugate transpose of $\mathbf{\tilde{q}}$.
-By considering the linearised operator of \eqref{eq:OSQ}, we define a linear operator as follows,
+By considering the linearised operator of \eqref{eq:OSQ}, we define a linear operator as follows:
 \begin{equation}\label{eq:linear_evolution}
     \mathbf{\tilde{q}}(\tau) = \mathcal{A}(\tau) \mathbf{\tilde{q}}_0,
 \end{equation}
@@ -233,7 +229,7 @@ Substituting the expression above into equation \eqref{eq:transient_growth},
 \end{equation}
 where $\mathcal{A}^\dagger(\tau)$ is the adjoint of $\mathcal{A}(\tau)$.
 The maximum amplification factor, $G(\tau)$, is the largest eigenvalue of $\mathcal{A}^\dagger(\tau)\mathcal{A}(\tau)$ and the corresponding eigenvector, $\mathbf{\tilde{q}}_0$, denotes the eigenvector.
-The eigenvalue problem is given as,
+The eigenvalue problem is given as
 \begin{equation}
     \mathcal{A}^\dagger(\tau)\mathcal{A}(\tau) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0.
 \end{equation}

@@ -80,7 +80,7 @@ We have also carried out a mesh independence study for the end case of $Ra = 100
 \subsection{Linear Stability Analysis}\label{sec:linearstab}
 In \S \ref{sec:rbp_4}, we will perform numerical experiments where small disturbances are added along the unstable manifold of longitudinal rolls.
 This is rooted in linear stability methods discussed earlier in \S \ref{sec:bkgrd_transitional}, and its numerical technique is presented in \S \ref{sec:nm_arnoldi}.
-To determine the unstable eigenmodes, we consider a small disturbance about the longitudinal roll state,
+To determine the unstable eigenmodes, we consider a small disturbance about the longitudinal roll state:
 \begin{subequations}\label{eq:rbp_basepert}
 \begin{equation}
     \mathbf{u}(\mathbf{x}, t) = \mathbf{u}_{LR}(\mathbf{x}) + \mathbf{\hat{u}}(\mathbf{x}, t),
@@ -92,13 +92,13 @@ To determine the unstable eigenmodes, we consider a small disturbance about the 
     p(\mathbf{x}, t)  = p_{LR}(\mathbf{x})  + \hat{p}(\mathbf{x}, t),
 \end{equation}
 \end{subequations}
-where $\mathbf{q}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{q}_{LR}=[\mathbf{u}_{LR}, \theta_{LR}, p_{LR}]^T$ and $\mathbf{\hat{q}}=[\mathbf{\hat{u}}, \hat{\theta}, \hat{p}]^T$ refers to the solution vector, the longitudinal state and the disturbances respectively.
+where $\mathbf{q}  = [\mathbf{u}, \theta, p]^T$, $\mathbf{q}_{LR}=[\mathbf{u}_{LR}, \theta_{LR}, p_{LR}]^T$ and $\mathbf{\hat{q}}=[\mathbf{\hat{u}}, \hat{\theta}, \hat{p}]^T$ refer to the solution vector, the longitudinal state and the disturbances respectively.
 We substitute equation \eqref{eq:rbp_basepert} into \eqref{eq:rbp_RBP} and neglect the nonlinear terms, leading to the linearised equations,
 \begin{subequations}\label{eq:rbp_linearised}
 \begin{equation}
     \frac{\partial \mathbf{\hat{q}}}{\partial t} = \mathcal{A}(\mathbf{q}_{LR}; Re, Ra, Pr) \mathbf{\hat{q}}, 
 \end{equation}
-where
+where the operator $\mathcal{A}$ is given as
 \begin{equation}
 \mathcal{A}(\mathbf{q}_{LR}; Re, Ra, Pr) =
     \left(
@@ -110,7 +110,7 @@ where
     \right).
 \end{equation}
 \end{subequations}
-Becasue the longitudinal rolls are invariant along the $z$-direction, the following form of normal-mode solution can be considered,
+Becasue the longitudinal rolls are invariant along the $z$-direction, the following form of normal-mode solution can be considered:
 \begin{equation}\label{eq:rbp_ansatz}
     \mathbf{\hat{q}} (\mathbf{x},t) = \mathbf{\breve{q}}(x,y)e^{i\beta z + \lambda t} + \text{c.c},
 \end{equation}
@@ -155,9 +155,9 @@ Given that the buoyancy-dominated regime is relatively well studied (RBC flow, i
 In the buoyancy-dominated regime, the flow structures are predominantly organised with convection rolls, such as SDC, transverse, oblique, longitudinal rolls (and ISRs with no mean flow), or oscillatory rolls.
 The bistability between SDC and ISRs (refer to figure \ref{fig:Ra3k}(a)) is preserved for $Ra \geq 3000$ at $Re = 0.1$  and $Re = 1$ for $Ra \geq 5000$ (see also figure \ref{fig:buoyancy_wavy_regime}(a,d,g)). There exists a maximum $Re$, beyond which SDC disappears, we denote this as $Re_s$, and its dependence on $Ra$ is demarcated by the black dashed lines on the left side of figure \ref{fig:rarephase}.
 Notably, an oblique roll with a hook-like defect is observed at $Re = 1$, $Ra = 3000$, shown in figure \ref{fig:Ra3k}(b), reminiscent of the multiple non-ISR states in RBC (see references in \S\ref{sec:bkgrd_RBC}).
-At $Re = 10$, the SDC disappears and longitudinal rolls with a spanwise wavenumber of $\alpha d = 2.5$ emerge, illustrated in figure \ref{fig:Ra3k}(c), suggesting that the roll wavenumber is within the stability boundaries of the Busse balloon \cite[see also figure~6 in][]{bodenschatz_recent_2000}.
+At $Re = 10$, the SDC disappears and longitudinal rolls with a spanwise wavenumber of $\alpha d = 2.5$ emerge, illustrated in figure \ref{fig:Ra3k}(c), suggesting that the roll wavenumber is within the stability boundaries of the Busse balloon (see also figure 6 in \citet{bodenschatz_recent_2000}).
 As $Re$ is increased further to $1000$, the longitudinal rolls emerge as the preferred solution at $Ra = 2000, 3000$.
-The non-dimensionalised spanwise wavenumber of the longitudinal rolls observed at $Ra = 3000$ and $Re = 100, 500$ (not shown) and  $Re=1000$, shown in figure \ref{fig:Ra3k}(d-e) respectively, is approximately $\alpha d \approx 3.3$, which lies outside of the stability boundaries of the Busse balloon in RBC \cite[figure 6 in][]{bodenschatz_recent_2000}.
+The non-dimensionalised spanwise wavenumber of the longitudinal rolls observed at $Ra = 3000$ and $Re = 100, 500$ (not shown) and  $Re=1000$, shown in figure \ref{fig:Ra3k}(d-e) respectively, is approximately $\alpha d \approx 3.3$, which lies outside of the stability boundaries of the Busse balloon in RBC (see figure 6 in \citet{bodenschatz_recent_2000}).
 This suggests that the stability boundaries of the longitudinal rolls may vary with increasing $Re$.
 Interestingly, a stable pinched longitudinal roll pattern emerges at $Re = 100$ $Ra = 3000$, reminiscent of a skew-varicose instability shown in figure \ref{fig:Ra3k}(d).
 Unlike the secondary skew-varicose instability observed in RBC (which reduces the wavenumber of an unstable ISR by pinching adjacent rolls together, see figure 7 of \citet{bodenschatz_recent_2000}), a stable pinched tertiary state emerges here.
@@ -312,7 +312,7 @@ Using a standard quadratic regression, the critical Rayleigh number for disturba
     \label{fig:intermittent-dynamics}
 \end{figure}
 
-Following this, we examine the dominant unstable eigenmode ($\beta d = 2$) of the longitudinal rolls ($\alpha d = 4$) at $Ra=5000$, by considering an initial condition,
+Following this, we examine the dominant unstable eigenmode ($\beta d = 2$) of the longitudinal rolls ($\alpha d = 4$) at $Ra=5000$, by considering an initial condition
 \begin{equation}\label{eq:SecInstab}
 \mathbf{q}_0(\mathbf{x},t=0) = \mathbf{q}_{LR}(x,y) + (\mathbf{\breve{q}}(x,y)e^{i\beta z}+c.c).
 \end{equation}
@@ -437,7 +437,7 @@ In this case, a bistable system forms between longitudinal rolls and turbulence 
 \begin{figure}
     \centering
     \includegraphics[width=1.3\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/Ra10000-MidSpaceTimeAndPDFs-landscape.pdf}
-    \caption{The midplane temperature space-time plot, and near-wall wall-normal and spanwise perturbation kinetic energy normalised by the thermal velocity scale, $u_\kappa$, and the probability density functions based on planar-averaged centerline velocity and the midplane temperature for $Ra = 10000$ at (a) $Re = 500$, (b) $Re = 750$, (c) $Re = 1000$ and (d) $Re = 1050$.} 
+    \caption{The midplane temperature space-time plot, and near-wall wall-normal and spanwise perturbation kinetic energy normalised by the thermal velocity scale, $u_\kappa$, and the probability density functions based on planar-averaged centerline velocity and the midplane temperature for $Ra = 10000$ at (a) $Re = 500$, (b) $Re = 750$, (c) $Re = 1000$ and (d) $Re = 1050$ at $\Gamma = 4\pi$.}
     \label{fig:Ra10k-PDFs}
 \end{figure}
 

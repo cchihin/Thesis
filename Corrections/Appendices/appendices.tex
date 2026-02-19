@@ -1,5 +1,6 @@
 \appendix
-\chapter{Transitional Rayleigh-B\'{e}nard Poiseuille flows}\label{chap:appendices}
+\chapter[Transitional RBP flows]{Transitional Rayleigh-B\'{e}nard Poiseuille flows}\label{app:rbp}
+In Appendix \ref{app:rbp}, we provide additional results and discussion pertaining to our investigation in transitional Rayleigh-B\'{e}nard Poiseuille flows discussed in \S \ref{chap:3}. The mathematical notations and definitions follow those defined in \S \ref{chap:3}.
 \section{Simulation parameters for $Ra$-$Re$ sweep}\label{app:params}
 \begin{table}\scriptsize
 \centering
@@ -69,7 +70,7 @@
 \label{tab:simulations}
 \end{table}
 The spectral/\emph{hp} quadrilateral element width, heights and polynomial order are kept constant for all simulations, $(\Delta x, \Delta y|_{y=\pm h}, \Delta y|_{y=0}, P) = (0.1\pi,0.0549,0.367,4)$.
-To resolve the high gradients, the quadrilateral element heights are bunched near the wall, $\Delta y|_{y=\pm h}$, and expanded in the channel center, $\Delta y|_{y=0}$.
+To resolve the high gradients near the wall, the quadrilateral element heights are bunched near the wall, $\Delta y|_{y=\pm h}$, and expanded in the channel center, $\Delta y|_{y=0}$.
 The basis type employed here consists of the modified Jacobi polynomials, known as the \emph{modified} basis (see \S \ref{sec:nm_modalexpansions}).
 Table \ref{tab:simulations} describes the number of Fourier expansions, $N_z$, and temporal resolution of 52 numerical experiments at $Re = 0, 0.1, 1, 10, 100, 500, 750, 1000, 1050$, $2000$, and $Ra = 0, 2000, 3000, 5000, 8000, 10000$ with $Pr = 1$ and a large aspect ratio, $\Gamma = 4\pi$. 
 The initial conditions of all numerical experiments were sampled from a statistically stationary solution based on the time history of the Nusselt number and shear.
@@ -114,7 +115,7 @@ In other words, the dominant physical mechanism is shear-driven turbulence at $R
 As $Re$ approaches $Re = 1050$, the midplane temperature in figure \ref{fig:rarephase} shows regions of spatially localised structures, indicating the presence of turbulent-laminar bands, described in figure \ref{fig:spacetime-Ra0k-Re1.05k} and \ref{fig:spacetime-Ra10k-Re1.05k} later.
 The mean streamwise velocity and temperature gradients at both ends of the wall, and second-order statistics, are enhanced slightly from $Ra = 0$ to $Ra = 10000$.
 This enhancement could be due to the coexistence of longitudinal rolls with turbulent bands at $Ra = 10000$, discussed in \S \ref{sec:rbp_3.3}.
-Notably, we have also included the statistics for a subcritical case ($Ra < Ra_{\parallel}$) at $Ra = 1000$, indicating the presence of subcritical effects as the statistics are slightly enhanced from $Ra = 0$ to $Ra = 1000$, reported by \cite{john_soundar_jerome_transient_2012}.
+Notably, we have also included the statistics for a subcritical case ($Ra < Ra_{\parallel}$) at $Ra = 1000$, indicating the presence of subcritical effects as the statistics are slightly enhanced from $Ra = 0$ to $Ra = 1000$, reported by \citet{john_soundar_jerome_transient_2012}.
 Nonetheless, there is a distinct change of state between $Re = 1000$ to $1050$ (see figure \ref{fig:rarephase}), marked by the transition from the longitudinal/intermittent roll regime to shear-driven turbulence at $Re \geq 1050$, thus, shaded in blue in figure \ref{fig:rarephase}.
 
 \section{Growth rates of primary instabilities}\label{app:long-pri}
@@ -127,7 +128,8 @@ Nonetheless, there is a distinct change of state between $Re = 1000$ to $1050$ (
 
 Figure \ref{fig:long-pri-instab} shows the eigenvalues of the primary instabilities as a function of its spanwise wavenumber $\alpha d$, leading to the onset of longitudinal rolls at $Re = 1050$. The results are obtained using a Chebyshev-collocation method discretised by 51 Chebyshev polynomials \citep{driscoll_chebfun_2014}. The crosses denote the spanwise wavenumbers admissible within the domain $\Gamma = \pi/2$, where $\alpha d = 4$ corresponds to the dominant eigenmode.
 
-\chapter{State-space structure of spiral defect chaos}
+\chapter[State-space structure of SDC]{State-space structure of spiral defect chaos}\label{app:sdc}
+In Appendix \ref{app:sdc}, we provide additional results and discussion pertaining to our investigation in the state-space structure of spiral defect chaos in Rayleigh-B\'{e}nard convection in \S \ref{chap:4}. The mathematical notations and definitions follow those defined in \S \ref{chap:4}.
 \section{Verification of linear stability analysis}\label{app:sdc_appA}
 \begin{figure}
     \centering
@@ -136,10 +138,10 @@ Figure \ref{fig:long-pri-instab} shows the eigenvalues of the primary instabilit
     \label{fig:evvalidation}
 \end{figure}
 
-Figure \ref{fig:evvalidation} shows the eigenvalues as a function of spanwise wavenumber $\beta$ of RBC at $\varepsilon = 0.7$. The results are obtained using Nektar++ and compared against a Chebyshev-collocation method discretised by 101 Chebyshev polynomials \cite{driscoll_chebfun_2014}.
+Figure \ref{fig:evvalidation} shows the eigenvalues as a function of spanwise wavenumber $\beta$ of RBC at $\varepsilon = 0.7$. The results are obtained using Nektar++ and compared against a Chebyshev-collocation method discretised by 101 Chebyshev polynomials \citep{driscoll_chebfun_2014}.
 
-\section{Other elementary states and ISRs}\label{app:sdc_appB}
-Figure \ref{fig:10elementaries} presents snapshots of temperature slices ($\theta(x,z)|_{d/2}$), depicting ten distinct elementary states. These states are obtained within a minimal domain $\Gamma = 2\pi$, consisting of eight stationary states (figures \ref{fig:10elementaries}(a-h)) and two travelling-wave states (figures \ref{fig:10elementaries}(i,j)).
+\section{Additional elementary states and ISRs}\label{app:sdc_appB}
+Figure \ref{fig:10elementaries} presents snapshots of temperature slices ($\theta(x,z)|_{d/2}$), depicting ten distinct elementary states. These states are obtained within a minimal domain $\Gamma = 4\pi$, consisting of eight stationary states (figures \ref{fig:10elementaries}(a-h)) and two travelling-wave states (figures \ref{fig:10elementaries}(i,j)).
 Figure \ref{fig:ISRs} features a snapshot of fourteen ideal straight rolls (ISRs), and they satisfy rotational symmetry about the $y$-axis and mirror symmetries about the $x$- and $z$-axes due to the horizontal isotropy of the present system. These ISRs represent stable fixed-points in the state space of figures \ref{fig:statespace-sdc-isr-transient}, \ref{fig:statespace-sdc-isr-elems}, \ref{fig:statespace-sdc-isr-elems-edge}, \ref{fig:phasespacetraj}.
 
 \begin{figure}
@@ -152,6 +154,6 @@ Figure \ref{fig:ISRs} features a snapshot of fourteen ideal straight rolls (ISRs
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{StateSpaceStructureOfSDC/Figures/ISRs.pdf}
-    \caption{Temperature snapshots, $\theta(x,z)|_{y=d/2}$, of 14 stable ideal straight rolls (ISRs) confined within a minimal domain, $\Gamma = 6.28$. Plots (a-n) are ordered in increasing wavenumbers, $q \in (2/d, 3.35/d)$. We note that these states are distinct and are not equivalent to each other under any combinations of spatial rotation, translation or reflection.}
+    \caption{Temperature snapshots, $\theta(x,z)|_{y=d/2}$, of 14 stable ideal straight rolls (ISRs) confined within a minimal domain, $\Gamma = 4\pi$. Plots (a-n) are ordered in increasing wavenumbers, $q \in (2/d, 3.35/d)$. We note that these states are distinct and are not equivalent to each other under any combinations of spatial rotation, translation or reflection.}
     \label{fig:ISRs}
 \end{figure}

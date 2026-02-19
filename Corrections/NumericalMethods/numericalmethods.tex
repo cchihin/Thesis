@@ -12,13 +12,13 @@ This chapter concludes with numerical techniques for performing stability analys
 Spatial discretisation errors, or residuals, arise as one seeks an approximate solution of a partial differential equation (PDE).
 The method of weighted residuals provides a general mathematical framework in which constraints on the residual can be applied flexibly, thereby defining the spatial discretisation scheme and its convergence properties.
 We approximate the solution of PDE by considering a finite expansion of a suitable basis, to which its coefficients are sought by minimising the inner product between the PDE and a test (or weight) function.
-To demonstrate this, we consider a linear partial differential equation as,
+To demonstrate this, we consider a linear partial differential equation as
 \begin{equation}\label{eq:linear_operator}
     \mathbf{L}[u(x)] = 0, \quad x \in \Omega,
 \end{equation}
 where $\mathbf{L}$ refers to a linear spatial differential operator subjected to some boundary conditions within the domain, $\Omega$, while $u(x)$ refers to the exact solution of $\mathbf{L}$.
 Examples of PDEs with linear spatial differential operators include the Laplace equation, $\nabla^2 u = 0 $, the Poisson equation, $\nabla^2 u - f = 0$, and the Helmholtz equation, $\nabla^2 u - \lambda u  + f = 0$.
-We suppose that the exact solution $u(x)$ can be approximated (discretised) by $N$ finite number of global basis (or expansion) functions, $\Phi(x)$.
+We suppose that the exact solution $u(x)$ can be approximated (discretised) by $N$ finite number of global basis (or expansion) functions, $\Phi(x)$:
 \begin{equation}\label{eq:approximate}
     u(x) \approx u^\delta(x) = \sum_{i=0}^{N-1} \hat{u}_i \Phi_i(x),
 \end{equation}
@@ -113,7 +113,7 @@ where $u \in H^1$ refers to functions of $u$ belonging to the Sobolev space of o
     \end{equation}
 \end{definition}
 In other words, $H^1$ functions satisfy the condition that the integral of the square of the function and its first derivative is finite, consistent with the highest order derivative in the weak formulation of equation \eqref{eq:helmholtz_inner}.
-Similarly, the space of test functions, $\mathcal{V}$, is defined as,
+Similarly, the space of test functions, $\mathcal{V}$, is defined as
 \begin{equation}\label{eq:test_space}
     \mathcal{V} := \{ v \, | \, v \in H^1, v(0) = 0 \},
 \end{equation}
@@ -134,7 +134,7 @@ To ensure that they belong to the same space, we lift the solution $u^\delta$ in
     u^\delta = u^\mathcal{H} + u^\mathcal{D}.
 \end{equation}
 where $u^\mathcal{H} \in \mathcal{V}^\delta$ satisfies the homogeneous Dirichlet condition (e.g. is zero on Dirichlet boundaries), belonging to the same subsapce as $v^\delta \in \mathcal{V}^\delta$, while $u^\mathcal{D} \in \mathcal{U}^\delta$ satisfies the Dirichlet boundary conditions $u^\mathcal{D}(0) = g_D$.
-Finally, the standard Galerkin projection method is to solve,
+Finally, the standard Galerkin projection method is to solve
 \begin{equation}\label{eq:standard_galerkin}
     a(v^\delta, u^\mathcal{H}) = f(v^\delta) - a(v^\delta, u^\mathcal{D}).
 \end{equation}
@@ -164,7 +164,7 @@ We consider an example in one dimension within $\Omega$, and partition it into a
 \begin{equation}
     \Omega = \bigcup_{e = 1}^{N_{el}} \Omega^e, \quad \text{where} \; \bigcap_{e=1}^{N_{el}} \Omega^e = \emptyset
 \end{equation}
-where the $e^{th}$ element is defined as,
+where the $e^{th}$ element is defined as
 \begin{equation}
     \Omega^e = \{x \, | \, x_{e-1} \geq x \geq x_e \}.
 \end{equation}
@@ -196,18 +196,18 @@ which for this case has an analytical inverse, $(\chi^e)^{-1}(x)$,
 \begin{equation}
     \xi = (\chi^e)^{-1}(x) = 2 \frac{x - x_{e-1}}{x_e - x_{e-1}} - 1, \quad x \in \Omega^{e}.
 \end{equation}
-For illustration purposes, we consider that the standard element can be represented by three local basis expansions of polynomial order of up to $P = 2$,
+For illustration purposes, we consider that the standard element can be represented by three local basis expansions of polynomial order of up to $P = 2$:
 \begin{equation}\label{eq:def_local_expansions}
     \phi_0^e(\xi) = \frac{1 - \xi}{2}, \quad \phi_1^e(\xi) = (1 + \xi)(1 - \xi), \quad \phi_2^e(\xi) =  \frac{1 + \xi}{2},
 \end{equation}
 where $\phi_0^e, \phi_2^e$ and $\phi_1^e$ refer to the linear and quadratic local basis expansions of the $e^{th}$ element.
 These local basis expansions is illustrated in figure \ref{fig:standard_element}.
-The approximate solution is now represented as,
+The approximate solution is now represented as
 \begin{equation}\label{eq:local_expansions}
     u^\delta(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{u}_i^{e}\phi^e_i(\xi).
 \end{equation}
 where $\hat{u}_i^e$ refers to the local expansion basis coefficients.
-The approximate solution, $u^\delta(x)$, now lie within the solution space $\mathcal{U}^\delta$ defined as,
+The approximate solution, $u^\delta(x)$, now lie within the solution space $\mathcal{U}^\delta$ defined as
 \begin{equation}
     \mathcal{U}^\delta := \left\{ u^\delta \,\middle|\, u^\delta \in H^1,\ u^\delta(\chi^e(\xi)) \in \phi_i^e(\xi), \forall i : 0 \leq i \leq P, \forall e : 1 \leq e \leq N_{el} \right\}
 \end{equation}
@@ -242,7 +242,7 @@ In general, we can represent the global and local basis coefficients each as a c
 where $\mathbf{\hat{u}}^{e} = (\hat{u}_0^e, ..., \hat{u}_P^e)^T$, $\mathbf{\hat{u}}_g \in \mathbb{R}^N$, $\mathbf{\hat{u}}_l \in \mathbb{R}^{N_{loc}}$ and $N_{loc} = N_{el}(P+1)$.
 As there can be more local degrees of freedom than global degrees of freedom, $ N_{loc} > N$, we need to impose some conditions on the local expansion coefficients.
 One approach is to enforce $C^0$ continuity across element boundaries, known as the continuous Galerkin projection.
-Following the definition of local basis expansions in equation \eqref{eq:def_local_expansions}, we can enforce the solution to be equivalent at the elemental boundary using the condition,
+Following the definition of local basis expansions in equation \eqref{eq:def_local_expansions}, we can enforce the solution to be equivalent at the elemental boundary using the condition
 \begin{equation}
     \hat{u}^{e-1}_P = \hat{u}^e_0.
 \end{equation}
@@ -257,7 +257,7 @@ We can relate the global and local basis coefficients with an assembly matrix, $
 \begin{equation}
     \mathbf{\hat{u}}_l = \mathbf{A} \mathbf{\hat{u}}_g.
 \end{equation}
-In the case of $P=2$ and three finite elements ,as in the case of figures \ref{fig:standard_element}and \ref{fig:local_to_global}, the assembly matrix and the vectors of global and local basis coefficients are given as,
+In the case of $P=2$ and three finite elements ,as in the case of figures \ref{fig:standard_element}and \ref{fig:local_to_global}, the assembly matrix and the vectors of global and local basis coefficients are given as
 \begin{equation}
     \begingroup
     \setlength\arraycolsep{2pt}
@@ -287,7 +287,8 @@ In the case of $P=2$ and three finite elements ,as in the case of figures \ref{f
             0 & 0 & 0 & 0 & 0 & 1 & 0\\
             0 & 0 & 0 & 0 & 0 & 0 & 1\\
         \end{pmatrix}
-        ,
+        \quad 
+        \text{and}
         \quad 
         \mathbf{\hat{u}}_g
         \begin{pmatrix}
@@ -357,7 +358,6 @@ An example of modal expansions is the Jacobi polynomials, $P_p^{\alpha,\beta}(x)
 The Jacobi polynomials become symmetric for $\alpha = \beta$, referred to as ultraspherical polynomials. 
 Special cases of ultraspherical polynomials are the Legendre polynomials, $\alpha = \beta = 1$, and the Chebyshev polynomials, $\alpha = \beta = 1/2$.
 Within the Nektar++ framework, we utilise the \emph{modified} basis, based on Jacobi polynomials that are modified (hence the name),
-% are used as the \emph{trial} functions. Using $\alpha=1$, $\beta=1$, and linear basis functions as \emph{boundary} modes, the modified Jacobi polynomials are,
 \renewcommand{\arraystretch}{1.5} % Default value: 1
 \begin{equation}\label{eq:modifiedJacobi}
     \phi_p(\xi) \rightarrow \psi_p(\xi) = \left\{
@@ -403,7 +403,7 @@ Figure \ref{fig:Lagrange_basis} presents Lagrange expansions evaluated along the
 \end{figure}
 \subsubsection{Multi-dimensional expansions}
 We have introduced modal and nodal expansions in one dimension, and their extension to multi-dimensional bases can be generalised using a tensorial expansion of the local expansion bases. 
-The standard element in a two dimensional quadrilateral, $\mathcal{Q}^2$, and a three dimensional hexahedral $\mathcal{H}^3$, are given as,
+The standard element in a two dimensional quadrilateral, $\mathcal{Q}^2$, and a three dimensional hexahedral $\mathcal{H}^3$, are given as
 \begin{equation}
     \mathcal{Q}^2 = \{-1 \leq \xi_1, \xi_2 \leq 1 \}, \quad \mathcal{H}^2 = \{-1 \leq \xi_1, \xi_2, \xi_3 \leq 1 \}
 \end{equation}
@@ -431,7 +431,7 @@ The reader is referred to \citet{karniadakis_spectralhp_2005} for more details a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gaussian quadrature}\label{sec:Gaussian_quadrature}
 In the Galerkin formulation, we routinely perform integration over the basis functions and therefore seek an efficient numerical technique.
-Suppose we want to approximate the integral of a function, $u(\xi)$, in a standard element numerically given as,
+Suppose we want to approximate the integral of a function, $u(\xi)$, in a standard element numerically given as
 \begin{equation}\label{eq:discrete_integral}
     \int_{-1}^1 u(\xi) \; \mathrm{d}\xi = \sum_{i=0}^{Q-1} w_i u(\xi_i) + R(u).
 \end{equation}
@@ -443,7 +443,7 @@ The main difference between the three categories is in the inclusion of the endp
 The Gauss quadrature rule evaluates the integral without the endpoints $\xi = \pm 1$.
 The Gauss-Radau quadrature rule either selects one of the endpoints, often at $\xi = -1$.
 The Gauss-Lobatto quadrature rule considers both endpoints.
-We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials, known as the Gauss-Lobatto-Jacobi quadrature rules, given as,
+We will only focus on describing the Gauss-Lobatto quadrature rules and the zeros of Jacobi polynomials, known as the Gauss-Lobatto-Jacobi quadrature rules, given as
 \begin{subequations}\label{eq:weightsnzeros}
     \begin{equation}
         \xi_i^{\alpha,\beta} = \begin{cases}
@@ -473,7 +473,7 @@ By evaluating the discrete integral (equation \eqref{eq:discrete_integral}) usin
 
 \subsection{Numerical differentiation}
 In the same fashion as Gaussian quadrature rules, we want to evaluate the derivative of a function, $u^\delta(\xi)$, numerically.
-Suppose that we want to differentiate in $x$ using local coordinates given as,
+Suppose that we want to differentiate in $x$ using local coordinates given as
 \begin{equation}
     \frac{\mathrm{d} u^\delta(\xi)}{\mathrm{d} x} = \frac{\mathrm{d} u^\delta(\xi)}{\mathrm{d} \xi}\frac{\mathrm{d} \xi}{\mathrm{d} x} = \sum_{p = 0}^P \hat{u}_p \frac{\mathrm{d} \phi_p(\xi)}{\mathrm{d}\xi}\frac{\mathrm{d}\xi}{\mathrm{d} x},
 \end{equation}
@@ -481,13 +481,13 @@ where $\mathrm{d}\xi/\mathrm{d}x$ is the jacobian.
 The primary step involves evaluating the derivative of the local expansion bases, $\mathrm{d} \phi_p(\xi) / \mathrm{d} \xi$.
 By exploiting the Kronecker delta property of Lagrange polynomials, any polynomial can be conveniently represented by a sum of Lagrange polynomials.
 Suppose that the solution has polynomial order $P$, we can represent it exactly with $P+1$ Lagrange polynomials, $\phi_p(\xi) \rightarrow h_p(\xi)$.
-Its derivative through $Q \geq P + 1$ discrete nodal points, $\xi_i$ for all $i = 0, 1, \ldots, Q-1$, is expressed as,
+Its derivative through $Q \geq P + 1$ discrete nodal points, $\xi_i$ for all $i = 0, 1, \ldots, Q-1$, is expressed as
 \begin{equation}
     \frac{\mathrm{d} u ^\delta (\xi)}{\mathrm{d} \xi}\Big |_{\xi = \xi_i} = \sum_{j=0}^{P} \hat{u}_j \frac{\mathrm{d} h_j(\xi)}{\mathrm{d} \xi} \Big|_{\xi = \xi_i} = \sum_{j = 0}^{P} d_{ij}\hat{u}_j,
 \end{equation}
 where $\mathbf{D} = [d_{ij}] \in \mathbb{R}^{Q \times Q}$ refers to the differential matrix containing values of the derivative of the Lagrange polynomials at the quadrature points. 
 Since we are evaluating the derivative along nodal (collocated) points, it is referred to as \textit{collocation} differentiation.
-The general form for collocation differentiation based on Lagrange polynomials can be expressed as,
+The general form for collocation differentiation based on Lagrange polynomials can be expressed as
 \begin{equation}\label{eq:differential_matrices}
     d_{ij} = \frac{\mathrm{d} h_j (\xi)}{\mathrm{d} \xi}\Big|_{\xi = \xi_i} = 
     \begin{cases} 
@@ -529,13 +529,13 @@ Suppose they can be discretised by spectral/\textit{hp} elements with $N_{el}$ e
 \begin{equation}
     u^\delta(x) = \sum_{i=0}^N \hat{u}_i\Phi_i(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{u}_i^e\phi_i^e(\xi),
 \end{equation}
-with test functions similarly defined as,
+with test functions similarly defined as
 \begin{equation}
     v^\delta(x) = \sum_{i=0}^{N} \hat{v}_i\Phi_i(x) = \sum_{e=1}^{N_{el}}\sum_{i=0}^P \hat{v}_i^e\phi_i^e(\xi)
 \end{equation}
 \end{subequations}
 Substituting the expansions of $u^\delta, v^\delta$ into the weak form (equation \eqref{eq:example_weak_form}) and evaluating the first term on the left-hand side using numerical quadrature over $Q$ quadrature points within a standard region,
-the $e^{th}$ elemental contribution becomes,
+the $e^{th}$ elemental contribution becomes
 \begin{align}
     \int_{-1}^1 \sum_{i = 0}^{P}\hat{v}^e_i\phi^e_i(\xi) \sum_{j = 0}^{P}\hat{u}^e_j\phi^e_j(\xi) \, \frac{\mathrm{d} \chi^e}{\mathrm{d} \xi} \, \mathrm{d}\xi &= \sum_{e=0}^{N_{el}-1}\sum_{q=0}^{Q-1} \left[ \sum_{i = 0}^{P}\hat{v}_i^e\phi_i^e(\xi_q) \sum_{j = 0}^{P}\hat{u}^e_j\phi_j^e(\xi_q) \right]J^e w_q^e\\ \nonumber
  & = (\mathbf{\hat{v}}^e)^T (\mathbf{B}^e)^T \mathbf{W}^e \mathbf{B}^e \mathbf{\hat{u}}^e \\ \nonumber
@@ -545,7 +545,7 @@ where the elemental mass matrix is defined as
 \begin{equation}
     \mathbf{M}^e = (\mathbf{B}^e)^T \mathbf{W} \mathbf{B}^e \in \mathbb{R}^{(P+1)\times(P+1)}.
 \end{equation}
-Here, $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental basis matrix, and $\mathbf{W}^e\in \mathbb{R}^{Q \times Q}$, the elemental weight matrix, a diagonal matrix consisting of the product between integration weights, $w_q^e$, and the element's jacobian, $J^e = \frac{\mathrm{d} \chi^e}{\mathrm{d} \xi}$.
+Here, $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental basis matrix, and $\mathbf{W}^e\in \mathbb{R}^{Q \times Q}$, the elemental weight matrix, a diagonal matrix consisting of the product between integration weights, $w_q^e$, and the element's jacobian, $J^e = \frac{\mathrm{d} \chi^e}{\mathrm{d} \xi}$, where
 \begin{equation}
     \mathbf{B}^e = 
     \begin{bmatrix}
@@ -553,14 +553,15 @@ Here, $\mathbf{B}^e \in \mathbb{R}^{Q \times (P+1)}$ refers to the elemental bas
         \vdots & \ddots & \vdots \\
         \phi_0^e(\xi_Q) & \cdots & \phi_P^e(\xi_Q) \\
     \end{bmatrix}
-    ,
+    \quad
+    \text{and}
     \quad
     \mathbf{W}^e = 
     \begin{bmatrix}
         w_0^eJ^e &  & 0 \\
          & \ddots &  \\
         0 & & w_{Q-1}^eJ^e  
-    \end{bmatrix}
+    \end{bmatrix}.
 \end{equation}
 Next, we evaluate the $e^{th}$ elemental contribution of the second term on the left-hand side, 
 \begin{align}
@@ -616,7 +617,7 @@ To enforce $C^0$ continuity across elemental boundaries, we pre-multiply equatio
 \begin{equation}
     \mathbf{A}^T[\lambda \mathbf{M}_l + \mathbf{L}_l]\mathbf{A} \mathbf{\hat{u}}_g = \mathbf{A}^T \mathbf{\hat{f}}.
 \end{equation}
-Finally, we consider the boundary conditions by lifting $u^\delta(x) = u^\mathcal{H}(x) + u^\mathcal{D}(x)$
+Finally, we consider the boundary conditions by lifting $u^\delta(x) = u^\mathcal{H}(x) + u^\mathcal{D}(x)$,
 \begin{equation}
     \mathbf{A}^T[\lambda \mathbf{M}_l + \mathbf{L}_l]\mathbf{A} \mathbf{\hat{u}^\mathcal{H}}_g = \mathbf{A}^T \mathbf{\hat{f}} + \mathbf{A}^T[\lambda \mathbf{M}_l - \mathbf{L}_l]\mathbf{A} \mathbf{\hat{u}^\mathcal{D}}_g.
 \end{equation}
@@ -647,7 +648,7 @@ For $p$-refinement, the polynomial order $P$ is increased on a mesh with two equ
 \section[Numerical methods for solving the N.S equations]{Numerical methods for solving the Navier-Stokes equations}\label{sec:numeraltechniquesforNS}
 \subsection{Velocity Correction Scheme}\label{sec:nm_vcs}
 The spatial discretisation of the Helmholtz operator and its numerical solution procedure have been discussed using the spectral/\emph{hp} element methods.
-Here, we describe the numerical methods that are used to solve the Navier-Stokes equations given as,
+Here, we describe the numerical methods that are used to solve the Navier-Stokes equations given as
 \begin{subequations}
     \begin{equation}\label{eq:velocity_explicit}
     \frac{\partial u}{\partial t}  + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla p + \nu \nabla^2 \mathbf{u} + \mathbf{f}
@@ -670,7 +671,7 @@ Several strategies exist for addressing the coupled velocity-pressure fields by
 We adopt splitting methods, which decompose the Navier-Stokes equations into subproblems and solve them sequentially.
 These methods, which belong to the broader family of projection methods introduced by \citet{chorin_numerical_1967} and \citet{temam_sur_1969}, can be further classified as pressure-correction or velocity-correction schemes.
 This thesis employs the use of the high-order velocity-correction scheme introduced by \citet{karniadakis_high-order_1991} and further explained by \citet{guermond_velocity-correction_2003}.
-We rewrite the incompressible Navier-Stokes equations in semi-discrete form using linear and nonlinear operators as,
+We rewrite the incompressible Navier-Stokes equations in semi-discrete form using linear and nonlinear operators as
 \begin{subequations}\label{eq:semidiscreteNS}
     \begin{equation}\label{eq:semidiscreteNSa}
         \frac{\partial \mathbf{u}}{\partial t} = \mathrm{\mathbf{N}(\mathbf{u})} - \nabla p +  \nu \mathrm{\mathbf{L}}(\mathbf{u}),
@@ -684,7 +685,7 @@ We rewrite the incompressible Navier-Stokes equations in semi-discrete form usin
     \end{equation}
 \end{subequations}
 The nonlinear, $\mathbf{N}$, linear, $\mathbf{L}$, operators are obtained from a suitable spatial-discretisation method such as the spectral/\emph{hp} element method.
-The nonlinear and linear operators are defined as,
+The nonlinear and linear operators are defined as
 \begin{equation}
     \mathrm{\mathbf{N}}(\mathbf{u}) \equiv - (\mathbf{u} \cdot \nabla)\mathbf{u}, \qquad \mathrm{\mathbf{L}}(\mathbf{u}) \equiv \nabla^2 \mathbf{u},
 \end{equation}
@@ -694,12 +695,12 @@ To advance the velocity at time step, $\mathbf{u}^{n}$, to the next time step, $
 \mathbf{u}^{n+1} - \mathbf{u}^n = \underbrace{\int_{t_n}^{t_{n+1}} \mathbf{N}(\mathbf{u}) \, \mathrm{d}t}_{\Delta t \sum_{q=0}^{J_e - 1} \beta_q \mathbf{N}(\mathbf{u}^{n-q})} \; - \; \underbrace{\int_{t_n}^{t_{n+1}} \nabla p \, \mathrm{d} t}_{\Delta t \nabla \bar{p}^{n+1}} \; + \; \nu\underbrace{\int_{t_n}^{t_{n+1}} \mathbf{L}(\mathbf{u})\, \mathrm{d}t}_{\Delta t \sum_{q = 0}^{J_i - 1} \gamma_q \mathbf{L}(\mathbf{u}^{n+1-q})}.
 \end{equation}
 The velocity correction scheme `splits' equation \eqref{eq:semidiscreteNS} into three steps shown as underbraces, which are evaluated successively from left to right.
-The first step we perform is to extrapolate the advection velocities, by approximating the nonlinear terms using an explicit scheme such as the Adams-Bashforth family of $J_e$ order,
+The first step we perform is to extrapolate the advection velocities, by approximating the nonlinear terms using an explicit scheme such as the Adams-Bashforth family of $J_e$-th order,
 \begin{equation}\label{eq:firstStep}
     \frac{\mathbf{\hat{u}} - \sum_{q=0}^{J_e-1} \alpha_{q} \mathbf{u}^{n-q}}{\Delta t} = \sum_{q=0}^{J_e-1} \beta_q \mathrm{\mathbf{N}}(\mathbf{u}^{n-q}),
 \end{equation}
-where $\mathbf{\hat{u}}$ is denotes the primary intermediate velocity field desired and $\alpha_e,\beta_e$ refers to the time integration coefficients for a prescribe $J_e$-th order, described later.
-After evaluating $\mathbf{\hat{u}}$, we move onto the second term in equation \eqref{eq:split}, which defines the pressure at time step $n+1$ as,
+where $\mathbf{\hat{u}}$ is denotes the primary intermediate velocity field desired and $\alpha_e,\beta_e$ refers to the time integration coefficients for a prescribed $J_e$-th order, described later.
+After evaluating $\mathbf{\hat{u}}$, we move onto the second term in equation \eqref{eq:split}, which defines the pressure at time step $n+1$ as
 \begin{equation}\label{eq:secondStep}
     \frac{\mathbf{\hat{\hat{u}}} - \mathbf{\hat{u}}}{\Delta t} = -\nabla p^{n+1}.
 \end{equation}
@@ -733,7 +734,7 @@ The time integration coefficients are determined from stiffly stable schemes sho
 \renewcommand{\arraystretch}{1.} % Default value: 1
 \begin{table}[h]
     \centering
-        \begin{tabular}{c c c c}
+        \begin{tabular}{c | c c c}
             Coefficients & $1^{st}$ order & $2^{nd}$ order & $3^{rd}$ order \\
             \hline
             $\gamma_0$ & 1 & 3/2 & 11/6 \\
@@ -747,7 +748,7 @@ The time integration coefficients are determined from stiffly stable schemes sho
         \caption{Integration coefficient of stiffly stable schemes from \cite{karniadakis_high-order_1991}.}
     \label{tab:stiffyStableCoefficients}
 \end{table}
-The high-order velocity correction scheme can be summarised in a three-step process of the following,
+The high-order velocity correction scheme can be summarised in a three-step process of the following:
 \begin{equation}
     \mathbf{u}^n \xrightarrow{\quad \mathbf{N}(\mathbf{u}^n) \quad} \mathbf{\hat{u}} \xrightarrow{\quad \nabla^2 p \quad} \mathbf{\hat{\hat{u}}} \xrightarrow{\quad \mathbf{L}(\mathbf{\hat{\hat{u}}}) \quad} \mathbf{u}^{n+1}, \nonumber
 \end{equation}
@@ -810,7 +811,7 @@ We decompose the pressure as
 \end{equation}
 where $p, \tilde{p}, f_x$ refer to the pressure, consisting of a sum of a periodic component of pressure (i.e. $\tilde{p}(x+L_x) = \tilde{p}(x)$ where $L_x$ is the streamwise length of the computational domain) and a constant pressure gradient, respectively.
 This decomposition is used when $\tilde{p}$ is represented by Fourier expansions in the homogeneous direction.
-Substituting this decomposition into the streamwise component of the Navier-Stokes equations yields,
+Substituting this decomposition into the streamwise component of the Navier-Stokes equations yields
 \begin{equation}\label{eq:streamwise_equation}
     \frac{\partial u}{\partial t} + (u \cdot \nabla) u = -\frac{\partial \tilde{p}}{\partial x} + \nu \nabla^2 u + f_x.
 \end{equation}
@@ -837,7 +838,7 @@ For a statistically stationary turbulent (or laminar) channel flow with periodic
     \item $\langle u',v',w',p' \rangle  = 0$, based on the definition of fluctuations,
     \item $\frac{\partial \tilde{p}}{\partial x} = 0 $ due to the enforced periodicity in $x$.
 \end{enumerate}
-Applying the assumptions above, the mean momentum equations simplify into,
+Applying the assumptions above, the mean momentum equations simplify into
 \begin{equation}
 \langle F_x \rangle = \left\langle \frac{\partial (u'v')}{\partial y} \right\rangle - \nu \frac{\partial U^2}{\partial y^2},
 \end{equation}
@@ -849,14 +850,14 @@ Next, we integrate the expression from $y \in [-1, 1]$,
 \end{equation}
 The wall shear stress is defined by $\tau_w = \nu \frac{\partial U}{\partial y}|_{y=1}$ ($\rho$ is assumed to be 1), and it is antisymmetric about the channel centreline, $\nu \frac{\partial U}{\partial y}|_{y=1} = - \nu \frac{\partial U}{\partial y}|_{y=-1}$.
 Due to the no-slip condition, the Reynolds shear stress is zero, i.e. $[u'v']|_{y=-1,1} = 0$.
-Hence, the expression above simplifies to,
+Hence, the expression above simplifies to
 \begin{equation}\label{eq:eq6}
     \tau_w = F_x.
 \end{equation}
 In other words, the body force $F_x$ is balanced by the wall shear stress (drag), $\tau_w$, along the channel walls.
 In the case of laminar flow, $\tau_w$ can be determined analytically, and the body force required for sustaining a laminar flow for a velocity profile of $u(y) = 1 - y^2$, is $F_x = -2\nu$.
 However, determining the wall shear stress (and hence the magnitude of the body force) is not a straightforward task for transitional or turbulent channel flow, as there is no analytical expression for $\tau_w$ and its dependence on Reynolds number.
-Instead, we can only rely on the empirical relations of turbulent channel flow between the skin friction coefficient, $c_f = \tau_w / \frac{1}{2}\rho U_c^2$ and Reynolds number $Re_c$ from \citet{dean_reynolds_1978}.
+Instead, we can only rely on the empirical relations of turbulent channel flow between the skin friction coefficient, $c_f = \tau_w / \frac{1}{2}\rho U_c^2$ and Reynolds number $Re_c$ from \citet{dean_reynolds_1978},
 \begin{equation}
     c_f = 0.00302Re_c^{-1/4},
 \end{equation}
@@ -876,7 +877,7 @@ Since we are investigating flow regimes in the transitional region, we will not 
 \subsubsection{Constant volumetric flux}
 An alternative approach is to enforce a constant volumetric flux, illustrated using the piston method in figure \ref{fig:flowrate}(b).
 We employ the efficient Green's function approach introduced by \citet{chu_direct_1993}, and outline its solution procedure.
-The volumetric flux is defined as,
+The volumetric flux is defined as
 \begin{equation}
     Q(\mathbf{u})=\frac{1}{A_{s}}\int_{R} \mathbf{u} \cdot \mathrm{d}\mathbf{R},
 \end{equation}
@@ -884,7 +885,7 @@ where $Q(\cdot)$ refers to the flow rate operator through the surface $R$ with s
 The idea is to add a correction velocity, $\mathbf{u}_{corr}$, to the velocity field at time step $n$, $\mathbf{u}^{n}$, such that the corrected solution, $\mathbf{\bar{u}}^{n} = \mathbf{u}^{n} + \mathbf{u}_{corr}$, has the desired volumetric flux $\bar{Q}= Q(\mathbf{\bar{u}}^{n})$.
 While adding two solutions is straightforward, the resulting velocity field may not satisfy the Navier-Stokes equations directly.
 Fortunately, we can leverage the velocity correction scheme, which (in general) evaluates the nonlinear advection terms followed by the linear terms (pressure and dissipation).
-This process is summarised as,
+This process is summarised as
 \begin{equation}\label{eq:two_step}
     \begin{cases} 
         \frac{\partial \mathbf{u}}{\partial t} = \mathbf{N}(\mathbf{u})\\ 
@@ -916,17 +917,17 @@ The corrected velocity field becomes
     \mathbf{\bar{u}} = \mathbf{u} + \alpha^n \mathbf{v}^1,
 \end{equation}
 where $\mathbf{v}^1$ is a solution field obtained by solving equation \eqref{eq:unit_stokes} in the first time step.
-To match the target volumetric flux, $\bar{Q}$, we need to scale $\alpha^n$ such that,
+To match the target volumetric flux, $\bar{Q}$, we need to scale $\alpha^n$ such that
 \begin{equation}
     \bar{Q} = Q(\mathbf{\bar{u}}^n) =  Q(\mathbf{u}^n) + Q(\alpha^n \mathbf{v}^1).
 \end{equation}
-which gives,
+which gives
 \begin{equation}
     \alpha^n = \frac{\bar{Q} - Q(\mathbf{u}^n)}{Q(\mathbf{v}^1)},
 \end{equation}
 evaluated at every time step $n$.
 This Green's function approach is computationally efficient because we only need to compute $\mathbf{v}^1$ and $Q(\mathbf{v} ^1)$ once in the first time step and reuse them for subsequent time steps.
-The process of adding the correction velocity at the end of the velocity correction scheme can be summarised in the process as follows,
+The process of adding the correction velocity at the end of the velocity correction scheme can be summarised in the process as follows:
 \begin{equation}
     \mathbf{u}^n \xrightarrow{\quad \mathbf{N}(\mathbf{u}^n) \quad} \mathbf{\hat{u}} \xrightarrow{\quad \nabla^2 p \quad} \mathbf{\hat{\hat{u}}} \xrightarrow{\quad \mathbf{L}(\mathbf{\hat{\hat{u}}}) \quad} \mathbf{u}^{n+1} \xrightarrow {\quad \alpha^{n+1} \mathbf{v}^1 \quad} \mathbf{\bar{u}}^{n+1} \nonumber.
 \end{equation}
@@ -957,7 +958,7 @@ Substituting this into the Navier-Stokes equations and linearising,
     \nabla \cdot \mathbf{u}' = 0.
 \end{equation}
 \end{subequations}
-This can be rewritten as,
+This can be rewritten as
 \begin{equation}
     \frac{\partial}{\partial t} \mathbf{q'} = \mathcal{L}\mathbf{q'}, \quad \mathcal{L} =
     \begin{bmatrix}
@@ -966,7 +967,7 @@ This can be rewritten as,
     \end{bmatrix},
 \end{equation}
 where $\mathcal{L}$ refer to the linearised operator and $\mathbf{q}' = (\mathbf{u}', p')^T$.
-Assuming an initial perturbation, $\mathbf{q}'(\mathbf{x}, t = 0) = \mathbf{q}_0$, its evolution to time $T$ is given by,
+Assuming an initial perturbation, $\mathbf{q}'(\mathbf{x}, t = 0) = \mathbf{q}_0$, its evolution to time $T$ is given by
 \begin{equation}\label{eq:linearised_propagation}
     \mathbf{q}(\mathbf{x}', T) = \mathcal{A}(T, Re)\mathbf{q}_0, \quad \text{where} \quad \mathcal{A}(T,Re) = \exp(\mathcal{L}T).
 \end{equation}
@@ -1012,20 +1013,20 @@ A simple method for computing the dominant eigenpair is the power iteration meth
 % We typically require two to four eigenpairs with the largest real parts.
 A generalisation of the power method is the Arnoldi method \citep{arnoldi_principle_1951}, belonging to a class of Krylov subspace iterative methods, for performing a Hessenberg reduction.
 \begin{definition}[Krylov Subspaces]
-    Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0 \in \mathbb{R}^n$, the $k^{th}$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$ is defined by,
+    Given a matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ and a non-zero vector $\mathbf{x}_0 \in \mathbb{R}^n$, the $k^{th}$-Krylov subspace, $\mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k)$, is defined by
     \begin{equation}
         \mathcal{K}_n(\mathbf{A}, \mathbf{x}_0, k) = \text{span}\{\mathbf{x}_0, \mathbf{A}\mathbf{x}_0, \mathbf{A}^2\mathbf{x}_0, \mathbf{A}^3\mathbf{x}_0, ..., \mathbf{A}^{k-1} \mathbf{x}_0 \}.
     \end{equation}
 \end{definition}
 \begin{definition}[Hessenberg reduction]
     The Hessenberg reduction is a matrix decomposition technique commonly used for computing eigenpairs of matrices. 
-    Given a nonsymmetric matrix $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real as it is for physical applications), we seek a decomposition of the form,
+    Given a nonsymmetric matrix $A \in \mathbb{R}^{N \times N}$ (we assume that $\mathbf{A}$ is real as it is for physical applications), we seek a decomposition of the form:
     \begin{equation}\label{eq:hessenberg_reduction}
         \mathbf{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T,
     \end{equation}
     where,
     \begin{itemize}
-        \item $\mathbf{H} \in \mathbb{R}^{N \times N}$ is an upper Hessenberg matrix (i.e. $a_{i,j} = 0$ for $i > j +1$)
+        \item $\mathbf{H} \in \mathbb{R}^{N \times N}$ is an upper Hessenberg matrix (i.e. $a_{i,j} = 0$ for $i > j +1$).
         \item $\mathbf{Q} \in \mathbb{R}^{N \times N}$ is an orthonormal matrix (i.e. $\mathbf{Q}^{-1} = \mathbf{Q}^T$), whose columns $\mathbf{q}_1, ..., \mathbf{q}_N$ form an orthonormal basis.
     \end{itemize}
     The Hessenberg reduction shows that $\mathbf{A}$ and $\mathbf{H}$ are similar matrices, which have the same eigenvalues.
@@ -1039,12 +1040,12 @@ A generalisation of the power method is the Arnoldi method \citep{arnoldi_princi
 The Arnoldi method generates sequences of vectors $[\mathbf{u}_0, \mathcal{A}\mathbf{u}_0, .., \mathcal{A}^{k-1}\mathbf{u}_0]$ that spans the $k$-dimensional Krylov subspace.
 These vectors, known as Arnoldi vectors \citep{golub_matrix_2013}, are used to construct an orthogonal matrix via the Gram-Schmidt process, $\mathbf{Q} = [\mathbf{q}_1, \mathbf{q}_2, ..., \mathbf{q}_k]$ $\in \mathbb{R}^{M \times K}$.
 This is equivalent to performing a partial Hessenberg reduction of $\mathcal{A} = \mathbf{Q}\mathbf{H}\mathbf{Q}^T$, where the eigenvalues of $\mathcal{A} \in \mathbb{R}^{N \times N}$ can be approximated by a smaller Hessenberg matrix $\mathbf{H} \in \mathbb{R}^{k \times k}$, suitable for a direct eigenvalue computation using the QR algorithm.
-The $k-$step Arnoldi factorisation of $\mathcal{A}$ gives,
+The $k-$step Arnoldi factorisation of $\mathcal{A}$ is given as
 \begin{equation}
 \mathcal{A}\mathbf{Q}_k = \mathbf{Q}_k\mathbf{H}_k + \mathbf{r}_k\mathbf{e}_k^T,
 \end{equation}
 where $\mathbf{H} \in \mathbb{R}^{k \times k}$ refers to the upper Hessenberg matrix, $\mathbf{e}_k = [0,...,0, 1] \in \mathbb{R}^k$, and $\mathbf{r}_k \in \mathbb{R}^N $ is a residual vector. 
-If $\mathbf{x} = \mathbf{Q}_k \mathbf{y}$, and $\mathbf{H}\mathbf{y} = \lambda\mathbf{y}$ then,
+If $\mathbf{x} = \mathbf{Q}_k \mathbf{y}$ and $\mathbf{H}\mathbf{y} = \lambda\mathbf{y}$, then,
 \begin{equation}
     (\mathcal{A} - \mathbf{I}\lambda)\mathbf{x} = (\mathbf{e}_k^T\mathbf{y}) \mathbf{r}_k.
 \end{equation}
@@ -1056,7 +1057,7 @@ We now present the Arnoldi method by generating $k$ Arnoldi vectors,
     \mathbf{T}_{k} = [\mathbf{u}_0, \mathbf{u}_1, ...., \mathbf{u}_{k-1} ] = \left [\mathbf{u}_0, \frac{\mathcal{A}(T,Re)\mathbf{u}_0}{\alpha_1}, \frac{\mathcal{A}(T,Re)\mathbf{u}_1}{\alpha_2}, ..., \frac{\mathcal{A}(T,Re)\mathbf{u}_{k-1}}{\alpha_k} \right],
 \end{equation}
 where $\alpha_j$ is scaled such that $||\mathbf{u}_j|| = 1$.
-Following \citet{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is given as,
+Following \citet{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is given as
 \begin{equation}
     \mathcal{A}\mathbf{T}_k = \mathbf{T}_{k+1}D_k^{(k+1)},
 \end{equation}
@@ -1066,12 +1067,12 @@ We assume that $\mathbf{T}_k$ and $\mathbf{T}_{k+1}$ admit QR decompositions,
     \mathcal{A}\mathbf{Q}_k\mathbf{R}_k = \mathbf{Q}_{k+1}\mathbf{R}_{k+1} \mathbf{D}_{k}^{(k+1)},
 \end{equation}
 where $\mathbf{Q}_k \in \mathbb{R}^{N \times k}$, $\mathbf{R}_k \in \mathbb{R}^{k \times k}$ and $\mathbf{Q}_{k+1}, \mathbf{R}_{k+1}$ are similarly defined.
-The upper Hessenberg matrix $\mathbf{H}_{k}^{(k+1)} \in \mathbb{R}^{(k +1) \times k}$ is defined as,
+The upper Hessenberg matrix $\mathbf{H}_{k}^{(k+1)} \in \mathbb{R}^{(k +1) \times k}$ is defined as
 \begin{equation}
     \mathbf{H}_{k}^{(k+1)} = \mathbf{R}_{k+1} \mathbf{D}_k^{(k+1)}\mathbf{R}_k^{-1},
 \end{equation}
 in which the last row of $\mathbf{H}_{k}^{(k+1)}$ only contains a single non-zero entry, $h^* = h_{k, k-1}$.
-By substituting the definition of the upper Hessenberg matrix and separating the last row of $\mathbf{H}_k^{(k+1)}$ we obtain,
+By substituting the definition of the upper Hessenberg matrix and separating the last row of $\mathbf{H}_k^{(k+1)}$ we obtain
 \begin{equation}\label{eq:arnoldi_projection}
     \mathcal{A}\mathbf{Q}_k = \mathbf{Q}_k\mathbf{H}_k + h^* \mathbf{q}_k \mathbf{e}_k^T.
 \end{equation}
@@ -1081,12 +1082,12 @@ Assuming that $\mathbf{H}_k$ is diagonalisable as $\mathbf{H}_k = \mathbf{\Psi}_
 \begin{equation}
     \mathcal{A}\mathbf{Q}_k\mathbf{\Psi}_k = \mathbf{Q}_k\mathbf{\Psi}_k\mathbf{\Psi}_k^{-1}\mathbf{H}_k\mathbf{\Psi}_k + h^*\mathbf{q}_k\mathbf{e}_k^T\mathbf{\Psi}_k.
 \end{equation}
-Simplifying the expression above, we get,
+Simplifying the expression above, we get
 \begin{equation}\label{eq:eigen_approximation}
     \mathcal{A}\mathbf{V}_k = \mathbf{V}_k\mathbf{\Lambda}_k + h^*\mathbf{q}_k\mathbf{e}_k^T\mathbf{\Psi}_k,
 \end{equation}
 where $\mathbf{\Lambda}_k$ contains the $k$ eigenvalues and $\mathbf{V}_k = \mathbf{Q}_k\mathbf{\Psi}_k$ the eigenvectors of $\mathcal{A}$.
-The error in approximating the $j^{th}$ eigenpair is given by,
+The error in approximating the $j^{th}$ eigenpair is given by
 \begin{equation}
     \varepsilon_j = ||\mathcal{A}\mathbf{v}_j - \lambda_j \mathbf{v}_j|| = ||h^* \mathbf{q}_k\mathbf{e}_k^T\mathbf{\psi}_j|| = |h^*||\mathbf{v}_j[k-1]|,
 \end{equation}
