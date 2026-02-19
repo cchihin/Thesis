@@ -76,7 +76,7 @@ The initial conditions of all cases are sampled from a statistically stationary 
 Laminar solutions are obtained for $Ra = 0$, $Re \leq 1000$, with the given set of parameters and are omitted from the analysis.
 For all the cases considered here, we maintain the same spatial resolution except for $Re = 2000$, where the number of Fourier expansions was doubled.
 The temporal resolution between the numerical simulations differs due to time scales arising from the different flow physics, as we shall see later.
-We have also considered a mesh independence study for the end case of $Ra = 10000$, $Re = 2000$, where doubling the number of Fourier modes or increasing the polynomial order by 1 led to a $<1\%$ change in near-wall transport properties defined by the Nusselt number, $Nu = -\langle \mathrm{d}\theta/\mathrm{d}y_{y=-1}\rangle_{x,z} d/\Delta T$, and shear, $\langle \mathrm{d}w/\mathrm{d}y|_{y=-1} \rangle_{x,z} $, on the lower wall, where $\langle \cdot \rangle_{x,z} = 1 / (L_xL_z) \int_{z,x} \; \cdot \; \mathrm{d}x\mathrm{d}z$ refer to the plane-averaged operator.
+We have also carried out a mesh independence study for the end case of $Ra = 10000$, $Re = 2000$, where doubling the number of Fourier modes or increasing the polynomial order by 1 led to a $<1\%$ change in near-wall transport properties defined by the Nusselt number, $Nu = -\langle \mathrm{d}\theta/\mathrm{d}y_{y=-1}\rangle_{x,z} d/\Delta T$, and shear, $\langle \mathrm{d}w/\mathrm{d}y|_{y=-1} \rangle_{x,z} $, on the lower wall, where $\langle \cdot \rangle_{x,z} = 1 / (L_xL_z) \int_{z,x} \; \cdot \; \mathrm{d}x\mathrm{d}z$ refer to the plane-averaged operator.
 \subsection{Linear Stability Analysis}\label{sec:linearstab}
 In \S \ref{sec:rbp_4}, we will perform numerical experiments where small disturbances are added along the unstable manifold of longitudinal rolls.
 This is rooted in linear stability methods discussed earlier in \S \ref{sec:bkgrd_transitional}, and its numerical technique is presented in \S \ref{sec:nm_arnoldi}.
@@ -110,7 +110,7 @@ where
     \right).
 \end{equation}
 \end{subequations}
-Consider that the longitudinal rolls are invariant along the $z$-direction, the following form of normal-mode solution can be considered,
+Becasue the longitudinal rolls are invariant along the $z$-direction, the following form of normal-mode solution can be considered,
 \begin{equation}\label{eq:rbp_ansatz}
     \mathbf{\hat{q}} (\mathbf{x},t) = \mathbf{\breve{q}}(x,y)e^{i\beta z + \lambda t} + \text{c.c},
 \end{equation}
@@ -377,7 +377,7 @@ We first consider $Re=1000$ (figures \ref{fig:dynamical-process}(c,g)). At $Ra =
 The solution trajectory subsequently decays towards the longitudinal roll state, $\mathbf{q}_{LR}$ with roll wavenumber $\alpha d =4$, at $t = 7400$, before regenerating again, consistent with the \emph{TASP} in \S \ref{sec:TASP}.
 As $Ra$ is lowered to $4000$ (figure \ref{fig:dynamical-process}(g)), the solution trajectory decays towards the longitudinal roll state, $\mathbf{q}_{LR}$.
 In both cases, turbulence appear to be transient.
-Sustained turbulence occurs only when the longitudinal rolls are linearly unstable (i.e. $Ra = 8000$), which guide the trajectory back toward turbulence. Otherwise (i.e. $Ra = 4000$), the solution ultimately relaminarises.
+Sustained turbulence occurs only when the longitudinal rolls are linearly unstable (i.e. $Ra = 8000$), and guides the trajectory back toward turbulence. Otherwise (i.e. $Ra = 4000$), the solution ultimately relaminarises.
 % In this case, the longitudinal rolls are linearly stable, confirming our hypothesis earlier that the \emph{TASP} is only established when longitudinal rolls become linearly unstable above a certain $Ra$-threshold (i.e. $Ra \gtrsim Ra_{s} \approx 4720$).
 
 At $Re = 1400$, $Ra = 4000$, the solution trajectory remains within the turbulent `cloud' near $(0.8, 3.8)$ for $t \in [0,10000]$, as illustrated in figure \ref{fig:dynamical-process}(h).
@@ -397,7 +397,7 @@ When $Ra$ is lowered to $Ra = 4000$, the periodic orbit disappears and the traje
 \begin{figure}
 \centering
 \includegraphics[width=1.2\linewidth, angle=90]{TransitionalRBP/Figures/RaEffectOnTurbulence/statespace-cartoon-full.pdf}
-\caption{A schematic version of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as a saddle here \citep{paranjape_direct_2023}.}
+\caption{A schematic version of figure \ref{fig:dynamical-process} at $Ra = 8000$, (a) $Re = 600$, (b) $Re = 700$, (c) $Re = 1000$, (d) $Re = 1400$ and $Ra = 4000$ at (e) $Re = 600,700$, (f) $Re = 1000$, (g) $Re =1400$. The longitudinal roll is linearly unstable (saddle) at $Ra = 8000$, and is stable at $Ra = 4000$, whereas the laminar state is always linearly unstable (saddle). The blue and orange solid arrows refer to the unstable manifold of longitudinal rolls and the laminar state. The red solid lines denote the chaotic trajectories of turbulence, likely forming a chaotic saddle at $Re = 1000$ and a chaotic attractor at $Re = 1400$. The black-dashed trajectories refer to possible solution trajectories, forming a periodic orbit (P.O) at $Ra = 8000$, $Re = 600, 700$, and a basin of attraction (B.o.A) at $Ra = 8000, Re = 1000$. We note that invariant states could exist at $Ra = 4000, Re = 600,700$, labelled as saddles here \citep{paranjape_direct_2023}.}
 \label{fig:statespacesketch}
 \end{figure}
 
