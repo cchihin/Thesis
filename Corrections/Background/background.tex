@@ -161,12 +161,12 @@ Substituting this ansatz into the linearised equations leads to the classical Or
     \begin{pmatrix}
         \tilde{v} \\
         \tilde{\eta}
-    \end{pmatrix}.
+    \end{pmatrix},
 \end{equation}
 \text{with}
   \begin{equation} 
       \mathcal{L}_{OS} = i\alpha U(k^2-\mathcal{D}^2) + i\alpha U'' + \frac{1}{Re}(k^2 - \mathcal{D}^2)^2,
-      \quad \mathcal{L}_{SQ} = i\alpha U + \frac{1}{Re}(k^2 - \mathcal{D}^2).
+      \quad \mathcal{L}_{SQ} = i\alpha U + \frac{1}{Re}(k^2 - \mathcal{D}^2),
   \end{equation}
 \end{subequations}
 where $\mathcal{D} = d/dy, k^2 = \alpha^2 + \beta^2$ and $U''$ is the second derivative of $U(y)$.
@@ -204,7 +204,7 @@ To demonstrate an example of transient growth, we consider a two-dimensional toy
     \frac{\mathrm{d}}{\mathrm{d}t} \begin{pmatrix} v \\ \eta \end{pmatrix}  = \begin{pmatrix} -\frac{1}{Re} & -1 \\ 0 & -\frac{2}{Re} \end{pmatrix} \begin{pmatrix} v \\ \eta \end{pmatrix},
 \end{equation}
 where $Re$ refers to the Reynolds number.
-The toy model has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, indicating asymptotic decay.
+The toy model has negative eigenvalues, $(\lambda_1, \lambda_2) = (-1/Re, -2/Re)$, indicating a linearly stable system where perturbations decay asymptotically.
 At $Re = 15$, the eigenvectors, $\mathbf{x_1} = (1,0)$, $\mathbf{x}_2 = (1,\frac{1}{\sqrt{Re^2 + 1}})$, are highly non-orthogonal, becoming almost parallel, as shown in figure \ref{fig:toy_model}(a).
 Notably, they become more linearly dependent as $Re \rightarrow \infty$.
 For a particular initial condition, the energy, $||\mathbf{q}||_2 = \sqrt{v^2 + \eta^2}$, is amplified approximately four times before decaying, represented by the blue trajectory shown in figure \ref{fig:toy_model}(b).
@@ -235,7 +235,7 @@ where $\mathcal{A}^\dagger(\tau)$ is the adjoint of $\mathcal{A}(\tau)$.
 The maximum amplification factor, $G(\tau)$, is the largest eigenvalue of $\mathcal{A}^\dagger(\tau)\mathcal{A}(\tau)$ and the corresponding eigenvector, $\mathbf{\tilde{q}}_0$, denotes the eigenvector.
 The eigenvalue problem is given as,
 \begin{equation}
-    \mathcal{A}^\dagger(\tau)\mathcal{A}(\tau) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0,
+    \mathcal{A}^\dagger(\tau)\mathcal{A}(\tau) \mathbf{\tilde{q}}_0 = \lambda \mathbf{\tilde{q}}_0.
 \end{equation}
 % where $\mathbf{\tilde{q}}_0$ refers to the eigenvector denoting the optimal initial condition.
 For a detailed derivation of the optimal initial conditions or forcing, the reader is referred to \citet{butler_three-dimensional_1992} and \citet{schmid_nonmodal_2007}.
@@ -282,13 +282,12 @@ This pair is referred to as the \textit{lower} and \textit{upper} branches, emer
 The \textit{lower} branch lies closer to the laminar state, while the \textit{upper} branch resides further away in state space.
 % The lower branch refers to its proximity towards the stable laminar state in phase space.
 Later, a travelling-wave solution in plane Couette flow was also found by the same author \citep{nagata_three-dimensional_1997}.
-A family of equilibrium and travelling-wave solutions for plane Couette and plane Poiseuille flows under different boundary conditions (i.e., stress-free, slip, and no-slip) was later identified by \citet{waleffe_exact_2001} and \citet{waleffe_homotopy_2003}.
+A family of equilibrium and travelling-wave solutions for plane Couette and plane Poiseuille flows with different boundary conditions (i.e., stress-free, slip, and no-slip) was later identified by \citet{waleffe_exact_2001} and \citet{waleffe_homotopy_2003}.
 Additional equilibria and travelling-wave solutions were identified by \citet{gibson_visualizing_2008} and \citet{gibson_equilibrium_2009}, along with heteroclinic connections between them \citep{halcrow_heteroclinic_2009}.
 In the context of pipe flow, multiple travelling-wave solutions have also been reported 
 \citep{faisst_traveling_2003,wedin_exact_2004,kerswell_recurrence_2007,wang_lower_2007,duguet_transition_2008,pringle_highly_2009}.
 The statistical quantities (e.g. mean and fluctuations) computed from the set of equilibria and travelling waves are in good agreement with those obtained from direct numerical simulations.
 However, since these solutions are time independent (within a moving reference frame for travelling waves), they do not capture the temporal dynamics of turbulence such as the \textit{self-sustaining process} (SSP) \citep{hamilton_regeneration_1995} (see \S \ref{subsec:SSP}).
-% While these unstable solutions demonstrate good agreement with results from DNS such as the spanwise length scales, and mean and fluctuations, they do not capture the dynamical processes.
 
 
 The next breakthrough was the identification of time-dependent unstable solutions in the form of periodic orbits. 
@@ -297,28 +296,28 @@ These periodic orbits are linked by heteroclinic connections.
 In plane Poiseuille flow, \citet{toh_periodic-like_2003} also identified periodic orbits displaying bursting behaviour.
 Using a Newton–Krylov iteration with a hook-step modification, \citet{viswanath_recurrent_2007} computed multiple relative periodic orbits.
 These studies conceptualise that the chaotic trajectories of turbulence are embedded within a set of unstable periodic orbits, evolving along their unstable manifold \citep{viswanath_recurrent_2007,gibson_visualizing_2008,gibson_equilibrium_2009,halcrow_heteroclinic_2009,graham_exact_2021}.
-An example is shown in figure \ref{fig:BuildingBlocks}, where the chaotic trajectories in figure \ref{fig:BuildingBlocks}(b), reside within the same state space as the periodic orbits, enclosed by equilibria and their heteroclinic connections shown in figure \ref{fig:BuildingBlocks}(c),
-Invariant solutions such as equilibria, travelling waves, periodic orbits, and relative periodic orbits provide a building-block description of turbulence.
-However, they do not provide insight into the transition process, since these solutions already reside in the turbulent attractor.
+An example is shown in figure \ref{fig:BuildingBlocks}, where the chaotic trajectories in figure \ref{fig:BuildingBlocks}(b), reside within the same state space as the periodic orbits, enclosed by equilibria and their heteroclinic connections shown in figure \ref{fig:BuildingBlocks}(c).
+Chaotic trajectories of turbulence reside in the \textit{turbulent attractor} contains invariant solutions (e.g. equilibria, travelling waves, periodic orbits, and relative periodic orbits) that provide a building-block description of turbulence.
+However, they invariant solutions do not provide insight into the transition process, since these solutions already reside in the turbulent attractor.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Background/Figures/EdgeStates.pdf}
-    \caption{A graphical representation of the edge (grey surface) separating the basins of attraction of the laminar and turbulent attractor, consisting of attractors, known as edge states, adapted from \protect\citet{graham_exact_2021}.}
+    \caption{A graphical representation of the \textit{basin boundary} (grey surface) that seperate the basins of attraction of the laminar and turbulent attractor. Along the basin boudary sit attractors, known as edge states, adapted from \protect\citet{graham_exact_2021}.}
     \label{fig:EdgeStates}
 \end{figure}
 
 The transition to turbulence in canonical shear flow configurations is typically subcritical, emerging from the invariant solutions described above, accompanied by an underlying stable laminar state.
-A consequence of this is that the laminar and turbulent states form bistable attractors in phase space with a boundary, separating their respective basins of attraction, known as the basin boundary.
-Attractors that sit along this basin boundary have been identified and found to possess a saddle-like structure, attracting trajectories along the basin boundary and repelling them toward either the laminar or turbulent state, known as \textit{edge states}.
+A consequence of this is that the laminar and turbulent states form bistable attractors in phase space with a boundary, separating their respective basins of attraction, known as the \textit{basin boundary}.
+Attractors that sit along this basin boundary were identified as saddles, attracting trajectories along the basin boundary and repelling them toward either towards the laminar or turbulent state, known as \textit{edge states}.
 The bisection algorithm for edge tracking was first applied to pipe-flow experiments by \citet{schneider_turbulence_2007}.
 The edge state was found to be chaotic. 
-Time-averaging of this edge state revealed a close resemblance to the unstable lower-branch travelling-wave solutions, suggesting that the boundary separating the basins of attraction between the laminar and turbulent states consists of the lower branch solutions and their symmetries \citep{duguet_transition_2008,pringle_highly_2009}.
+It was shown that the time-averaged edge state is similar to the unstable lower-branch travelling-wave solutions, suggesting that the basin boundary contains lower branch solutions and their symmetries in pipe flows \citep{duguet_transition_2008,pringle_highly_2009}.
 As the Reynolds number increases, the separation between the edge state and the turbulent attractor moves apart \citep{schneider_edge_2009}.
-In the context of pipe flows, it was recognised that the edge consists of a set of unstable lower-branch travelling-wave solutions.
-A graphical representation of the edge, and edge states, separating the laminar and turbulent states is shown in figure \ref{fig:EdgeStates}.
+A graphical representation of the basin boundary and edge states separating the basin of attractions of the laminar and turbulent states is shown in figure \ref{fig:EdgeStates}.
+
 Near the onset of subcritical turbulence, turbulence appears to be transient, decaying towards the laminar solution after a finite lifetime \citep{bottin_discontinuous_1998,faisst_sensitive_2004,hof_finite_2006}.
-This can be interpreted as the turbulent chaotic attractor colliding with the lower branch solution through a \textit{boundary crisis} \citep{lai_transient_2011}, forming a chaotic saddle where solution trajectories may `leak' (relaminarise) towards the laminar state \citep{mellibovsky_travelling_2012, kreilos_periodic_2012, zammert_crisis_2015}.
+From a dynamical-system perspective, this can be interpreted as the turbulent chaotic attractor colliding with the lower branch solution known as a \textit{boundary crisis} \citep{lai_transient_2011}, forming a \textit{chaotic saddle} where solution trajectories may leak (relaminarise) towards the laminar state \citep{mellibovsky_travelling_2012, kreilos_periodic_2012, zammert_crisis_2015}.
 The onset of a boundary crisis (transient turbulence) has also been attributed to the emergence of homoclinic tangency in plane Couette flow \citep{van_veen_homoclinic_2011,lustro_onset_2019}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -337,7 +336,7 @@ It is defined by a quasi-cyclic process, consisting of three distinct phases: (1
 A schematic of the SSP is shown in figure \ref{fig:SSP}.
 While early investigations of the SSP were confined to the buffer layer \citep{hamilton_regeneration_1995}, evidence that the SSP extends towards the logarithmic and outer region has been found \citep{cossu_self-sustaining_2017}.
 In parallel to the SSP, the vortex-wave interaction (VWI) theory developed to describe the sustained interactions between a general class of vortices and waves for asymptotically large Reynolds number \citep{hall_nonlinear_1988,stewart_near-planar_1990,hall_strongly_1991}, was found to be linked to the SSP \citep{hall_streamwise_2010}.
-In particular, the solutions obtained using VWI theory by \citet{hall_streamwise_2010} are analogous to the lower branch solution from \citet{wang_lower_2007}.
+In particular, the solutions obtained using VWI theory by \citet{hall_streamwise_2010} are analogous to the lower branch solutions from \citet{wang_lower_2007}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Spatiotemporal transitional flows
@@ -346,13 +345,13 @@ In particular, the solutions obtained using VWI theory by \citet{hall_streamwise
 \subsection{Spatiotemporal transitional flows}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{Background/Figures/Re1400.pdf}
+    \includegraphics[width=1.05\textwidth]{Background/Figures/Re1400.pdf}
     \caption{A snapshot of turbulent-laminar bands at $Re = 1400$ in a large domain $L/h = 16\pi$, depecting its spatiotemporal intermittent nature. Isovolume renderings are based on the spanwise, $u'$, and wall-normal, $v'$, perturbation kinetic energy, $E(u',v') = 1/2(u'^2 + v'^2)$, where the perturbation velocities are defined about the laminar state $\mathbf{u}'(\mathbf{x},t) = \mathbf{u}(\mathbf{x},t) - U_{lam}(y)$.}
     \label{fig:turbulent-laminar}
 \end{figure}
 
 This section describes the inherent spatiotemporal structure of subcritical turbulence near the onset commonly reported in large extended domains.
-In this regime, turbulence is characterised by the coexistence of turbulent and laminar structures.
+In this regime, turbulence is characterised by the coexistence of turbulent and laminar flow structures.
 Examples of such are found in canonical shear flow systems such as plane Couette flows \citep{prigent_long-wavelength_2003,barkley_computational_2005,barkley_mean_2007,tuckerman_patterns_2011,duguet_formation_2010,reetz_exact_2019}, Taylor-Couette flows \citep{prigent_barber_2002,prigent_long-wavelength_2003}, pipe flows \citep{avila_transient_2010,avila_onset_2011,song_speed_2017,avila_transition_2023} and plane Poiseuille flows \citep{tsukahara_dns_2014, tsukahara_dns_2014-1, tuckerman_turbulent-laminar_2014, tsukahara_experimental_2014, gome_statistical_2020, paranjape_onset_2019, paranjape_oblique_2020, paranjape_direct_2023}.
 
 We will focus on the plane Poiseuille flow configuration, where the spatiotemporal intermittent patterns are referred to as oblique turbulent-laminar bands illustrated in figure \ref{fig:turbulent-laminar} at $Re = 1400$ for $L/h = 16\pi$.
@@ -479,9 +478,9 @@ The hysteretic behaviour highlights that the roll wavenumber of ISRs is strongly
 
 % MULTIPLE STATES
 It is worth noting that the ISRs are the exception rather than the rule in RBC \citep{croquette_convective_1989-1}.
-A range of non-ISR states, such as squares, travelling or stationary target patterns, giant rotating spirals, and oscillatory convection, have been observed over the years \citep{le_gal_square_1985, croquette_convective_1989, plapp_spiral_1997, hof_flow_1999, rudiger_pattern_2000, boronska_extreme_2010, boronska_extreme_2010-1}.
+A range of non-ISR states, such as squares, travelling or stationary target patterns, giant rotating spirals, and oscillatory convection, have been observed over the years \citep{le_gal_square_1985, croquette_convective_1989, plapp_spiral_1997, hof_flow_1999, rudiger_pattern_2000, boronska_extreme_2010_A, boronska_extreme_2010_B}.
 For example, \citet{hof_flow_1999} identified eight stationary and two oscillatory states in cylindrical RBC with small aspect ratios at the same Rayleigh number.
-These results were later verified in numerical simulations and bifurcation analysis, revealing up to twelve stable branches near the onset ($Ra \leq 2500$) and the potential for hundreds more as $Ra$ is increased \citep{ma_multiplicity_2006,boronska_extreme_2010,boronska_extreme_2010-1}.
+These results were later verified in numerical simulations and bifurcation analysis, revealing up to twelve stable branches near the onset ($Ra \leq 2500$) and the potential for hundreds more as $Ra$ is increased \citep{ma_multiplicity_2006,boronska_extreme_2010_A,boronska_extreme_2010_B}.
 
 In larger domains ($\Gamma \geq 28$), giant rotating spirals were found and have been investigated \citep{plapp_core_1996, plapp_dynamics_1998}.
 Experimental and numerical studies of RBC with varying sidewall boundary conditions (i.e. thermally insulating, conducting and no-slip) \citep{tuckerman_global_1988, siggers_dynamics_2003, paul_pattern_2003,boulle_bifurcation_2022}, non-Boussinesq convection \citep{bodenschatz_experiments_1992}, and rotational effects \citep{hu_convection_1997} were investigated, where multiple states were also reported.
@@ -499,17 +498,16 @@ To further complicate matters, RBC also exhibits spatiotemporal chaos.
 In the 1990s, convection rolls exhibiting spatio-temporal chaotic behaviour known as spiral defect chaos (SDC) were observed within the same stability boundaries where ISRs were expected \citep{morris_spiral_1993, hu_convection_1993,decker_spiral_1994,hu_convection_1995,morris_spatio-temporal_1996,cakmur_bistability_1997,ahlers_experiments_nodate,egolf_importance_1998,egolf_mechanisms_2000,chiam_mean_2003,vitral_spiral_2020}.
 Notably, ISRs emerge with carefully prepared initial conditions, while uncontrolled initial conditions lead to SDC.
 It is now well established that SDC exists as an intrinsic attractor of RBC, independent of sidewall conditions \citet{morris_spatio-temporal_1996}, forming a bistable system with ISRs \citep{cakmur_bistability_1997} across a range of $Ra$ at $Pr = 1$ illustrated in figure \ref{fig:sdc_isr}.
-However, this bistability appears to be Prandtl number dependent. 
-At $Pr = 4$, the SDC appears to be transient, decaying towards ISRs over long periods \citep{bajaj_competition_1997}.
+At $Pr = 4$, SDC appears to be transient, decaying towards ISRs over long periods, suggesting that the bistable system is $Pr$ dependent \citep{bajaj_competition_1997}.
 SDC has also been replicated in numerical simulations using two-dimensional Swift-Hohenberg equations \citep{swift_hydrodynamic_1977,xi_spiral_1993,xi_spatiotemporal_1995,schmitz_spiral-defect_2002,karimi_exploring_2011}.
 The critical Rayleigh number for the onset of SDC, $Ra_s$, depends on the domain's aspect ratio, and Prandtl number \citep{hu_convection_1995,bajaj_competition_1997,cakmur_transition_1997,bodenschatz_recent_2000}.
 % Investigations into quantifying the onset of SDC in terms of Rayleigh number remain inconclusive as it appears to depend on the domain's aspect ratio, and Prandtl number \citep{hu_convection_1995,bajaj_competition_1997,cakmur_transition_1997,bodenschatz_recent_2000}.
 % The critical reduced Rayleigh number for the onset of SDC, $\varepsilon_s$, has been observed to decrease with increasing $\Gamma$, and increase with increasing $Pr$ \citet{hu1995a, hu1995b, bajaj1997, Cakmur97, bodenschatz2000}.
 SDC has been primarily reported in large aspect ratio domains ($\Gamma \gtrsim 20$), suggesting that a minimal domain size is required for SDC to occur \citep{bodenschatz_recent_2000}.
-This is consistent with the leading Lyapunov exponents of SDC, which become smaller with decreasing $\Gamma$ \citep{egolf_mechanisms_2000, paul_extensive_2007}.
-To better characterise SDC, several studies have investigated its spatial-temporal properties, such as the averaged roll-curvature \citet{hu_convection_1995}, probability distribution of spirals \citep{ecke_excitation_1995, liu_spiral-defect_1996} and correlation length-/time-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997}.
+This is consistent with the leading Lyapunov exponents of SDC, which increases with $\Gamma$ \citep{egolf_mechanisms_2000, paul_extensive_2007}.
+To characterise SDC, several studies have investigated its spatial-temporal properties, such as the averaged roll-curvature \citet{hu_convection_1995}, probability distribution of spirals \citep{ecke_excitation_1995, liu_spiral-defect_1996} and correlation length-/time-scales \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997}.
 Specifically, the correlation length-scales were found to grow exponentially \citep{morris_spiral_1993, morris_spatio-temporal_1996, cakmur_transition_1997}, suggesting that the transition from ISRs to SDC is related to phase transitions.
-Similar SDC-like patterns have been observed in other pattern-forming systems, including rotating RBC \citep{hu_convection_1997}, dielectric barrier discharge \citep{dong_observation_2005} and advection diffusion reaction systems \citep{affan_spiral_2014}.
+Similar SDC-like patterns have been observed in rotating RBC \citep{hu_convection_1997}, dielectric barrier discharge \citep{dong_observation_2005} and advection diffusion reaction systems \citep{affan_spiral_2014}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Rayleigh Benard Poiseuille flows
@@ -558,7 +556,7 @@ For a comprehensive overview of RBP flows, the reader is referred to the reviews
 % SCOPE OF STUDY
 %%%%%%%%%%%%%%%%
 \section{Thesis objectives}\label{sec:bkgrd_objs}
-While significant progress has been made in understanding the transition processes of Rayleigh-B\'{e}nard convection (see \S \ref{sec:bkgrd_RBC}) and plane Poiseuille flows (see \S \ref{sec:bkgrd_transitional}) independently, their combined interaction remains largely unexplored.
+While significant progress has been made in understanding the transition processes of Rayleigh-B\'{e}nard convection (see \S \ref{sec:bkgrd_RBC}) and plane Poiseuille flows (see \S \ref{sec:bkgrd_transitional}) independently, their combined interaction beyond primary linear instabilities (see \S \ref{sec:bkgrd_RBP}) remains largely unexplored.
 In particular, the interaction between buoyancy-driven convection and shear-driven instability in Rayleigh-B\'{e}nard-Poiseuille (RBP) flow raises questions about transition mechanisms that may not be inferred from either system in isolation.
 
 In this thesis, we focus on the transitional behaviour of RBP flow, using direct numerical simulations and linear stability analysis.
@@ -571,8 +569,8 @@ Through a combination of exploratory DBS and linear stability analysis, this wor
     \item Do convection rolls promote the transition to shear-driven turbulence?
     \item How does shear influence the bistable dynamics between ideal straight rolls (ISRs) and spiral defect chaos (SDC)?
 \end{enumerate}
-These questions are explored in \S \ref{chap:3}.
-The answers to these questions may have implications for improving microprocessing chip-cooling technologies and improving thin-film fabrication using chemical vapour deposition processes (see \S \ref{sec:bkgrd_overview}).
+These questions are examined in \S \ref{chap:3}.
+The answers to these questions may have implications for enhancing microprocessing chip-cooling technologies and improving thin-film fabrication using chemical vapour deposition processes (see \S \ref{sec:bkgrd_overview}).
 
 In \S \ref{chap:4}, we adopt a dynamical systems perspective to study the bistability between ISRs and SDC in Rayleigh-B\'{e}nard convection.
 Although the co-existence of ISRs and SDC as bistable states is well established, the presence of multiple stable states raises further questions about the underlying state-space structure.
