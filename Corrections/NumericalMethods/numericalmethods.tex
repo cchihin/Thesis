@@ -970,7 +970,7 @@ Assuming an initial perturbation, $\mathbf{q}'(\mathbf{x}, t = 0) = \mathbf{q}_0
 \begin{equation}\label{eq:linearised_propagation}
     \mathbf{q}(\mathbf{x}', T) = \mathcal{A}(T, Re)\mathbf{q}_0, \quad \text{where} \quad \mathcal{A}(T,Re) = \exp(\mathcal{L}T).
 \end{equation}
-We assume that the perturbations can be represented as a normal mode,
+We assume that the perturbation can be represented as a normal mode,
 \begin{equation}\label{eq:normal_modes}
     \mathbf{q}'(\mathbf{x},t ) = \mathbf{\tilde{q}}(\mathbf{x})\exp(\lambda t) + \text{c.c}
 \end{equation}
@@ -1056,7 +1056,7 @@ We now present the Arnoldi method by generating $k$ Arnoldi vectors,
     \mathbf{T}_{k} = [\mathbf{u}_0, \mathbf{u}_1, ...., \mathbf{u}_{k-1} ] = \left [\mathbf{u}_0, \frac{\mathcal{A}(T,Re)\mathbf{u}_0}{\alpha_1}, \frac{\mathcal{A}(T,Re)\mathbf{u}_1}{\alpha_2}, ..., \frac{\mathcal{A}(T,Re)\mathbf{u}_{k-1}}{\alpha_k} \right],
 \end{equation}
 where $\alpha_j$ is scaled such that $||\mathbf{u}_j|| = 1$.
-Following \citep{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is given as,
+Following \citet{barkley_direct_2008}, the projection of $\mathcal{A}$ onto the Krylov subspace is given as,
 \begin{equation}
     \mathcal{A}\mathbf{T}_k = \mathbf{T}_{k+1}D_k^{(k+1)},
 \end{equation}
@@ -1093,21 +1093,22 @@ The error in approximating the $j^{th}$ eigenpair is given by,
 where $\mathbf{v}_j[k-1]$ is the last component of the eigenvector $\mathbf{v}_j$.
 
 Lastly, we are generally interested in obtaining the eigenpairs with the largest real part.
-We introduce the exponential power method \citep{tuckerman_bifurcation_2000}, which is naturally considered by time stepping an initial perturbation $\mathbf{q}'_0$ from $t = 0$ to $T$,
+We introduce the exponential power method \citep{tuckerman_bifurcation_2000} carried out by time stepping an initial perturbation $\mathbf{q}'_0$ from $t = 0$ to $T$,
 \begin{equation}
     \mathbf{q}'(T) = \exp({\mathcal{L} T}) \mathbf{q}'_0 = \mathcal{A}(T)\mathbf{q}_0'.
 \end{equation}
-The dominant eigenvalues, $\mu$, of $\mathcal{A}$ are obtained from the Arnoldi method described above, which corresponds to the eigenvalue of the largest real part $\lambda$ of $\mathcal{L}$ by $\mu = \exp(\lambda  T)$.
+The dominant eigenvalues, $\mu$, of $\mathcal{A}$ obtained from the Arnoldi method described above, are the leading eigenvalues, $\lambda$, of $\mathcal{L}$, where $\lambda = \log(\mu)/T$.
 For further details on this algorithm, the reader is referred to \citet{tuckerman_bifurcation_2000} and \citet{barkley_direct_2008}.
 
-In summary, the algorithm described above has been implemented in Nektar++, referred to as the modified Arnoldi algorithm, which modifies the existing time-stepper code with a wrapper function that generates Arnoldi vectors and solves the Hessenberg matrix using the subroutine \texttt{dgeev} from LAPACK (Linear Algebra PACKage, \citep{anderson_lapack_1999}).
+In summary, the algorithm described above has been implemented in Nektar++, referred to as the \textit{modified Arnoldi algorithm} (not to be confused with the modified Gram-Schmidt procedure).
+The \textit{modification} consists of algorithmic changes to the existing time-stepper routine to (1) integrate the linearised Navier-Stokes equations to generates Arnoldi vectors, and (2) solve the resulting Hessenberg matrix using the \texttt{dgeev} subroutine from LAPACK (Linear Algebra PACKage, \citep{anderson_lapack_1999}).
 The modified Arnoldi algorithm has been verified against a separate implementation \citep{rocco_advanced_nodate}, which is based on the third-party package ARPACK (ARnoldi PACKage \citep{lehoucq_arpack_1998}).
 
 \subsection{Edge tracking}\label{sec:nm_edgetrack}
-In this section, we consider the dynamical-systems perspective on subcritical transitional shear flows where the linearly stable laminar co-exists with the chaotic attractor of the turbulent dynamics.
+In this section, we consider the dynamical-systems perspective on subcritical transitional shear flows where the linearly stable laminar state co-exists with the chaotic attractor of the turbulent dynamics.
 The basin boundary is defined as the region that separates the basins of attraction of the laminar and turbulent states.
-Along this boundary, sit local attractors, called edge states, which can be travelling-waves, tori, or high-order invariant sets.
-A common technique employed for edge tracking is based on the bisection method \citep{skufca_edge_2006, schneider_turbulence_2007, khapko_edge_2016}, which is performed by repeatedly bisecting trajectories,
+Along this boundary sit local attractors, called edge states, which can be travelling-waves, tori, or high-order invariant sets.
+A common technique employed for edge tracking is the bisection method \citep{skufca_edge_2006, schneider_turbulence_2007, khapko_edge_2016}, which is performed by repeatedly bisecting trajectories,
 \begin{equation}\label{eq:bisection}
     \mathbf{q}_0(\mathbf{x}, 0; \chi) = \chi\mathbf{q}_L(\mathbf{x})  + (1 - \chi)\mathbf{q}_T(\mathbf{x})
 \end{equation}
@@ -1115,14 +1116,14 @@ where $\mathbf{q}_0$ refers to an initial condition consisting of a weighted sum
 For an initial condition given by $\mathbf{q}_0(\mathbf{x}, 0; \chi=0) = \mathbf{q}_T$, or $\mathbf{q}_0(\mathbf{x}, 0; \chi=1) = \mathbf{q}_L$, the solution trajectory will evolve along the turbulent attractor or remain laminar, respectively.
 Hence, there could be (at least) one intermediate value of the bisection parameter, $\chi^* \in [0, 1]$, where the solution trajectory evolves along the basin boundary, neither falling towards the turbulent nor laminar attractor.
 The method of finding $\chi^*$ is based on bisection, where we perform $n$ successive bisections between $\chi_L^n$ and $ \chi_T^n$, where $\chi_L^n$ and $\chi_T^n$ lead to relaminarisation and turbulence, respectively.
-This necessitates $n$ direct numerical simulations using initial conditions updated by $\mathbf{q}_0(\mathbf{x}, 0; \chi^n = \frac{1}{2}(\chi_L^n + \chi_T^n))$ and having a stopping criterion to determine if the solution is about to relaminarise or become turbulent.
+This requires $n$ direct numerical simulations using initial conditions updated by $\mathbf{q}_0(\mathbf{x}, 0; \chi^n = \frac{1}{2}(\chi_L^n + \chi_T^n))$ and having a stopping criterion to determine if the solution is about to relaminarise or become turbulent.
 A stopping criterion based on turbulent kinetic energy and wall shear stress is often used.
 
-This basin boundary is often unstable, and we often require $\chi^*$ to be sufficiently accurate to evolve along the edge for a sufficient time, $T$.
+This basin boundary is unstable, and we require $\chi^*$ to be sufficiently accurate to evolve along the edge for a sufficient time, $T$.
 After we have determined $\chi^*$ and $T$, the bisection can be restarted between by replacing $\mathbf{q}_L(\mathbf{x}) = \mathbf{q}_0(\mathbf{x}, T, \chi_L)$ and $\mathbf{q}_T(\mathbf{x}) = \mathbf{q}_0(\mathbf{x}, T; \chi_T)$, which are close to each other in state space but diverge to the laminar and turbulent states after a long time $t > T$.
 After a certain $i$ number of restarted bisections, the solution trajectory evolving along the basin boundary may converge towards an edge state, acting as a separatrix between the turbulent and laminar attractor.
 We describe the algorithm of the edge tracking in algorithm \ref{alg:edge-tracking}.
-To disambiguate between the two iterative processes, we perform $i$ number of iterations to traverse along the basin boundary, each containing $n$ number of bisections.
+To distinguish between the two iterative processes, we perform $i$ number of iterations to traverse along the basin boundary, each containing $n$ number of bisections.
 
 \begin{algorithm}[h]
     \begin{algorithmic}[1]
